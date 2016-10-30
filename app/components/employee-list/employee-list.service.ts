@@ -12,7 +12,7 @@ import { Search, Employee, Result } from '../../models/model';
 // user-defined service
 import { Service } from '../../shared-services/service';
 
-@Injectable() export class LoginService extends Service {
+@Injectable() export class EmployeeListService extends Service {
 
     addEmployee(company: Employee): Promise<Result> {
 
