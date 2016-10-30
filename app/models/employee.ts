@@ -1,11 +1,12 @@
 
 import { Position } from './position';
-import { EmploymentStatus } from './employment-status';
-import { Address } from './address';
-import { EducationHistory } from './education-history';
-import { Accreditation } from './accrediation';
-import { WorkHistory } from './work-history';
-import { FamilyBackground } from './family-background'; 
+import { EmploymentStatus, 
+    Address, 
+    EducationHistory, 
+    Accreditation, 
+    WorkHistory, 
+    FamilyBackground 
+} from './model';
 
 export class Employee {
 
