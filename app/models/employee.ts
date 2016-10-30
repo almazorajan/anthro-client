@@ -1,11 +1,11 @@
 
-import { Position } from './position';
 import { EmploymentStatus, 
     Address, 
     EducationHistory, 
     Accreditation, 
     WorkHistory, 
-    FamilyBackground 
+    FamilyBackground,
+    Position 
 } from './model';
 
 export class Employee {
