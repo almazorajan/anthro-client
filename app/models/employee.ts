@@ -13,7 +13,7 @@ export class Employee {
     _id: string;
     employeeNumber: string;
     startingDate: Date;
-    salar: number;
+    salary: number;
 
     position: Position;
     employmentStatus: EmploymentStatus;
