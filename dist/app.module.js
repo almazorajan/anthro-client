@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
 var http_1 = require('@angular/http');
+var ng2_toastr_1 = require('ng2-toastr/ng2-toastr');
 var app_routing_module_1 = require('./app-routing.module');
 var app_component_1 = require('./app.component');
 var login_component_1 = require('./components/login/login.component');
@@ -24,6 +25,7 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
                 http_1.HttpModule,
+                ng2_toastr_1.ToastModule,
                 app_routing_module_1.AppRoutingModule],
             declarations: [
                 app_component_1.AppComponent,

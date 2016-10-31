@@ -9,17 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var ng2_toastr_1 = require('ng2-toastr/ng2-toastr');
 var LoginComponent = (function () {
-    function LoginComponent() {
+    function LoginComponent(toastr) {
+        this.toastr = toastr;
     }
     LoginComponent.prototype.ngOnInit = function () {
+        this.showSuccess();
+    };
+    LoginComponent.prototype.showSuccess = function () {
+        this.toastr.success('You are awesome!', 'Success!');
     };
     LoginComponent = __decorate([
         core_1.Component({
             selector: 'login-component',
             templateUrl: './app/components/login/login-page.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [ng2_toastr_1.ToastsManager])
     ], LoginComponent);
     return LoginComponent;
 }());

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
     selector: 'login-component',
@@ -8,8 +8,14 @@ import { Component, OnInit } from '@angular/core';
 
 export class LoginComponent implements OnInit {
 
-    ngOnInit() {
+    constructor(public toastr: ToastsManager) { }
 
+    ngOnInit() {
+        this.showSuccess();
+    }
+
+    showSuccess() {
+        this.toastr.success('You are awesome!', 'Success!');
     }
 
 }
