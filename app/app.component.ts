@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
         <router-outlet></router-outlet>`
 })
 
-export class AppComponent { }
+export class AppComponent {
+
+    ngOnInit() {
+
+
+
+    }
+
+}
 

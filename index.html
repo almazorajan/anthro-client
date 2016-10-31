@@ -9,13 +9,12 @@
 
 	<link rel="stylesheet" type="text/css" href="css/semantic.min.css">
 	<link rel="stylesheet" type="text/css" href="css/sweetalert.css">
-	<link rel="styelsheet" type="text/css" href="node_modules/ng2-toastr/bundles/ng2-toastr.min.css">
 
 	<script type="text/javascript" src="node_modules/core-js/client/shim.min.js"></script>
 	<script type="text/javascript" src="node_modules/zone.js/dist/zone.js"></script>
 	<script type="text/javascript" src="node_modules/reflect-metadata/Reflect.js"></script>
 	<script type="text/javascript" src="node_modules/systemjs/dist/system.src.js"></script>
-	<script type="text/javascript" src="node_modules/ng2-toastr/bundles/ng2-toastr.min.js"></script>
+
 	<script type="text/javascript" src="systemjs.config.js"></script>
 	<script type="text/javascript">
 		System.import('app').catch(function (err) { console.error(err); });
@@ -24,11 +23,20 @@
 	<script type="text/javascript" src="js/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="js/semantic/semantic.min.js"></script>
 	<script type="text/javascript" src="js/sweetalert/sweetalert.min.js"></script>
-	
+
 </head>
 
 <body>
-	<app-component>Loading...</app-component>
+	<app-component>
+
+		<div class="ui raised very padded text container segment">
+			<div class="ui active inverted dimmer">
+				<div class="ui huge indeterminate text loader">Preparing...</div>
+			</div>
+			<p></p>
+		</div>
+
+	</app-component>
 </body>
 
 </html>

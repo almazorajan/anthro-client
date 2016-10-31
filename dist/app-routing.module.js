@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var login_component_1 = require('./components/login/login.component');
+var main_component_1 = require('./components/main/main.component');
 var routes = [
     {
         path: '',
@@ -20,6 +21,13 @@ var routes = [
     {
         path: 'login',
         component: login_component_1.LoginComponent
+    },
+    {
+        path: 'main',
+        component: main_component_1.MainComponent
+    },
+    {
+        path: 'main/employee',
     }
 ];
 var AppRoutingModule = (function () {
