@@ -9,17 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var AppComponent = (function () {
-    function AppComponent() {
+var PositionComponent = (function () {
+    function PositionComponent() {
     }
-    AppComponent = __decorate([
+    PositionComponent.prototype.ngOnInit = function () { };
+    PositionComponent = __decorate([
         core_1.Component({
-            selector: 'app-component',
-            template: "\n        <nav>\n            <a routerLink=\"/dashboard\">Dashboard</a>\n            <a routerLink=\"/heroes\">Heroes</a>\n        </nav>\n        <router-outlet></router-outlet>"
+            selector: 'position-component',
+            templateUrl: './position-page.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], PositionComponent);
+    return PositionComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.PositionComponent = PositionComponent;
+//# sourceMappingURL=position.component.js.map

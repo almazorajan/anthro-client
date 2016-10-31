@@ -1,6 +1,6 @@
 /*
 version: 1
-Employee List Service
+User Service
 **/
 "use strict";
 var __extends = (this && this.__extends) || function (d, b) {
@@ -21,25 +21,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 // user-defined service
 var service_1 = require('../../shared-services/service');
-var EmployeeListService = (function (_super) {
-    __extends(EmployeeListService, _super);
-    function EmployeeListService() {
+var LoginService = (function (_super) {
+    __extends(LoginService, _super);
+    function LoginService() {
         _super.apply(this, arguments);
     }
-    EmployeeListService.prototype.addEmployee = function (company) {
-        return this.apiCall("post", "employee/addemployee", company);
+    LoginService.prototype.addUser = function (user) {
+        return this.apiCall("post", "user/adduser", user);
     };
-    EmployeeListService.prototype.updateEmployee = function (company) {
-        return this.apiCall("post", "employee/updateemployee", company);
+    LoginService.prototype.updateUser = function (user) {
+        return this.apiCall("post", "user/updateuser", user);
     };
-    EmployeeListService.prototype.deleteEmployee = function (company) {
-        return this.apiCall("post", "employee/deleteemployee", company);
+    LoginService.prototype.deactiveUser = function (user) {
+        return this.apiCall("post", "user/deleteuser", user);
     };
-    EmployeeListService = __decorate([
+    LoginService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])
-    ], EmployeeListService);
-    return EmployeeListService;
+    ], LoginService);
+    return LoginService;
 }(service_1.Service));
-exports.EmployeeListService = EmployeeListService;
-//# sourceMappingURL=employee-list.service.js.map
+exports.LoginService = LoginService;
+//# sourceMappingURL=user.service.js.map
