@@ -9,4 +9,16 @@ export class Address {
     zipCode: string;
     isPermanent: boolean;
 
+    constructor() {
+
+        this.unitFloor = "";
+        this.building = "";
+        this.streetName = "";
+        this.barangay = "";
+        this.city = "";
+        this.zipCode = "";
+        this.isPermanent = false;
+
+    }
+
 }

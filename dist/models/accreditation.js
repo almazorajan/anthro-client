@@ -1,6 +1,8 @@
 "use strict";
 var Accreditation = (function () {
     function Accreditation() {
+        this.title = "";
+        this.dateAccredited = new Date();
     }
     return Accreditation;
 }());

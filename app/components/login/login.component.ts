@@ -9,6 +9,8 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         
+        document.title = "Ad-haven - Login";
+
     }
 
 }

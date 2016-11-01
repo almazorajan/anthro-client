@@ -1,1 +1,1 @@
-{"version":3,"file":"position.js","sourceRoot":"","sources":["../../app/models/position.ts"],"names":[],"mappings":";AACA;IAAA;IAKA,CAAC;IAAD,eAAC;AAAD,CAAC,AALD,IAKC;AALY,gBAAQ,WAKpB,CAAA"}
+{"version":3,"file":"position.js","sourceRoot":"","sources":["../../app/models/position.ts"],"names":[],"mappings":";AACA;IAKI;QAEI,IAAI,CAAC,GAAG,GAAG,EAAE,CAAC;QACd,IAAI,CAAC,aAAa,GAAG,EAAE,CAAC;IAE5B,CAAC;IAGL,eAAC;AAAD,CAAC,AAbD,IAaC;AAbY,gBAAQ,WAapB,CAAA"}

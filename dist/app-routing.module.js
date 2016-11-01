@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var login_component_1 = require('./components/login/login.component');
 var main_component_1 = require('./components/main/main.component');
+var employee_sheet_component_1 = require('./components/employee-sheet/employee-sheet.component');
 var routes = [
     {
         path: '',
@@ -24,10 +25,13 @@ var routes = [
     },
     {
         path: 'main',
-        component: main_component_1.MainComponent
-    },
-    {
-        path: 'main/employee',
+        component: main_component_1.MainComponent,
+        children: [
+            {
+                path: 'employeesheet',
+                component: employee_sheet_component_1.EmployeeSheetComponent
+            }
+        ]
     }
 ];
 var AppRoutingModule = (function () {

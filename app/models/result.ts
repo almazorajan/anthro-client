@@ -3,6 +3,14 @@ export class Result {
 
     success: boolean;
     message: string;
-    data: <t>(param1: t) => t;
+    data: any;
+
+    constructor() {
+
+        this.success = false;
+        this.message = "";
+        this.data = null;
+
+    }
 
 }

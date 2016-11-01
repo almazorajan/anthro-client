@@ -5,4 +5,12 @@ export class EducationHistory {
     degree: string;
     dateGraduated: Date;
 
+    constructor() {
+
+        this.educationLevel = "";
+        this.degree = "";
+        this.dateGraduated = new Date();
+
+    }
+
 }

@@ -13,6 +13,7 @@ var LoginComponent = (function () {
     function LoginComponent() {
     }
     LoginComponent.prototype.ngOnInit = function () {
+        document.title = "Ad-haven - Login";
     };
     LoginComponent = __decorate([
         core_1.Component({

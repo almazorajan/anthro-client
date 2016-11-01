@@ -16,6 +16,7 @@ var app_routing_module_1 = require('./app-routing.module');
 var app_component_1 = require('./app.component');
 var login_component_1 = require('./components/login/login.component');
 var main_component_1 = require('./components/main/main.component');
+var employee_sheet_component_1 = require('./components/employee-sheet/employee-sheet.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -29,7 +30,8 @@ var AppModule = (function () {
             declarations: [
                 app_component_1.AppComponent,
                 login_component_1.LoginComponent,
-                main_component_1.MainComponent
+                main_component_1.MainComponent,
+                employee_sheet_component_1.EmployeeSheetComponent
             ],
             providers: [],
             bootstrap: [app_component_1.AppComponent]

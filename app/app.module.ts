@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
+import { EmployeeSheetComponent } from './components/employee-sheet/employee-sheet.component';
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import { MainComponent } from './components/main/main.component';
     declarations: [
         AppComponent,
         LoginComponent,
-        MainComponent
+        MainComponent,
+        EmployeeSheetComponent
     ],
     providers: [],
     bootstrap: [AppComponent]

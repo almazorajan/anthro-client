@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
+import { EmployeeSheetComponent } from './components/employee-sheet/employee-sheet.component';
 
 var routes: Routes = [
     {
@@ -16,10 +17,13 @@ var routes: Routes = [
     },
     {
         path: 'main',
-        component: MainComponent
-    },
-    {
-        path: 'main/employee',
+        component: MainComponent,
+        children: [
+            {
+                path: 'employeesheet',
+                component: EmployeeSheetComponent
+            }
+        ]
     }
 ];
 
@@ -28,4 +32,4 @@ var routes: Routes = [
     exports: [RouterModule]
 })
 
-export class AppRoutingModule {}
+export class AppRoutingModule { }
