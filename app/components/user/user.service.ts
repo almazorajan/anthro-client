@@ -12,11 +12,17 @@ import { Search, User, Result } from '../../models/model';
 // user-defined service
 import { Service } from '../../shared-services/service';
 
-@Injectable() export class LoginService extends Service {
+@Injectable() export class UserService extends Service {
 
     addUser(user: User): Promise<Result> {
 
         return this.apiCall("post", "user/adduser", user);
+
+    }
+
+    changePassword(user: User): Promise<Result> {
+
+        return this.apiCall("post", "user/changepassword", user);
 
     }
 
@@ -26,7 +32,7 @@ import { Service } from '../../shared-services/service';
 
     }
 
-    deactiveUser(user: User): Promise<Result> {
+    deactivateUser(user: User): Promise<Result> {
 
         return this.apiCall("post", "user/deleteuser", user);
 

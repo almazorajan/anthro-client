@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
 import { EmployeeSheetComponent } from './components/employee-sheet/employee-sheet.component';
+import { UserComponent } from './components/user/user.component';
+import { ModuleComponent } from './components/module/module.component';
 
 @NgModule({
     imports: [
@@ -20,7 +22,9 @@ import { EmployeeSheetComponent } from './components/employee-sheet/employee-she
         AppComponent,
         LoginComponent,
         MainComponent,
-        EmployeeSheetComponent
+        EmployeeSheetComponent,
+        UserComponent,
+        ModuleComponent
     ],
     providers: [],
     bootstrap: [AppComponent]

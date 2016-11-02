@@ -1,13 +1,17 @@
 
+import { Module } from './model'; 
+
 export class Position {
 
     _id: string;
-    _positionName: string;
+    positionName: string;
+    modules: Module[];
 
     constructor() {
 
         this._id = "";
-        this._positionName = "";
+        this.positionName = "";
+        this.modules = [new Module()];
 
     }
 

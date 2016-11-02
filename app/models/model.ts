@@ -8,6 +8,7 @@ export { EmailAddress } from './email-address';
 export { Employee } from './employee';
 export { EmploymentStatus } from './employment-status';
 export { FamilyBackground } from './family-background';
+export { Module } from './module';
 export { Position } from './position';
 export { Result } from './result';
 export { Search } from './Search';

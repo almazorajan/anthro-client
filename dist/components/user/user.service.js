@@ -21,25 +21,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 // user-defined service
 var service_1 = require('../../shared-services/service');
-var LoginService = (function (_super) {
-    __extends(LoginService, _super);
-    function LoginService() {
+var UserService = (function (_super) {
+    __extends(UserService, _super);
+    function UserService() {
         _super.apply(this, arguments);
     }
-    LoginService.prototype.addUser = function (user) {
+    UserService.prototype.addUser = function (user) {
         return this.apiCall("post", "user/adduser", user);
     };
-    LoginService.prototype.updateUser = function (user) {
+    UserService.prototype.changePassword = function (user) {
+        return this.apiCall("post", "user/changepassword", user);
+    };
+    UserService.prototype.updateUser = function (user) {
         return this.apiCall("post", "user/updateuser", user);
     };
-    LoginService.prototype.deactiveUser = function (user) {
+    UserService.prototype.deactivateUser = function (user) {
         return this.apiCall("post", "user/deleteuser", user);
     };
-    LoginService = __decorate([
+    UserService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])
-    ], LoginService);
-    return LoginService;
+    ], UserService);
+    return UserService;
 }(service_1.Service));
-exports.LoginService = LoginService;
+exports.UserService = UserService;
 //# sourceMappingURL=user.service.js.map

@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
 import { EmployeeSheetComponent } from './components/employee-sheet/employee-sheet.component';
+import { UserComponent } from './components/user/user.component';
+import { ModuleComponent } from './components/module/module.component';
 
 var routes: Routes = [
     {
@@ -22,6 +24,14 @@ var routes: Routes = [
             {
                 path: 'employeesheet',
                 component: EmployeeSheetComponent
+            },
+            {
+                path: 'user',
+                component: UserComponent
+            },
+            {
+                path: 'module',
+                component: ModuleComponent
             }
         ]
     }

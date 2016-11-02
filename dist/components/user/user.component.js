@@ -9,17 +9,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var user_service_1 = require('./user.service');
+var swal_service_1 = require('../../shared-services/swal.service');
 var UserComponent = (function () {
-    function UserComponent() {
+    function UserComponent(userService, swal) {
+        this.userService = userService;
+        this.swal = swal;
     }
     UserComponent.prototype.ngOnInit = function () {
+        this.swal.confirm("Are you sure?", "You won't be able to recover this.", function (isConfirm) {
+        });
     };
     UserComponent = __decorate([
         core_1.Component({
             selector: 'user-component',
-            templateUrl: './user-page.html'
+            templateUrl: './app/components/user/user-page.html',
+            providers: [
+                user_service_1.UserService,
+                swal_service_1.SweetAlert
+            ]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [user_service_1.UserService, swal_service_1.SweetAlert])
     ], UserComponent);
     return UserComponent;
 }());
