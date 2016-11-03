@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ModuleService } from './module.service';
 
+import { ModuleService } from './module.service';
 import { Module } from '../../models/model';
 
 @Component({
@@ -13,11 +13,11 @@ import { Module } from '../../models/model';
 
 export class ModuleComponent implements OnInit {
 
-    loading: boolean = false;
+    loading: boolean = true;
     modules: Module[] = [];
 
     ngOnInit() {
-        console.log(this.modules.length);        
+        this.modules = [new Module()];
     }
 
     constructor(private moduleService: ModuleService) {

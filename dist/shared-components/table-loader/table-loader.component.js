@@ -15,6 +15,11 @@ var TableLoaderComponent = (function () {
         this.message = "";
         this.condition = false;
     }
+    TableLoaderComponent.prototype.ngOnInit = function () {
+        console.log("colspan size", this.colSpanSize);
+        console.log("message", this.message);
+        console.log("condition", this.condition);
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Number)

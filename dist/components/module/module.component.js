@@ -10,14 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var module_service_1 = require('./module.service');
+var model_1 = require('../../models/model');
 var ModuleComponent = (function () {
     function ModuleComponent(moduleService) {
         this.moduleService = moduleService;
-        this.loading = false;
+        this.loading = true;
         this.modules = [];
     }
     ModuleComponent.prototype.ngOnInit = function () {
-        console.log(this.modules.length);
+        this.modules = [new model_1.Module()];
     };
     ModuleComponent = __decorate([
         core_1.Component({
