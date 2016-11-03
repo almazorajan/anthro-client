@@ -12,6 +12,9 @@ import { EmployeeSheetComponent } from './components/employee-sheet/employee-she
 import { UserComponent } from './components/user/user.component';
 import { ModuleComponent } from './components/module/module.component';
 
+// shared-components
+import { TableLoaderComponent } from './shared-components/components';
+
 @NgModule({
     imports: [
         BrowserModule, 
@@ -24,7 +27,8 @@ import { ModuleComponent } from './components/module/module.component';
         MainComponent,
         EmployeeSheetComponent,
         UserComponent,
-        ModuleComponent
+        ModuleComponent,
+        TableLoaderComponent
     ],
     providers: [],
     bootstrap: [AppComponent]
