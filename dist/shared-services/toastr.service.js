@@ -1,7 +1,3 @@
-/*
-version: 1
-Swal Service
-**/
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -12,28 +8,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-// @angular
 var core_1 = require('@angular/core');
-var SweetAlertService = (function () {
-    function SweetAlertService() {
+toastr.options.timeOut = 2000;
+toastr.options.extendedTimeOut = 2000;
+toastr.options.newestOnTop = true;
+var ToastrService = (function () {
+    function ToastrService() {
     }
-    SweetAlertService.prototype.confirm = function (title, message, callBack) {
-        swal({
-            title: title,
-            text: message,
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'Yes, delete it!'
-        }, function (isConfirm) {
-            callBack(isConfirm);
-        });
+    ToastrService.prototype.warn = function (msg) {
+        toastr.warning(msg, "Are you sure?");
     };
-    SweetAlertService = __decorate([
+    ToastrService.prototype.success = function (msg) {
+        toastr.success(msg, "Success!");
+    };
+    ToastrService.prototype.error = function (msg) {
+        toastr.error(msg, "Oops!");
+    };
+    ToastrService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])
-    ], SweetAlertService);
-    return SweetAlertService;
+    ], ToastrService);
+    return ToastrService;
 }());
-exports.SweetAlertService = SweetAlertService;
-//# sourceMappingURL=swal.service.js.map
+exports.ToastrService = ToastrService;
+//# sourceMappingURL=toastr.service.js.map

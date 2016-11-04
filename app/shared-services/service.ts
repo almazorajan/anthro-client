@@ -26,8 +26,8 @@ export class Service implements iService {
     constructor(private http: Http) {
 
         this.forDevelopment = true;
-        this.developmentApi = "http://localhost/optimus";
-        this.productionApi = "https://127.0.0.1/optimus"
+        this.developmentApi = "http://localhost:8090/";
+        this.productionApi = "https://127.0.0.1/"
 
         if(this.forDevelopment)
             this.server = this.developmentApi;
@@ -48,13 +48,26 @@ export class Service implements iService {
     
     }
 
-    apiCall(verb: string, uri: string, body: any): Promise<Result> {
+    apiCall(verb: string, uri: string, body?: any): Promise<Result> {
 
-        return this.http[verb](this.endpoint(uri), body)
+        if(body) {
+            
+            let payload = {
+                data: body,
+                auth: {}
+            };
+
+            return this.http[verb](this.endpoint(uri), payload)
+                .toPromise()
+                .then(response => response.json() as Result)
+                .catch(this.handleError);
+        
+        }
+
+        return this.http[verb](this.endpoint(uri))
             .toPromise()
             .then(response => response.json() as Result)
             .catch(this.handleError);
-
 
     }
 

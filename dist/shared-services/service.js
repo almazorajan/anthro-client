@@ -20,8 +20,8 @@ var Service = (function () {
     function Service(http) {
         this.http = http;
         this.forDevelopment = true;
-        this.developmentApi = "http://localhost/optimus";
-        this.productionApi = "https://127.0.0.1/optimus";
+        this.developmentApi = "http://localhost:8090/";
+        this.productionApi = "https://127.0.0.1/";
         if (this.forDevelopment)
             this.server = this.developmentApi;
         else
@@ -34,7 +34,17 @@ var Service = (function () {
         return Promise.reject(error.message || error);
     };
     Service.prototype.apiCall = function (verb, uri, body) {
-        return this.http[verb](this.endpoint(uri), body)
+        if (body) {
+            var payload = {
+                data: body,
+                auth: {}
+            };
+            return this.http[verb](this.endpoint(uri), payload)
+                .toPromise()
+                .then(function (response) { return response.json(); })
+                .catch(this.handleError);
+        }
+        return this.http[verb](this.endpoint(uri))
             .toPromise()
             .then(function (response) { return response.json(); })
             .catch(this.handleError);
