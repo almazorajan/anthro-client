@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
 // interface
-import { iService } from '../interfaces/service.interface';
+import { iService, iApiCall } from '../interfaces/service.interface';
 
 // classes
 import { Result } from '../models/model';
@@ -26,8 +26,8 @@ export class Service implements iService {
     constructor(private http: Http) {
 
         this.forDevelopment = true;
-        this.developmentApi = "http://localhost/optimus";
-        this.productionApi = "https://127.0.0.1/optimus"
+        this.developmentApi = "http://localhost:8090/";
+        this.productionApi = "https://127.0.0.1/"
 
         if(this.forDevelopment)
             this.server = this.developmentApi;
@@ -48,13 +48,17 @@ export class Service implements iService {
     
     }
 
-    apiCall(verb: string, uri: string, body: any): Promise<Result> {
+    apiCall(request: iApiCall): Promise<Result> {
 
-        return this.http[verb](this.endpoint(uri), body)
+        let payload = {
+            data: request.body,
+            auth: {}
+        };
+
+        return this.http[request.verb](this.endpoint(request.uri), payload)
             .toPromise()
             .then(response => response.json() as Result)
             .catch(this.handleError);
-
 
     }
 

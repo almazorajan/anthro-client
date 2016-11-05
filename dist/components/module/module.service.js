@@ -1,9 +1,4 @@
 "use strict";
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -15,30 +10,49 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var services_1 = require('../../shared-services/services');
-var ModuleService = (function (_super) {
-    __extends(ModuleService, _super);
-    function ModuleService() {
-        _super.apply(this, arguments);
+require('rxjs/add/operator/toPromise');
+var ModuleService = (function () {
+    function ModuleService(service) {
+        this.service = service;
     }
     ModuleService.prototype.getGroups = function () {
         return [
+            "",
             "Maintenance"
         ];
     };
+    ModuleService.prototype.getAll = function () {
+        return this.service.apiCall({
+            verb: "post",
+            uri: "module/getall"
+        });
+    };
     ModuleService.prototype.addModule = function (_module) {
-        return this.apiCall("post", "module/addmodule", _module);
+        return this.service.apiCall({
+            verb: "post",
+            uri: "module/add",
+            body: _module
+        });
     };
     ModuleService.prototype.updateModule = function (_module) {
-        return this.apiCall("post", "module/updatemodule", _module);
+        return this.service.apiCall({
+            verb: "post",
+            uri: "module/update",
+            body: _module
+        });
     };
     ModuleService.prototype.deleteModule = function (_module) {
-        return this.apiCall("post", "module/deletemodule", _module);
+        return this.service.apiCall({
+            verb: "post",
+            uri: "module/delete",
+            body: _module
+        });
     };
     ModuleService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [services_1.Service])
     ], ModuleService);
     return ModuleService;
-}(services_1.Service));
+}());
 exports.ModuleService = ModuleService;
 //# sourceMappingURL=module.service.js.map

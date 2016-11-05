@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './user.service';
-import { SweetAlert } from '../../shared-services/swal.service';
+import { SweetAlertService } from '../../shared-services/swal.service';
 
 @Component({
     selector: 'user-component',
     templateUrl: './app/components/user/user-page.html',
     providers: [
         UserService,
-        SweetAlert
+        SweetAlertService
     ]
 })
 
@@ -19,7 +19,7 @@ export class UserComponent implements OnInit {
         });
     }
 
-    constructor(private userService: UserService, private swal: SweetAlert) {
+    constructor(private userService: UserService, private swal: SweetAlertService) {
 
     }
 

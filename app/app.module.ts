@@ -12,6 +12,9 @@ import { EmployeeSheetComponent } from './components/employee-sheet/employee-she
 import { UserComponent } from './components/user/user.component';
 import { ModuleComponent } from './components/module/module.component';
 
+// providers
+import { Service } from './shared-services/service';
+
 // shared-components
 import { TableLoaderComponent } from './shared-components/components';
 
@@ -30,7 +33,7 @@ import { TableLoaderComponent } from './shared-components/components';
         ModuleComponent,
         TableLoaderComponent
     ],
-    providers: [],
+    providers: [Service],
     bootstrap: [AppComponent]
 })
 

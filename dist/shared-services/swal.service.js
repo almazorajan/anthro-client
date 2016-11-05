@@ -14,27 +14,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 // @angular
 var core_1 = require('@angular/core');
-var SweetAlert = (function () {
-    function SweetAlert() {
+var SweetAlertService = (function () {
+    function SweetAlertService() {
     }
-    SweetAlert.prototype.confirm = function (title, message, callBack) {
+    SweetAlertService.prototype.confirm = function (sweet) {
         swal({
-            title: title,
-            text: message,
+            title: sweet.title,
+            text: sweet.message,
             type: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then(function (isConfirm) {
-            callBack(isConfirm);
+            confirmButtonColor: '#d9230f',
+            confirmButtonText: sweet.confirmButtonText
+        }, function (isConfirm) {
+            sweet.callBack(isConfirm);
         });
     };
-    SweetAlert = __decorate([
+    SweetAlertService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])
-    ], SweetAlert);
-    return SweetAlert;
+    ], SweetAlertService);
+    return SweetAlertService;
 }());
-exports.SweetAlert = SweetAlert;
+exports.SweetAlertService = SweetAlertService;
 //# sourceMappingURL=swal.service.js.map

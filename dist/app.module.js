@@ -19,6 +19,8 @@ var main_component_1 = require('./components/main/main.component');
 var employee_sheet_component_1 = require('./components/employee-sheet/employee-sheet.component');
 var user_component_1 = require('./components/user/user.component');
 var module_component_1 = require('./components/module/module.component');
+// providers
+var service_1 = require('./shared-services/service');
 // shared-components
 var components_1 = require('./shared-components/components');
 var AppModule = (function () {
@@ -40,7 +42,7 @@ var AppModule = (function () {
                 module_component_1.ModuleComponent,
                 components_1.TableLoaderComponent
             ],
-            providers: [],
+            providers: [service_1.Service],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

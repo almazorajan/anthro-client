@@ -26,10 +26,10 @@ var UserComponent = (function () {
             templateUrl: './app/components/user/user-page.html',
             providers: [
                 user_service_1.UserService,
-                swal_service_1.SweetAlert
+                swal_service_1.SweetAlertService
             ]
         }), 
-        __metadata('design:paramtypes', [user_service_1.UserService, swal_service_1.SweetAlert])
+        __metadata('design:paramtypes', [user_service_1.UserService, swal_service_1.SweetAlertService])
     ], UserComponent);
     return UserComponent;
 }());
