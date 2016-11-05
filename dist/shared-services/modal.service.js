@@ -1,7 +1,3 @@
-/*
-version: 1
-Swal Service
-**/
 "use strict";
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -12,28 +8,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-// @angular
 var core_1 = require('@angular/core');
-var SweetAlertService = (function () {
-    function SweetAlertService() {
+var ModalService = (function () {
+    function ModalService(id) {
+        this.id = id;
     }
-    SweetAlertService.prototype.confirm = function (sweet) {
-        swal({
-            title: sweet.title,
-            text: sweet.message,
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d9230f',
-            confirmButtonText: sweet.confirmButtonText
-        }, function (isConfirm) {
-            sweet.callBack(isConfirm);
-        });
+    ModalService.prototype.show = function () {
+        $(this.id).modal("show");
     };
-    SweetAlertService = __decorate([
+    ModalService.prototype.hide = function () {
+        $(this.id).modal("hide");
+    };
+    ModalService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
-    ], SweetAlertService);
-    return SweetAlertService;
+        __metadata('design:paramtypes', [String])
+    ], ModalService);
+    return ModalService;
 }());
-exports.SweetAlertService = SweetAlertService;
-//# sourceMappingURL=swal.service.js.map
+exports.ModalService = ModalService;
+//# sourceMappingURL=modal.service.js.map

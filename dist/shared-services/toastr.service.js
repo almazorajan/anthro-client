@@ -22,7 +22,12 @@ var ToastrService = (function () {
         toastr.success(msg, "Success!");
     };
     ToastrService.prototype.error = function (msg) {
-        toastr.error(msg, "Oops!");
+        try {
+            toastr.error((msg || msg.message).toString(), "Oops!");
+        }
+        catch (e) {
+            toastr.error("Unable to parse " + msg, "Oops!");
+        }
     };
     ToastrService = __decorate([
         core_1.Injectable(), 

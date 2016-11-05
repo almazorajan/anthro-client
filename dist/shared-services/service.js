@@ -33,18 +33,12 @@ var Service = (function () {
     Service.prototype.handleError = function (error) {
         return Promise.reject(error.message || error);
     };
-    Service.prototype.apiCall = function (verb, uri, body) {
-        if (body) {
-            var payload = {
-                data: body,
-                auth: {}
-            };
-            return this.http[verb](this.endpoint(uri), payload)
-                .toPromise()
-                .then(function (response) { return response.json(); })
-                .catch(this.handleError);
-        }
-        return this.http[verb](this.endpoint(uri))
+    Service.prototype.apiCall = function (request) {
+        var payload = {
+            data: request.body,
+            auth: {}
+        };
+        return this.http[request.verb](this.endpoint(request.uri), payload)
             .toPromise()
             .then(function (response) { return response.json(); })
             .catch(this.handleError);

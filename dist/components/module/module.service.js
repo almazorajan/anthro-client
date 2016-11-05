@@ -17,20 +17,36 @@ var ModuleService = (function () {
     }
     ModuleService.prototype.getGroups = function () {
         return [
+            "",
             "Maintenance"
         ];
     };
     ModuleService.prototype.getAll = function () {
-        return this.service.apiCall("post", "module/getall");
+        return this.service.apiCall({
+            verb: "post",
+            uri: "module/getall"
+        });
     };
     ModuleService.prototype.addModule = function (_module) {
-        return this.service.apiCall("post", "module/add", _module);
+        return this.service.apiCall({
+            verb: "post",
+            uri: "module/add",
+            body: _module
+        });
     };
     ModuleService.prototype.updateModule = function (_module) {
-        return this.service.apiCall("post", "module/update", _module);
+        return this.service.apiCall({
+            verb: "post",
+            uri: "module/update",
+            body: _module
+        });
     };
     ModuleService.prototype.deleteModule = function (_module) {
-        return this.service.apiCall("post", "module/remove", _module);
+        return this.service.apiCall({
+            verb: "post",
+            uri: "module/delete",
+            body: _module
+        });
     };
     ModuleService = __decorate([
         core_1.Injectable(), 

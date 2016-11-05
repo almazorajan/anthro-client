@@ -20,9 +20,17 @@ toastr.options.newestOnTop = true;
 
     }
 
-    error(msg: string) {
+    error(msg: any) {
 
-        toastr.error(msg, "Oops!");
+        try {
+
+            toastr.error((msg || msg.message).toString(), "Oops!");
+            
+        } catch(e) {
+
+            toastr.error("Unable to parse " + msg, "Oops!");
+
+        }
 
     }
 

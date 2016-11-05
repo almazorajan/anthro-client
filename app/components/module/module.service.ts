@@ -14,6 +14,7 @@ import 'rxjs/add/operator/toPromise';
     getGroups(): string[] {
 
         return [
+            "",
             "Maintenance"
         ];
 
@@ -21,25 +22,40 @@ import 'rxjs/add/operator/toPromise';
 
     getAll(): Promise<Result> {
 
-        return this.service.apiCall("post", "module/getall");
+        return this.service.apiCall({
+            verb: "post",
+            uri: "module/getall"
+        });
 
     }
 
     addModule(_module: Module): Promise<Result> {
 
-        return this.service.apiCall("post", "module/add", _module);
+        return this.service.apiCall({
+            verb: "post",
+            uri: "module/add",
+            body: _module
+        });
 
     }
 
     updateModule(_module: Module): Promise<Result> {
 
-        return this.service.apiCall("post", "module/update", _module);
+        return this.service.apiCall({
+            verb: "post",
+            uri: "module/update",
+            body: _module
+        });
 
     }
 
     deleteModule(_module: Module): Promise<Result> {
 
-        return this.service.apiCall("post", "module/remove", _module);
+        return this.service.apiCall({
+            verb: "post",
+            uri: "module/delete",
+            body: _module
+        });
 
     }
 

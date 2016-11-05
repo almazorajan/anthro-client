@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
 // interface
-import { iService } from '../interfaces/service.interface';
+import { iService, iApiCall } from '../interfaces/service.interface';
 
 // classes
 import { Result } from '../models/model';
@@ -48,23 +48,14 @@ export class Service implements iService {
     
     }
 
-    apiCall(verb: string, uri: string, body?: any): Promise<Result> {
+    apiCall(request: iApiCall): Promise<Result> {
 
-        if(body) {
-            
-            let payload = {
-                data: body,
-                auth: {}
-            };
+        let payload = {
+            data: request.body,
+            auth: {}
+        };
 
-            return this.http[verb](this.endpoint(uri), payload)
-                .toPromise()
-                .then(response => response.json() as Result)
-                .catch(this.handleError);
-        
-        }
-
-        return this.http[verb](this.endpoint(uri))
+        return this.http[request.verb](this.endpoint(request.uri), payload)
             .toPromise()
             .then(response => response.json() as Result)
             .catch(this.handleError);

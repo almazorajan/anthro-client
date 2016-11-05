@@ -6,6 +6,8 @@ Service Interface
 // classes
 import { Result } from '../models/model';
 
+import { iApiCall } from './api-call.interface';
+
 export interface iService {
     
     readonly server: string;
@@ -13,7 +15,7 @@ export interface iService {
     readonly productionApi: string;
     readonly forDevelopment: boolean;
     handleError(error: any): Promise<any>;
-    apiCall(verb: string, uri: string, body: any): Promise<Result>
+    apiCall(request: iApiCall): Promise<Result>
     endpoint(uri: string): string;
 
 }
