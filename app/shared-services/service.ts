@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 
 // interface
-import { iService, iApiCall } from '../interfaces/service.interface';
+import { iService, iApiCall } from '../interfaces/interface';
 
 // classes
 import { Result } from '../models/model';

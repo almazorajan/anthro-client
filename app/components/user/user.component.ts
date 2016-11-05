@@ -14,9 +14,9 @@ import { SweetAlertService } from '../../shared-services/swal.service';
 export class UserComponent implements OnInit {
 
     ngOnInit() {
-        this.swal.confirm("Are you sure?", "You won't be able to recover this.", (isConfirm) => {
+        // this.swal.confirm("Are you sure?", "You won't be able to recover this.", (isConfirm) => {
 
-        });
+        // });
     }
 
     constructor(private userService: UserService, private swal: SweetAlertService) {

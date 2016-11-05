@@ -14,28 +14,28 @@ import { Service } from '../../shared-services/service';
 
 @Injectable() export class UserService extends Service {
 
-    addUser(user: User): Promise<Result> {
+    // addUser(user: User): Promise<Result> {
 
-        return this.apiCall("post", "user/adduser", user);
+    //     return this.apiCall("post", "user/adduser", user);
 
-    }
+    // }
 
-    changePassword(user: User): Promise<Result> {
+    // changePassword(user: User): Promise<Result> {
 
-        return this.apiCall("post", "user/changepassword", user);
+    //     return this.apiCall("post", "user/changepassword", user);
 
-    }
+    // }
 
-    updateUser(user: User): Promise<Result> {
+    // updateUser(user: User): Promise<Result> {
 
-        return this.apiCall("post", "user/updateuser", user);
+    //     return this.apiCall("post", "user/updateuser", user);
 
-    }
+    // }
 
-    deactivateUser(user: User): Promise<Result> {
+    // deactivateUser(user: User): Promise<Result> {
 
-        return this.apiCall("post", "user/deleteuser", user);
+    //     //return this.apiCall("post", "user/deleteuser", user);
 
-    }
+    // }
 
 }

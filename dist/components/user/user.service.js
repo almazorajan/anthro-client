@@ -26,18 +26,6 @@ var UserService = (function (_super) {
     function UserService() {
         _super.apply(this, arguments);
     }
-    UserService.prototype.addUser = function (user) {
-        return this.apiCall("post", "user/adduser", user);
-    };
-    UserService.prototype.changePassword = function (user) {
-        return this.apiCall("post", "user/changepassword", user);
-    };
-    UserService.prototype.updateUser = function (user) {
-        return this.apiCall("post", "user/updateuser", user);
-    };
-    UserService.prototype.deactivateUser = function (user) {
-        return this.apiCall("post", "user/deleteuser", user);
-    };
     UserService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])

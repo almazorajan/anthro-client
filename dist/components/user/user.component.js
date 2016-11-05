@@ -17,8 +17,8 @@ var UserComponent = (function () {
         this.swal = swal;
     }
     UserComponent.prototype.ngOnInit = function () {
-        this.swal.confirm("Are you sure?", "You won't be able to recover this.", function (isConfirm) {
-        });
+        // this.swal.confirm("Are you sure?", "You won't be able to recover this.", (isConfirm) => {
+        // });
     };
     UserComponent = __decorate([
         core_1.Component({
