@@ -1,35 +1,58 @@
-// /*
-// version: 1
-// Position Service
-// **/
+/*
+version: 1
+Position Service
+**/
 
-// // @angular
-// import { Injectable } from '@angular/core';
+// @angular
+import { Injectable } from '@angular/core';
 
-// // user-defined models
-// import { Search, Position, Result } from '../../models/model';
+// user-defined models
+import { Search, Position, Result } from '../../models/model';
 
-// // user-defined service
-// import { Service } from '../../shared-services/service';
+// user-defined service
+import { Service } from '../../shared-services/service';
 
-// @Injectable() export class LoginService extends Service {
+@Injectable() export class PositionService {
 
-//     addPosition(position: Position): Promise<Result> {
+    constructor(private service: Service) {}
 
-//         return this.apiCall("post", "position/addposition", position);
+    getAll(): Promise<Result> {
 
-//     }
+        return this.service.apiCall({
+            verb: "post",
+            uri: "position/getall"
+        });
 
-//     updatePosition(position: Position): Promise<Result> {
+    }
 
-//         return this.apiCall("post", "position/updateposition", position);
+    addPosition(position: Position): Promise<Result> {
 
-//     }
+        return this.service.apiCall({
+            verb: "post",
+            uri: "position/add",
+            body: position
+        });
 
-//     deactivatePosition(position: Position): Promise<Result> {
+    }
 
-//         return this.apiCall("post", "position/deleteposition", position);
+    updatePosition(position: Position): Promise<Result> {
 
-//     }
+        return this.service.apiCall({
+            verb: "post",
+            uri: "position/update",
+            body: position
+        });
 
-// }
+    }
+
+    deactivatePosition(position: Position): Promise<Result> {
+
+        return this.service.apiCall({
+            verb: "post",
+            uri: "position/delete",
+            body: position
+        });
+
+    }
+
+}

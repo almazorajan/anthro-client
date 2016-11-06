@@ -6,8 +6,9 @@ import { MainComponent } from './components/main/main.component';
 import { EmployeeSheetComponent } from './components/employee-sheet/employee-sheet.component';
 import { UserComponent } from './components/user/user.component';
 import { ModuleComponent } from './components/module/module.component';
+import { PositionComponent } from './components/position/position.component';
 
-var routes: Routes = [
+const routes: Routes = [
     {
         path: '',
         redirectTo: '/login',
@@ -32,6 +33,10 @@ var routes: Routes = [
             {
                 path: 'module',
                 component: ModuleComponent
+            },
+            {
+                path: 'position',
+                component: PositionComponent
             }
         ]
     }

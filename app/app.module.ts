@@ -11,6 +11,7 @@ import { MainComponent } from './components/main/main.component';
 import { EmployeeSheetComponent } from './components/employee-sheet/employee-sheet.component';
 import { UserComponent } from './components/user/user.component';
 import { ModuleComponent } from './components/module/module.component';
+import { PositionComponent } from './components/position/position.component';
 
 // providers
 import { Service } from './shared-services/service';
@@ -24,6 +25,7 @@ import { TableLoaderComponent } from './shared-components/components';
         FormsModule,
         HttpModule,
         AppRoutingModule],
+
     declarations: [
         AppComponent,
         LoginComponent,
@@ -31,8 +33,9 @@ import { TableLoaderComponent } from './shared-components/components';
         EmployeeSheetComponent,
         UserComponent,
         ModuleComponent,
-        TableLoaderComponent
+        PositionComponent
     ],
+    
     providers: [Service],
     bootstrap: [AppComponent]
 })

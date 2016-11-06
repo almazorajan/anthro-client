@@ -15,6 +15,7 @@ var main_component_1 = require('./components/main/main.component');
 var employee_sheet_component_1 = require('./components/employee-sheet/employee-sheet.component');
 var user_component_1 = require('./components/user/user.component');
 var module_component_1 = require('./components/module/module.component');
+var position_component_1 = require('./components/position/position.component');
 var routes = [
     {
         path: '',
@@ -40,6 +41,10 @@ var routes = [
             {
                 path: 'module',
                 component: module_component_1.ModuleComponent
+            },
+            {
+                path: 'position',
+                component: position_component_1.PositionComponent
             }
         ]
     }
