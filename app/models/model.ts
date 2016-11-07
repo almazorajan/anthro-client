@@ -12,6 +12,6 @@ export { Modal } from './modal';
 export { Module } from './module';
 export { Position } from './position';
 export { Result } from './result';
-export { Search } from './Search';
+export { Search } from './search';
 export { User } from './user';
 export { WorkHistory } from './work-history';

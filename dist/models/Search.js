@@ -9,4 +9,4 @@ var Search = (function () {
     return Search;
 }());
 exports.Search = Search;
-//# sourceMappingURL=Search.js.map
+//# sourceMappingURL=search.js.map
