@@ -2,7 +2,7 @@
   "name": "project-anthro-rachet",
   "version": "1.0.0",
   "scripts": {
-    "start": "tsc && concurrently \"tsc -w\"  ",
+    "start": "tsc && concurrently \"tsc -w\" \"node app.server.js\" ",
     "lite": "lite-server",
     "tsc": "tsc",
     "tsc:w": "tsc -w"
