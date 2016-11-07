@@ -4,5 +4,5 @@ const app = express();
 
 app.use(express.static("./"));
 
-app.listen(80000);
-console.log("listening to 80000");
+app.listen(process.env.PORT || 80000);
+console.log("listening to " + (process.env.PORT || 80000));
