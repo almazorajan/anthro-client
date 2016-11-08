@@ -25,7 +25,7 @@ import { Service } from '../../shared-services/service';
 
     }
 
-    add(user: User) {
+    add(user: User): Promise<Result> {
 
         return this.service.apiCall({
             verb: "post",
@@ -35,7 +35,7 @@ import { Service } from '../../shared-services/service';
 
     }
 
-    update(user: User) {
+    update(user: User): Promise<Result> {
 
         return this.service.apiCall({
             verb: "post",
@@ -45,7 +45,7 @@ import { Service } from '../../shared-services/service';
 
     }
 
-    delete(user: User) {
+    delete(user: User): Promise<Result> {
 
         return this.service.apiCall({
             verb: "post",
