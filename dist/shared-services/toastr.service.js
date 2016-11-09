@@ -16,7 +16,7 @@ var ToastrService = (function () {
     function ToastrService() {
     }
     ToastrService.prototype.warn = function (msg) {
-        toastr.warning(msg, "Are you sure?");
+        toastr.warning(msg, "Wait...");
     };
     ToastrService.prototype.success = function (msg) {
         toastr.success(msg, "Success!");
