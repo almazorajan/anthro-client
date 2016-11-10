@@ -77,17 +77,19 @@
                         
                         <table class="table table-condensed">
                             <thead>
-                                <th><input [(ngModel)]="moduleSelector" name="chkModuleSelectorAll" (ngModelChange)="toggleModuleSelection(moduleSelector)" type="checkbox"></th>
+                                <th>
+                                    <input [(ngModel)]="moduleSelector" [disabled]="isFormDisabled" name="chkModuleSelectorAll" (ngModelChange)="toggleModuleSelection(moduleSelector)" type="checkbox">
+                                </th>
                                 <th>Module Name</th>
                                 <th>Module Description</th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let module of modules">
+                                <tr *ngFor="let module of modules; let index = index; trackBy: moduleName">
                                     <td>
-                                        <input [(ngModel)]="module.selected" type="checkbox" name="chkModuleSelected">
+                                        <input [(ngModel)]="modules[index].selected" [name]="index + 'chk'" [id]="index + 'chk'" [disabled]="isFormDisabled" type="checkbox" name="chkModuleSelected">
                                     </td>
-                                    <td>{{ module.moduleName }}</td>
-                                    <td>{{ module.moduleDescription }}</td>
+                                    <td>{{ modules[index].moduleName }}</td>
+                                    <td>{{ modules[index].moduleDescription }}</td>
                                 </tr>
                             </tbody>
                         </table>

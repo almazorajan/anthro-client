@@ -71,15 +71,41 @@ var PositionComponent = (function () {
             _this.toastr.error(error);
         });
     };
+    PositionComponent.prototype.checkModules = function () {
+        for (var i = 0; i < this.selectedPosition.modules.length; i++) {
+            for (var j = 0; j < this.modules.length; j++) {
+                if (this.selectedPosition.modules[i]._id === this.modules[j]._id) {
+                    this.modules[j].selected = true;
+                }
+            }
+        }
+    };
+    PositionComponent.prototype.view = function (position) {
+        this.operation = 0;
+        this.isFormDisabled = true;
+        this.selectedPosition = position;
+        this.toggleModuleSelection(false);
+        this.checkModules();
+    };
     PositionComponent.prototype.add = function () {
         this.operation = 1;
         this.isFormDisabled = false;
+        this.toggleModuleSelection(false);
         this.selectedPosition = new model_1.Position();
     };
-    PositionComponent.prototype.confirmAdd = function () {
+    PositionComponent.prototype.edit = function () {
+        this.operation = 2;
+        this.isFormDisabled = false;
+        this.originalPositionInfo = Object.assign({}, this.selectedPosition);
+    };
+    PositionComponent.prototype.cancelEdit = function () {
+        this.selectedPosition = Object.assign({}, this.originalPositionInfo);
+        this.view(this.selectedPosition);
+    };
+    PositionComponent.prototype.validPosition = function (position) {
         if (!this.selectedPosition.positionName.trim()) {
             this.toastr.warn("Please provide a position name.");
-            return;
+            return false;
         }
         this.selectedPosition.modules = [];
         for (var i = 0; i < this.modules.length; i++) {
@@ -88,13 +114,65 @@ var PositionComponent = (function () {
         }
         if (this.selectedPosition.modules.length <= 0) {
             this.toastr.warn("Please select atleast one(1) module.");
-            return;
+            return false;
         }
+        return true;
+    };
+    PositionComponent.prototype.confirmUpdate = function () {
+        var _this = this;
+        this.selectedPosition.modules = [];
+        if (!this.validPosition(this.selectedPosition))
+            return;
+        this.swal.confirm({
+            title: "Are you sure?",
+            message: "You will be updating this position.",
+            confirmButtonText: "Yes, Update It!",
+            callBack: function (isConfirm) {
+                _this.updatePosition();
+            }
+        });
+    };
+    PositionComponent.prototype.updatePosition = function () {
+        var _this = this;
+        try {
+            this.updatingPosition = true;
+            this.isFormDisabled = true;
+            this.positionService.updatePosition(this.selectedPosition).then(function (result) {
+                _this.updatingPosition = false;
+                _this.isFormDisabled = false;
+                if (result.success) {
+                    _this.toastr.success(result.message);
+                    _this.getAllPositions();
+                    _this.getAllModules();
+                    _this.modal.hide();
+                }
+                else {
+                    _this.toastr.error(result.message);
+                }
+            })
+                .catch(function (error) {
+                _this.updatingPosition = false;
+                _this.isFormDisabled = false;
+                _this.toastr.error(error);
+            });
+        }
+        catch (e) {
+            this.updatingPosition = false;
+            this.isFormDisabled = false;
+            this.toastr.error(e);
+        }
+    };
+    PositionComponent.prototype.confirmAdd = function () {
+        var _this = this;
+        this.selectedPosition.modules = [];
+        if (!this.validPosition(this.selectedPosition))
+            return;
         this.swal.confirm({
             title: "Are you sure?",
             message: "You will be adding a new position.",
             confirmButtonText: "Yes, Add",
             callBack: function (isConfirm) {
+                _this.addPosition();
             }
         });
     };
@@ -112,6 +190,7 @@ var PositionComponent = (function () {
                     _this.getAllPositions();
                     _this.getAllModules();
                     _this.toggleModuleSelection(false);
+                    _this.selectedPosition = new model_1.Position();
                     return;
                 }
                 _this.toastr.error(result.message);

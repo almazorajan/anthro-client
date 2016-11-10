@@ -22,6 +22,7 @@ export class PositionComponent implements OnInit {
     modules: Module[];
     positions: Position[];
     selectedPosition: Position;
+    originalPositionInfo: Position;
 
     modal: Modal;
     operation: number = 0;
@@ -37,10 +38,10 @@ export class PositionComponent implements OnInit {
     isFormDisabled: boolean;
 
     constructor(
-        private positionService: PositionService, 
+        private positionService: PositionService,
         private moduleService: ModuleService,
         private swal: SweetAlertService,
-        private toastr: ToastrService) {}
+        private toastr: ToastrService) { }
 
     ngOnInit() {
 
@@ -63,7 +64,7 @@ export class PositionComponent implements OnInit {
             this.loadingModules = false;
             this.isFormDisabled = false;
 
-            if(result.success) {
+            if (result.success) {
 
                 this.modules = result.data as Module[];
                 this.toastr.success(result.message);
@@ -72,14 +73,14 @@ export class PositionComponent implements OnInit {
             }
 
             this.toastr.error(result.message);
-            
-        })
-        .catch((error) => {
-            
-            this.loadingModules = false;
-            this.isFormDisabled = false;
 
-        });
+        })
+            .catch((error) => {
+
+                this.loadingModules = false;
+                this.isFormDisabled = false;
+
+            });
 
     }
 
@@ -95,7 +96,7 @@ export class PositionComponent implements OnInit {
             this.loadingPositions = false;
             this.isFormDisabled = false;
 
-            if(result.success) {
+            if (result.success) {
 
                 this.positions = result.data as Position[];
                 this.toastr.success(result.message);
@@ -106,49 +107,168 @@ export class PositionComponent implements OnInit {
             this.toastr.error(result.message);
 
         })
-        .catch((error) => {
+            .catch((error) => {
 
-            this.loadingPositions = false;
-            this.isFormDisabled = false;
+                this.loadingPositions = false;
+                this.isFormDisabled = false;
 
-            this.toastr.error(error);
+                this.toastr.error(error);
 
-        });
+            });
 
     }
 
-    add() {
+    checkModules(): void {
 
-        this.operation = 1;
-        this.isFormDisabled = false;
-        this.selectedPosition = new Position();
+        for (let i = 0; i < this.selectedPosition.modules.length; i++) {
+
+            for (let j = 0; j < this.modules.length; j++) {
+
+                if (this.selectedPosition.modules[i]._id === this.modules[j]._id) {
+
+                    this.modules[j].selected = true;
+
+                }
+
+            }
+
+        }
+
+    }
+
+    view(position: Position): void {
+
+        this.operation = 0;
+        this.isFormDisabled = true;
+        this.selectedPosition = position;
+        this.toggleModuleSelection(false);
+        this.checkModules();
         
     }
 
-    confirmAdd() {
+    add(): void {
 
-        if(!this.selectedPosition.positionName.trim()) {
+        this.operation = 1;
+        this.isFormDisabled = false;
+        this.toggleModuleSelection(false);
+        this.selectedPosition = new Position();
+
+    }
+
+    edit(): void {
+
+        this.operation = 2;
+        this.isFormDisabled = false;
+        this.originalPositionInfo = Object.assign({}, this.selectedPosition);
+
+    }
+
+    cancelEdit(): void {
+
+        this.selectedPosition = Object.assign({}, this.originalPositionInfo);
+        this.view(this.selectedPosition);
+
+    }
+
+    private validPosition(position: Position): boolean {
+
+        if (!this.selectedPosition.positionName.trim()) {
 
             this.toastr.warn("Please provide a position name.");
-            return;
+            return false;
 
         }
 
         this.selectedPosition.modules = [];
 
-        for(let i=0; i < this.modules.length; i++) {
+        for (let i = 0; i < this.modules.length; i++) {
 
-            if(this.modules[i].selected) 
+            if (this.modules[i].selected)
                 this.selectedPosition.modules.push(this.modules[i]);
 
         }
 
-        if(this.selectedPosition.modules.length <= 0) {
+        if (this.selectedPosition.modules.length <= 0) {
 
             this.toastr.warn("Please select atleast one(1) module.");
-            return;
+            return false;
 
         }
+
+        return true;
+
+    }
+
+    confirmUpdate(): void {
+
+        this.selectedPosition.modules = [];
+
+        if(!this.validPosition(this.selectedPosition))
+            return;
+
+        this.swal.confirm({
+            title: "Are you sure?",
+            message: "You will be updating this position.",
+            confirmButtonText: "Yes, Update It!",
+            callBack: (isConfirm) => {
+
+                this.updatePosition();
+
+            }
+        });
+
+    }
+
+    private updatePosition(): void {
+
+        try {
+
+            this.updatingPosition = true;
+            this.isFormDisabled = true;
+
+            this.positionService.updatePosition(this.selectedPosition).then((result) => {
+
+                this.updatingPosition = false;
+                this.isFormDisabled = false;
+
+                if(result.success) {
+
+                    this.toastr.success(result.message);
+                    this.getAllPositions();
+                    this.getAllModules();
+                    this.modal.hide();
+
+                } else {
+
+                    this.toastr.error(result.message);
+
+                }
+
+            })
+            .catch((error) => {
+
+                this.updatingPosition = false;
+                this.isFormDisabled = false;
+                this.toastr.error(error);
+
+            });
+
+        } catch(e) {
+
+            this.updatingPosition = false;
+            this.isFormDisabled = false;
+            this.toastr.error(e);
+
+        }
+
+    }
+
+    confirmAdd(): void {
+
+        this.selectedPosition.modules = [];
+
+        if(!this.validPosition(this.selectedPosition))
+            return;
 
         this.swal.confirm({
             title: "Are you sure?",
@@ -156,15 +276,17 @@ export class PositionComponent implements OnInit {
             confirmButtonText: "Yes, Add",
             callBack: (isConfirm) => {
 
+                this.addPosition();
+
             }
         });
 
     }
 
-    private addPosition() {
+    private addPosition(): void {
 
         try {
-     
+
             this.addingPosition = true;
             this.isFormDisabled = true;
 
@@ -173,29 +295,30 @@ export class PositionComponent implements OnInit {
                 this.addingPosition = false;
                 this.isFormDisabled = false;
 
-                if(result.success) {
+                if (result.success) {
 
                     this.modal.hide();
                     this.toastr.success(result.message);
                     this.getAllPositions();
                     this.getAllModules();
                     this.toggleModuleSelection(false);
+                    this.selectedPosition = new Position();
                     return;
 
-                } 
+                }
 
                 this.toastr.error(result.message);
 
             })
-            .catch((error) => {
+                .catch((error) => {
 
-                this.addingPosition = false;
-                this.isFormDisabled = false;
-                this.toastr.error(error.toString());
+                    this.addingPosition = false;
+                    this.isFormDisabled = false;
+                    this.toastr.error(error.toString());
 
-            });
+                });
 
-        } catch(e) {
+        } catch (e) {
 
             this.addingPosition = false;
             this.isFormDisabled = false;
@@ -208,7 +331,7 @@ export class PositionComponent implements OnInit {
 
     toggleModuleSelection(val: boolean) {
 
-        for(let i=0; i < this.modules.length; i++) {
+        for (let i = 0; i < this.modules.length; i++) {
 
             this.modules[i].selected = val;
 
