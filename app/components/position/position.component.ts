@@ -150,6 +150,7 @@ export class PositionComponent implements OnInit {
 
         this.operation = 1;
         this.isFormDisabled = false;
+        this.moduleSelector = false;
         this.toggleModuleSelection(false);
         this.selectedPosition = new Position();
 
@@ -159,6 +160,7 @@ export class PositionComponent implements OnInit {
 
         this.operation = 2;
         this.isFormDisabled = false;
+        this.moduleSelector = false;
         this.originalPositionInfo = Object.assign({}, this.selectedPosition);
 
     }
@@ -324,6 +326,63 @@ export class PositionComponent implements OnInit {
             this.isFormDisabled = false;
 
             this.toastr.error((e || e.message).toString());
+
+        }
+
+    }
+
+    confirmDelete(position: Position): void {
+
+        this.swal.confirm({
+            title: "Are you sure?",
+            message: "You will be deleting this position.",
+            confirmButtonText: "Yes, Delete It!",
+            callBack: (isConfirm) => {
+
+                this.delete(position);
+
+            }
+        });
+
+    }
+
+    private delete(position: Position) {
+
+        try {
+
+            this.deletingPosition = true;
+            this.isFormDisabled = true;
+            
+            this.positionService.deletePosition(position).then((result) => {
+
+                this.deletingPosition = false;
+                this.isFormDisabled = false;
+
+                if(result.success) {
+
+                    this.toastr.success(result.message);
+                    this.getAllPositions();
+                    this.getAllModules();
+
+                } else {
+
+                    this.toastr.error(result.message);
+
+                }
+
+            })
+            .catch((error) => {
+
+                this.deletingPosition = false;
+                this.isFormDisabled = false;
+                this.toastr.error(error);
+
+            });
+
+        } catch(e) {
+
+            this.deletingPosition = false;
+            this.isFormDisabled = false;
 
         }
 

@@ -90,12 +90,14 @@ var PositionComponent = (function () {
     PositionComponent.prototype.add = function () {
         this.operation = 1;
         this.isFormDisabled = false;
+        this.moduleSelector = false;
         this.toggleModuleSelection(false);
         this.selectedPosition = new model_1.Position();
     };
     PositionComponent.prototype.edit = function () {
         this.operation = 2;
         this.isFormDisabled = false;
+        this.moduleSelector = false;
         this.originalPositionInfo = Object.assign({}, this.selectedPosition);
     };
     PositionComponent.prototype.cancelEdit = function () {
@@ -205,6 +207,45 @@ var PositionComponent = (function () {
             this.addingPosition = false;
             this.isFormDisabled = false;
             this.toastr.error((e || e.message).toString());
+        }
+    };
+    PositionComponent.prototype.confirmDelete = function (position) {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are you sure?",
+            message: "You will be deleting this position.",
+            confirmButtonText: "Yes, Delete It!",
+            callBack: function (isConfirm) {
+                _this.delete(position);
+            }
+        });
+    };
+    PositionComponent.prototype.delete = function (position) {
+        var _this = this;
+        try {
+            this.deletingPosition = true;
+            this.isFormDisabled = true;
+            this.positionService.deletePosition(position).then(function (result) {
+                _this.deletingPosition = false;
+                _this.isFormDisabled = false;
+                if (result.success) {
+                    _this.toastr.success(result.message);
+                    _this.getAllPositions();
+                    _this.getAllModules();
+                }
+                else {
+                    _this.toastr.error(result.message);
+                }
+            })
+                .catch(function (error) {
+                _this.deletingPosition = false;
+                _this.isFormDisabled = false;
+                _this.toastr.error(error);
+            });
+        }
+        catch (e) {
+            this.deletingPosition = false;
+            this.isFormDisabled = false;
         }
     };
     PositionComponent.prototype.toggleModuleSelection = function (val) {

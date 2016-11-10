@@ -45,7 +45,7 @@ import { Service } from '../../shared-services/service';
 
     }
 
-    deactivatePosition(position: Position): Promise<Result> {
+    deletePosition(position: Position): Promise<Result> {
 
         return this.service.apiCall({
             verb: "post",

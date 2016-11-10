@@ -40,7 +40,7 @@ var PositionService = (function () {
             body: position
         });
     };
-    PositionService.prototype.deactivatePosition = function (position) {
+    PositionService.prototype.deletePosition = function (position) {
         return this.service.apiCall({
             verb: "post",
             uri: "position/delete",
