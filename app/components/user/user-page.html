@@ -1,0 +1,110 @@
+<div class="row">
+    <form>
+
+        <div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
+
+            <h2 class="text-center">Module Maintenance</h2>
+            <hr/>
+
+        </div>
+
+        <div class="col-lg-12">
+
+            <!--<button (click)="add()" class="btn btn-success btn-md" title="Add" data-toggle="modal" data-target="#mdlModalInfo">-->
+            <button class="btn btn-success btn-md" title="Add" data-toggle="modal" data-target="#mdlModalInfo">
+				<i class="glyphicon glyphicon-plus"></i> Add
+			</button>
+
+        </div>
+
+        <div class="col-lg-12">
+
+            <table class="table table-condensed" style="margin-top: 40px;">
+                <thead>
+                    <th></th>
+                    <th>Username</th>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>Last Name</th>
+                    <th>Date Created</th>
+                    <th>Date Updated</th>
+                    <th>Position</th>
+                    <th>Date Deactivated</th>
+                </thead>
+                <tbody>
+
+                    <tr *ngIf="loading">
+                        <td colspan="5" class="text-center">Loading...</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </form>
+</div>
+
+<!-- Modal -->
+
+<div class="modal fade" id="mdlModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form autocomplete="off">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">User</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="txtUsername">Username</label>
+                        <input type="text" name="txtUsername" class="form-control" id="txtUsername" placeholder="Username" requried>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtFirstName">First Name</label>
+                        <input type="text" name="txtFirstName" class="form-control" id="txtFirstName" placeholder="First Name" requried>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtMiddleName">Middle Name</label>
+                        <input type="text" name="txtMiddleName" class="form-control" id="txtMiddleName" placeholder="Middle Name" requried>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtLastName">Last Name</label>
+                        <input type="text" name="txtLastName" class="form-control" id="txtLastName" placeholder="Last Name" requried>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtPassword">Password</label>
+                        <input type="password" name="txtPassword" class="form-control" id="txtPassword" placeholder="Password" requried>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtPosition">Position</label>
+                        <input type="date" name="txtPosition" class="form-control" id="txtPosition" placeholder="Position" requried>
+                    </div>
+
+                    <div *ngIf="operation === 0" class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button (click)="edit()" type="button" class="btn btn-primary">Edit</button>
+                    </div>
+
+                    <div *ngIf="operation === 1" class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button (click)="confirmAdd()" type="button" class="btn btn-primary">Add</button>
+                    </div>
+
+                    <div *ngIf="operation === 2" class="modal-footer">
+                        <button (click)="cancelEdit()" class="btn btn-default">Cancel</button>
+                        <button (click)="confirmUpdate()" type="button" class="btn btn-primary">Save</button>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
