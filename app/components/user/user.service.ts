@@ -7,35 +7,52 @@ User Service
 import { Injectable } from '@angular/core';
 
 // user-defined models
-import { Search, User, Result } from '../../models/model';
+import { User, Result } from '../../models/model';
 
 // user-defined service
 import { Service } from '../../shared-services/service';
 
-@Injectable() export class UserService extends Service {
+@Injectable() export class UserService {
 
-    // addUser(user: User): Promise<Result> {
+    constructor(private service: Service) {}
 
-    //     return this.apiCall("post", "user/adduser", user);
+    getAll(): Promise<Result> {
 
-    // }
+        return this.service.apiCall({
+            verb: "post",
+            uri: "user/getall"
+        });
 
-    // changePassword(user: User): Promise<Result> {
+    }
 
-    //     return this.apiCall("post", "user/changepassword", user);
+    add(user: User): Promise<Result> {
 
-    // }
+        return this.service.apiCall({
+            verb: "post",
+            uri: "user/add",
+            body: user
+        })
 
-    // updateUser(user: User): Promise<Result> {
+    }
 
-    //     return this.apiCall("post", "user/updateuser", user);
+    update(user: User): Promise<Result> {
 
-    // }
+        return this.service.apiCall({
+            verb: "post",
+            uri: "user/update",
+            body: user
+        });
 
-    // deactivateUser(user: User): Promise<Result> {
+    }
 
-    //     //return this.apiCall("post", "user/deleteuser", user);
+    delete(user: User): Promise<Result> {
 
-    // }
+        return this.service.apiCall({
+            verb: "post",
+            uri: "user/delete",
+            body: user
+        });
+
+    }
 
 }

@@ -16,15 +16,13 @@
 
         </div>
 
-        <!--<div class="col-lg-12">
+        <div class="col-lg-12">
 
             <table class="table table-condensed" style="margin-top: 40px;">
                 <thead>
                     <th></th>
-                    <th>Group</th>
-                    <th>Module Name</th>
-                    <th>Description</th>
-                    <th>Link</th>
+                    <th>Position Name</th>
+                    <th>Modules</th>
                 </thead>
                 <tbody>
 
@@ -32,37 +30,35 @@
                         <td colspan="5" class="text-center">Loading...</td>
                     </tr>
 
-                    <tr *ngIf="!loading && modules.length <= 0">
+                    <tr *ngIf="!loading && positions.length <= 0">
                         <td colspan="5" class="text-center">No data yet.</td>
                     </tr>
 
-                    <tr *ngFor="let module of modules">
+                    <tr *ngFor="let position of positions">
                         <td>
-                            <button (click)="view(module)" class="btn btn-primary btn-xs" title="View information" data-toggle="modal" data-target="#mdlModalInfo">
+                            <button (click)="view(position)" class="btn btn-primary btn-xs" title="View information" data-toggle="modal" data-target="#mdlModalInfo">
 								<i class="glyphicon glyphicon-info-sign"></i>
 							</button>
-                            <button (click)="confirmDelete(module)" class="btn btn-danger btn-xs" title="Delete">
+                            <button (click)="confirmDelete(position)" class="btn btn-danger btn-xs" title="Delete">
 								<i class="glyphicon glyphicon-trash"></i>
 							</button>
                         </td>
-                        <td>{{ module.group }}</td>
-                        <td>{{ module.moduleName }}</td>
-                        <td>{{ module.moduleDescription }}</td>
-                        <td>{{ module.link }}</td>
+                        <th>{{ position.positionName }}</th>
+                        <th>{{ position.modules.length }}</th>
                     </tr>
                 </tbody>
             </table>
 
-        </div>-->
+        </div>
 
     </form>
 </div>
 
 <!-- Modal -->
-<!--<div class="modal fade" id="mdlModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="mdlModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form autocomplete="off" *ngIf="selectedModule">
+            <form autocomplete="off" *ngIf="selectedPosition">
 
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -70,30 +66,34 @@
                 </div>
                 <div class="modal-body">
 
-
                     <div class="form-group">
-                        <label for="txtModuleName">Module Name</label>
-                        <input [(ngModel)]="selectedModule.moduleName" [disabled]="isFormDisabled" name="txtModuleName" type="text" class="form-control"
-                            id="txtModuleName" placeholder="Module Name" required>
+                        <label for="txtPositionName">Position Name</label>
+                        <input [(ngModel)]="selectedPosition.positionName" [disabled]="isFormDisabled" name="txtPositionName" type="text" class="form-control"
+                            id="txtPositionName" placeholder="Module Name" required>
                     </div>
 
+                    
                     <div class="form-group">
-                        <label for="slcModuleGroup">Group</label>
-                        <select [(ngModel)]="selectedModule.group" [disabled]="isFormDisabled" name="slcModuleGroup" class="form-control" id="slcModuleGroup">
-							<option *ngFor="let group of groups" [value]="group">{{ group }}</option>
-						</select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="txtModuleDescription">Module Description</label>
-                        <input [(ngModel)]="selectedModule.moduleDescription" [disabled]="isFormDisabled" name="txtModuleDescription" type="text"
-                            class="form-control" id="txtModuleDescription" placeholder="Module Description" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="txtModuleLink">Link</label>
-                        <input [(ngModel)]="selectedModule.link" [disabled]="isFormDisabled" name="txtModuleLink" type="text" class="form-control"
-                            id="txtModuleLink" placeholder="Link" required>
+                        
+                        <table class="table table-condensed">
+                            <thead>
+                                <th>
+                                    <input [(ngModel)]="moduleSelector" [disabled]="isFormDisabled" name="chkModuleSelectorAll" (ngModelChange)="toggleModuleSelection(moduleSelector)" type="checkbox">
+                                </th>
+                                <th>Module Name</th>
+                                <th>Module Description</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let module of modules; let index = index; trackBy: moduleName">
+                                    <td>
+                                        <input [(ngModel)]="modules[index].selected" [name]="index + 'chk'" [id]="index + 'chk'" [disabled]="isFormDisabled" type="checkbox" name="chkModuleSelected">
+                                    </td>
+                                    <td>{{ modules[index].moduleName }}</td>
+                                    <td>{{ modules[index].moduleDescription }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
                     </div>
 
                 </div>
@@ -117,4 +117,4 @@
 
         </div>
     </div>
-</div>-->
+</div>

@@ -10,7 +10,7 @@ toastr.options.newestOnTop = true;
 
     warn(msg: string) {
 
-        toastr.warning(msg, "Are you sure?");
+        toastr.warning(msg, "Wait...");
 
     }
 

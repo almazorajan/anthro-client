@@ -9,15 +9,7 @@ export class Module implements iModule {
     link: string;
     group: string;
 
-    constructor(private moduleInterface?: iModule) {}
-
-    hasRequiredFields(): boolean {
-
-        if(this.moduleName && this.link)
-            return true;
-
-        return false;
-
-    }
+    selected: boolean;
+    disabled: boolean;
 
 }

@@ -2,7 +2,6 @@
 var model_1 = require('./model');
 var Position = (function () {
     function Position() {
-        this._id = "";
         this.positionName = "";
         this.modules = [new model_1.Module()];
     }

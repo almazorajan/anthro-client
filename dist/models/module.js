@@ -1,13 +1,7 @@
 "use strict";
 var Module = (function () {
-    function Module(moduleInterface) {
-        this.moduleInterface = moduleInterface;
+    function Module() {
     }
-    Module.prototype.hasRequiredFields = function () {
-        if (this.moduleName && this.link)
-            return true;
-        return false;
-    };
     return Module;
 }());
 exports.Module = Module;

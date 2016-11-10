@@ -9,7 +9,6 @@ export class Position {
 
     constructor() {
 
-        this._id = "";
         this.positionName = "";
         this.modules = [new Module()];
 
