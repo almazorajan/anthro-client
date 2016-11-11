@@ -1,35 +1,57 @@
-// /*
-// version: 1
-// Company Service
-// **/
+/*
+version: 1
+Company Service
+**/
 
-// // @angular
-// import { Injectable } from '@angular/core';
+// @angular
+import { Injectable } from '@angular/core';
 
-// // user-defined models
-// import { Search, Company, Result } from '../../models/model';
+// user-defined models
+import { Company, Result } from '../../models/model';
 
-// // user-defined service
-// import { Service } from '../../shared-services/service';
+// user-defined service
+import { Service } from '../../shared-services/service';
 
-// @Injectable() export class LoginService extends Service {
+@Injectable() export class CompanyService {
 
-//     addCompany(company: Company): Promise<Result> {
+    constructor(private service: Service) {}
 
-//         return this.apiCall("post", "company/addcompany", company);
+    getAll(): Promise<Result> {
 
-//     }
+        return this.service.apiCall({
+            verb: "post",
+            uri: "company/getall"
+        });
 
-//     updateCompany(company: Company): Promise<Result> {
+    }
 
-//         return this.apiCall("post", "company/updatecompany", company);
+    addCompany(company: Company): Promise<Result> {
 
-//     }
+        return this.service.apiCall({
+            verb: "post",
+            uri: "company/add"
+        });
 
-//     deleteCompany(company: Company): Promise<Result> {
+    }
 
-//         return this.apiCall("post", "company/deletecompany", company);
+    updateCompany(company: Company): Promise<Result> {
 
-//     }
+        return this.service.apiCall({
+            verb: "post",
+            uri: "company/update",
+            body: company
+        });
 
-// }
+    }
+
+    deleteCompany(company: Company): Promise<Result> {
+
+        return this.service.apiCall({
+            verb: "post",
+            uri: "company/delete",
+            body: company
+        });
+
+    }
+
+}
