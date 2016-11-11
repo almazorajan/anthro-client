@@ -21,6 +21,7 @@ var user_component_1 = require('./components/user/user.component');
 var module_component_1 = require('./components/module/module.component');
 var position_component_1 = require('./components/position/position.component');
 var employment_status_component_1 = require('./components/employment-status/employment-status.component');
+var company_component_1 = require('./components/company/company.component');
 // providers
 var service_1 = require('./shared-services/service');
 var AppModule = (function () {
@@ -41,7 +42,8 @@ var AppModule = (function () {
                 user_component_1.UserComponent,
                 module_component_1.ModuleComponent,
                 position_component_1.PositionComponent,
-                employment_status_component_1.EmploymentStatusComponent
+                employment_status_component_1.EmploymentStatusComponent,
+                company_component_1.CompanyComponent
             ],
             providers: [service_1.Service],
             bootstrap: [app_component_1.AppComponent]

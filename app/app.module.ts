@@ -13,6 +13,7 @@ import { UserComponent } from './components/user/user.component';
 import { ModuleComponent } from './components/module/module.component';
 import { PositionComponent } from './components/position/position.component';
 import { EmploymentStatusComponent } from './components/employment-status/employment-status.component';
+import { CompanyComponent } from './components/company/company.component';
 
 // providers
 import { Service } from './shared-services/service';
@@ -35,7 +36,8 @@ import { TableLoaderComponent } from './shared-components/components';
         UserComponent,
         ModuleComponent,
         PositionComponent,
-        EmploymentStatusComponent
+        EmploymentStatusComponent,
+        CompanyComponent
     ],
     
     providers: [Service],

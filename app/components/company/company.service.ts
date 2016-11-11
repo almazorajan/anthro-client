@@ -29,7 +29,8 @@ import { Service } from '../../shared-services/service';
 
         return this.service.apiCall({
             verb: "post",
-            uri: "company/add"
+            uri: "company/add",
+            body: company
         });
 
     }
