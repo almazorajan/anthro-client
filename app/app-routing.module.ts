@@ -8,6 +8,7 @@ import { UserComponent } from './components/user/user.component';
 import { ModuleComponent } from './components/module/module.component';
 import { PositionComponent } from './components/position/position.component';
 import { EmploymentStatusComponent } from './components/employment-status/employment-status.component';
+import { CompanyComponent } from './components/company/company.component';
 
 const routes: Routes = [
     {
@@ -42,6 +43,10 @@ const routes: Routes = [
             {
                 path: 'employmentstatus',
                 component: EmploymentStatusComponent
+            },
+            {
+                path: 'company',
+                component: CompanyComponent
             }
         ]
     }

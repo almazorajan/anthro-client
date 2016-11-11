@@ -17,6 +17,7 @@ var user_component_1 = require('./components/user/user.component');
 var module_component_1 = require('./components/module/module.component');
 var position_component_1 = require('./components/position/position.component');
 var employment_status_component_1 = require('./components/employment-status/employment-status.component');
+var company_component_1 = require('./components/company/company.component');
 var routes = [
     {
         path: '',
@@ -50,6 +51,10 @@ var routes = [
             {
                 path: 'employmentstatus',
                 component: employment_status_component_1.EmploymentStatusComponent
+            },
+            {
+                path: 'company',
+                component: company_component_1.CompanyComponent
             }
         ]
     }
