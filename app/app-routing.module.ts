@@ -7,6 +7,7 @@ import { EmployeeSheetComponent } from './components/employee-sheet/employee-she
 import { UserComponent } from './components/user/user.component';
 import { ModuleComponent } from './components/module/module.component';
 import { PositionComponent } from './components/position/position.component';
+import { EmploymentStatusComponent } from './components/employment-status/employment-status.component';
 
 const routes: Routes = [
     {
@@ -37,6 +38,10 @@ const routes: Routes = [
             {
                 path: 'position',
                 component: PositionComponent
+            },
+            {
+                path: 'employmentstatus',
+                component: EmploymentStatusComponent
             }
         ]
     }
