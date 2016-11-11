@@ -1,0 +1,99 @@
+<div class="row">
+    <form>
+
+        <div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
+
+            <h2 class="text-center">Employment Status Maintenance</h2>
+            <hr/>
+
+        </div>
+
+        <div class="col-lg-12">
+
+            <button (click)="add()" class="btn btn-success btn-md" title="Add" data-toggle="modal" data-target="#mdlModalInfo">
+				<i class="glyphicon glyphicon-plus"></i> Add
+			</button>
+
+        </div>
+
+        <div class="col-lg-12">
+
+            <table class="table table-condensed" style="margin-top: 40px;">
+                <thead>
+                    <th></th>
+                    <th>Employment Status</th>
+                </thead>
+                <tbody>
+
+                    <tr *ngIf="loadingEmploymentStatus">
+                        <td colspan="2" class="text-center">Loading...</td>
+                    </tr>
+
+                    <tr *ngIf="!loadingEmploymentStatus && employmentStatuses.length <= 0">
+                        <td colspan="2" class="text-center">No data yet.</td>
+                    </tr>
+
+                    <tr *ngFor="let employmentStatus of employmentStatuses; let index = index; trackBy: employmentStatus">
+                        <td>
+                            
+                            <button *ngIf="employmentStatus.editMode" (click)="confirmSave(employmentStatus)" class="btn btn-primary btn-xs" title="Confirm Save">
+								<i class="glyphicon glyphicon-floppy-disk"></i>
+							</button>
+
+                            <button *ngIf="employmentStatus.editMode" (click)="cancelEdit(employmentStatus)" class="btn btn-danger btn-xs" title="Cancel">
+								<i class="glyphicon glyphicon-ban-circle"></i>
+							</button>
+
+                            <button *ngIf="!employmentStatus.editMode" (click)="edit(employmentStatus)" class="btn btn-primary btn-xs" title="Update Information">
+								<i class="glyphicon glyphicon-info-sign"></i>
+							</button>
+
+                            <button *ngIf="!employmentStatus.editMode" (click)="confirmDelete(employmentStatus)" class="btn btn-danger btn-xs" title="Delete">
+								<i class="glyphicon glyphicon-trash"></i>
+							</button>
+
+                        </td>
+                        <th *ngIf="employmentStatus.disabled">{{ employmentStatus.employmentStatus }}</th>
+                        <th *ngIf="!employmentStatus.disabled">
+                            <input [(ngModel)]="employmentStatus.employmentStatus" type="text" [name]="'txtEmploymentStatus-' + index" class="form-control">
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </form>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="mdlModalInfo" tabindex="-1" role="dialog" aria-labelledby="mdlModalInfoLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form autocomplete="off" *ngIf="selectedEmploymentStatus">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="mdlModalInfoLabel">Add Employment Status</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="txtEmploymentStatus">Employment Status</label>
+                        <input [(ngModel)]="selectedEmploymentStatus.employmentStatus" [disabled]="isFormDisabled" name="txtEmploymentStatus" type="text"
+                            class="form-control" id="txtEmploymentStatus" placeholder="Employment Status" required>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button (click)="confirmAdd()" type="button" class="btn btn-primary">Add</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

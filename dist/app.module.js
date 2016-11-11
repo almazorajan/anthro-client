@@ -20,6 +20,7 @@ var employee_sheet_component_1 = require('./components/employee-sheet/employee-s
 var user_component_1 = require('./components/user/user.component');
 var module_component_1 = require('./components/module/module.component');
 var position_component_1 = require('./components/position/position.component');
+var employment_status_component_1 = require('./components/employment-status/employment-status.component');
 // providers
 var service_1 = require('./shared-services/service');
 var AppModule = (function () {
@@ -39,7 +40,8 @@ var AppModule = (function () {
                 employee_sheet_component_1.EmployeeSheetComponent,
                 user_component_1.UserComponent,
                 module_component_1.ModuleComponent,
-                position_component_1.PositionComponent
+                position_component_1.PositionComponent,
+                employment_status_component_1.EmploymentStatusComponent
             ],
             providers: [service_1.Service],
             bootstrap: [app_component_1.AppComponent]

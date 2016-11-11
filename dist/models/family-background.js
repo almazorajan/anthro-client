@@ -2,12 +2,6 @@
 var model_1 = require('./model');
 var FamilyBackground = (function () {
     function FamilyBackground() {
-        this.firstName = "";
-        this.middleName = "";
-        this.lastName = "";
-        this.occupation = "";
-        this.contactNumbers = [new model_1.ContactNumber()];
-        this.emailAddresses = [new model_1.EmailAddress()];
     }
     FamilyBackground.prototype.addContactNumber = function () {
         this.contactNumbers.push(new model_1.ContactNumber());
