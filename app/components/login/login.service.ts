@@ -1,23 +1,29 @@
-// /*
-// version: 1
-// Login Service
-// **/
+/*
+version: 1
+Login Service
+**/
 
-// // @angular
-// import { Injectable } from '@angular/core';
+// @angular
+import { Injectable } from '@angular/core';
 
-// // user-defined models
-// import { User, Result } from '../../models/model';
+// user-defined models
+import { User, Result } from '../../models/model';
 
-// // user-defined service
-// import { Service } from '../../shared-services/service';
+// user-defined service
+import { Service } from '../../shared-services/service';
 
-// @Injectable() export class LoginService extends Service {
+@Injectable() export class LoginService {
 
-//     attemptLogin(user: User): Promise<Result> {
+    constructor(private service: Service) { }
 
-//         return this.apiCall("post", "login/attemplogin", user);
+    attemptLogin(user: User): Promise<Result> {
+
+        return this.service.apiCall({
+            verb: "post",
+            uri: "login/attemptlogin",
+            body: user
+        });
         
-//     }
+    }
 
-// }
+}
