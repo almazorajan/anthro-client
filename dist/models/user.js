@@ -2,7 +2,6 @@
 var model_1 = require('./model');
 var User = (function () {
     function User() {
-        this._id = "";
         this.userName = "";
         this.firstName = "";
         this.middleName = "";
@@ -11,7 +10,6 @@ var User = (function () {
         this.dateCreated = new Date();
         this.dateUpdated = new Date();
         this.position = new model_1.Position();
-        this.dateDeactivated = new Date();
     }
     return User;
 }());

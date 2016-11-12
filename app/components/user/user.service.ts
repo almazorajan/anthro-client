@@ -46,7 +46,7 @@ import { Service } from '../../shared-services/service';
     }
 
     delete(user: User): Promise<Result> {
-
+        
         return this.service.apiCall({
             verb: "post",
             uri: "user/delete",
