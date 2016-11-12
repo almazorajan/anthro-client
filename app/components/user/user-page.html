@@ -1,0 +1,165 @@
+<div class="row">
+    <form>
+
+        <div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
+
+            <h2 class="text-center">User Maintenance</h2>
+            <hr/>
+
+        </div>
+
+        <div class="col-lg-6">
+
+            <button (click)="add()" class="btn btn-success btn-md" title="Add" data-toggle="modal" data-target="#mdlModalInfo">
+				<i class="glyphicon glyphicon-plus"></i> Add
+			</button>
+
+        </div>
+
+        <div class="col-lg-6">
+
+            <!--<form class="form-horizontal">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                    </div>
+                </div>
+            </form>-->
+
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="txtSearchKeyword" class="col-lg-5 control-label">Search:</label>
+                    <div class="col-lg-7">
+                        <input [(ngModel)]="search.keyword" type="text" name="txtSearchKeyword" class="form-control pull-right" placeholder="Keyword...">
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="col-lg-12">
+
+            <table class="table table-condensed" style="margin-top: 40px;">
+                <thead>
+                    <th></th>
+                    <th>Username</th>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>Last Name</th>
+                    <th>Position</th>
+                </thead>
+                <tbody>
+
+                    <tr *ngIf="loadingUsers && loadingCompanies">
+                        <td colspan="6" class="text-center">Loading...</td>
+                    </tr>
+
+                    <tr *ngIf="!loadingUsers && !loadingCompanies && users.length <= 0">
+                        <td colspan="6" class="text-center">No data yet.</td>
+                    </tr>
+
+                    <tr *ngFor="let user of (users | userFilter: search.keyword)">
+
+                        <td>
+                            <button (click)="view(user)" class="btn btn-primary btn-xs" title="View information" data-toggle="modal" data-target="#mdlModalInfo">
+                                <i class="glyphicon glyphicon-info-sign"></i>
+                            </button>
+                            <button (click)="confirmDelete(user)" class="btn btn-danger btn-xs" title="Delete">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                        </td>
+
+                        <td>{{ user.userName }}</td>
+                        <td>{{ user.firstName }}</td>
+                        <td>{{ user.middleName }}</td>
+                        <td>{{ user.lastName }}</td>
+                        <td>
+                            <span *ngIf="user.position">
+                                {{ user.position.positionName }}
+                            </span>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+    </form>
+</div>
+
+<!-- Modal -->
+
+<div class="modal fade" id="mdlModalInfo" tabindex="-1" role="dialog" aria-labelledby="mdlModalInfoLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form autocomplete="off" *ngIf="selectedUser">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="mdlModalInfoLabel">User</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="txtUsername">Username</label>
+                        <input [(ngModel)]="selectedUser.userName" [disabled]="isFormDisabled" type="text" name="txtUsername" class="form-control"
+                            id="txtUsername" placeholder="Username" requried>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtPassword">Password</label>
+                        <input [(ngModel)]="selectedUser.password" [disabled]="isFormDisabled" type="password" name="txtPassword" class="form-control"
+                            id="txtPassword" placeholder="Password" requried>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtFirstName">First Name</label>
+                        <input [(ngModel)]="selectedUser.firstName" [disabled]="isFormDisabled" type="text" name="txtFirstName" class="form-control"
+                            id="txtFirstName" placeholder="First Name" requried>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtMiddleName">Middle Name</label>
+                        <input [(ngModel)]="selectedUser.middleName" [disabled]="isFormDisabled" type="text" name="txtMiddleName" class="form-control"
+                            id="txtMiddleName" placeholder="Middle Name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtLastName">Last Name</label>
+                        <input [(ngModel)]="selectedUser.lastName" [disabled]="isFormDisabled" type="text" name="txtLastName" class="form-control"
+                            id="txtLastName" placeholder="Last Name" requried>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtPosition">Position</label>
+                        <select [(ngModel)]="selectedUser.position._id" [disabled]="isFormDisabled" name="slcPosition" class="form-control" id="slcPosition"
+                            required>
+                            <option *ngFor="let position of positions" [value]="position._id">{{ position.positionName }}</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div *ngIf="operation === 0" class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button (click)="edit()" type="button" class="btn btn-primary">Edit</button>
+                </div>
+
+                <div *ngIf="operation === 1" class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button (click)="confirmAdd()" type="button" class="btn btn-primary">Add</button>
+                </div>
+
+                <div *ngIf="operation === 2" class="modal-footer">
+                    <button (click)="cancelEdit()" class="btn btn-default">Cancel</button>
+                    <button (click)="confirmUpdate()" type="button" class="btn btn-primary">Save</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

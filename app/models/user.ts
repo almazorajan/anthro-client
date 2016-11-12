@@ -16,7 +16,6 @@ export class User {
 
     constructor() {
 
-        this._id = "";
         this.userName = "";
         this.firstName = "";
         this.middleName = "";
@@ -25,7 +24,6 @@ export class User {
         this.dateCreated = new Date();
         this.dateUpdated = new Date();
         this.position = new Position();
-        this.dateDeactivated = new Date();
 
     }
 

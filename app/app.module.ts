@@ -18,6 +18,9 @@ import { CompanyComponent } from './components/company/company.component';
 // providers
 import { Service } from './shared-services/service';
 
+// pipes
+import { UserFilter } from './pipes/pipe';
+
 // shared-components
 import { TableLoaderComponent } from './shared-components/components';
 
@@ -37,9 +40,10 @@ import { TableLoaderComponent } from './shared-components/components';
         ModuleComponent,
         PositionComponent,
         EmploymentStatusComponent,
-        CompanyComponent
+        CompanyComponent,
+        UserFilter
     ],
-    
+
     providers: [Service],
     bootstrap: [AppComponent]
 })

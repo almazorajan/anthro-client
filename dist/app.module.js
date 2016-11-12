@@ -24,6 +24,8 @@ var employment_status_component_1 = require('./components/employment-status/empl
 var company_component_1 = require('./components/company/company.component');
 // providers
 var service_1 = require('./shared-services/service');
+// pipes
+var pipe_1 = require('./pipes/pipe');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -43,7 +45,8 @@ var AppModule = (function () {
                 module_component_1.ModuleComponent,
                 position_component_1.PositionComponent,
                 employment_status_component_1.EmploymentStatusComponent,
-                company_component_1.CompanyComponent
+                company_component_1.CompanyComponent,
+                pipe_1.UserFilter
             ],
             providers: [service_1.Service],
             bootstrap: [app_component_1.AppComponent]
