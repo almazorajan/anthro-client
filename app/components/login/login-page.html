@@ -16,15 +16,23 @@
 
 						<div class="form-group">
 							<label for="txtUserName">Username</label>
-							<input name="txtUserName" type="text" class="form-control" placeholder="Username" required>
+							<input [(ngModel)]="user.userName" [disabled]="isFormDisabled" name="txtUserName" type="text" class="form-control" placeholder="Username"
+								required autofocus>
 						</div>
 
 						<div class="form-group">
 							<label for="txtPassword">Password</label>
-							<input name="txtPassword" type="password" class="form-control" placeholder="Password" required>
+							<input [(ngModel)]="user.password" [disabled]="isFormDisabled" name="txtPassword" type="password" class="form-control" placeholder="Password"
+								required>
 						</div>
 
-						<button type="submit" class="btn btn-default">Submit</button>
+						<div class="checkbox">
+							<label>
+      							<input [(ngModel)]="rememberMe" [disabled]="isFormDisabled" name="chkRememberMe" type="checkbox"> Remember me
+    						</label>
+						</div>
+
+						<button (click)="attemptLogin()" [disabled]="isFormDisabled" type="button" class="btn btn-default btn-md pull-right">Submit</button>
 					</form>
 				</div>
 			</div>

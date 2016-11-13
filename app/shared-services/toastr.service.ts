@@ -8,19 +8,25 @@ toastr.options.newestOnTop = true;
 
 @Injectable() export class ToastrService {
 
-    warn(msg: string) {
+    warn(msg: string): void {
 
         toastr.warning(msg, "Wait...");
 
     }
 
-    success(msg: string) {
+    info(msg: string): void {
+
+        toastr.info(msg, "Info");
+
+    }
+
+    success(msg: string): void {
 
         toastr.success(msg, "Success!");
 
     }
 
-    error(msg: any) {
+    error(msg: any): void {
 
         try {
 
