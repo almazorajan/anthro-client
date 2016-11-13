@@ -9,18 +9,75 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
+var login_service_1 = require('./login.service');
+var services_1 = require('../../shared-services/services');
+var model_1 = require('../../models/model');
 var LoginComponent = (function () {
-    function LoginComponent() {
+    function LoginComponent(swal, toastr, loginService, localStorage, router) {
+        this.swal = swal;
+        this.toastr = toastr;
+        this.loginService = loginService;
+        this.localStorage = localStorage;
+        this.router = router;
+        this.rememberMe = false;
     }
     LoginComponent.prototype.ngOnInit = function () {
         document.title = "Ad-haven - Login";
+        this.user = new model_1.User();
+        var credential = this.localStorage.get("athro.user-credential");
+        if (credential) {
+            this.rememberMe = true;
+            this.user.userName = credential.userName;
+            this.user.password = credential.password;
+        }
+    };
+    LoginComponent.prototype.attemptLogin = function () {
+        var _this = this;
+        try {
+            this.attempingLogin = true;
+            this.isFormDisabled = true;
+            this.toastr.info("Attempting login.");
+            this.loginService.attemptLogin(this.user).then(function (result) {
+                _this.attempingLogin = false;
+                _this.isFormDisabled = false;
+                if (result.success) {
+                    _this.toastr.success(result.message);
+                    if (_this.rememberMe) {
+                        _this.localStorage.set("athro.user-credential", _this.user);
+                    }
+                    _this.localStorage.set("anthro.user-session", result.data);
+                    _this.router.navigate(["/main/user"]);
+                }
+                else {
+                    _this.toastr.error(result.message);
+                    _this.user = new model_1.User();
+                }
+            })
+                .catch(function (error) {
+                _this.attempingLogin = false;
+                _this.isFormDisabled = false;
+                _this.toastr.error(error);
+            });
+        }
+        catch (e) {
+            this.attempingLogin = false;
+            this.isFormDisabled = false;
+            this.toastr.error(e);
+        }
     };
     LoginComponent = __decorate([
         core_1.Component({
             selector: 'login-component',
-            templateUrl: './app/components/login/login-page.html'
+            templateUrl: './app/components/login/login-page.html',
+            providers: [
+                services_1.SweetAlertService,
+                services_1.ToastrService,
+                login_service_1.LoginService,
+                services_1.LocalStorageService
+            ]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [services_1.SweetAlertService, services_1.ToastrService, login_service_1.LoginService, services_1.LocalStorageService, router_1.Router])
     ], LoginComponent);
     return LoginComponent;
 }());
