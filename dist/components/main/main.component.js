@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 var services_1 = require('../../shared-services/services');
 var Session = (function () {
     function Session() {
@@ -26,10 +27,11 @@ var Navition = (function () {
     return Navition;
 }());
 var MainComponent = (function () {
-    function MainComponent(swal, toastr, localStorage) {
+    function MainComponent(swal, toastr, localStorage, router) {
         this.swal = swal;
         this.toastr = toastr;
         this.localStorage = localStorage;
+        this.router = router;
     }
     MainComponent.prototype.ngOnInit = function () {
         console.log("main component.", new Date());
@@ -37,6 +39,11 @@ var MainComponent = (function () {
         this.session = this.localStorage.get("anthro.user-session");
         this.greetings = "Hi " + this.session.user.firstName;
         this.formatAvailableModules(this.session);
+        this.validRoute = this.isValidRoute(this.session);
+        if (!this.validRoute) {
+            this.toastr.error("The page you are looking for is either inaccessible or does not exist.");
+            this.router.navigate["/login"];
+        }
     };
     MainComponent.prototype.formatAvailableModules = function (session) {
         var _this = this;
@@ -64,7 +71,14 @@ var MainComponent = (function () {
                 _this.navigation.withoutGroup.push(mod);
             }
         });
-        console.log("navigation", this.navigation);
+    };
+    MainComponent.prototype.isValidRoute = function (session) {
+        for (var i = 0; i < session.user.position.modules.length; i++) {
+            if (session.user.position.modules[i].link === this.router.url) {
+                return true;
+            }
+        }
+        return false;
     };
     MainComponent.prototype.signOut = function () {
         console.log("main component logout", new Date());
@@ -79,7 +93,7 @@ var MainComponent = (function () {
                 services_1.LocalStorageService
             ]
         }), 
-        __metadata('design:paramtypes', [services_1.SweetAlertService, services_1.ToastrService, services_1.LocalStorageService])
+        __metadata('design:paramtypes', [services_1.SweetAlertService, services_1.ToastrService, services_1.LocalStorageService, router_1.Router])
     ], MainComponent);
     return MainComponent;
 }());

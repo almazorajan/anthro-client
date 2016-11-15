@@ -47,6 +47,6 @@
 	<!-- /.container-fluid -->
 </nav>
 
-<div class="container">
+<div class="container" [hidden]="!validRoute">
     <router-outlet></router-outlet>
 </div>

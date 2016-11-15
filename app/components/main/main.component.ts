@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { SweetAlertService, ToastrService, LocalStorageService } from '../../shared-services/services';
 
@@ -36,7 +37,8 @@ export class MainComponent implements OnInit {
     constructor(
         private swal: SweetAlertService,
         private toastr: ToastrService,
-        private localStorage: LocalStorageService
+        private localStorage: LocalStorageService,
+        private router: Router
     ) {}
 
     ngOnInit() { 
@@ -50,14 +52,24 @@ export class MainComponent implements OnInit {
 
         this.formatAvailableModules(this.session);
 
+        this.validRoute = this.isValidRoute(this.session);
+
+        if(!this.validRoute) {
+
+            this.toastr.error("The page you are looking for is either inaccessible or does not exist.");
+            this.router.navigate["/login"];
+
+        }
+
      }
      
      private session: Session;
 
      greetings: string;
      navigation: Navition;
+     validRoute: boolean;
 
-     private formatAvailableModules(session: Session) {
+     private formatAvailableModules(session: Session): void {
 
          this.navigation = new Navition();
          this.navigation.withGroup = [];
@@ -98,7 +110,21 @@ export class MainComponent implements OnInit {
 
          });
         
-         console.log("navigation", this.navigation);
+     }
+
+     private isValidRoute(session: Session): boolean {
+
+         for(let i=0; i < session.user.position.modules.length; i++) {
+
+             if(session.user.position.modules[i].link === this.router.url) {
+
+                 return true;
+
+             }
+
+         }
+
+         return false;
 
      }
 
