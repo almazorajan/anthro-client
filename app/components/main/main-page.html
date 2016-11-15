@@ -18,20 +18,15 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li class="dropdown">
+				<li *ngFor="let group of navigation.withGroup" class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        Maintenance <span class="caret"></span>
+                        {{ group.group }} <span class="caret"></span>
                     </a>
 					<ul class="dropdown-menu">
-						<li><a ui-sref="main.employmentstatusmaintenance">Employment Status</a></li>
-						<li><a ui-sref="main.positionmaintenance">Positions</a></li>
-						<li><a ui-sref="main.companymaintenance">Companies</a></li>
-						<li><a ui-sref="main.citizenshipmaintenance">Citizenship</a></li>
-						<li><a ui-sref="main.usermaintenance">Users</a></li>
+						<li *ngFor="let module of group.modules"><a router-link="module.link">{{ module.moduleName }}</a></li>
 					</ul>
 				</li>
-				<li ui-sref="main.employeeinfosheet" class="active"><a href="#">Employee Info Sheet <span class="sr-only">(current)</span></a></li>
-				<li><a ui-sref="main.employeelist">Employee List</a></li>
+				<li *ngFor="let mod of navigation.withoutGroup"><a router-link="mod.link">{{ mod.moduleName }}</a></li>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">

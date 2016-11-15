@@ -15,6 +15,16 @@ var Session = (function () {
     }
     return Session;
 }());
+var NavigationGroup = (function () {
+    function NavigationGroup() {
+    }
+    return NavigationGroup;
+}());
+var Navition = (function () {
+    function Navition() {
+    }
+    return Navition;
+}());
 var MainComponent = (function () {
     function MainComponent(swal, toastr, localStorage) {
         this.swal = swal;
@@ -26,7 +36,35 @@ var MainComponent = (function () {
         this.session = new Session();
         this.session = this.localStorage.get("anthro.user-session");
         this.greetings = "Hi " + this.session.user.firstName;
-        console.log(this.session);
+        this.formatAvailableModules(this.session);
+    };
+    MainComponent.prototype.formatAvailableModules = function (session) {
+        var _this = this;
+        this.navigation = new Navition();
+        this.navigation.withGroup = [];
+        this.navigation.withoutGroup = [];
+        session.user.position.modules.forEach(function (mod) {
+            if (mod.group) {
+                var isGroupExists = false;
+                for (var i = 0; i < _this.navigation.withGroup.length; i++) {
+                    if (_this.navigation.withGroup[i].group === mod.group) {
+                        _this.navigation.withGroup[i].modules.push(mod);
+                        isGroupExists = true;
+                    }
+                }
+                if (!isGroupExists) {
+                    var wgroup = new NavigationGroup();
+                    wgroup.group = mod.group;
+                    wgroup.modules = [];
+                    wgroup.modules.push(mod);
+                    _this.navigation.withGroup.push(wgroup);
+                }
+            }
+            else {
+                _this.navigation.withoutGroup.push(mod);
+            }
+        });
+        console.log("navigation", this.navigation);
     };
     MainComponent.prototype.signOut = function () {
         console.log("main component logout", new Date());

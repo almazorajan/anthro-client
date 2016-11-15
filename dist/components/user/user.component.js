@@ -150,7 +150,12 @@ var UserComponent = (function () {
         this.operation = 0;
         this.isFormDisabled = true;
         this.selectedUser = user;
-        this.selectedUser.position.positionName = this.identifyPositionName(this.selectedUser.position);
+        if (!this.selectedUser.position) {
+            this.selectedUser.position = this.positions[0];
+        }
+        else {
+            this.selectedUser.position.positionName = this.identifyPositionName(this.selectedUser.position);
+        }
     };
     UserComponent.prototype.edit = function () {
         this.operation = 2;

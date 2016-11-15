@@ -241,7 +241,16 @@ export class UserComponent implements OnInit {
         this.operation = 0;
         this.isFormDisabled = true;
         this.selectedUser = user;
-        this.selectedUser.position.positionName = this.identifyPositionName(this.selectedUser.position);
+
+        if(!this.selectedUser.position) {
+
+            this.selectedUser.position = this.positions[0];
+
+        } else {
+     
+            this.selectedUser.position.positionName = this.identifyPositionName(this.selectedUser.position);
+       
+        }
 
     }
 
@@ -249,13 +258,14 @@ export class UserComponent implements OnInit {
 
         this.operation = 2;
         this.isFormDisabled = false;
-        this.originalUserInfo = Object.assign({}, this.selectedUser);
+        this.originalUserInfo = Object.assign({}, this.selectedUser) as User;
+
 
     }
 
     cancelEdit(): void {
 
-        this.selectedUser = Object.assign({}, this.originalUserInfo);
+        this.selectedUser = Object.assign({}, this.originalUserInfo) as User;
         this.selectedUser.position.positionName = this.identifyPositionName(this.selectedUser.position);
         this.view(this.selectedUser);
 

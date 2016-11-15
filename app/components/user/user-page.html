@@ -18,15 +18,6 @@
 
         <div class="col-lg-6">
 
-            <!--<form class="form-horizontal">
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-10">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                    </div>
-                </div>
-            </form>-->
-
             <form class="form-horizontal">
                 <div class="form-group">
                     <label for="txtSearchKeyword" class="col-lg-5 control-label">Search:</label>
@@ -133,7 +124,7 @@
                             id="txtLastName" placeholder="Last Name" requried>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" *ngIf="selectedUser.position._id">
                         <label for="txtPosition">Position</label>
                         <select [(ngModel)]="selectedUser.position._id" [disabled]="isFormDisabled" name="slcPosition" class="form-control" id="slcPosition"
                             required>
