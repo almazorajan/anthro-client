@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var services_1 = require('../../shared-services/services');
+// private classes
 var Session = (function () {
     function Session() {
     }
@@ -34,16 +35,27 @@ var MainComponent = (function () {
         this.router = router;
     }
     MainComponent.prototype.ngOnInit = function () {
-        console.log("main component.", new Date());
         this.session = new Session();
         this.session = this.localStorage.get("anthro.user-session");
-        this.greetings = "Hi " + this.session.user.firstName;
-        this.formatAvailableModules(this.session);
+        // check if there is a session.
+        if (!this.session) {
+            this.toastr.error("No session detected. Proceeding to logout.");
+            this.redirectToLogin();
+            return;
+        }
+        // check the current route is valid.
         this.validRoute = this.isValidRoute(this.session);
         if (!this.validRoute) {
             this.toastr.error("The page you are looking for is either inaccessible or does not exist.");
-            this.router.navigate["/login"];
+            this.redirectToLogin();
+            return;
         }
+        // format route.
+        this.formatAvailableModules(this.session);
+        this.greetings = "Hi " + this.session.user.firstName;
+    };
+    MainComponent.prototype.redirectToLogin = function () {
+        this.router.navigate(["/login"]);
     };
     MainComponent.prototype.formatAvailableModules = function (session) {
         var _this = this;

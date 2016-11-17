@@ -22,6 +22,7 @@ var module_component_1 = require('./components/module/module.component');
 var position_component_1 = require('./components/position/position.component');
 var employment_status_component_1 = require('./components/employment-status/employment-status.component');
 var company_component_1 = require('./components/company/company.component');
+var page_not_found_component_1 = require('./components/page-not-found/page-not-found.component');
 // providers
 var service_1 = require('./shared-services/service');
 // pipes
@@ -46,6 +47,7 @@ var AppModule = (function () {
                 position_component_1.PositionComponent,
                 employment_status_component_1.EmploymentStatusComponent,
                 company_component_1.CompanyComponent,
+                page_not_found_component_1.PageNotFoundComponent,
                 pipe_1.UserFilter
             ],
             providers: [service_1.Service],

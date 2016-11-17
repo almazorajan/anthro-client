@@ -9,6 +9,7 @@ import { ModuleComponent } from './components/module/module.component';
 import { PositionComponent } from './components/position/position.component';
 import { EmploymentStatusComponent } from './components/employment-status/employment-status.component';
 import { CompanyComponent } from './components/company/company.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
     {
@@ -19,6 +20,10 @@ const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: '404',
+        component: PageNotFoundComponent
     },
     {
         path: 'main',

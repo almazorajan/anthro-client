@@ -23,10 +23,10 @@
                         {{ group.group }} <span class="caret"></span>
                     </a>
 					<ul class="dropdown-menu">
-						<li *ngFor="let module of group.modules"><a router-link="module.link">{{ module.moduleName }}</a></li>
+						<li *ngFor="let module of group.modules"><a [routerLink]="module.link">{{ module.moduleName }}</a></li>
 					</ul>
 				</li>
-				<li *ngFor="let mod of navigation.withoutGroup"><a router-link="mod.link">{{ mod.moduleName }}</a></li>
+				<li *ngFor="let mod of navigation.withoutGroup"><a [routerLink]="mod.link">{{ mod.moduleName }}</a></li>
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">

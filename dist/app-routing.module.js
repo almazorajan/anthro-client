@@ -18,6 +18,7 @@ var module_component_1 = require('./components/module/module.component');
 var position_component_1 = require('./components/position/position.component');
 var employment_status_component_1 = require('./components/employment-status/employment-status.component');
 var company_component_1 = require('./components/company/company.component');
+var page_not_found_component_1 = require('./components/page-not-found/page-not-found.component');
 var routes = [
     {
         path: '',
@@ -27,6 +28,14 @@ var routes = [
     {
         path: 'login',
         component: login_component_1.LoginComponent
+    },
+    {
+        path: '404',
+        component: page_not_found_component_1.PageNotFoundComponent
+    },
+    {
+        path: '**',
+        redirectTo: "/404"
     },
     {
         path: 'main',
