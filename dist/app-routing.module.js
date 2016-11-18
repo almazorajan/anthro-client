@@ -34,10 +34,6 @@ var routes = [
         component: page_not_found_component_1.PageNotFoundComponent
     },
     {
-        path: '**',
-        redirectTo: "/404"
-    },
-    {
         path: 'main',
         component: main_component_1.MainComponent,
         children: [

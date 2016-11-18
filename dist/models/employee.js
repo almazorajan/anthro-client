@@ -2,11 +2,12 @@
 var model_1 = require('./model');
 var Employee = (function () {
     function Employee() {
-        this._id = "";
         this.employeeNumber = "";
         this.startingDate = new Date();
         this.salary = 0;
         this.position = new model_1.Position();
+        this.position._id = "";
+        this.position.positionName = "";
         this.firstName = "";
         this.middleName = "";
         this.lastName = "";

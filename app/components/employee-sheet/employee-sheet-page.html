@@ -152,8 +152,8 @@
 				<label for="txtLandline">
                     Landlines <button (click)="employee.addLandline()" class="btn btn-success btn-xs">add</button>
                 </label>
-				<span ng-repeat="landline in employee.landlines">
-                    <input [(ngModel)]="landline" name="txtLandline" type="text" class="form-control" id="txtLandline" placeholder="Landline">
+				<span *ngFor="let landline of employee.landlines">
+                    <input [(ngModel)]="landline.number" name="txtLandline" type="text" class="form-control" id="txtLandline" placeholder="Landline">
                 </span>
 			</div>
 
@@ -505,7 +505,7 @@
 							<button (click)="employee.deleteCertification(certification)" type="button" class="btn btn-dagner btn-xs"></button>
 						</td>
 						<td><input [(ngModel)]="certification.title" name="txtCertificationTitle" type="text" class="form-control"></td>
-						<td><input [(ngModel)]="certitication.dateAccredited" name="txtCertificationDateAccredited" type="text" class="form-control"></td>
+						<td><input [(ngModel)]="certification.dateAccredited" name="txtCertificationDateAccredited" type="text" class="form-control"></td>
 					</tr>
 				</tbody>
 			</table>

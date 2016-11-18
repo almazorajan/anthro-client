@@ -10,6 +10,17 @@ export class FamilyBackground {
     contactNumbers: ContactNumber[];
     emailAddresses: EmailAddress[];
 
+    constructor() {
+
+        this.firstName = "";
+        this.middleName = "";
+        this.lastName = "";
+        this.occupation = "";
+        this.contactNumbers = [new ContactNumber()];
+        this.emailAddresses = [new EmailAddress()];
+
+    }
+
     addContactNumber(): void {
 
         this.contactNumbers.push(new ContactNumber());

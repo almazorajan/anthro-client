@@ -13,6 +13,7 @@ import {
 export class Employee {
 
     _id: string;
+    image: string;
     employeeNumber: string;
     startingDate: Date;
     salary: number;
@@ -58,12 +59,13 @@ export class Employee {
 
     constructor() {
 
-        this._id = "";
         this.employeeNumber = "";
         this.startingDate = new Date();
         this.salary = 0;
 
         this.position = new Position();
+        this.position._id = "";
+        this.position.positionName = "";
 
         this.firstName = "";
         this.middleName = "";
