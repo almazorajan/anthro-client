@@ -136,9 +136,10 @@ export class MainComponent implements OnInit {
 
      }
 
-     signOut() {
+     signOut(): void {
 
-         console.log("main component logout", new Date());
+         this.localStorage.remove("anthro.user-session");
+         this.redirectToLogin();
 
      }
 

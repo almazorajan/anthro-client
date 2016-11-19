@@ -126,11 +126,13 @@ var PositionComponent = (function () {
         if (!this.validPosition(this.selectedPosition))
             return;
         this.swal.confirm({
-            title: "Are you sure?",
-            message: "You will be updating this position.",
+            title: "Are You Sure?",
+            message: "You will be updating this position",
             confirmButtonText: "Yes, Update It!",
             callBack: function (isConfirm) {
-                _this.updatePosition();
+                if (isConfirm) {
+                    _this.updatePosition();
+                }
             }
         });
     };
@@ -170,11 +172,13 @@ var PositionComponent = (function () {
         if (!this.validPosition(this.selectedPosition))
             return;
         this.swal.confirm({
-            title: "Are you sure?",
-            message: "You will be adding a new position.",
-            confirmButtonText: "Yes, Add",
+            title: "Are You Sure?",
+            message: "You will be adding a new position",
+            confirmButtonText: "Yes, Add It",
             callBack: function (isConfirm) {
-                _this.addPosition();
+                if (isConfirm) {
+                    _this.addPosition();
+                }
             }
         });
     };
@@ -212,11 +216,13 @@ var PositionComponent = (function () {
     PositionComponent.prototype.confirmDelete = function (position) {
         var _this = this;
         this.swal.confirm({
-            title: "Are you sure?",
-            message: "You will be deleting this position.",
+            title: "Are You Sure?",
+            message: "You will be deleting this position",
             confirmButtonText: "Yes, Delete It!",
             callBack: function (isConfirm) {
-                _this.delete(position);
+                if (isConfirm) {
+                    _this.delete(position);
+                }
             }
         });
     };

@@ -178,12 +178,16 @@ export class UserComponent implements OnInit {
     confirmAdd(): void {
 
         this.swal.confirm({
-            title: "Are you sure?",
-            message: "You will be adding this position.",
+            title: "Are You Sure?",
+            message: "You will be adding this user",
             confirmButtonText: "Yes, Add It!",
             callBack: (isConfirm) => {
 
-                this.addUser();
+                if(isConfirm) {
+
+                    this.addUser();
+
+                }
 
             }
         });
@@ -275,12 +279,15 @@ export class UserComponent implements OnInit {
 
         this.swal.confirm({
             title: "Are You Sure?",
-            message: "You will be updating this user.",
+            message: "You will be updating this user",
             confirmButtonText: "Yes, Update It!",
             callBack: (isConfirm) => {
 
-                if(isConfirm) 
+                if(isConfirm) {
+
                     this.updateUser();
+
+                } 
 
             }
         });
@@ -334,12 +341,16 @@ export class UserComponent implements OnInit {
     confirmDelete(user: User): void {
 
         this.swal.confirm({
-            title: "Are you sure?",
-            message: "You will be adding this position.",
+            title: "Are You Sure?",
+            message: "You will be deleting this user",
             confirmButtonText: "Yes, Delete It!",
             callBack: (isConfirm) => {
 
-                this.deleteUser(user);
+                if(isConfirm) {
+
+                    this.deleteUser(user);
+
+                }
 
             }
         });

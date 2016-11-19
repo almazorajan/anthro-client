@@ -93,7 +93,8 @@ var MainComponent = (function () {
         return false;
     };
     MainComponent.prototype.signOut = function () {
-        console.log("main component logout", new Date());
+        this.localStorage.remove("anthro.user-session");
+        this.redirectToLogin();
     };
     MainComponent = __decorate([
         core_1.Component({

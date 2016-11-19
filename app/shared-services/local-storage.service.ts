@@ -29,5 +29,11 @@ import { Injectable } from '@angular/core';
 
     }
 
+    reset(): void {
+
+        localStorage.clear();
+
+    }
+
 
 }

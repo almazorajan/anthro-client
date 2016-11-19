@@ -209,12 +209,16 @@ export class PositionComponent implements OnInit {
             return;
 
         this.swal.confirm({
-            title: "Are you sure?",
-            message: "You will be updating this position.",
+            title: "Are You Sure?",
+            message: "You will be updating this position",
             confirmButtonText: "Yes, Update It!",
             callBack: (isConfirm) => {
 
-                this.updatePosition();
+                if(isConfirm) {
+
+                    this.updatePosition();
+
+                }
 
             }
         });
@@ -273,12 +277,16 @@ export class PositionComponent implements OnInit {
             return;
 
         this.swal.confirm({
-            title: "Are you sure?",
-            message: "You will be adding a new position.",
-            confirmButtonText: "Yes, Add",
+            title: "Are You Sure?",
+            message: "You will be adding a new position",
+            confirmButtonText: "Yes, Add It",
             callBack: (isConfirm) => {
 
-                this.addPosition();
+                if(isConfirm) {
+
+                    this.addPosition();
+
+                }
 
             }
         });
@@ -334,12 +342,16 @@ export class PositionComponent implements OnInit {
     confirmDelete(position: Position): void {
 
         this.swal.confirm({
-            title: "Are you sure?",
-            message: "You will be deleting this position.",
+            title: "Are You Sure?",
+            message: "You will be deleting this position",
             confirmButtonText: "Yes, Delete It!",
             callBack: (isConfirm) => {
 
-                this.delete(position);
+                if(isConfirm) {
+
+                    this.delete(position);
+
+                }
 
             }
         });

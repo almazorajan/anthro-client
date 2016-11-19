@@ -107,11 +107,13 @@ var UserComponent = (function () {
     UserComponent.prototype.confirmAdd = function () {
         var _this = this;
         this.swal.confirm({
-            title: "Are you sure?",
-            message: "You will be adding this position.",
+            title: "Are You Sure?",
+            message: "You will be adding this user",
             confirmButtonText: "Yes, Add It!",
             callBack: function (isConfirm) {
-                _this.addUser();
+                if (isConfirm) {
+                    _this.addUser();
+                }
             }
         });
     };
@@ -171,11 +173,12 @@ var UserComponent = (function () {
         var _this = this;
         this.swal.confirm({
             title: "Are You Sure?",
-            message: "You will be updating this user.",
+            message: "You will be updating this user",
             confirmButtonText: "Yes, Update It!",
             callBack: function (isConfirm) {
-                if (isConfirm)
+                if (isConfirm) {
                     _this.updateUser();
+                }
             }
         });
     };
@@ -212,11 +215,13 @@ var UserComponent = (function () {
     UserComponent.prototype.confirmDelete = function (user) {
         var _this = this;
         this.swal.confirm({
-            title: "Are you sure?",
-            message: "You will be adding this position.",
+            title: "Are You Sure?",
+            message: "You will be deleting this user",
             confirmButtonText: "Yes, Delete It!",
             callBack: function (isConfirm) {
-                _this.deleteUser(user);
+                if (isConfirm) {
+                    _this.deleteUser(user);
+                }
             }
         });
     };
