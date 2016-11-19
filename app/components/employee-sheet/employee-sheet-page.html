@@ -1,27 +1,11 @@
 <div class="row">
 	<form>
-
-		<!--
-        -------------------------------------------------------------------------------------------------
-        E M P L O Y E E   I N F O R M A T I O N
-        -------------------------------------------------------------------------------------------------
-        -->
-
-		<!-- [start] header -->
 		<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-
 			<h2 class="text-center">Employee Information</h2>
 			<hr/>
-
 		</div>
-		<!-- [end] header -->
 
-
-		<!-- [start] employee information
-            employee number, position, starting date, salary, employment status
-        -->
 		<div class="col-lg-6">
-
 			<div class="form-group">
 				<label for="txtEmployeeEmail">Employee Number</label>
 				<input [(ngModel)]="employee.employeeNumber" name="txtEmployeeEmail" type="text" class="form-control" id="txtEmployeeEmail"
@@ -47,19 +31,9 @@
 				<label for="slcEmploymentStatus">Employment Status</label>
 				<!--<select [(ngModel)]="employee.employmentStatus.id" class="form-control" id="slcEmploymentStatus"></select>-->
 			</div>
-
 		</div>
-		<!-- [end] employee information
-            employee number, position, starting date, salary, employment status
-        -->
 
-
-		<!-- [start] employee information
-            fullname, middle initial, date of birth, age, place of birth, marital status,
-            sex, citizenship
-        -->
 		<div class="col-lg-6">
-
 			<div class="form-group">
 				<label for="txtFirstName">First Name</label>
 				<input [(ngModel)]="employee.firstName" name="txtFirstName" type="text" class="form-control" id="txtFirstName" placeholder="First Name">
@@ -105,35 +79,14 @@
 				<label for="txtCitizenship">Citizenship</label>
 				<input [(ngModel)]="employee.citizenship" name="txtCitizenship" type="text" class="form-control" id="txtCitizenship" placeholder="Citizenship">
 			</div>
-
-
 		</div>
-		<!-- [end] employee information
-            fullname, middle initial, date of birth, age, place of birth, marital status,
-            sex, citizenship
-        -->
 
-
-
-		<!--
-        -------------------------------------------------------------------------------------------------
-        C O N T A C T   I N F O R M A T I O N
-        -------------------------------------------------------------------------------------------------
-        -->
-
-		<!-- [start] header -->
 		<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-
 			<h2 class="text-center">Contact Information</h2>
 			<hr/>
-
 		</div>
-		<!-- [end] header -->
 
-
-		<!-- phone numbers -->
 		<div class="col-lg-6">
-
 			<div class="form-group">
 				<label for="txtPhoneNumber">
                     Phone Numbers <button class="btn btn-success btn-xs" (click)="employee.addPhoneNumber()">Add</button>
@@ -142,12 +95,9 @@
                     <input [(ngModel)]="phoneNumber.number" name="txtPhoneNumber" type="text" class="form-control" id="txtPhoneNumber" placeholder="Phone Number">
                 </span>
 			</div>
-
 		</div>
 
-		<!-- tel numbers -->
 		<div class="col-lg-6">
-
 			<div class="form-group">
 				<label for="txtLandline">
                     Landlines <button (click)="employee.addLandline()" class="btn btn-success btn-xs">add</button>
@@ -156,30 +106,14 @@
                     <input [(ngModel)]="landline.number" name="txtLandline" type="text" class="form-control" id="txtLandline" placeholder="Landline">
                 </span>
 			</div>
-
 		</div>
 
-
-
-		<!--
-        -------------------------------------------------------------------------------------------------
-        A D D R E S S
-        -------------------------------------------------------------------------------------------------
-        -->
-
-		<!-- [start] header -->
 		<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-
 			<h2 class="text-center">Address</h2>
 			<hr/>
-
 		</div>
-		<!-- [end] header -->
 
-
-		<!-- [start] city address -->
 		<div class="col-lg-6">
-
 			<h3>City Address</h3>
 
 			<div class="checkbox">
@@ -235,14 +169,9 @@
 				<input [(ngModel)]="employee.cityAddress.zipCode" name="txtCityAddressZipCode" type="text" class="form-control" id="txtCityAddressZipCode"
 					placeholder="Zip Code">
 			</div>
-
 		</div>
-		<!-- [end] city address -->
 
-
-		<!-- [start] provincial address -->
 		<div class="col-lg-6">
-
 			<h3>Provincial Address</h3>
 
 			<div class="checkbox">
@@ -298,15 +227,9 @@
 				<input [(ngModel)]="employee.provincialAddress.zipCode" name="txtPronvincialAddressZipCode" type="text" class="form-control"
 					id="txtPronvincialAddressZipCode" placeholder="Zip Code">
 			</div>
-
-
 		</div>
-		<!-- [end] provincial address -->
 
-
-		<!-- [start] permanent address -->
 		<div class="col-lg-6" *ngIf="!employee.hasPermanentAddress()">
-
 			<h3>Permanent Address</h3>
 
 			<div class="form-group">
@@ -356,31 +279,14 @@
 				<input [(ngModel)]="employee.permanentAddress.zipCode" name="txtPermanentAddressZipCode" type="text" class="form-control"
 					id="txtPermanentAddressZipCode" placeholder="Zip Code">
 			</div>
-
 		</div>
-		<!-- [end] permanent address -->
 
-
-
-		<!--
-        -------------------------------------------------------------------------------------------------
-        G O V E R N M E N T   I D E N T I F I C A T I O N
-        -------------------------------------------------------------------------------------------------
-        -->
-
-		<!-- [start] header -->
 		<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-
 			<h2 class="text-center">Govenment Identification</h2>
 			<hr/>
-
 		</div>
-		<!-- [end] header -->
 
-
-		<!-- [start] government identification: ss number, tin number -->
 		<div class="col-lg-6">
-
 			<div class="form-group">
 				<label for="txtSsNumber">
                     SS Number
@@ -394,14 +300,9 @@
                 </label>
 				<input [(ngModel)]="employee.tinNumber" name="txtTinNumber" type="text" class="form-control" id="txtTinNumber" placeholder="TIN Number">
 			</div>
-
 		</div>
-		<!-- [end] government identification: ss number, tin number -->
 
-
-		<!-- [start] government identification: philhealth number, pagibig number -->
 		<div class="col-lg-6">
-
 			<div class="form-group">
 				<label for="txtPhilHealthNumber">
                     PhilHealth Number
@@ -417,31 +318,14 @@
 				<input [(ngModel)]="employee.pagibigNumber" name="txtPagibigNumber" type="text" class="form-control" id="txtPagibigNumber"
 					placeholder="PAGIBIG Number">
 			</div>
-
 		</div>
-		<!-- [end] government identification: philhealth number, pagibig number -->
 
-
-
-		<!--
-        -------------------------------------------------------------------------------------------------
-        E D U C A T I O N   H I S T O R Y
-        -------------------------------------------------------------------------------------------------
-        -->
-
-		<!-- [start] header -->
 		<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-
 			<h2 class="text-center">Education History</h2>
 			<hr/>
-
 		</div>
-		<!-- [end] header -->
 
-
-		<!-- [start] education history -->
 		<div class="col-lg-12">
-
 			<p>
 				<button (click)="employee.addEducationHistory()" type="button" class="btn btn-success btn-xs">
                     <span class="glyphicon glyphicon-plus"></span> Add Education History
@@ -468,31 +352,14 @@
 					</tr>
 				</tbody>
 			</table>
-
 		</div>
-		<!-- [end] education history -->
 
-
-
-		<!--
-        -------------------------------------------------------------------------------------------------
-        C E R T I F I C A T I O N S   A C C R E D I T E D
-        -------------------------------------------------------------------------------------------------
-        -->
-
-		<!-- [start] header -->
 		<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-
 			<h2 class="text-center">Certifications Accredited</h2>
 			<hr/>
-
 		</div>
-		<!-- [end] header -->
 
-
-		<!-- start certifications -->
 		<div class="col-lg-12">
-
 			<table class="table table-condensed">
 				<thead>
 					<th></th>
@@ -509,31 +376,14 @@
 					</tr>
 				</tbody>
 			</table>
-
 		</div>
-		<!-- [end] certifications -->
 
-
-
-		<!--
-        -------------------------------------------------------------------------------------------------
-        L O C A L   &   I N T E R N A T I O N A L   L I C E N S U R E S
-        -------------------------------------------------------------------------------------------------
-        -->
-
-		<!-- [start] header -->
 		<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-
 			<h2 class="text-center">Local & International Licensures</h2>
 			<hr/>
-
 		</div>
-		<!-- [end] header -->
 
-
-		<!-- [start] licensures -->
 		<div class="col-lg-12">
-
 			<table class="table table-condensed">
 				<thead>
 					<th></th>
@@ -550,31 +400,14 @@
 					</tr>
 				</tbody>
 			</table>
-
 		</div>
-		<!-- [end] licensures -->
 
-
-
-		<!--
-        -------------------------------------------------------------------------------------------------
-        W O R K   H I S T O R Y
-        -------------------------------------------------------------------------------------------------
-        -->
-
-		<!-- [start] header -->
 		<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-
 			<h2 class="text-center">Work History</h2>
 			<hr/>
-
 		</div>
-		<!-- [end] header -->
-
-
-		<!-- [start] work history -->
+	
 		<div class="col-lg-12">
-
 			<table class="table table-condensed">
 				<thead>
 					<th></th>
@@ -602,37 +435,21 @@
 					</tr>
 				</tbody>
 			</table>
-
 		</div>
-		<!-- [end] work history -->
 
-
-		<!--
-        -------------------------------------------------------------------------------------------------
-        F A M I L Y   B A C K G R O U N D
-        -------------------------------------------------------------------------------------------------
-        -->
-
-		<!-- [start] header -->
 		<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-
 			<h2 class="text-center">Family Background</h2>
 			<hr/>
-
 		</div>
-		<!-- [end] header -->
 
-
-		<!-- [start] father's information -->
 		<div class="col-lg-6">
-
 			<h3>Father's Information</h3>
 
 			<div class="form-group">
 				<label for="txtFathersFirstName">
                     First Name: 
                 </label>
-				<input ([ngModel])="employee.fathersInfo.firstName" name="txtFathersFirstName" type="text" class="form-control" id="txtFathersFirstName"
+				<input [(ngModel)]="employee.fathersInfo.firstName" name="txtFathersFirstName" type="text" class="form-control" id="txtFathersFirstName"
 					placeholder="Father's First Name">
 			</div>
 
@@ -640,7 +457,7 @@
 				<label for="txtFathersMiddleName">
                     Middle Name: 
                 </label>
-				<input ([ngModel])="employee.fathersInfo.middleName" name="txtFathersMiddleName" type="text" class="form-control" id="txtFathersMiddleName"
+				<input [(ngModel)]="employee.fathersInfo.middleName" name="txtFathersMiddleName" type="text" class="form-control" id="txtFathersMiddleName"
 					placeholder="Father's Middle Name'">
 			</div>
 
@@ -681,15 +498,9 @@
 						</tr>
 					</tbody>
 				</table>
-
 			</div>
-
-
 		</div>
-		<!-- [end] father's information -->
 
-
-		<!-- [start] mother's information -->
 		<div class="col-lg-6">
 
 			<h3>Mother's Information</h3>
@@ -748,15 +559,9 @@
 						</tr>
 					</tbody>
 				</table>
-
 			</div>
-
-
 		</div>
-		<!-- [end] mother's information -->
 
-
-		<!-- [start] spouse's information -->
 		<div class="col-lg-6">
 
 			<h3>Spouse's Information</h3>
@@ -766,7 +571,7 @@
                     First Name: 
                 </label>
 				<input [(ngModel)]="employee.spouseInfo.firstName" name="txtSpouseInfoFirstName" type="text" class="form-control" id="txtSpouseInfoFirstName"
-					placeholder="Email">
+					placeholder="Spouse's First Name">
 			</div>
 
 			<div class="form-group">
@@ -774,7 +579,7 @@
                     Middle Name: 
                 </label>
 				<input [(ngModel)]="employee.spouseInfo.middleName" name="txtSpouseInfoMiddleName" type="text" class="form-control" id="txtSpouseInfoMiddleName"
-					placeholder="Mother's First Name">
+					placeholder="Spouse's First Name">
 			</div>
 
 			<div class="form-group">
@@ -782,7 +587,7 @@
                     Last Name: 
                 </label>
 				<input [(ngModel)]="employee.spouseInfo.lastName" name="txtSpouseInfoLastName" type="text" class="form-control" id="txtSpouseInfoLastName"
-					placeholder="Mother's Middle Name">
+					placeholder="Spouse's Middle Name">
 			</div>
 
 			<div class="form-group">
@@ -790,7 +595,7 @@
                     Occupation:
                 </label>
 				<input [(ngModel)]="employee.spouseInfo.occupation" name="txtSpouseInfoOccupation" type="text" class="form-control" id="txtSpouseInfoOccupation"
-					placeholder="Mother's Last Name">
+					placeholder="Spouse's Occupation">
 			</div>
 
 
@@ -815,14 +620,9 @@
 						</tr>
 					</tbody>
 				</table>
-
 			</div>
-
 		</div>
-		<!-- [end] spouse's information -->
 
-
-		<!-- [start] children info -->
 		<div class="col-lg-12">
 
 			<h3>Children Information</h3>
@@ -849,12 +649,8 @@
 					</tr>
 				</tbody>
 			</table>
-
 		</div>
-		<!-- [end] children info -->
 
-
-		<!-- [start] siblings info -->
 		<div class="col-lg-12">
 
 			<h3>Siblings Information</h3>
@@ -881,10 +677,6 @@
 					</tr>
 				</tbody>
 			</table>
-
 		</div>
-		<!-- [end] siblings info -->
-
-
 	</form>
 </div>
