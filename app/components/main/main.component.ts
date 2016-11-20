@@ -1,25 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { SweetAlertService, ToastrService, LocalStorageService } from '../../shared-services/services';
-
-import { User, Position, Module } from '../../models/model';
-
-// private classes
-class Session {
-    token: string;
-    user: User;
-}
-
-class NavigationGroup {
-    group: string;
-    modules: Module[];
-}
-
-class Navition {
-    withGroup: NavigationGroup[];
-    withoutGroup: Module[];
-}
+import { PositionService } from '../position/position.service';
+import { User, Position, Module, Session, NavigationGroup, Navigation } from '../../models/model';
 
 @Component({
     selector: 'main-component',
@@ -27,8 +10,9 @@ class Navition {
     providers: [
         SweetAlertService,
         ToastrService,
-        LocalStorageService
-    ] 
+        LocalStorageService,
+        PositionService
+    ]
 })
 
 export class MainComponent implements OnInit {
@@ -37,74 +21,91 @@ export class MainComponent implements OnInit {
         private swal: SweetAlertService,
         private toastr: ToastrService,
         private localStorage: LocalStorageService,
+        private positionService: PositionService,
         private router: Router
-    ) {}
+    ) { }
 
-    ngOnInit() { 
+    ngOnInit() {
 
-        this.session = new Session();
-        this.session = this.localStorage.get<Session>("anthro.user-session");
-        
-        // check if there is a session.
-        if(!this.session) {
+        try {
 
-            this.toastr.error("No session detected. Proceeding to logout.");
+            this.session = new Session();
+            this.session = this.localStorage.get<Session>("anthro.user-session");
+            this.currentUser = this.session.user;
+
+            // check if there is a session.
+            if (!this.session) {
+
+                this.toastr.error("No session detected. Proceeding to logout.");
+                this.redirectToLogin();
+                return;
+
+            }
+
+            // check the current route is valid.
+            this.validRoute = this.isValidRoute(this.session);
+
+            if (!this.validRoute) {
+
+                this.toastr.error("The page you are looking for is either inaccessible or does not exist.");
+                this.redirectToLogin();
+                return;
+
+            }
+
+            // format route.
+            this.formatAvailableModules(this.session);
+            this.getPositions();
+            this.readyGreetings();
+
+        } catch (e) {
+
+            this.toastr.error(e);
             this.redirectToLogin();
-            return;
 
         }
 
-        // check the current route is valid.
-        this.validRoute = this.isValidRoute(this.session);
-        if(!this.validRoute) {
+    }
 
-            this.toastr.error("The page you are looking for is either inaccessible or does not exist.");
-            this.redirectToLogin();
-            return;
+    private session: Session;
+    
+    loadingPositions: boolean;
+    userProfileDisabled: boolean;
+    currentUser: User;
+    greetings: string;
+    navigation: Navigation;
+    validRoute: boolean;
+    positions: Position[];
+    
 
-        }
-
-        // format route.
-        this.formatAvailableModules(this.session);
-
-        this.greetings = "Hi " + this.session.user.firstName;        
-
-     }
-     
-     private session: Session;
-
-     greetings: string;
-     navigation: Navition;
-     validRoute: boolean;
-
-     private redirectToLogin() {
+    private redirectToLogin() {
 
         this.router.navigate(["/login"]);
-         
-     }
 
-     private formatAvailableModules(session: Session): void {
+    }
 
-         this.navigation = new Navition();
-         this.navigation.withGroup = [];
-         this.navigation.withoutGroup = [];
+    private formatAvailableModules(session: Session): void {
 
-         session.user.position.modules.forEach((mod) => {
+        this.navigation = new Navigation();
+        this.navigation.withGroup = [];
+        this.navigation.withoutGroup = [];
 
-            if(mod.group) {
-                
+        session.user.position.modules.forEach((mod) => {
+
+            if (mod.group) {
+
                 let isGroupExists: boolean = false;
-                
-                for(let i=0; i < this.navigation.withGroup.length; i++) {
 
-                    if(this.navigation.withGroup[i].group === mod.group) {
+                for (let i = 0; i < this.navigation.withGroup.length; i++) {
+
+                    if (this.navigation.withGroup[i].group === mod.group) {
                         this.navigation.withGroup[i].modules.push(mod);
-                        isGroupExists = true;               
+                        isGroupExists = true;
                     }
 
                 }
 
-                if(!isGroupExists) {
+                if (!isGroupExists) {
                     let wgroup = new NavigationGroup();
                     wgroup.group = mod.group;
                     wgroup.modules = [];
@@ -114,33 +115,82 @@ export class MainComponent implements OnInit {
 
             } else {
 
-                this.navigation.withoutGroup.push(mod);                
+                this.navigation.withoutGroup.push(mod);
 
             }
 
-         });
-        
-     }
+        });
 
-     private isValidRoute(session: Session): boolean {
+    }
 
-         for(let i=0; i < session.user.position.modules.length; i++) {
+    private isValidRoute(session: Session): boolean {
 
-             if(session.user.position.modules[i].link === this.router.url) {
-                 return true;
-             }
+        for (let i = 0; i < session.user.position.modules.length; i++) {
 
-         }
+            if (session.user.position.modules[i].link === this.router.url) {
+                return true;
+            }
 
-         return false;
+        }
 
-     }
+        return false;
 
-     signOut(): void {
+    }
 
-         this.localStorage.remove("anthro.user-session");
-         this.redirectToLogin();
+    private readyGreetings(): void {
 
-     }
+        this.greetings = "Hi " + this.session.user.firstName;
+
+    }
+
+    private getPositions(): void {
+
+        try {
+
+            this.positions = [];
+            this.loadingPositions = true;
+            this.userProfileDisabled = true;
+
+            this.positionService.getAll().then((result) => {
+
+                this.loadingPositions = false;
+                this.userProfileDisabled = false;
+
+                if(result.success) {
+
+                    this.positions = result.data as Position[];
+                    this.toastr.success(result.message);
+
+                } else {
+
+                    this.toastr.error(result.message);
+
+                }
+
+            })
+            .catch((error) => {
+
+                this.loadingPositions = false;
+                this.userProfileDisabled = false;
+                this.toastr.error(error);
+
+            });
+
+        } catch(e) {
+
+            this.loadingPositions = false;
+            this.userProfileDisabled = false;
+            this.toastr.error(e);
+
+        }
+
+    }
+
+    signOut(): void {
+
+        this.localStorage.remove("anthro.user-session");
+        this.redirectToLogin();
+
+    }
 
 }

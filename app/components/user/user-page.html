@@ -1,23 +1,17 @@
 <div class="row">
     <form>
-
         <div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-
             <h2 class="text-center">User Maintenance</h2>
             <hr/>
-
         </div>
 
         <div class="col-lg-6">
-
             <button (click)="add()" class="btn btn-success btn-md" title="Add" data-toggle="modal" data-target="#mdlModalInfo">
 				<i class="glyphicon glyphicon-plus"></i> Add
 			</button>
-
         </div>
 
         <div class="col-lg-6">
-
             <form class="form-horizontal">
                 <div class="form-group">
                     <label for="txtSearchKeyword" class="col-lg-5 control-label">Search:</label>
@@ -26,11 +20,9 @@
                     </div>
                 </div>
             </form>
-
         </div>
 
         <div class="col-lg-12">
-
             <table class="table table-condensed" style="margin-top: 40px;">
                 <thead>
                     <th></th>
@@ -51,7 +43,6 @@
                     </tr>
 
                     <tr *ngFor="let user of (users | userFilter: search.keyword)">
-
                         <td>
                             <button (click)="view(user)" class="btn btn-primary btn-xs" title="View information" data-toggle="modal" data-target="#mdlModalInfo">
                                 <i class="glyphicon glyphicon-info-sign"></i>
@@ -70,30 +61,24 @@
                                 {{ user.position.positionName }}
                             </span>
                         </td>
-
                     </tr>
-
                 </tbody>
             </table>
-
         </div>
-
     </form>
 </div>
 
 <!-- Modal -->
-
 <div class="modal fade" id="mdlModalInfo" tabindex="-1" role="dialog" aria-labelledby="mdlModalInfoLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <form autocomplete="off" *ngIf="selectedUser">
-
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="mdlModalInfoLabel">User</h4>
                 </div>
-                <div class="modal-body">
 
+                <div class="modal-body">
                     <div class="form-group">
                         <label for="txtUsername">Username</label>
                         <input [(ngModel)]="selectedUser.userName" [disabled]="isFormDisabled" type="text" name="txtUsername" class="form-control"
@@ -131,7 +116,6 @@
                             <option *ngFor="let position of positions" [value]="position._id">{{ position.positionName }}</option>
                         </select>
                     </div>
-
                 </div>
 
                 <div *ngIf="operation === 0" class="modal-footer">
