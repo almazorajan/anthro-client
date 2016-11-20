@@ -1,682 +1,447 @@
 <div class="row">
-	<form>
-		<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-			<h2 class="text-center">Employee Information</h2>
-			<hr/>
-		</div>
+	<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
+		<h2 class="text-center">Employee Information</h2>
+		<hr/>
+	</div>
+</div>
 
-		<div class="col-lg-6">
-			<div class="form-group">
-				<label for="txtEmployeeEmail">Employee Number</label>
-				<input [(ngModel)]="employee.employeeNumber" name="txtEmployeeEmail" type="text" class="form-control" id="txtEmployeeEmail"
-					placeholder="Employee Number">
+<div class="row">
+	<ul class="nav nav-tabs">
+		<li role="presentation" class="active"><a href="#overview" data-toggle="tab">Overview</a></li>
+		<li role="presentation"><a href="#historical" data-toggle="tab">Historical</a></li>
+	</ul>
+
+	<div class="tab-content" style="padding-top: 50px; margin-bottom: 30px;">
+		<form>
+			<!--OVERVIEW-->
+			<div class="tab-pane fade in active" id="overview">
+				<div class="row">
+					<div class="col-lg-3">
+						<ul class="nav nav-pills nav-stacked">
+							<li class="active"><a data-toggle="pill" href="#general">General</a></li>
+							<li><a data-toggle="pill" href="#employment">Employment</a></li>
+							<li><a data-toggle="pill" href="#contacts">Contacts</a></li>
+							<li><a data-toggle="pill" href="#idnumbers">ID Numbers</a></li>
+							<li class="disabled"><a data-toggle="pill" href="#family">Family</a></li>
+							<li><a data-toggle="pill" href="#education">Education</a></li>
+							<li><a data-toggle="pill" href="#certification">Certification</a></li>
+							<li><a data-toggle="pill" href="#license">License</a></li>
+							<li><a data-toggle="pill" href="#work-history">Work History</a></li>
+						</ul>
+					</div>
+
+					<div class="col-lg-6">
+						<div class="tab-content">
+							<!--GENERAL-->
+							<div id="general" class="tab-pane fade in active">
+								<div class="form-group">
+									<label for="txtFirstName">First Name</label>
+									<input [(ngModel)]="employee.firstName" name="txtFirstName" type="text" class="form-control" id="txtFirstName" placeholder="First Name">
+								</div>
+
+								<div class="form-group">
+									<label for="txtMiddleName">Middle Name</label>
+									<input [(ngModel)]="employee.middleName" name="txtMiddleName" type="text" class="form-control" id="txtMiddleName" placeholder="Middle Name">
+								</div>
+
+								<div class="form-group">
+									<label for="txtLastName">Last Name</label>
+									<input [(ngModel)]="employee.lastName" name="txtLastName" type="text" class="form-control" id="txtLastName" placeholder="Last Name">
+								</div>
+
+								<div class="form-group">
+									<label for="nbAge">Age</label>
+									<input [(ngModel)]="employee.age" name="nbAge" type="number" class="form-control" id="nbAge" placeholder="Age" disabled>
+								</div>
+
+								<div class="form-group">
+									<label for="txtBirthPlace">Birth Place</label>
+									<input [(ngModel)]="employee.birthPlace" name="txtBirthPlace" type="text" class="form-control" id="txtBirthPlace" placeholder="Birth Place">
+								</div>
+
+								<div class="form-group">
+									<label for="slcMaritalStatus">Marital Status</label>
+									<select [(ngModel)]="employee.maritalStatus" name="slcMaritalStatus" class="form-control" id="slcMaritalStatus">
+										<option>Single</option>
+										<option>Married</option>
+									</select>
+								</div>
+
+								<div class="form-group">
+									<label for="slcGender">Gender</label>
+									<select [(ngModel)]="employee.gender" name="slcGender" class="form-control" id="slcGender">
+										<option>Male</option>
+										<option>Female</option>
+									</select>
+								</div>
+
+								<div class="form-group">
+									<label for="txtCitizenship">Citizenship</label>
+									<input [(ngModel)]="employee.citizenship" name="txtCitizenship" type="text" class="form-control" id="txtCitizenship" placeholder="Citizenship">
+								</div>
+							</div>
+
+							<!--EMPLOYMENT-->
+							<div id="employment" class="tab-pane fade">
+								<div class="form-group">
+									<label for="txtEmployeeEmail">Employee Number</label>
+									<input [(ngModel)]="employee.employeeNumber" name="txtEmployeeEmail" type="text" class="form-control" id="txtEmployeeEmail"
+										placeholder="Employee Number">
+								</div>
+
+								<div class="form-group">
+									<label for="slcPosition">Position</label>
+									<!--<select [(ngModel)]="employee.position.id" class="form-control" id="slcPosition"></select>-->
+								</div>
+
+								<div class="form-group">
+									<label for="dtStartingDate">Starting Date</label>
+									<input [(ngModel)]="employee.startingDate" name="dtStartingDate" type="date" class="form-control" id="dtStartingDate" placeholder="Starting Date">
+								</div>
+
+								<div class="form-group">
+									<label for="nbSalary">Salary</label>
+									<input [(ngModel)]="employee.salary" name="nbSalary" type="number" step="any" class="form-control" id="nbSalary" placeholder="Salary">
+								</div>
+
+								<div class="form-group">
+									<label for="slcEmploymentStatus">Employment Status</label>
+									<!--<select [(ngModel)]="employee.employmentStatus.id" class="form-control" id="slcEmploymentStatus"></select>-->
+								</div>
+							</div>
+
+							<!--CONTACTS-->
+							<div id="contacts" class="tab-pane fade">
+								<div class="form-group">
+									<label for="txtPhoneNumber">
+										Phone Numbers <button class="btn btn-success btn-xs" (click)="employee.addPhoneNumber()">Add</button>
+									</label>
+									<span *ngFor="let phoneNumber of employee.phoneNumbers">
+										<input [(ngModel)]="phoneNumber.number" name="txtPhoneNumber" type="text" class="form-control" id="txtPhoneNumber" placeholder="Phone Number">
+									</span>
+								</div>
+								<div class="form-group">
+									<label for="txtLandline">
+										Landlines <button (click)="employee.addLandline()" class="btn btn-success btn-xs">add</button>
+									</label>
+									<span *ngFor="let landline of employee.landlines">
+										<input [(ngModel)]="landline.number" name="txtLandline" type="text" class="form-control" id="txtLandline" placeholder="Landline">
+									</span>
+								</div>
+
+								<h3>City Address</h3>
+
+								<div class="checkbox">
+									<label for="chkCityAddressIsPermanent">
+										<input [(ngModel)]="employee.cityAddress.isPermanent" name="chkCityAddressIsPermanent" type="checkbox" id="chkCityAddressIsPermanent"> Permanent Address
+									</label>
+								</div>
+
+								<div class="form-group">
+									<label for="txtCityAddresstUnitFloor">
+										Unit/Floor
+									</label>
+									<input [(ngModel)]="employee.cityAddress.unitFloor" name="txtCityAddresstUnitFloor" type="text" class="form-control" id="txtCityAddressUnitFloor"
+										placeholder="Unit/Floor">
+								</div>
+
+								<div class="form-group">
+									<label for="txtCityAddressBulding">
+										Building
+									</label>
+									<input [(ngModel)]="employee.cityAddress.building" name="txtCityAddressBulding" type="text" class="form-control" id="txtCityAddressBulding"
+										placeholder="Building">
+								</div>
+
+								<div class="form-group">
+									<label for="txtCityAddressStreetName">
+										Street Name
+									</label>
+									<input [(ngModel)]="employee.cityAddress.streetName" name="txtCityAddressStreetName" type="text" class="form-control" id="txtCityAddressStreetName"
+										placeholder="Street Name">
+								</div>
+
+								<div class="form-group">
+									<label for="txtCityAddressBarangay">
+										Barangay
+									</label>
+									<input [(ngModel)]="employee.cityAddress.barangay" name="txtCityAddressBarangay" type="text" class="form-control" id="txtCityAddressBarangay"
+										placeholder="Barangay">
+								</div>
+
+								<div class="form-group">
+									<label for="txtCityAddressCity">
+										City
+									</label>
+									<input [(ngModel)]="employee.cityAddress.city" name="txtCityAddressCity" type="text" class="form-control" id="txtCityAddressCity"
+										placeholder="City">
+								</div>
+
+								<div class="form-group">
+									<label for="txtCityAddressZipCode">
+									Zip Code
+								</label>
+									<input [(ngModel)]="employee.cityAddress.zipCode" name="txtCityAddressZipCode" type="text" class="form-control" id="txtCityAddressZipCode"
+										placeholder="Zip Code">
+								</div>
+
+								<h3>Provincial Address</h3>
+
+								<div class="checkbox">
+									<label for="chkProvincialAddressIsPermanent">
+										<input [(ngModel)]="employee.provincialAddress.isPermanent" name="chkProvincialAddressIsPermanent" type="checkbox" id="chkProvincialAddressIsPermanent"> Permanent Address
+									</label>
+								</div>
+
+								<div class="form-group">
+									<label for="txtProvincialAddressUnitFloor">
+										Unit/Floor
+									</label>
+									<input [(ngModel)]="employee.provincialAddress.unitFloor" name="txtProvincialAddressUnitFloor" type="text" class="form-control"
+										id="txtUnitFloor" placeholder="Unit/Floor">
+								</div>
+
+								<div class="form-group">
+									<label for="txtProvincialAddressBuilding">
+										Building
+									</label>
+									<input [(ngModel)]="employee.provincialAddress.building" name="txtProvincialAddressBuilding" type="text" class="form-control"
+										id="txtProvincialAddressBuilding" placeholder="Building">
+								</div>
+
+								<div class="form-group">
+									<label for="txtProvincialAddressStreetName">
+										Street Name
+									</label>
+									<input [(ngModel)]="employee.provincialAddress.streetName" name="txtProvincialAddressStreetName" type="text" class="form-control"
+										id="txtStreetName" placeholder="Street Name">
+								</div>
+
+								<div class="form-group">
+									<label for="txtProvincialAddressBarangay">
+										Barangay
+									</label>
+									<input [(ngModel)]="employee.provincialAddress.barangay" name="txtProvincialAddressBarangay" type="text" class="form-control"
+										id="txtProvincialAddressBarangay" placeholder="Barangay">
+								</div>
+
+								<div class="form-group">
+									<label for="txtProvincialAddressCity">
+										City
+									</label>
+									<input [(ngModel)]="employee.provincialAddress.city" name="txtProvincialAddressCity" type="text" class="form-control" id="txtProvincialAddressCity"
+										placeholder="City">
+								</div>
+
+								<div class="form-group">
+									<label for="txtPronvincialAddressZipCode">
+										Zip Code
+									</label>
+									<input [(ngModel)]="employee.provincialAddress.zipCode" name="txtPronvincialAddressZipCode" type="text" class="form-control"
+										id="txtPronvincialAddressZipCode" placeholder="Zip Code">
+								</div>
+
+								<h3>Permanent Address</h3>
+
+								<div class="form-group">
+									<label for="txtPermanentAddressUnitFloor">
+										Unit/Floor
+									</label>
+									<input [(ngModel)]="employee.permanentAddress.unitFloor" name="txtPermanentAddressUnitFloor" type="text" class="form-control"
+										id="txtPermanentAddressUnitFloor" placeholder="Unit/Floor">
+								</div>
+
+								<div class="form-group">
+									<label for="txtPermanentAddressBuilding">
+										Building
+									</label>
+									<input [(ngModel)]="employee.permanentAddress.building" name="txtPermanentAddressBuilding" type="text" class="form-control"
+										id="txtPermanentAddressBuilding" placeholder="Building">
+								</div>
+
+								<div class="form-group">
+									<label for="txtPermanentAddressStreetName">
+										Street Name
+									</label>
+									<input [(ngModel)]="employee.permanentAddress.streetName" name="txtPermanentAddressStreetName" type="text" class="form-control"
+										id="txtPermanentAddressStreetName" placeholder="Street Name">
+								</div>
+
+								<div class="form-group">
+									<label for="txtPermanentAddressBarangay">
+										Barangay
+									</label>
+									<input [(ngModel)]="employee.permanentAddress.barangay" name="txtPermanentAddressBarangay" type="text" class="form-control"
+										id="txtPermanentAddressBarangay" placeholder="Barangay">
+								</div>
+
+								<div class="form-group">
+									<label for="txtPermanentAddressCity">
+										City
+									</label>
+									<input [(ngModel)]="employee.permanentAddress.city" name="txtPermanentAddressCity" type="text" class="form-control" id="txtPermanentAddressCity"
+										placeholder="City">
+								</div>
+
+								<div class="form-group">
+									<label for="txtPermanentAddressZipCode">
+										Zip Code
+									</label>
+									<input [(ngModel)]="employee.permanentAddress.zipCode" name="txtPermanentAddressZipCode" type="text" class="form-control"
+										id="txtPermanentAddressZipCode" placeholder="Zip Code">
+								</div>
+							</div>
+
+							<!--ID NUMBERS-->
+							<div id="idnumbers" class="tab-pane fade">
+								<div class="form-group">
+									<label for="txtSsNumber">
+										SSS Number
+									</label>
+									<input [(ngModel)]="employee.ssNumber" name="txtSsNumber" type="text" class="form-control" id="txtSsNumber" placeholder="SS Number">
+								</div>
+
+								<div class="form-group">
+									<label for="txtTinNumber">
+										TIN Number
+									</label>
+									<input [(ngModel)]="employee.tinNumber" name="txtTinNumber" type="text" class="form-control" id="txtTinNumber" placeholder="TIN Number">
+								</div>
+								<div class="form-group">
+									<label for="txtPhilHealthNumber">
+										PhilHealth Number
+									</label>
+									<input [(ngModel)]="employee.philHealthNumber" name="txtPhilHealthNumber" type="text" class="form-control" id="txtPhilHealthNumber"
+										placeholder="PhilHealth Number">
+								</div>
+
+								<div class="form-group">
+									<label for="txtPagibigNumber">
+										PAGIBIG Number
+									</label>
+									<input [(ngModel)]="employee.pagibigNumber" name="txtPagibigNumber" type="text" class="form-control" id="txtPagibigNumber"
+										placeholder="PAGIBIG Number">
+								</div>
+							</div>
+
+							
+
+						<!--EDUCATION-->
+						<div id="education" class="tab-pane fade in active">
+							<p>
+								<button (click)="employee.addEducationHistory()" type="button" class="btn btn-success btn-xs">
+										<span class="glyphicon glyphicon-plus"></span> Add Education History
+									</button>
+							</p>
+
+							<table class="table table-condensed">
+								<thead>
+									<th></th>
+									<th>Education Level</th>
+									<th>Degree</th>
+									<th>Date of Graduation</th>
+								</thead>
+								<tbody>
+									<tr *ngFor="let education of employee.educationHistory">
+										<td>
+											<button (click)="employee.deleteEducationHistory(education)" type="button" class="btn btn-danger btn-xs">
+													<span class="glyphicon glyphicon-trash"></span>
+												</button>
+										</td>
+										<td><input [(ngModel)]="education.educationLevel" name="txtEducationLevel" type="text" class="form-control"></td>
+										<td><input [(ngModel)]="education.degree" name="txtEducationDegree" type="text" class="form-control"></td>
+										<td><input [(ngModel)]="education.dateGraduated" name="txtEducationDateGraduated" type="date" class="form-control"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<!--CERTIFICATION-->
+						<div id="certification" class="tab-pane fade in active">
+							<table class="table table-condensed">
+								<thead>
+									<th></th>
+									<th>Title</th>
+									<th>Date Accredited</th>
+								</thead>
+								<tbody>
+									<tr *ngFor="let certification of employee.certifications">
+										<td>
+											<button (click)="employee.deleteCertification(certification)" type="button" class="btn btn-dagner btn-xs"></button>
+										</td>
+										<td><input [(ngModel)]="certification.title" name="txtCertificationTitle" type="text" class="form-control"></td>
+										<td><input [(ngModel)]="certification.dateAccredited" name="txtCertificationDateAccredited" type="text" class="form-control"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<!--LICENSE-->
+						<div id="license" class="tab-pane fade in active">
+							<table class="table table-condensed">
+								<thead>
+									<th></th>
+									<th>Title</th>
+									<th>Date Accredited</th>
+								</thead>
+								<tbody>
+									<tr *ngFor="let licensure of employee.licensures">
+										<td>
+											<button (click)="employee.deleteLicensure(licensure)" type="button" class="btn btn-danger btn-xs"></button>
+										</td>
+										<td><input [(ngModel)]="licensure.title" name="txtLicensureTitle" type="text" class="form-control"></td>
+										<td><input [(ngModel)]="licensure.dateAccredited" name="txtLicensureDateAccredited" type="text" class="form-control"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<!--WORK HISTORY-->
+						<div id="work-history" class="tab-pane fade in active">
+							<table class="table table-condensed">
+								<thead>
+									<th></th>
+									<th>Position</th>
+									<th>Company Name</th>
+									<th>Date From</th>
+									<th>Date To</th>
+									<th>Employment Status</th>
+									<th>Salary</th>
+									<th>Reason for Leaving</th>
+								</thead>
+								<tbody>
+									<tr *ngFor="let workHistory of employee.workHistory">
+										<td>
+											<button (click)="employee.deleteWorkHistory(workHistory)" type="button" class="btn btn-danger btn-xs"></button>
+										</td>
+										<td><input [(ngModel)]="workHistory.position" name="txtWorkHistoryPosition" type="text" class="form-control"></td>
+										<td><input [(ngModel)]="workHistory.companyName" name="txtWorkHistoryCompanyName" type="text" class="form-control"></td>
+										<td><input [(ngModel)]="workHistory.dateFrom" name="txtWorkHistoryDateFrom" type="date" class="form-control"></td>
+										<td><input [(ngModel)]="workHistory.dateTo" name="txtWorkHistoryDateTo" type="date" class="form-control"></td>
+										<td><input [(ngModel)]="workHistory.employmentStatus.employmentStatus" name="txtWorkHistoryEmploymentStatus" type="text"
+												class="form-control"></td>
+										<td><input [(ngModel)]="workHistory.salary" name="txtWorkHistorySalary" type="number" step="any" class="form-control"></td>
+										<td><input [(ngModel)]="workHistory.reasonForLeaving" name="txtWorkHistoryReasonForLeaving" type="text" class="form-control"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+				</div>
+
+
 			</div>
 
-			<div class="form-group">
-				<label for="slcPosition">Position</label>
-				<!--<select [(ngModel)]="employee.position.id" class="form-control" id="slcPosition"></select>-->
-			</div>
-
-			<div class="form-group">
-				<label for="dtStartingDate">Starting Date</label>
-				<input [(ngModel)]="employee.startingDate" name="dtStartingDate" type="date" class="form-control" id="dtStartingDate" placeholder="Starting Date">
-			</div>
-
-			<div class="form-group">
-				<label for="nbSalary">Salary</label>
-				<input [(ngModel)]="employee.salary" name="nbSalary" type="number" step="any" class="form-control" id="nbSalary" placeholder="Salary">
-			</div>
-
-			<div class="form-group">
-				<label for="slcEmploymentStatus">Employment Status</label>
-				<!--<select [(ngModel)]="employee.employmentStatus.id" class="form-control" id="slcEmploymentStatus"></select>-->
-			</div>
-		</div>
-
-		<div class="col-lg-6">
-			<div class="form-group">
-				<label for="txtFirstName">First Name</label>
-				<input [(ngModel)]="employee.firstName" name="txtFirstName" type="text" class="form-control" id="txtFirstName" placeholder="First Name">
-			</div>
-
-			<div class="form-group">
-				<label for="txtMiddleName">Middle Name</label>
-				<input [(ngModel)]="employee.middleName" name="txtMiddleName" type="text" class="form-control" id="txtMiddleName" placeholder="Middle Name">
-			</div>
-
-			<div class="form-group">
-				<label for="txtLastName">Last Name</label>
-				<input [(ngModel)]="employee.lastName" name="txtLastName" type="text" class="form-control" id="txtLastName" placeholder="Last Name">
-			</div>
-
-			<div class="form-group">
-				<label for="nbAge">Age</label>
-				<input [(ngModel)]="employee.age" name="nbAge" type="number" class="form-control" id="nbAge" placeholder="Age" disabled>
-			</div>
-
-			<div class="form-group">
-				<label for="txtBirthPlace">Birth Place</label>
-				<input [(ngModel)]="employee.birthPlace" name="txtBirthPlace" type="text" class="form-control" id="txtBirthPlace" placeholder="Birth Place">
-			</div>
-
-			<div class="form-group">
-				<label for="slcMaritalStatus">Marital Status</label>
-				<select [(ngModel)]="employee.maritalStatus" name="slcMaritalStatus" class="form-control" id="slcMaritalStatus">
-					<option>Single</option>
-					<option>Married</option>
-				</select>
-			</div>
-
-			<div class="form-group">
-				<label for="slcGender">Gender</label>
-				<select [(ngModel)]="employee.gender" name="slcGender" class="form-control" id="slcGender">
-					<option>Male</option>
-					<option>Female</option>
-				</select>
-			</div>
-
-			<div class="form-group">
-				<label for="txtCitizenship">Citizenship</label>
-				<input [(ngModel)]="employee.citizenship" name="txtCitizenship" type="text" class="form-control" id="txtCitizenship" placeholder="Citizenship">
-			</div>
-		</div>
-
-		<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-			<h2 class="text-center">Contact Information</h2>
-			<hr/>
-		</div>
-
-		<div class="col-lg-6">
-			<div class="form-group">
-				<label for="txtPhoneNumber">
-                    Phone Numbers <button class="btn btn-success btn-xs" (click)="employee.addPhoneNumber()">Add</button>
-                </label>
-				<span *ngFor="let phoneNumber of employee.phoneNumbers">
-                    <input [(ngModel)]="phoneNumber.number" name="txtPhoneNumber" type="text" class="form-control" id="txtPhoneNumber" placeholder="Phone Number">
-                </span>
-			</div>
-		</div>
-
-		<div class="col-lg-6">
-			<div class="form-group">
-				<label for="txtLandline">
-                    Landlines <button (click)="employee.addLandline()" class="btn btn-success btn-xs">add</button>
-                </label>
-				<span *ngFor="let landline of employee.landlines">
-                    <input [(ngModel)]="landline.number" name="txtLandline" type="text" class="form-control" id="txtLandline" placeholder="Landline">
-                </span>
-			</div>
-		</div>
-
-		<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-			<h2 class="text-center">Address</h2>
-			<hr/>
-		</div>
-
-		<div class="col-lg-6">
-			<h3>City Address</h3>
-
-			<div class="checkbox">
-				<label for="chkCityAddressIsPermanent">
-                    <input [(ngModel)]="employee.cityAddress.isPermanent" name="chkCityAddressIsPermanent" type="checkbox" id="chkCityAddressIsPermanent"> Permanent Address
-                </label>
-			</div>
-
-			<div class="form-group">
-				<label for="txtCityAddresstUnitFloor">
-                    Unit/Floor
-                </label>
-				<input [(ngModel)]="employee.cityAddress.unitFloor" name="txtCityAddresstUnitFloor" type="text" class="form-control" id="txtCityAddressUnitFloor"
-					placeholder="Unit/Floor">
-			</div>
-
-			<div class="form-group">
-				<label for="txtCityAddressBulding">
-                    Building
-                </label>
-				<input [(ngModel)]="employee.cityAddress.building" name="txtCityAddressBulding" type="text" class="form-control" id="txtCityAddressBulding"
-					placeholder="Building">
-			</div>
-
-			<div class="form-group">
-				<label for="txtCityAddressStreetName">
-                    Street Name
-                </label>
-				<input [(ngModel)]="employee.cityAddress.streetName" name="txtCityAddressStreetName" type="text" class="form-control" id="txtCityAddressStreetName"
-					placeholder="Street Name">
-			</div>
-
-			<div class="form-group">
-				<label for="txtCityAddressBarangay">
-                    Barangay
-                </label>
-				<input [(ngModel)]="employee.cityAddress.barangay" name="txtCityAddressBarangay" type="text" class="form-control" id="txtCityAddressBarangay"
-					placeholder="Barangay">
-			</div>
-
-			<div class="form-group">
-				<label for="txtCityAddressCity">
-                    City
-                </label>
-				<input [(ngModel)]="employee.cityAddress.city" name="txtCityAddressCity" type="text" class="form-control" id="txtCityAddressCity"
-					placeholder="City">
-			</div>
-
-			<div class="form-group">
-				<label for="txtCityAddressZipCode">
-                    Zip Code
-                </label>
-				<input [(ngModel)]="employee.cityAddress.zipCode" name="txtCityAddressZipCode" type="text" class="form-control" id="txtCityAddressZipCode"
-					placeholder="Zip Code">
-			</div>
-		</div>
-
-		<div class="col-lg-6">
-			<h3>Provincial Address</h3>
-
-			<div class="checkbox">
-				<label for="chkProvincialAddressIsPermanent">
-                    <input [(ngModel)]="employee.provincialAddress.isPermanent" name="chkProvincialAddressIsPermanent" type="checkbox" id="chkProvincialAddressIsPermanent"> Permanent Address
-                </label>
-			</div>
-
-			<div class="form-group">
-				<label for="txtProvincialAddressUnitFloor">
-                    Unit/Floor
-                </label>
-				<input [(ngModel)]="employee.provincialAddress.unitFloor" name="txtProvincialAddressUnitFloor" type="text" class="form-control"
-					id="txtUnitFloor" placeholder="Unit/Floor">
-			</div>
-
-			<div class="form-group">
-				<label for="txtProvincialAddressBuilding">
-                    Building
-                </label>
-				<input [(ngModel)]="employee.provincialAddress.building" name="txtProvincialAddressBuilding" type="text" class="form-control"
-					id="txtProvincialAddressBuilding" placeholder="Building">
-			</div>
-
-			<div class="form-group">
-				<label for="txtProvincialAddressStreetName">
-                    Street Name
-                </label>
-				<input [(ngModel)]="employee.provincialAddress.streetName" name="txtProvincialAddressStreetName" type="text" class="form-control"
-					id="txtStreetName" placeholder="Street Name">
-			</div>
-
-			<div class="form-group">
-				<label for="txtProvincialAddressBarangay">
-                    Barangay
-                </label>
-				<input [(ngModel)]="employee.provincialAddress.barangay" name="txtProvincialAddressBarangay" type="text" class="form-control"
-					id="txtProvincialAddressBarangay" placeholder="Barangay">
-			</div>
-
-			<div class="form-group">
-				<label for="txtProvincialAddressCity">
-                    City
-                </label>
-				<input [(ngModel)]="employee.provincialAddress.city" name="txtProvincialAddressCity" type="text" class="form-control" id="txtProvincialAddressCity"
-					placeholder="City">
-			</div>
-
-			<div class="form-group">
-				<label for="txtPronvincialAddressZipCode">
-                    Zip Code
-                </label>
-				<input [(ngModel)]="employee.provincialAddress.zipCode" name="txtPronvincialAddressZipCode" type="text" class="form-control"
-					id="txtPronvincialAddressZipCode" placeholder="Zip Code">
-			</div>
-		</div>
-
-		<div class="col-lg-6" *ngIf="!employee.hasPermanentAddress()">
-			<h3>Permanent Address</h3>
-
-			<div class="form-group">
-				<label for="txtPermanentAddressUnitFloor">
-                    Unit/Floor
-                </label>
-				<input [(ngModel)]="employee.permanentAddress.unitFloor" name="txtPermanentAddressUnitFloor" type="text" class="form-control"
-					id="txtPermanentAddressUnitFloor" placeholder="Unit/Floor">
-			</div>
-
-			<div class="form-group">
-				<label for="txtPermanentAddressBuilding">
-                    Building
-                </label>
-				<input [(ngModel)]="employee.permanentAddress.building" name="txtPermanentAddressBuilding" type="text" class="form-control"
-					id="txtPermanentAddressBuilding" placeholder="Building">
-			</div>
-
-			<div class="form-group">
-				<label for="txtPermanentAddressStreetName">
-                    Street Name
-                </label>
-				<input [(ngModel)]="employee.permanentAddress.streetName" name="txtPermanentAddressStreetName" type="text" class="form-control"
-					id="txtPermanentAddressStreetName" placeholder="Street Name">
-			</div>
-
-			<div class="form-group">
-				<label for="txtPermanentAddressBarangay">
-                    Barangay
-                </label>
-				<input [(ngModel)]="employee.permanentAddress.barangay" name="txtPermanentAddressBarangay" type="text" class="form-control"
-					id="txtPermanentAddressBarangay" placeholder="Barangay">
-			</div>
-
-			<div class="form-group">
-				<label for="txtPermanentAddressCity">
-                    City
-                </label>
-				<input [(ngModel)]="employee.permanentAddress.city" name="txtPermanentAddressCity" type="text" class="form-control" id="txtPermanentAddressCity"
-					placeholder="City">
-			</div>
-
-			<div class="form-group">
-				<label for="txtPermanentAddressZipCode">
-                    Zip Code
-                </label>
-				<input [(ngModel)]="employee.permanentAddress.zipCode" name="txtPermanentAddressZipCode" type="text" class="form-control"
-					id="txtPermanentAddressZipCode" placeholder="Zip Code">
-			</div>
-		</div>
-
-		<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-			<h2 class="text-center">Govenment Identification</h2>
-			<hr/>
-		</div>
-
-		<div class="col-lg-6">
-			<div class="form-group">
-				<label for="txtSsNumber">
-                    SS Number
-                </label>
-				<input [(ngModel)]="employee.ssNumber" name="txtSsNumber" type="text" class="form-control" id="txtSsNumber" placeholder="SS Number">
-			</div>
-
-			<div class="form-group">
-				<label for="txtTinNumber">
-                    TIN Number
-                </label>
-				<input [(ngModel)]="employee.tinNumber" name="txtTinNumber" type="text" class="form-control" id="txtTinNumber" placeholder="TIN Number">
-			</div>
-		</div>
-
-		<div class="col-lg-6">
-			<div class="form-group">
-				<label for="txtPhilHealthNumber">
-                    PhilHealth Number
-                </label>
-				<input [(ngModel)]="employee.philHealthNumber" name="txtPhilHealthNumber" type="text" class="form-control" id="txtPhilHealthNumber"
-					placeholder="PhilHealth Number">
-			</div>
-
-			<div class="form-group">
-				<label for="txtPagibigNumber">
-                    PAGIBIG Number
-                </label>
-				<input [(ngModel)]="employee.pagibigNumber" name="txtPagibigNumber" type="text" class="form-control" id="txtPagibigNumber"
-					placeholder="PAGIBIG Number">
-			</div>
-		</div>
-
-		<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-			<h2 class="text-center">Education History</h2>
-			<hr/>
-		</div>
-
-		<div class="col-lg-12">
-			<p>
-				<button (click)="employee.addEducationHistory()" type="button" class="btn btn-success btn-xs">
-                    <span class="glyphicon glyphicon-plus"></span> Add Education History
-                </button>
-			</p>
-
-			<table class="table table-condensed">
-				<thead>
-					<th></th>
-					<th>Education Level</th>
-					<th>Degree</th>
-					<th>Date of Graduation</th>
-				</thead>
-				<tbody>
-					<tr *ngFor="let education of employee.educationHistory">
-						<td>
-							<button (click)="employee.deleteEducationHistory(education)" type="button" class="btn btn-danger btn-xs">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </button>
-						</td>
-						<td><input [(ngModel)]="education.educationLevel" name="txtEducationLevel" type="text" class="form-control"></td>
-						<td><input [(ngModel)]="education.degree" name="txtEducationDegree" type="text" class="form-control"></td>
-						<td><input [(ngModel)]="education.dateGraduated" name="txtEducationDateGraduated" type="date" class="form-control"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-
-		<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-			<h2 class="text-center">Certifications Accredited</h2>
-			<hr/>
-		</div>
-
-		<div class="col-lg-12">
-			<table class="table table-condensed">
-				<thead>
-					<th></th>
-					<th>Title</th>
-					<th>Date Accredited</th>
-				</thead>
-				<tbody>
-					<tr *ngFor="let certification of employee.certifications">
-						<td>
-							<button (click)="employee.deleteCertification(certification)" type="button" class="btn btn-dagner btn-xs"></button>
-						</td>
-						<td><input [(ngModel)]="certification.title" name="txtCertificationTitle" type="text" class="form-control"></td>
-						<td><input [(ngModel)]="certification.dateAccredited" name="txtCertificationDateAccredited" type="text" class="form-control"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-
-		<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-			<h2 class="text-center">Local & International Licensures</h2>
-			<hr/>
-		</div>
-
-		<div class="col-lg-12">
-			<table class="table table-condensed">
-				<thead>
-					<th></th>
-					<th>Title</th>
-					<th>Date Accredited</th>
-				</thead>
-				<tbody>
-					<tr *ngFor="let licensure of employee.licensures">
-						<td>
-							<button (click)="employee.deleteLicensure(licensure)" type="button" class="btn btn-danger btn-xs"></button>
-						</td>
-						<td><input [(ngModel)]="licensure.title" name="txtLicensureTitle" type="text" class="form-control"></td>
-						<td><input [(ngModel)]="licensure.dateAccredited" name="txtLicensureDateAccredited" type="text" class="form-control"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-
-		<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-			<h2 class="text-center">Work History</h2>
-			<hr/>
-		</div>
-	
-		<div class="col-lg-12">
-			<table class="table table-condensed">
-				<thead>
-					<th></th>
-					<th>Position</th>
-					<th>Company Name</th>
-					<th>Date From</th>
-					<th>Date To</th>
-					<th>Employment Status</th>
-					<th>Salary</th>
-					<th>Reason for Leaving</th>
-				</thead>
-				<tbody>
-					<tr *ngFor="let workHistory of employee.workHistory">
-						<td>
-							<button (click)="employee.deleteWorkHistory(workHistory)" type="button" class="btn btn-danger btn-xs"></button>
-						</td>
-						<td><input [(ngModel)]="workHistory.position" name="txtWorkHistoryPosition" type="text" class="form-control"></td>
-						<td><input [(ngModel)]="workHistory.companyName" name="txtWorkHistoryCompanyName" type="text" class="form-control"></td>
-						<td><input [(ngModel)]="workHistory.dateFrom" name="txtWorkHistoryDateFrom" type="date" class="form-control"></td>
-						<td><input [(ngModel)]="workHistory.dateTo" name="txtWorkHistoryDateTo" type="date" class="form-control"></td>
-						<td><input [(ngModel)]="workHistory.employmentStatus.employmentStatus" name="txtWorkHistoryEmploymentStatus" type="text"
-								class="form-control"></td>
-						<td><input [(ngModel)]="workHistory.salary" name="txtWorkHistorySalary" type="number" step="any" class="form-control"></td>
-						<td><input [(ngModel)]="workHistory.reasonForLeaving" name="txtWorkHistoryReasonForLeaving" type="text" class="form-control"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-
-		<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-			<h2 class="text-center">Family Background</h2>
-			<hr/>
-		</div>
-
-		<div class="col-lg-6">
-			<h3>Father's Information</h3>
-
-			<div class="form-group">
-				<label for="txtFathersFirstName">
-                    First Name: 
-                </label>
-				<input [(ngModel)]="employee.fathersInfo.firstName" name="txtFathersFirstName" type="text" class="form-control" id="txtFathersFirstName"
-					placeholder="Father's First Name">
-			</div>
-
-			<div class="form-group">
-				<label for="txtFathersMiddleName">
-                    Middle Name: 
-                </label>
-				<input [(ngModel)]="employee.fathersInfo.middleName" name="txtFathersMiddleName" type="text" class="form-control" id="txtFathersMiddleName"
-					placeholder="Father's Middle Name'">
-			</div>
-
-			<div class="form-group">
-				<label for="txtFathersLastName">
-                    Last Name: 
-                </label>
-				<input [(ngModel)]="txtFathersLastName" name="txtFathersLastName" type="text" class="form-control" id="txtFathersLastName"
-					placeholder="Father's Last Name'">
-			</div>
-
-			<div class="form-group">
-				<label for="txtFathersOccupation">
-                    Occupation:
-                </label>
-				<input [(ngModel)]="employee.fathersInfo.occupation" name="txtFathersOccupation" type="text" class="form-control" id="txtFathersOccupation"
-					placeholder="Father's Occupation">
-			</div>
-
-			<div class="form-group">
-				<label for="txtFathersContactNumbers">
-                    Contact Numbers: <button (click)="employee.fathersInfo.addContactNumber()" class="btn btn-success btn-xs">Add</button>
-                </label>
-
-				<table class="table table-condensed">
-					<thead>
-						<th></th>
-						<th>Contact Number</th>
-					</thead>
-					<tbody>
-						<tr *ngFor="let contactNumber of employee.fathersInfo.contactNumbers">
-							<td>
-								<button (click)="employee.fathersInfo.deleteContactNumber(contactNumber)" type="button" class="btn btn-danger btn-xs">Delete</button>
-							</td>
-							<td>
-								<input [(ngModel)]="contactNumber.number" name="txtFathersInfoContactNumber" type="text" class="form-control">
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-
-		<div class="col-lg-6">
-
-			<h3>Mother's Information</h3>
-
-			<div class="form-group">
-				<label for="txtMothersInfoFirstName">
-                    First Name: 
-                </label>
-				<input [(ngModel)]="employee.mothersInfo.firstName" name="txtMothersInfoFirstName" type="text" class="form-control" id="txtMothersInfoFirstName"
-					placeholder="Email">
-			</div>
-
-			<div class="form-group">
-				<label for="txtMothersInfoMiddleName">
-                    Middle Name: 
-                </label>
-				<input [(ngModel)]="employee.mothersInfo.middleName" name="txtMothersInfoMiddleName" type="text" class="form-control" id="txtMothersInfoMiddleName"
-					placeholder="Mother's First Name">
-			</div>
-
-			<div class="form-group">
-				<label for="txtMothersInfoLastName">
-                    Last Name: 
-                </label>
-				<input [(ngModel)]="employee.mothersInfo.lastName" name="txtMothersInfoLastName" type="text" class="form-control" id="txtMothersInfoLastName"
-					placeholder="Mother's Middle Name">
-			</div>
-
-			<div class="form-group">
-				<label for="txtMothersInfoOccupation">
-                    Occupation:
-                </label>
-				<input [(ngModel)]="employee.mothersInfo.occupation" name="txtMothersInfoOccupation" type="text" class="form-control" id="txtMothersInfoOccupation"
-					placeholder="Mother's Last Name">
-			</div>
-
-
-			<div class="form-group">
-				<label for="txtMothersContactNumbers">
-                    Contact Numbers: <button (click)="employee.fathersInfo.addContactNumber()" class="btn btn-success btn-xs">Add</button>
-                </label>
-
-				<table class="table table-condensed">
-					<thead>
-						<th></th>
-						<th>Contact Number</th>
-					</thead>
-					<tbody>
-						<tr *ngFor="let contactNumber of employee.mothersInfo.contactNumbers">
-							<td>
-								<button (click)="employee.mothersInfo.deleteContactNumber(contactNumber)" type="button" class="btn btn-danger btn-xs">Delete</button>
-							</td>
-							<td>
-								<input [(ngModel)]="contactNumber.number" name="txtMothersInfoContactNumber" type="text" class="form-control">
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-
-		<div class="col-lg-6">
-
-			<h3>Spouse's Information</h3>
-			
-			<div class="form-group">
-				<label for="txtSpouseInfoFirstName">
-                    First Name: 
-                </label>
-				<input [(ngModel)]="employee.spouseInfo.firstName" name="txtSpouseInfoFirstName" type="text" class="form-control" id="txtSpouseInfoFirstName"
-					placeholder="Spouse's First Name">
-			</div>
-
-			<div class="form-group">
-				<label for="txtSpouseInfoMiddleName">
-                    Middle Name: 
-                </label>
-				<input [(ngModel)]="employee.spouseInfo.middleName" name="txtSpouseInfoMiddleName" type="text" class="form-control" id="txtSpouseInfoMiddleName"
-					placeholder="Spouse's First Name">
-			</div>
-
-			<div class="form-group">
-				<label for="txtSpouseInfoLastName">
-                    Last Name: 
-                </label>
-				<input [(ngModel)]="employee.spouseInfo.lastName" name="txtSpouseInfoLastName" type="text" class="form-control" id="txtSpouseInfoLastName"
-					placeholder="Spouse's Middle Name">
-			</div>
-
-			<div class="form-group">
-				<label for="txtSpouseInfoOccupation">
-                    Occupation:
-                </label>
-				<input [(ngModel)]="employee.spouseInfo.occupation" name="txtSpouseInfoOccupation" type="text" class="form-control" id="txtSpouseInfoOccupation"
-					placeholder="Spouse's Occupation">
-			</div>
-
-
-			<div class="form-group">
-				<label for="txtSpouseContactNumbers">
-                    Contact Numbers: <button (click)="employee.spouseInfo.addContactNumber()" class="btn btn-success btn-xs">Add</button>
-                </label>
-
-				<table class="table table-condensed">
-					<thead>
-						<th></th>
-						<th>Contact Number</th>
-					</thead>
-					<tbody>
-						<tr *ngFor="let contactNumber of employee.spouseInfo.contactNumbers">
-							<td>
-								<button (click)="employee.spouseInfo.deleteContactNumber(contactNumber)" type="button" class="btn btn-danger btn-xs">Delete</button>
-							</td>
-							<td>
-								<input [(ngModel)]="contactNumber.number" name="txtSpouseInfoContactNumber" type="text" class="form-control">
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-
+	</div>
+	<!--HISTORICAL-->
+	<div class="tab-pane fade" id="historical">
 		<div class="col-lg-12">
 
-			<h3>Children Information</h3>
-
-			<table class="table table-condensed">
-				<thead>
-					<th></th>
-					<th>First Name</th>
-					<th>Middle Name</th>
-					<th>Last NAme</th>
-					<th>Occupation</th>
-					<th>Contact No</th>
-				</thead>
-				<tbody>
-					<tr *ngFor="let childrenInfo of employee.childrenInfo">
-						<td>
-							<button (click)="employee.deleteSiblingInfo(siblingInfo)" type="button" class="btn btn-danger btn-xs"></button>
-						</td>
-						<td><input [(ngModel)]="childrenInfo.firstName" name="txtChildrenInfoFirstName" type="text" class="form-control" placeholder="First Name"></td>
-						<td><input [(ngModel)]="childrenInfo.middleName" name="txtChildrenInfoMiddleName" type="text" class="form-control" placeholder="Middle Name"></td>
-						<td><input [(ngModel)]="childrenInfo.lastName" name="txtChildrenInfoLastName" type="text" class="form-control" placeholder="Last Name"></td>
-						<td><input [(ngModel)]="childrenInfo.occupation" name="txtChildrenInfoOccupation" type="text" class="form-control" placeholder="Occupation"></td>
-						<td><input [(ngModel)]="childrenInfo.contactNumbers[0].number" name="txtChildrenInfoContactNumber" type="text" class="form-control" placeholder="Contact No"></td>
-					</tr>
-				</tbody>
-			</table>
 		</div>
 
-		<div class="col-lg-12">
-
-			<h3>Siblings Information</h3>
-
-			<table class="table table-condensed">
-				<thead>
-					<th></th>
-					<th>First Name</th>
-					<th>Middle Name</th>
-					<th>Last NAme</th>
-					<th>Occupation</th>
-					<th>Contact No</th>
-				</thead>
-				<tbody>
-					<tr *ngFor="let siblingInfo of employee.siblingsInfo">
-						<td>
-							<button (click)="employee.deleteSiblingInfo(siblingInfo)" type="button" class="btn btn-danger btn-xs"></button>
-						</td>
-						<td><input [(ngModel)]="siblingInfo.firstName" name="txtSiblingInfoFirstName" type="text" class="form-control" placeholder="First Name"></td>
-						<td><input [(ngModel)]="siblingInfo.middleName" name="txtSiblingInfoMiddleName" type="text" class="form-control" placeholder="Middle Name"></td>
-						<td><input [(ngModel)]="siblingInfo.lastName" name="txtSiblingInfoLastName" type="text" class="form-control" placeholder="Last Name"></td>
-						<td><input [(ngModel)]="siblingInfo.occupation" name="txtSiblingInfoOccupation" type="text" class="form-control" placeholder="Occupation"></td>
-						<td><input [(ngModel)]="siblingInfo.contactNumbers[0].number" name="txtSiblingInfoContactNumber" type="text" class="form-control" placeholder="Contact No"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+	</div>
 	</form>
+
+</div>
 </div>
