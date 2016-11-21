@@ -8,6 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+/*
+* position component v1
+**/
 var core_1 = require('@angular/core');
 var position_service_1 = require('./position.service');
 var module_service_1 = require('../module/module.service');
@@ -32,44 +35,61 @@ var PositionComponent = (function () {
     };
     PositionComponent.prototype.getAllModules = function () {
         var _this = this;
-        this.modules = [];
-        this.loadingModules = true;
-        this.isFormDisabled = true;
-        this.moduleService.getAll().then(function (result) {
-            _this.loadingModules = false;
-            _this.isFormDisabled = false;
-            if (result.success) {
-                _this.modules = result.data;
-                _this.toastr.success(result.message);
-                return;
-            }
-            _this.toastr.error(result.message);
-        })
-            .catch(function (error) {
-            _this.loadingModules = false;
-            _this.isFormDisabled = false;
-        });
+        try {
+            this.modules = [];
+            this.loadingModules = true;
+            this.isFormDisabled = true;
+            this.moduleService.getAll().then(function (result) {
+                _this.loadingModules = false;
+                _this.isFormDisabled = false;
+                if (result.success) {
+                    _this.modules = result.data;
+                    _this.toastr.success(result.message);
+                }
+                else {
+                    _this.toastr.error(result.message);
+                }
+            })
+                .catch(function (error) {
+                _this.loadingModules = false;
+                _this.isFormDisabled = false;
+                _this.toastr.error(error);
+            });
+        }
+        catch (e) {
+            this.loadingModules = false;
+            this.isFormDisabled = false;
+            this.toastr.error(e);
+        }
     };
     PositionComponent.prototype.getAllPositions = function () {
         var _this = this;
-        this.positions = [];
-        this.loadingPositions = true;
-        this.isFormDisabled = true;
-        this.positionService.getAll().then(function (result) {
-            _this.loadingPositions = false;
-            _this.isFormDisabled = false;
-            if (result.success) {
-                _this.positions = result.data;
-                _this.toastr.success(result.message);
-                return;
-            }
-            _this.toastr.error(result.message);
-        })
-            .catch(function (error) {
-            _this.loadingPositions = false;
-            _this.isFormDisabled = false;
-            _this.toastr.error(error);
-        });
+        try {
+            this.positions = [];
+            this.loadingPositions = true;
+            this.isFormDisabled = true;
+            this.positionService.getAll().then(function (result) {
+                _this.loadingPositions = false;
+                _this.isFormDisabled = false;
+                if (result.success) {
+                    _this.positions = result.data;
+                    _this.toastr.success(result.message);
+                }
+                else {
+                    _this.toastr.error(result.message);
+                }
+            })
+                .catch(function (error) {
+                _this.loadingPositions = false;
+                _this.isFormDisabled = false;
+                _this.toastr.error(error);
+            });
+        }
+        catch (e) {
+            this.loadingPositions = false;
+            this.isFormDisabled = false;
+            this.toastr.error(e);
+        }
     };
     PositionComponent.prototype.checkModules = function () {
         for (var i = 0; i < this.selectedPosition.modules.length; i++) {
@@ -128,7 +148,7 @@ var PositionComponent = (function () {
         this.swal.confirm({
             title: "Are You Sure?",
             message: "You will be updating this position",
-            confirmButtonText: "Yes, Update It!",
+            confirmButtonText: "Yes, Update It",
             callBack: function (isConfirm) {
                 if (isConfirm) {
                     _this.updatePosition();
@@ -218,7 +238,7 @@ var PositionComponent = (function () {
         this.swal.confirm({
             title: "Are You Sure?",
             message: "You will be deleting this position",
-            confirmButtonText: "Yes, Delete It!",
+            confirmButtonText: "Yes, Delete It",
             callBack: function (isConfirm) {
                 if (isConfirm) {
                     _this.delete(position);

@@ -12,20 +12,22 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var services_1 = require('../../shared-services/services');
 var position_service_1 = require('../position/position.service');
+var user_service_1 = require('../user/user.service');
 var model_1 = require('../../models/model');
 var MainComponent = (function () {
-    function MainComponent(swal, toastr, localStorage, positionService, router) {
+    function MainComponent(swal, toastr, localStorage, positionService, userService, router) {
         this.swal = swal;
         this.toastr = toastr;
         this.localStorage = localStorage;
         this.positionService = positionService;
+        this.userService = userService;
         this.router = router;
     }
     MainComponent.prototype.ngOnInit = function () {
         try {
             this.session = new model_1.Session();
             this.session = this.localStorage.get("anthro.user-session");
-            this.currentUser = this.session.user;
+            this.currentUser = Object.assign({}, this.session.user);
             // check if there is a session.
             if (!this.session) {
                 this.toastr.error("No session detected. Proceeding to logout.");
@@ -39,10 +41,10 @@ var MainComponent = (function () {
                 this.redirectToLogin();
                 return;
             }
-            // format route.
             this.formatAvailableModules(this.session);
             this.getPositions();
             this.readyGreetings();
+            this.modal = new model_1.Modal("#mdlUserProfile");
         }
         catch (e) {
             this.toastr.error(e);
@@ -101,7 +103,6 @@ var MainComponent = (function () {
                 _this.userProfileDisabled = false;
                 if (result.success) {
                     _this.positions = result.data;
-                    _this.toastr.success(result.message);
                 }
                 else {
                     _this.toastr.error(result.message);
@@ -119,6 +120,57 @@ var MainComponent = (function () {
             this.toastr.error(e);
         }
     };
+    MainComponent.prototype.updateUser = function () {
+        var _this = this;
+        try {
+            this.updatingUserProfile = true;
+            this.userProfileDisabled = true;
+            this.userService.update(this.currentUser).then(function (result) {
+                _this.updatingUserProfile = false;
+                _this.userProfileDisabled = false;
+                if (result.success) {
+                    _this.modal.hide();
+                    _this.toastr.success(result.message);
+                    _this.toastr.info("Please re-login to continue.");
+                    _this.redirectToLogin();
+                }
+                else {
+                    _this.toastr.error(result.message);
+                }
+            })
+                .catch(function (error) {
+                _this.updatingUserProfile = false;
+                _this.userProfileDisabled = false;
+                _this.toastr.error(error);
+            });
+        }
+        catch (e) {
+            this.updatingUserProfile = false;
+            this.userProfileDisabled = false;
+            this.toastr.error(e);
+        }
+    };
+    MainComponent.prototype.viewProfile = function () {
+        this.originalUser = Object.assign({}, this.currentUser);
+    };
+    MainComponent.prototype.cancelEdit = function () {
+        this.modal.hide();
+        this.currentUser = Object.assign({}, this.originalUser);
+        this.originalUser = null;
+    };
+    MainComponent.prototype.confirmUpdate = function () {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "you will be updating your user information",
+            confirmButtonText: "Yes, Update it",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    _this.updateUser();
+                }
+            }
+        });
+    };
     MainComponent.prototype.signOut = function () {
         this.localStorage.remove("anthro.user-session");
         this.redirectToLogin();
@@ -131,10 +183,11 @@ var MainComponent = (function () {
                 services_1.SweetAlertService,
                 services_1.ToastrService,
                 services_1.LocalStorageService,
-                position_service_1.PositionService
+                position_service_1.PositionService,
+                user_service_1.UserService
             ]
         }), 
-        __metadata('design:paramtypes', [services_1.SweetAlertService, services_1.ToastrService, services_1.LocalStorageService, position_service_1.PositionService, router_1.Router])
+        __metadata('design:paramtypes', [services_1.SweetAlertService, services_1.ToastrService, services_1.LocalStorageService, position_service_1.PositionService, user_service_1.UserService, router_1.Router])
     ], MainComponent);
     return MainComponent;
 }());

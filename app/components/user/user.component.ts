@@ -1,14 +1,11 @@
+/*
+* user component v1
+**/
 import { Component, OnInit } from '@angular/core';
-
-// services
 import { PositionService } from '../position/position.service';
 import { UserService } from './user.service';
 import { SweetAlertService, ToastrService } from '../../shared-services/services';
-
-// models
 import { User, Position, Modal, Search } from '../../models/model';
-
-// pipes
 import { UserFilter } from '../../pipes/pipe';
 
 @Component({
@@ -180,7 +177,7 @@ export class UserComponent implements OnInit {
         this.swal.confirm({
             title: "Are You Sure?",
             message: "You will be adding this user",
-            confirmButtonText: "Yes, Add It!",
+            confirmButtonText: "Yes, Add It",
             callBack: (isConfirm) => {
 
                 if(isConfirm) {
@@ -280,7 +277,7 @@ export class UserComponent implements OnInit {
         this.swal.confirm({
             title: "Are You Sure?",
             message: "You will be updating this user",
-            confirmButtonText: "Yes, Update It!",
+            confirmButtonText: "Yes, Update It",
             callBack: (isConfirm) => {
 
                 if(isConfirm) {
@@ -343,7 +340,7 @@ export class UserComponent implements OnInit {
         this.swal.confirm({
             title: "Are You Sure?",
             message: "You will be deleting this user",
-            confirmButtonText: "Yes, Delete It!",
+            confirmButtonText: "Yes, Delete It",
             callBack: (isConfirm) => {
 
                 if(isConfirm) {

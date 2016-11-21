@@ -27,7 +27,7 @@
 			</ul>
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a data-toggle="modal" data-target="#mdlUserProfile">{{ greetings }}</a></li>
+				<li><a (click)="viewProfile()" data-toggle="modal" data-target="#mdlUserProfile">{{ greetings }}</a></li>
 				<li><a (click)="signOut()">Sign out</a></li>
 			</ul>
 		</div>
@@ -47,7 +47,7 @@
 						<h4 class="modal-title" id="mdlUserProfileLabel">User</h4>
 					</div>
 
-					<div class="modal-body" *ngIf="currentUser && loadingPositions">
+					<div class="modal-body" *ngIf="currentUser && positions.length">
 						<div class="form-group">
 							<label for="txtUsername">Username</label>
 							<input [(ngModel)]="currentUser.userName" [disabled]="userProfileDisabled" type="text" name="txtUsername" class="form-control"

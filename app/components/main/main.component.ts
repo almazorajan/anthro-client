@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SweetAlertService, ToastrService, LocalStorageService } from '../../shared-services/services';
 import { PositionService } from '../position/position.service';
-import { User, Position, Module, Session, NavigationGroup, Navigation } from '../../models/model';
+import { UserService } from '../user/user.service';
+import { User, Position, Module, Session, NavigationGroup, Navigation, Modal } from '../../models/model';
 
 @Component({
     selector: 'main-component',
@@ -11,7 +12,8 @@ import { User, Position, Module, Session, NavigationGroup, Navigation } from '..
         SweetAlertService,
         ToastrService,
         LocalStorageService,
-        PositionService
+        PositionService,
+        UserService
     ]
 })
 
@@ -22,6 +24,7 @@ export class MainComponent implements OnInit {
         private toastr: ToastrService,
         private localStorage: LocalStorageService,
         private positionService: PositionService,
+        private userService: UserService,
         private router: Router
     ) { }
 
@@ -31,7 +34,7 @@ export class MainComponent implements OnInit {
 
             this.session = new Session();
             this.session = this.localStorage.get<Session>("anthro.user-session");
-            this.currentUser = this.session.user;
+            this.currentUser = Object.assign({}, this.session.user);
 
             // check if there is a session.
             if (!this.session) {
@@ -53,10 +56,11 @@ export class MainComponent implements OnInit {
 
             }
 
-            // format route.
             this.formatAvailableModules(this.session);
             this.getPositions();
             this.readyGreetings();
+
+            this.modal = new Modal("#mdlUserProfile");
 
         } catch (e) {
 
@@ -70,14 +74,16 @@ export class MainComponent implements OnInit {
     private session: Session;
     
     loadingPositions: boolean;
+    updatingUserProfile: boolean;
     userProfileDisabled: boolean;
     currentUser: User;
+    originalUser: User;
     greetings: string;
     navigation: Navigation;
     validRoute: boolean;
     positions: Position[];
+    modal: Modal;
     
-
     private redirectToLogin() {
 
         this.router.navigate(["/login"]);
@@ -159,7 +165,6 @@ export class MainComponent implements OnInit {
                 if(result.success) {
 
                     this.positions = result.data as Position[];
-                    this.toastr.success(result.message);
 
                 } else {
 
@@ -183,6 +188,83 @@ export class MainComponent implements OnInit {
             this.toastr.error(e);
 
         }
+
+    }
+
+    private updateUser(): void {
+
+        try {
+
+            this.updatingUserProfile = true;
+            this.userProfileDisabled = true;
+
+            this.userService.update(this.currentUser).then((result) => {
+
+                this.updatingUserProfile = false;
+                this.userProfileDisabled = false;
+
+                if(result.success) {
+
+                    this.modal.hide();
+                    this.toastr.success(result.message);
+                    this.toastr.info("Please re-login to continue.");
+                    this.redirectToLogin();
+
+                } else {
+
+                    this.toastr.error(result.message);
+
+                }
+
+            })
+            .catch((error) => {
+
+                this.updatingUserProfile = false;
+                this.userProfileDisabled = false;
+                this.toastr.error(error);
+
+            });
+
+        } catch(e) {
+
+            this.updatingUserProfile = false;
+            this.userProfileDisabled = false;
+            this.toastr.error(e);
+
+        }
+
+    }
+
+    viewProfile(): void {
+
+        this.originalUser = Object.assign({}, this.currentUser);
+
+    }
+
+    cancelEdit(): void {
+
+        this.modal.hide();
+        this.currentUser = Object.assign({}, this.originalUser);
+        this.originalUser = null;
+
+    }
+
+    confirmUpdate(): void {
+
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "you will be updating your user information",
+            confirmButtonText: "Yes, Update it",
+            callBack: (isConfirm) => {
+
+                if(isConfirm) {
+
+                    this.updateUser();
+
+                }
+
+            }
+        });
 
     }
 
