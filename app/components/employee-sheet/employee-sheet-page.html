@@ -4,8 +4,6 @@
 		<hr/>
 	</div>
 </div>
-
-
 <form>
 	<!--OVERVIEW-->
 	<div class="row">
@@ -22,7 +20,6 @@
 				<li><a data-toggle="pill" href="#work-history"><i class="fa fa-institution"></i> Work History</a></li>
 			</ul>
 		</div>
-
 		<div class="col-lg-6">
 			<div class="tab-content">
 				<!--GENERAL-->
@@ -56,7 +53,6 @@
 							<input [(ngModel)]="employee.age" name="nbAge" type="number" class="form-control" id="nbAge" placeholder="Age" disabled>
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label for="txtBirthPlace" class="col-lg-4">Birth Place</label>
 						<div class="col-lg-8" style="padding-bottom:10px">
@@ -72,7 +68,6 @@
 							</select>
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label for="slcGender" class="col-lg-4">Gender</label>
 						<div class="col-lg-8" style="padding-bottom:10px">
@@ -159,15 +154,12 @@
 							</span>
 						</div>
 					</div>
-
 					<h3>City Address</h3>
-
 					<div class="checkbox">
 						<label for="chkCityAddressIsPermanent">
 							<input [(ngModel)]="employee.cityAddress.isPermanent" name="chkCityAddressIsPermanent" type="checkbox" id="chkCityAddressIsPermanent"> Permanent Address
 						</label>
 					</div>
-
 					<div class="form-group">
 						<label for="txtCityAddresstUnitFloor">
 							Unit/Floor
@@ -175,7 +167,6 @@
 						<input [(ngModel)]="employee.cityAddress.unitFloor" name="txtCityAddresstUnitFloor" type="text" class="form-control" id="txtCityAddressUnitFloor"
 							placeholder="Unit/Floor">
 					</div>
-
 					<div class="form-group">
 						<label for="txtCityAddressBulding">
 							Building
@@ -183,7 +174,6 @@
 						<input [(ngModel)]="employee.cityAddress.building" name="txtCityAddressBulding" type="text" class="form-control" id="txtCityAddressBulding"
 							placeholder="Building">
 					</div>
-
 					<div class="form-group">
 						<label for="txtCityAddressStreetName">
 							Street Name
@@ -191,7 +181,6 @@
 						<input [(ngModel)]="employee.cityAddress.streetName" name="txtCityAddressStreetName" type="text" class="form-control" id="txtCityAddressStreetName"
 							placeholder="Street Name">
 					</div>
-
 					<div class="form-group">
 						<label for="txtCityAddressBarangay">
 							Barangay
@@ -206,7 +195,6 @@
 						<input [(ngModel)]="employee.cityAddress.city" name="txtCityAddressCity" type="text" class="form-control" id="txtCityAddressCity"
 							placeholder="City">
 					</div>
-
 					<div class="form-group">
 						<label for="txtCityAddressZipCode">
 							Zip Code
@@ -214,15 +202,12 @@
 						<input [(ngModel)]="employee.cityAddress.zipCode" name="txtCityAddressZipCode" type="text" class="form-control" id="txtCityAddressZipCode"
 							placeholder="Zip Code">
 					</div>
-
 					<h3>Provincial Address</h3>
-
 					<div class="checkbox">
 						<label for="chkProvincialAddressIsPermanent">
 							<input [(ngModel)]="employee.provincialAddress.isPermanent" name="chkProvincialAddressIsPermanent" type="checkbox" id="chkProvincialAddressIsPermanent"> Permanent Address
 						</label>
 					</div>
-
 					<div class="form-group">
 						<label for="txtProvincialAddressUnitFloor">
 							Unit/Floor
@@ -230,7 +215,6 @@
 						<input [(ngModel)]="employee.provincialAddress.unitFloor" name="txtProvincialAddressUnitFloor" type="text" class="form-control"
 							id="txtUnitFloor" placeholder="Unit/Floor">
 					</div>
-
 					<div class="form-group">
 						<label for="txtProvincialAddressBuilding">
 							Building
@@ -238,7 +222,6 @@
 						<input [(ngModel)]="employee.provincialAddress.building" name="txtProvincialAddressBuilding" type="text" class="form-control"
 							id="txtProvincialAddressBuilding" placeholder="Building">
 					</div>
-
 					<div class="form-group">
 						<label for="txtProvincialAddressStreetName">
 							Street Name
@@ -246,7 +229,6 @@
 						<input [(ngModel)]="employee.provincialAddress.streetName" name="txtProvincialAddressStreetName" type="text" class="form-control"
 							id="txtStreetName" placeholder="Street Name">
 					</div>
-
 					<div class="form-group">
 						<label for="txtProvincialAddressBarangay">
 							Barangay
@@ -254,7 +236,6 @@
 						<input [(ngModel)]="employee.provincialAddress.barangay" name="txtProvincialAddressBarangay" type="text" class="form-control"
 							id="txtProvincialAddressBarangay" placeholder="Barangay">
 					</div>
-
 					<div class="form-group">
 						<label for="txtProvincialAddressCity">
 							City
@@ -262,7 +243,6 @@
 						<input [(ngModel)]="employee.provincialAddress.city" name="txtProvincialAddressCity" type="text" class="form-control" id="txtProvincialAddressCity"
 							placeholder="City">
 					</div>
-
 					<div class="form-group">
 						<label for="txtPronvincialAddressZipCode">
 							Zip Code
@@ -270,9 +250,7 @@
 						<input [(ngModel)]="employee.provincialAddress.zipCode" name="txtPronvincialAddressZipCode" type="text" class="form-control"
 							id="txtPronvincialAddressZipCode" placeholder="Zip Code">
 					</div>
-
 					<h3>Permanent Address</h3>
-
 					<div class="form-group">
 						<label for="txtPermanentAddressUnitFloor">
 							Unit/Floor
@@ -280,7 +258,6 @@
 						<input [(ngModel)]="employee.permanentAddress.unitFloor" name="txtPermanentAddressUnitFloor" type="text" class="form-control"
 							id="txtPermanentAddressUnitFloor" placeholder="Unit/Floor">
 					</div>
-
 					<div class="form-group">
 						<label for="txtPermanentAddressBuilding">
 							Building
@@ -288,7 +265,6 @@
 						<input [(ngModel)]="employee.permanentAddress.building" name="txtPermanentAddressBuilding" type="text" class="form-control"
 							id="txtPermanentAddressBuilding" placeholder="Building">
 					</div>
-
 					<div class="form-group">
 						<label for="txtPermanentAddressStreetName">
 							Street Name
@@ -296,7 +272,6 @@
 						<input [(ngModel)]="employee.permanentAddress.streetName" name="txtPermanentAddressStreetName" type="text" class="form-control"
 							id="txtPermanentAddressStreetName" placeholder="Street Name">
 					</div>
-
 					<div class="form-group">
 						<label for="txtPermanentAddressBarangay">
 							Barangay
@@ -304,7 +279,6 @@
 						<input [(ngModel)]="employee.permanentAddress.barangay" name="txtPermanentAddressBarangay" type="text" class="form-control"
 							id="txtPermanentAddressBarangay" placeholder="Barangay">
 					</div>
-
 					<div class="form-group">
 						<label for="txtPermanentAddressCity">
 							City
@@ -312,7 +286,6 @@
 						<input [(ngModel)]="employee.permanentAddress.city" name="txtPermanentAddressCity" type="text" class="form-control" id="txtPermanentAddressCity"
 							placeholder="City">
 					</div>
-
 					<div class="form-group">
 						<label for="txtPermanentAddressZipCode">
 							Zip Code
@@ -320,14 +293,12 @@
 						<input [(ngModel)]="employee.permanentAddress.zipCode" name="txtPermanentAddressZipCode" type="text" class="form-control"
 							id="txtPermanentAddressZipCode" placeholder="Zip Code">
 					</div>
-
 					<div class="form-group" style="text-align: right">
 						<span><button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Save</button></span>
 						<span><button type="button" class="btn btn-default"><i class="fa fa-undo"></i> Reset</button></span>
 
 					</div>
 				</div>
-
 				<!--ID NUMBERS-->
 				<div id="idnumbers" class="tab-pane fade">
 					<h3>ID Numbers</h3>
@@ -340,7 +311,6 @@
 							<input [(ngModel)]="employee.ssNumber" name="txtSsNumber" type="text" class="form-control" id="txtSsNumber" placeholder="SS Number">
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label for="txtTinNumber" class="col-lg-4">
 							TIN Number
@@ -358,7 +328,6 @@
 								placeholder="PhilHealth Number">
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label for="txtPagibigNumber" class="col-lg-4">
 							PAGIBIG Number
@@ -368,16 +337,12 @@
 								placeholder="PAGIBIG Number">
 						</div>
 					</div>
-
 					<div class="form-group" style="text-align: right">
 						<span><button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Save</button></span>
 						<span><button type="button" class="btn btn-default"><i class="fa fa-undo"></i> Reset</button></span>
 
 					</div>
 				</div>
-
-
-
 				<!--EDUCATION-->
 				<div id="education" class="tab-pane fade">
 					<h3>Educational Background</h3>
@@ -387,7 +352,6 @@
 							<span class="glyphicon glyphicon-plus"></span> Add Education History
 						</button>
 					</p>
-
 					<table class="table table-condensed">
 						<thead>
 							<th></th>
@@ -436,7 +400,6 @@
 					<div class="form-group" style="text-align: right">
 						<span><button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Save</button></span>
 						<span><button type="button" class="btn btn-default"><i class="fa fa-undo"></i> Reset</button></span>
-
 					</div>
 				</div>
 				<!--LICENSE-->
@@ -479,7 +442,6 @@
 								<input [(ngModel)]="workHistory.position" name="txtWorkHistoryPosition" type="text" class="form-control">
 							</div>
 						</div>
-
 						<div class="form-group">
 							<label for="txtWorkHistoryCompanyName" class="col-lg-4">
 								Company Name
@@ -611,9 +573,5 @@
 
 			</div>
 		</div>
-
-
 	</div>
-
-
 </form>
