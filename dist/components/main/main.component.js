@@ -11,55 +11,52 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var services_1 = require('../../shared-services/services');
-// private classes
-var Session = (function () {
-    function Session() {
-    }
-    return Session;
-}());
-var NavigationGroup = (function () {
-    function NavigationGroup() {
-    }
-    return NavigationGroup;
-}());
-var Navition = (function () {
-    function Navition() {
-    }
-    return Navition;
-}());
+var position_service_1 = require('../position/position.service');
+var user_service_1 = require('../user/user.service');
+var model_1 = require('../../models/model');
 var MainComponent = (function () {
-    function MainComponent(swal, toastr, localStorage, router) {
+    function MainComponent(swal, toastr, localStorage, positionService, userService, router) {
         this.swal = swal;
         this.toastr = toastr;
         this.localStorage = localStorage;
+        this.positionService = positionService;
+        this.userService = userService;
         this.router = router;
     }
     MainComponent.prototype.ngOnInit = function () {
-        this.session = new Session();
-        this.session = this.localStorage.get("anthro.user-session");
-        // check if there is a session.
-        if (!this.session) {
-            this.toastr.error("No session detected. Proceeding to logout.");
-            this.redirectToLogin();
-            return;
+        try {
+            this.session = new model_1.Session();
+            this.session = this.localStorage.get("anthro.user-session");
+            this.currentUser = Object.assign({}, this.session.user);
+            // check if there is a session.
+            if (!this.session) {
+                this.toastr.error("No session detected. Proceeding to logout.");
+                this.redirectToLogin();
+                return;
+            }
+            // check the current route is valid.
+            this.validRoute = this.isValidRoute(this.session);
+            if (!this.validRoute) {
+                this.toastr.error("The page you are looking for is either inaccessible or does not exist.");
+                this.redirectToLogin();
+                return;
+            }
+            this.formatAvailableModules(this.session);
+            this.getPositions();
+            this.readyGreetings();
+            this.modal = new model_1.Modal("#mdlUserProfile");
         }
-        // check the current route is valid.
-        this.validRoute = this.isValidRoute(this.session);
-        if (!this.validRoute) {
-            this.toastr.error("The page you are looking for is either inaccessible or does not exist.");
+        catch (e) {
+            this.toastr.error(e);
             this.redirectToLogin();
-            return;
         }
-        // format route.
-        this.formatAvailableModules(this.session);
-        this.greetings = "Hi " + this.session.user.firstName;
     };
     MainComponent.prototype.redirectToLogin = function () {
         this.router.navigate(["/login"]);
     };
     MainComponent.prototype.formatAvailableModules = function (session) {
         var _this = this;
-        this.navigation = new Navition();
+        this.navigation = new model_1.Navigation();
         this.navigation.withGroup = [];
         this.navigation.withoutGroup = [];
         session.user.position.modules.forEach(function (mod) {
@@ -72,7 +69,7 @@ var MainComponent = (function () {
                     }
                 }
                 if (!isGroupExists) {
-                    var wgroup = new NavigationGroup();
+                    var wgroup = new model_1.NavigationGroup();
                     wgroup.group = mod.group;
                     wgroup.modules = [];
                     wgroup.modules.push(mod);
@@ -92,8 +89,91 @@ var MainComponent = (function () {
         }
         return false;
     };
+    MainComponent.prototype.readyGreetings = function () {
+        this.greetings = "Hi " + this.session.user.firstName;
+    };
+    MainComponent.prototype.getPositions = function () {
+        var _this = this;
+        try {
+            this.positions = [];
+            this.loadingPositions = true;
+            this.userProfileDisabled = true;
+            this.positionService.getAll().then(function (result) {
+                _this.loadingPositions = false;
+                _this.userProfileDisabled = false;
+                if (result.success) {
+                    _this.positions = result.data;
+                }
+                else {
+                    _this.toastr.error(result.message);
+                }
+            })
+                .catch(function (error) {
+                _this.loadingPositions = false;
+                _this.userProfileDisabled = false;
+                _this.toastr.error(error);
+            });
+        }
+        catch (e) {
+            this.loadingPositions = false;
+            this.userProfileDisabled = false;
+            this.toastr.error(e);
+        }
+    };
+    MainComponent.prototype.updateUser = function () {
+        var _this = this;
+        try {
+            this.updatingUserProfile = true;
+            this.userProfileDisabled = true;
+            this.userService.update(this.currentUser).then(function (result) {
+                _this.updatingUserProfile = false;
+                _this.userProfileDisabled = false;
+                if (result.success) {
+                    _this.modal.hide();
+                    _this.toastr.success(result.message);
+                    _this.toastr.info("Please re-login to continue.");
+                    _this.redirectToLogin();
+                }
+                else {
+                    _this.toastr.error(result.message);
+                }
+            })
+                .catch(function (error) {
+                _this.updatingUserProfile = false;
+                _this.userProfileDisabled = false;
+                _this.toastr.error(error);
+            });
+        }
+        catch (e) {
+            this.updatingUserProfile = false;
+            this.userProfileDisabled = false;
+            this.toastr.error(e);
+        }
+    };
+    MainComponent.prototype.viewProfile = function () {
+        this.originalUser = Object.assign({}, this.currentUser);
+    };
+    MainComponent.prototype.cancelEdit = function () {
+        this.modal.hide();
+        this.currentUser = Object.assign({}, this.originalUser);
+        this.originalUser = null;
+    };
+    MainComponent.prototype.confirmUpdate = function () {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "you will be updating your user information",
+            confirmButtonText: "Yes, Update it",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    _this.updateUser();
+                }
+            }
+        });
+    };
     MainComponent.prototype.signOut = function () {
-        console.log("main component logout", new Date());
+        this.localStorage.remove("anthro.user-session");
+        this.redirectToLogin();
     };
     MainComponent = __decorate([
         core_1.Component({
@@ -102,10 +182,12 @@ var MainComponent = (function () {
             providers: [
                 services_1.SweetAlertService,
                 services_1.ToastrService,
-                services_1.LocalStorageService
+                services_1.LocalStorageService,
+                position_service_1.PositionService,
+                user_service_1.UserService
             ]
         }), 
-        __metadata('design:paramtypes', [services_1.SweetAlertService, services_1.ToastrService, services_1.LocalStorageService, router_1.Router])
+        __metadata('design:paramtypes', [services_1.SweetAlertService, services_1.ToastrService, services_1.LocalStorageService, position_service_1.PositionService, user_service_1.UserService, router_1.Router])
     ], MainComponent);
     return MainComponent;
 }());

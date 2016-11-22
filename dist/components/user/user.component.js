@@ -8,12 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+/*
+* user component v1
+**/
 var core_1 = require('@angular/core');
-// services
 var position_service_1 = require('../position/position.service');
 var user_service_1 = require('./user.service');
 var services_1 = require('../../shared-services/services');
-// models
 var model_1 = require('../../models/model');
 var UserComponent = (function () {
     function UserComponent(userService, positionService, swal, toastr) {
@@ -107,11 +108,13 @@ var UserComponent = (function () {
     UserComponent.prototype.confirmAdd = function () {
         var _this = this;
         this.swal.confirm({
-            title: "Are you sure?",
-            message: "You will be adding this position.",
-            confirmButtonText: "Yes, Add It!",
+            title: "Are You Sure?",
+            message: "You will be adding this user",
+            confirmButtonText: "Yes, Add It",
             callBack: function (isConfirm) {
-                _this.addUser();
+                if (isConfirm) {
+                    _this.addUser();
+                }
             }
         });
     };
@@ -171,11 +174,12 @@ var UserComponent = (function () {
         var _this = this;
         this.swal.confirm({
             title: "Are You Sure?",
-            message: "You will be updating this user.",
-            confirmButtonText: "Yes, Update It!",
+            message: "You will be updating this user",
+            confirmButtonText: "Yes, Update It",
             callBack: function (isConfirm) {
-                if (isConfirm)
+                if (isConfirm) {
                     _this.updateUser();
+                }
             }
         });
     };
@@ -212,11 +216,13 @@ var UserComponent = (function () {
     UserComponent.prototype.confirmDelete = function (user) {
         var _this = this;
         this.swal.confirm({
-            title: "Are you sure?",
-            message: "You will be adding this position.",
-            confirmButtonText: "Yes, Delete It!",
+            title: "Are You Sure?",
+            message: "You will be deleting this user",
+            confirmButtonText: "Yes, Delete It",
             callBack: function (isConfirm) {
-                _this.deleteUser(user);
+                if (isConfirm) {
+                    _this.deleteUser(user);
+                }
             }
         });
     };
