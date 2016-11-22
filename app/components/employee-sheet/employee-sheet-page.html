@@ -14,11 +14,11 @@
 				<li class="active"><a data-toggle="pill" href="#general"><i class="fa fa-tags"></i> General</a></li>
 				<li><a data-toggle="pill" href="#employment"><i class="fa fa-gear"></i> Employment</a></li>
 				<li><a data-toggle="pill" href="#contacts"><i class="fa fa-phone"></i> Contacts</a></li>
-				<li><a data-toggle="pill" href="#idnumbers"><i class="fa fa-lists"></i> ID Numbers</a></li>
-				<li class="disabled"><a data-toggle="pill" href="#family"><i class="fa fa-group"></i> Family</a></li>
+				<li><a data-toggle="pill" href="#idnumbers"><i class="fa fa-th-list"></i> ID Numbers</a></li>
+				<li><a data-toggle="pill" href="#family"><i class="fa fa-group"></i> Family</a></li>
 				<li><a data-toggle="pill" href="#education"><i class="fa fa-suitcase"></i> Education</a></li>
 				<li><a data-toggle="pill" href="#certification"><i class="fa fa-certificate"></i> Certification</a></li>
-				<li><a data-toggle="pill" href="#license"><i class="fa fa-drivers-license"></i> License</a></li>
+				<li><a data-toggle="pill" href="#license"><i class="fa fa-address-card"></i> License</a></li>
 				<li><a data-toggle="pill" href="#work-history"><i class="fa fa-institution"></i> Work History</a></li>
 			</ul>
 		</div>
@@ -35,9 +35,7 @@
 							<input [(ngModel)]="employee.firstName" name="txtFirstName" type="text" class="form-control" id="txtFirstName" placeholder="First Name"
 								required>
 						</div>
-
 					</div>
-
 					<div class="form-group">
 						<label for="txtMiddleName" class="col-lg-4">Middle Name*</label>
 						<div class="col-lg-8" style="padding-bottom:10px">
@@ -45,7 +43,6 @@
 								required>
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label for="txtLastName" class="col-lg-4">Last Name*</label>
 						<div class="col-lg-8" style="padding-bottom:10px">
@@ -53,7 +50,6 @@
 								required>
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label for="nbAge" class="col-lg-4">Age</label>
 						<div class="col-lg-8" style="padding-bottom:10px">
@@ -67,14 +63,13 @@
 							<input [(ngModel)]="employee.birthPlace" name="txtBirthPlace" type="text" class="form-control" id="txtBirthPlace" placeholder="Birth Place">
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label for="slcMaritalStatus" class="col-lg-4">Marital Status</label>
 						<div class="col-lg-8" style="padding-bottom:10px">
 							<select [(ngModel)]="employee.maritalStatus" name="slcMaritalStatus" class="form-control" id="slcMaritalStatus">
-											<option>Single</option>
-											<option>Married</option>
-										</select>
+								<option>Single</option>
+								<option>Married</option>
+							</select>
 						</div>
 					</div>
 
@@ -82,12 +77,11 @@
 						<label for="slcGender" class="col-lg-4">Gender</label>
 						<div class="col-lg-8" style="padding-bottom:10px">
 							<select [(ngModel)]="employee.gender" name="slcGender" class="form-control" id="slcGender">
-											<option>Male</option>
-											<option>Female</option>
-										</select>
+								<option>Male</option>
+								<option>Female</option>
+							</select>
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label for="txtCitizenship" class="col-lg-4">Citizenship</label>
 						<div class="col-lg-8" style="padding-bottom:10px">
@@ -97,10 +91,8 @@
 					<div class="form-group" style="text-align: right">
 						<span><button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Save</button></span>
 						<span><button type="button" class="btn btn-default"><i class="fa fa-undo"></i> Reset</button></span>
-
 					</div>
 				</div>
-
 				<!--EMPLOYMENT-->
 				<div id="employment" class="tab-pane fade">
 					<h3>Employment Information</h3>
@@ -112,7 +104,6 @@
 								placeholder="Employee Number">
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label for="slcPosition" class="col-lg-4">Position</label>
 						<div class="col-lg-8" style="padding-bottom:10px">
@@ -120,21 +111,18 @@
 							<!--<select [(ngModel)]="employee.position.id" class="form-control" id="slcPosition"></select>-->
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label for="dtStartingDate" class="col-lg-4">Starting Date</label>
 						<div class="col-lg-8" style="padding-bottom:10px">
 							<input [(ngModel)]="employee.startingDate" name="dtStartingDate" type="date" class="form-control" id="dtStartingDate" placeholder="Starting Date">
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label for="nbSalary" class="col-lg-4">Salary</label>
 						<div class="col-lg-8" style="padding-bottom:10px">
 							<input [(ngModel)]="employee.salary" name="nbSalary" type="number" step="any" class="form-control" id="nbSalary" placeholder="Salary">
 						</div>
 					</div>
-
 					<div class="form-group">
 						<label for="slcEmploymentStatus" class="col-lg-4">Employment Status</label>
 						<div class="col-lg-8" style="padding-bottom:10px">
@@ -142,37 +130,33 @@
 							<!--<select [(ngModel)]="employee.employmentStatus.id" class="form-control" id="slcEmploymentStatus"></select>-->
 						</div>
 					</div>
-
 					<div class="form-group" style="text-align: right">
 						<span><button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Save</button></span>
 						<span><button type="button" class="btn btn-default"><i class="fa fa-undo"></i> Reset</button></span>
-
 					</div>
-
 				</div>
-
 				<!--CONTACTS-->
 				<div id="contacts" class="tab-pane fade">
 					<h3>Contact Information</h3>
 					<hr>
 					<div class="form-group">
 						<label for="txtPhoneNumber" class="col-lg-4">
-										Phone Numbers <button class="btn btn-success btn-xs" (click)="employee.addPhoneNumber()"><i class="fa fa-plus"></i></button>
-									</label>
+							Phone Numbers <button class="btn btn-success btn-xs" (click)="employee.addPhoneNumber()"><i class="fa fa-plus"></i></button>
+						</label>
 						<div class="col-lg-8" style="padding-bottom:10px">
 							<span *ngFor="let phoneNumber of employee.phoneNumbers">
-											<input [(ngModel)]="phoneNumber.number" name="txtPhoneNumber" type="text" class="form-control" id="txtPhoneNumber" placeholder="Phone Number">
-										</span>
+								<input [(ngModel)]="phoneNumber.number" name="txtPhoneNumber" type="text" class="form-control" id="txtPhoneNumber" placeholder="Phone Number">
+							</span>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="txtLandline" class="col-lg-4">
-										Landlines <button (click)="employee.addLandline()" class="btn btn-success btn-xs"><i class="fa fa-plus"></i></button>
-									</label>
+							Landlines <button (click)="employee.addLandline()" class="btn btn-success btn-xs"><i class="fa fa-plus"></i></button>
+						</label>
 						<div class="col-lg-8" style="padding-bottom:10px">
 							<span *ngFor="let landline of employee.landlines">
-											<input [(ngModel)]="landline.number" name="txtLandline" type="text" class="form-control" id="txtLandline" placeholder="Landline">
-										</span>
+								<input [(ngModel)]="landline.number" name="txtLandline" type="text" class="form-control" id="txtLandline" placeholder="Landline">
+							</span>
 						</div>
 					</div>
 
@@ -180,54 +164,53 @@
 
 					<div class="checkbox">
 						<label for="chkCityAddressIsPermanent">
-										<input [(ngModel)]="employee.cityAddress.isPermanent" name="chkCityAddressIsPermanent" type="checkbox" id="chkCityAddressIsPermanent"> Permanent Address
-									</label>
+							<input [(ngModel)]="employee.cityAddress.isPermanent" name="chkCityAddressIsPermanent" type="checkbox" id="chkCityAddressIsPermanent"> Permanent Address
+						</label>
 					</div>
 
 					<div class="form-group">
 						<label for="txtCityAddresstUnitFloor">
-										Unit/Floor
-									</label>
+							Unit/Floor
+						</label>
 						<input [(ngModel)]="employee.cityAddress.unitFloor" name="txtCityAddresstUnitFloor" type="text" class="form-control" id="txtCityAddressUnitFloor"
 							placeholder="Unit/Floor">
 					</div>
 
 					<div class="form-group">
 						<label for="txtCityAddressBulding">
-										Building
-									</label>
+							Building
+						</label>
 						<input [(ngModel)]="employee.cityAddress.building" name="txtCityAddressBulding" type="text" class="form-control" id="txtCityAddressBulding"
 							placeholder="Building">
 					</div>
 
 					<div class="form-group">
 						<label for="txtCityAddressStreetName">
-										Street Name
-									</label>
+							Street Name
+						</label>
 						<input [(ngModel)]="employee.cityAddress.streetName" name="txtCityAddressStreetName" type="text" class="form-control" id="txtCityAddressStreetName"
 							placeholder="Street Name">
 					</div>
 
 					<div class="form-group">
 						<label for="txtCityAddressBarangay">
-										Barangay
-									</label>
+							Barangay
+						</label>
 						<input [(ngModel)]="employee.cityAddress.barangay" name="txtCityAddressBarangay" type="text" class="form-control" id="txtCityAddressBarangay"
 							placeholder="Barangay">
 					</div>
-
 					<div class="form-group">
 						<label for="txtCityAddressCity">
-										City
-									</label>
+							City
+						</label>
 						<input [(ngModel)]="employee.cityAddress.city" name="txtCityAddressCity" type="text" class="form-control" id="txtCityAddressCity"
 							placeholder="City">
 					</div>
 
 					<div class="form-group">
 						<label for="txtCityAddressZipCode">
-									Zip Code
-								</label>
+							Zip Code
+						</label>
 						<input [(ngModel)]="employee.cityAddress.zipCode" name="txtCityAddressZipCode" type="text" class="form-control" id="txtCityAddressZipCode"
 							placeholder="Zip Code">
 					</div>
@@ -236,54 +219,54 @@
 
 					<div class="checkbox">
 						<label for="chkProvincialAddressIsPermanent">
-										<input [(ngModel)]="employee.provincialAddress.isPermanent" name="chkProvincialAddressIsPermanent" type="checkbox" id="chkProvincialAddressIsPermanent"> Permanent Address
-									</label>
+							<input [(ngModel)]="employee.provincialAddress.isPermanent" name="chkProvincialAddressIsPermanent" type="checkbox" id="chkProvincialAddressIsPermanent"> Permanent Address
+						</label>
 					</div>
 
 					<div class="form-group">
 						<label for="txtProvincialAddressUnitFloor">
-										Unit/Floor
-									</label>
+							Unit/Floor
+						</label>
 						<input [(ngModel)]="employee.provincialAddress.unitFloor" name="txtProvincialAddressUnitFloor" type="text" class="form-control"
 							id="txtUnitFloor" placeholder="Unit/Floor">
 					</div>
 
 					<div class="form-group">
 						<label for="txtProvincialAddressBuilding">
-										Building
-									</label>
+							Building
+						</label>
 						<input [(ngModel)]="employee.provincialAddress.building" name="txtProvincialAddressBuilding" type="text" class="form-control"
 							id="txtProvincialAddressBuilding" placeholder="Building">
 					</div>
 
 					<div class="form-group">
 						<label for="txtProvincialAddressStreetName">
-										Street Name
-									</label>
+							Street Name
+						</label>
 						<input [(ngModel)]="employee.provincialAddress.streetName" name="txtProvincialAddressStreetName" type="text" class="form-control"
 							id="txtStreetName" placeholder="Street Name">
 					</div>
 
 					<div class="form-group">
 						<label for="txtProvincialAddressBarangay">
-										Barangay
-									</label>
+							Barangay
+						</label>
 						<input [(ngModel)]="employee.provincialAddress.barangay" name="txtProvincialAddressBarangay" type="text" class="form-control"
 							id="txtProvincialAddressBarangay" placeholder="Barangay">
 					</div>
 
 					<div class="form-group">
 						<label for="txtProvincialAddressCity">
-										City
-									</label>
+							City
+						</label>
 						<input [(ngModel)]="employee.provincialAddress.city" name="txtProvincialAddressCity" type="text" class="form-control" id="txtProvincialAddressCity"
 							placeholder="City">
 					</div>
 
 					<div class="form-group">
 						<label for="txtPronvincialAddressZipCode">
-										Zip Code
-									</label>
+							Zip Code
+						</label>
 						<input [(ngModel)]="employee.provincialAddress.zipCode" name="txtPronvincialAddressZipCode" type="text" class="form-control"
 							id="txtPronvincialAddressZipCode" placeholder="Zip Code">
 					</div>
@@ -292,48 +275,48 @@
 
 					<div class="form-group">
 						<label for="txtPermanentAddressUnitFloor">
-										Unit/Floor
-									</label>
+							Unit/Floor
+						</label>
 						<input [(ngModel)]="employee.permanentAddress.unitFloor" name="txtPermanentAddressUnitFloor" type="text" class="form-control"
 							id="txtPermanentAddressUnitFloor" placeholder="Unit/Floor">
 					</div>
 
 					<div class="form-group">
 						<label for="txtPermanentAddressBuilding">
-										Building
-									</label>
+							Building
+						</label>
 						<input [(ngModel)]="employee.permanentAddress.building" name="txtPermanentAddressBuilding" type="text" class="form-control"
 							id="txtPermanentAddressBuilding" placeholder="Building">
 					</div>
 
 					<div class="form-group">
 						<label for="txtPermanentAddressStreetName">
-										Street Name
-									</label>
+							Street Name
+						</label>
 						<input [(ngModel)]="employee.permanentAddress.streetName" name="txtPermanentAddressStreetName" type="text" class="form-control"
 							id="txtPermanentAddressStreetName" placeholder="Street Name">
 					</div>
 
 					<div class="form-group">
 						<label for="txtPermanentAddressBarangay">
-										Barangay
-									</label>
+							Barangay
+						</label>
 						<input [(ngModel)]="employee.permanentAddress.barangay" name="txtPermanentAddressBarangay" type="text" class="form-control"
 							id="txtPermanentAddressBarangay" placeholder="Barangay">
 					</div>
 
 					<div class="form-group">
 						<label for="txtPermanentAddressCity">
-										City
-									</label>
+							City
+						</label>
 						<input [(ngModel)]="employee.permanentAddress.city" name="txtPermanentAddressCity" type="text" class="form-control" id="txtPermanentAddressCity"
 							placeholder="City">
 					</div>
 
 					<div class="form-group">
 						<label for="txtPermanentAddressZipCode">
-										Zip Code
-									</label>
+							Zip Code
+						</label>
 						<input [(ngModel)]="employee.permanentAddress.zipCode" name="txtPermanentAddressZipCode" type="text" class="form-control"
 							id="txtPermanentAddressZipCode" placeholder="Zip Code">
 					</div>
@@ -351,8 +334,8 @@
 					<hr>
 					<div class="form-group">
 						<label for="txtSsNumber" class="col-lg-4">
-										SSS Number
-									</label>
+							SSS Number
+						</label>
 						<div class="col-lg-8" style="padding-bottom:10px">
 							<input [(ngModel)]="employee.ssNumber" name="txtSsNumber" type="text" class="form-control" id="txtSsNumber" placeholder="SS Number">
 						</div>
@@ -360,16 +343,16 @@
 
 					<div class="form-group">
 						<label for="txtTinNumber" class="col-lg-4">
-										TIN Number
-									</label>
+							TIN Number
+						</label>
 						<div class="col-lg-8" style="padding-bottom:10px">
 							<input [(ngModel)]="employee.tinNumber" name="txtTinNumber" type="text" class="form-control" id="txtTinNumber" placeholder="TIN Number">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="txtPhilHealthNumber" class="col-lg-4">
-										PhilHealth Number
-									</label>
+							PhilHealth Number
+						</label>
 						<div class="col-lg-8" style="padding-bottom:10px">
 							<input [(ngModel)]="employee.philHealthNumber" name="txtPhilHealthNumber" type="text" class="form-control" id="txtPhilHealthNumber"
 								placeholder="PhilHealth Number">
@@ -378,8 +361,8 @@
 
 					<div class="form-group">
 						<label for="txtPagibigNumber" class="col-lg-4">
-										PAGIBIG Number
-									</label>
+							PAGIBIG Number
+						</label>
 						<div class="col-lg-8" style="padding-bottom:10px">
 							<input [(ngModel)]="employee.pagibigNumber" name="txtPagibigNumber" type="text" class="form-control" id="txtPagibigNumber"
 								placeholder="PAGIBIG Number">
@@ -401,8 +384,8 @@
 					<hr>
 					<p>
 						<button (click)="employee.addEducationHistory()" type="button" class="btn btn-success btn-xs">
-										<span class="glyphicon glyphicon-plus"></span> Add Education History
-									</button>
+							<span class="glyphicon glyphicon-plus"></span> Add Education History
+						</button>
 					</p>
 
 					<table class="table table-condensed">
@@ -416,8 +399,8 @@
 							<tr *ngFor="let education of employee.educationHistory">
 								<td>
 									<button (click)="employee.deleteEducationHistory(education)" type="button" class="btn btn-danger btn-xs">
-													<span class="glyphicon glyphicon-trash"></span>
-												</button>
+										<span class="glyphicon glyphicon-trash"></span>
+									</button>
 								</td>
 								<td><input [(ngModel)]="education.educationLevel" name="txtEducationLevel" type="text" class="form-control"></td>
 								<td><input [(ngModel)]="education.degree" name="txtEducationDegree" type="text" class="form-control"></td>
@@ -425,14 +408,11 @@
 							</tr>
 						</tbody>
 					</table>
-
 					<div class="form-group" style="text-align: right">
 						<span><button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Save</button></span>
 						<span><button type="button" class="btn btn-default"><i class="fa fa-undo"></i> Reset</button></span>
-
 					</div>
 				</div>
-
 				<!--CERTIFICATION-->
 				<div id="certification" class="tab-pane fade">
 					<h3>Certificate</h3>
@@ -459,7 +439,6 @@
 
 					</div>
 				</div>
-
 				<!--LICENSE-->
 				<div id="license" class="tab-pane fade">
 					<h3>License</h3>
@@ -483,108 +462,150 @@
 					<div class="form-group" style="text-align: right">
 						<span><button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Save</button></span>
 						<span><button type="button" class="btn btn-default"><i class="fa fa-undo"></i> Reset</button></span>
-
 					</div>
 				</div>
-
 				<!--WORK HISTORY-->
 				<div id="work-history" class="tab-pane fade ">
 					<h3>Employment History</h3>
 					<hr>
-					<!--<table class="table table-condensed">
-									<thead>
-										<th></th>
-										<th>Position</th>
-										<th>Company Name</th>
-										<th>Date From</th>
-										<th>Date To</th>
-										<th>Employment Status</th>
-										<th>Salary</th>
-										<th>Reason for Leaving</th>
-									</thead>
-									<tbody>
-										<tr *ngFor="let workHistory of employee.workHistory">
-											<td>
-												<button (click)="employee.deleteWorkHistory(workHistory)" type="button" class="btn btn-danger btn-xs"></button>
-											</td>
-											<td><input [(ngModel)]="workHistory.position" name="txtWorkHistoryPosition" type="text" class="form-control"></td>
-											<td><input [(ngModel)]="workHistory.companyName" name="txtWorkHistoryCompanyName" type="text" class="form-control"></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-									</tbody>
-								</table>-->
-
 					<span *ngFor="let workHistory of employee.workHistory">
-									<button (click)="employee.deleteWorkHistory(workHistory)" type="button" class="btn btn-danger btn-xs">Delete</button><br/>
+						<button (click)="employee.deleteWorkHistory(workHistory)" type="button" class="btn btn-danger btn-xs">Delete</button><br/>
 									
-									<div class="form-group">
-										<label for="txtWorkHistoryPosition" class="col-lg-4">
-											Position
-										</label>
-										<div class="col-lg-8" style="padding-bottom:10px">
-											<input [(ngModel)]="workHistory.position" name="txtWorkHistoryPosition" type="text" class="form-control">
-										</div>
-									</div>
+						<div class="form-group">
+							<label for="txtWorkHistoryPosition" class="col-lg-4">
+								Position
+							</label>
+							<div class="col-lg-8" style="padding-bottom:10px">
+								<input [(ngModel)]="workHistory.position" name="txtWorkHistoryPosition" type="text" class="form-control">
+							</div>
+						</div>
 
-									<div class="form-group">
-										<label for="txtWorkHistoryCompanyName" class="col-lg-4">
-											Company Name
-										</label>
-										<div class="col-lg-8" style="padding-bottom:10px">
-											<input [(ngModel)]="workHistory.companyName" name="txtWorkHistoryCompanyName" type="text" class="form-control">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="txtWorkHistoryDateFrom" class="col-lg-2">
-											From
-										</label>
-										<div class="col-lg-4" style="padding-bottom:10px">
-											<input [(ngModel)]="workHistory.dateFrom" name="txtWorkHistoryDateFrom" type="date" class="form-control">	
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="txtWorkHistoryDateTo" class="col-lg-2">
-											To
-										</label>
-										<div class="col-lg-4" style="padding-bottom:10px">
-											<input [(ngModel)]="workHistory.dateTo" name="txtWorkHistoryDateTo" type="date" class="form-control">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="txtWorkHistoryEmploymentStatus" class="col-lg-2">
-											Status
-										</label>
-										<div class="col-lg-4" style="padding-bottom:10px">
-											<input [(ngModel)]="workHistory.employmentStatus.employmentStatus" name="txtWorkHistoryEmploymentStatus" type="text"
-													class="form-control">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="txtWorkHistorySalary" class="col-lg-2">
-											Salary
-										</label>
-										<div class="col-lg-4" style="padding-bottom:10px">
-											<input [(ngModel)]="workHistory.salary" name="txtWorkHistorySalary" type="number" step="any" class="form-control">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="txtWorkHistoryReasonForLeaving" class="col-lg-4">
-											Reason For Leaving
-										</label>
-										<div class="col-lg-8" style="padding-bottom:10px">
-											<input [(ngModel)]="workHistory.reasonForLeaving" name="txtWorkHistoryReasonForLeaving" type="text" class="form-control">
-										</div>
-									</div>
-								</span>
-
+						<div class="form-group">
+							<label for="txtWorkHistoryCompanyName" class="col-lg-4">
+								Company Name
+							</label>
+							<div class="col-lg-8" style="padding-bottom:10px">
+								<input [(ngModel)]="workHistory.companyName" name="txtWorkHistoryCompanyName" type="text" class="form-control">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="txtWorkHistoryDateFrom" class="col-lg-2">
+								From
+							</label>
+							<div class="col-lg-4" style="padding-bottom:10px">
+								<input [(ngModel)]="workHistory.dateFrom" name="txtWorkHistoryDateFrom" type="date" class="form-control">	
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="txtWorkHistoryDateTo" class="col-lg-2">
+								To
+							</label>
+							<div class="col-lg-4" style="padding-bottom:10px">
+								<input [(ngModel)]="workHistory.dateTo" name="txtWorkHistoryDateTo" type="date" class="form-control">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="txtWorkHistoryEmploymentStatus" class="col-lg-2">
+								Status
+							</label>
+							<div class="col-lg-4" style="padding-bottom:10px">
+								<input [(ngModel)]="workHistory.employmentStatus.employmentStatus" name="txtWorkHistoryEmploymentStatus" type="text"
+										class="form-control">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="txtWorkHistorySalary" class="col-lg-2">
+								Salary
+							</label>
+							<div class="col-lg-4" style="padding-bottom:10px">
+								<input [(ngModel)]="workHistory.salary" name="txtWorkHistorySalary" type="number" step="any" class="form-control">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="txtWorkHistoryReasonForLeaving" class="col-lg-4">
+								Reason For Leaving
+							</label>
+							<div class="col-lg-8" style="padding-bottom:10px">
+								<input [(ngModel)]="workHistory.reasonForLeaving" name="txtWorkHistoryReasonForLeaving" type="text" class="form-control">
+							</div>
+						</div>
+					</span>
 					<div class="form-group" style="text-align: right">
 						<span><button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Save</button></span>
 						<span><button type="button" class="btn btn-default"><i class="fa fa-undo"></i> Reset</button></span>
-
+					</div>
+				</div>
+				<!--Family-->
+				<div id="family" class="tab-pane fade ">
+					<h3>Family Information</h3>
+					<hr>
+					<div class="form-group">
+						<label for="txtFathersFirstName" class="col-lg-4">
+							First Name: 
+						</label>
+						<div class="col-lg-8" style="padding-bottom:10px">
+							<input [(ngModel)]="employee.fathersInfo.firstName" name="txtFathersFirstName" type="text" class="form-control" id="txtFathersFirstName"
+								placeholder="Father's First Name">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="txtFathersMiddleName"  class="col-lg-4">
+							Middle Name: 
+						</label>
+						<div class="col-lg-8" style="padding-bottom:10px">
+							<input [(ngModel)]="employee.fathersInfo.middleName" name="txtFathersMiddleName" type="text" class="form-control" id="txtFathersMiddleName"
+								placeholder="Father's Middle Name'">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="txtFathersLastName" class="col-lg-4">
+							Last Name: 
+						</label>
+						<div class="col-lg-8" style="padding-bottom:10px">
+							<input [(ngModel)]="txtFathersLastName" name="txtFathersLastName" type="text" class="form-control" id="txtFathersLastName"
+								placeholder="Father's Last Name'">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="txtFathersOccupation" class="col-lg-4">
+							Occupation:
+						</label>
+						<div class="col-lg-8" style="padding-bottom:10px">
+							<input [(ngModel)]="employee.fathersInfo.occupation" name="txtFathersOccupation" type="text" class="form-control" id="txtFathersOccupation"
+								placeholder="Father's Occupation">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="txtFathersContactNumbers" class="col-lg-4">
+							Contact Numbers: <button (click)="employee.fathersInfo.addContactNumber()" class="btn btn-success btn-xs">Add</button>
+						</label>
+						<div class="col-lg-8" style="padding-bottom:10px">
+							<table class="table table-condensed">
+								<tbody>
+									<tr *ngFor="let contactNumber of employee.fathersInfo.contactNumbers">
+										<td>
+											<button (click)="employee.fathersInfo.deleteContactNumber(contactNumber)" type="button" class="btn btn-danger btn-xs">Delete</button>
+										</td>
+										<td>
+											<input [(ngModel)]="contactNumber.number" name="txtFathersInfoContactNumber" type="text" class="form-control">
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="txtRelationship" class="col-lg-4">
+							Relationship:
+						</label>
+						<div class="col-lg-8" style="padding-bottom:10px">
+							<input name="txtRelationship" type="text" class="form-control" id="txtRelationship"
+								placeholder="Relationship">
+						</div>
+					</div>
+					<div class="form-group" style="text-align: right">
+						<span><button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Save</button></span>
+						<span><button type="button" class="btn btn-default"><i class="fa fa-undo"></i> Reset</button></span>
 					</div>
 				</div>
 
