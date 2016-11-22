@@ -1,25 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { SweetAlertService, ToastrService, LocalStorageService } from '../../shared-services/services';
-
-import { User, Position, Module } from '../../models/model';
-
-// private classes
-class Session {
-    token: string;
-    user: User;
-}
-
-class NavigationGroup {
-    group: string;
-    modules: Module[];
-}
-
-class Navition {
-    withGroup: NavigationGroup[];
-    withoutGroup: Module[];
-}
+import { PositionService } from '../position/position.service';
+import { UserService } from '../user/user.service';
+import { User, Position, Module, Session, NavigationGroup, Navigation, Modal } from '../../models/model';
 
 @Component({
     selector: 'main-component',
@@ -27,8 +11,10 @@ class Navition {
     providers: [
         SweetAlertService,
         ToastrService,
-        LocalStorageService
-    ] 
+        LocalStorageService,
+        PositionService,
+        UserService
+    ]
 })
 
 export class MainComponent implements OnInit {
@@ -37,74 +23,95 @@ export class MainComponent implements OnInit {
         private swal: SweetAlertService,
         private toastr: ToastrService,
         private localStorage: LocalStorageService,
+        private positionService: PositionService,
+        private userService: UserService,
         private router: Router
-    ) {}
+    ) { }
 
-    ngOnInit() { 
+    ngOnInit() {
 
-        this.session = new Session();
-        this.session = this.localStorage.get<Session>("anthro.user-session");
-        
-        // check if there is a session.
-        if(!this.session) {
+        try {
 
-            this.toastr.error("No session detected. Proceeding to logout.");
+            this.session = new Session();
+            this.session = this.localStorage.get<Session>("anthro.user-session");
+            this.currentUser = Object.assign({}, this.session.user);
+
+            // check if there is a session.
+            if (!this.session) {
+
+                this.toastr.error("No session detected. Proceeding to logout.");
+                this.redirectToLogin();
+                return;
+
+            }
+
+            // check the current route is valid.
+            this.validRoute = this.isValidRoute(this.session);
+
+            if (!this.validRoute) {
+
+                this.toastr.error("The page you are looking for is either inaccessible or does not exist.");
+                this.redirectToLogin();
+                return;
+
+            }
+
+            this.formatAvailableModules(this.session);
+            this.getPositions();
+            this.readyGreetings();
+
+            this.modal = new Modal("#mdlUserProfile");
+
+        } catch (e) {
+
+            this.toastr.error(e);
             this.redirectToLogin();
-            return;
 
         }
 
-        // check the current route is valid.
-        this.validRoute = this.isValidRoute(this.session);
-        if(!this.validRoute) {
+    }
 
-            this.toastr.error("The page you are looking for is either inaccessible or does not exist.");
-            this.redirectToLogin();
-            return;
-
-        }
-
-        // format route.
-        this.formatAvailableModules(this.session);
-
-        this.greetings = "Hi " + this.session.user.firstName;        
-
-     }
-     
-     private session: Session;
-
-     greetings: string;
-     navigation: Navition;
-     validRoute: boolean;
-
-     private redirectToLogin() {
+    private session: Session;
+    
+    loadingPositions: boolean;
+    updatingUserProfile: boolean;
+    userProfileDisabled: boolean;
+    currentUser: User;
+    originalUser: User;
+    greetings: string;
+    navigation: Navigation;
+    validRoute: boolean;
+    positions: Position[];
+    modal: Modal;
+    
+    private redirectToLogin() {
 
         this.router.navigate(["/login"]);
-         
-     }
 
-     private formatAvailableModules(session: Session): void {
+    }
 
-         this.navigation = new Navition();
-         this.navigation.withGroup = [];
-         this.navigation.withoutGroup = [];
+    private formatAvailableModules(session: Session): void {
 
-         session.user.position.modules.forEach((mod) => {
+        this.navigation = new Navigation();
+        this.navigation.withGroup = [];
+        this.navigation.withoutGroup = [];
 
-            if(mod.group) {
-                
+        session.user.position.modules.forEach((mod) => {
+
+            if (mod.group) {
+
                 let isGroupExists: boolean = false;
-                
-                for(let i=0; i < this.navigation.withGroup.length; i++) {
 
-                    if(this.navigation.withGroup[i].group === mod.group) {
+                for (let i = 0; i < this.navigation.withGroup.length; i++) {
+
+                    if (this.navigation.withGroup[i].group === mod.group) {
                         this.navigation.withGroup[i].modules.push(mod);
-                        isGroupExists = true;               
+                        isGroupExists = true;
                     }
 
                 }
 
-                if(!isGroupExists) {
+                if (!isGroupExists) {
                     let wgroup = new NavigationGroup();
                     wgroup.group = mod.group;
                     wgroup.modules = [];
@@ -114,32 +121,158 @@ export class MainComponent implements OnInit {
 
             } else {
 
-                this.navigation.withoutGroup.push(mod);                
+                this.navigation.withoutGroup.push(mod);
 
             }
 
-         });
-        
-     }
+        });
 
-     private isValidRoute(session: Session): boolean {
+    }
 
-         for(let i=0; i < session.user.position.modules.length; i++) {
+    private isValidRoute(session: Session): boolean {
 
-             if(session.user.position.modules[i].link === this.router.url) {
-                 return true;
-             }
+        for (let i = 0; i < session.user.position.modules.length; i++) {
 
-         }
+            if (session.user.position.modules[i].link === this.router.url) {
+                return true;
+            }
 
-         return false;
+        }
 
-     }
+        return false;
 
-     signOut() {
+    }
 
-         console.log("main component logout", new Date());
+    private readyGreetings(): void {
 
-     }
+        this.greetings = "Hi " + this.session.user.firstName;
+
+    }
+
+    private getPositions(): void {
+
+        try {
+
+            this.positions = [];
+            this.loadingPositions = true;
+            this.userProfileDisabled = true;
+
+            this.positionService.getAll().then((result) => {
+
+                this.loadingPositions = false;
+                this.userProfileDisabled = false;
+
+                if(result.success) {
+
+                    this.positions = result.data as Position[];
+
+                } else {
+
+                    this.toastr.error(result.message);
+
+                }
+
+            })
+            .catch((error) => {
+
+                this.loadingPositions = false;
+                this.userProfileDisabled = false;
+                this.toastr.error(error);
+
+            });
+
+        } catch(e) {
+
+            this.loadingPositions = false;
+            this.userProfileDisabled = false;
+            this.toastr.error(e);
+
+        }
+
+    }
+
+    private updateUser(): void {
+
+        try {
+
+            this.updatingUserProfile = true;
+            this.userProfileDisabled = true;
+
+            this.userService.update(this.currentUser).then((result) => {
+
+                this.updatingUserProfile = false;
+                this.userProfileDisabled = false;
+
+                if(result.success) {
+
+                    this.modal.hide();
+                    this.toastr.success(result.message);
+                    this.toastr.info("Please re-login to continue.");
+                    this.redirectToLogin();
+
+                } else {
+
+                    this.toastr.error(result.message);
+
+                }
+
+            })
+            .catch((error) => {
+
+                this.updatingUserProfile = false;
+                this.userProfileDisabled = false;
+                this.toastr.error(error);
+
+            });
+
+        } catch(e) {
+
+            this.updatingUserProfile = false;
+            this.userProfileDisabled = false;
+            this.toastr.error(e);
+
+        }
+
+    }
+
+    viewProfile(): void {
+
+        this.originalUser = Object.assign({}, this.currentUser);
+
+    }
+
+    cancelEdit(): void {
+
+        this.modal.hide();
+        this.currentUser = Object.assign({}, this.originalUser);
+        this.originalUser = null;
+
+    }
+
+    confirmUpdate(): void {
+
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "you will be updating your user information",
+            confirmButtonText: "Yes, Update it",
+            callBack: (isConfirm) => {
+
+                if(isConfirm) {
+
+                    this.updateUser();
+
+                }
+
+            }
+        });
+
+    }
+
+    signOut(): void {
+
+        this.localStorage.remove("anthro.user-session");
+        this.redirectToLogin();
+
+    }
 
 }
