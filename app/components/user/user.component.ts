@@ -1,14 +1,11 @@
+/*
+* user component v1
+**/
 import { Component, OnInit } from '@angular/core';
-
-// services
 import { PositionService } from '../position/position.service';
 import { UserService } from './user.service';
 import { SweetAlertService, ToastrService } from '../../shared-services/services';
-
-// models
 import { User, Position, Modal, Search } from '../../models/model';
-
-// pipes
 import { UserFilter } from '../../pipes/pipe';
 
 @Component({
@@ -178,12 +175,16 @@ export class UserComponent implements OnInit {
     confirmAdd(): void {
 
         this.swal.confirm({
-            title: "Are you sure?",
-            message: "You will be adding this position.",
-            confirmButtonText: "Yes, Add It!",
+            title: "Are You Sure?",
+            message: "You will be adding this user",
+            confirmButtonText: "Yes, Add It",
             callBack: (isConfirm) => {
 
-                this.addUser();
+                if(isConfirm) {
+
+                    this.addUser();
+
+                }
 
             }
         });
@@ -275,12 +276,15 @@ export class UserComponent implements OnInit {
 
         this.swal.confirm({
             title: "Are You Sure?",
-            message: "You will be updating this user.",
-            confirmButtonText: "Yes, Update It!",
+            message: "You will be updating this user",
+            confirmButtonText: "Yes, Update It",
             callBack: (isConfirm) => {
 
-                if(isConfirm) 
+                if(isConfirm) {
+
                     this.updateUser();
+
+                } 
 
             }
         });
@@ -334,12 +338,16 @@ export class UserComponent implements OnInit {
     confirmDelete(user: User): void {
 
         this.swal.confirm({
-            title: "Are you sure?",
-            message: "You will be adding this position.",
-            confirmButtonText: "Yes, Delete It!",
+            title: "Are You Sure?",
+            message: "You will be deleting this user",
+            confirmButtonText: "Yes, Delete It",
             callBack: (isConfirm) => {
 
-                this.deleteUser(user);
+                if(isConfirm) {
+
+                    this.deleteUser(user);
+
+                }
 
             }
         });

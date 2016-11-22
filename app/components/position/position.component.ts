@@ -1,9 +1,10 @@
+/*
+* position component v1
+**/
 import { Component, OnInit } from '@angular/core';
-
 import { PositionService } from './position.service';
 import { ModuleService } from '../module/module.service';
 import { SweetAlertService, ToastrService } from '../../shared-services/services';
-
 import { Module, Position, Modal } from '../../models/model';
 
 @Component({
@@ -41,12 +42,12 @@ export class PositionComponent implements OnInit {
         private positionService: PositionService,
         private moduleService: ModuleService,
         private swal: SweetAlertService,
-        private toastr: ToastrService) { }
+        private toastr: ToastrService
+    ) { }
 
     ngOnInit() {
 
         this.modal = new Modal("#mdlModalInfo");
-
         this.getAllModules();
         this.getAllPositions();
 
@@ -54,84 +55,100 @@ export class PositionComponent implements OnInit {
 
     getAllModules(): void {
 
-        this.modules = [];
+        try {
 
-        this.loadingModules = true;
-        this.isFormDisabled = true;
+            this.modules = [];
+            this.loadingModules = true;
+            this.isFormDisabled = true;
 
-        this.moduleService.getAll().then((result) => {
-
-            this.loadingModules = false;
-            this.isFormDisabled = false;
-
-            if (result.success) {
-
-                this.modules = result.data as Module[];
-                this.toastr.success(result.message);
-                return;
-
-            }
-
-            this.toastr.error(result.message);
-
-        })
-            .catch((error) => {
+            this.moduleService.getAll().then((result) => {
 
                 this.loadingModules = false;
                 this.isFormDisabled = false;
 
+                if (result.success) {
+
+                    this.modules = result.data as Module[];
+                    this.toastr.success(result.message);
+
+                } else {
+
+                    this.toastr.error(result.message);
+
+                }
+
+            })
+            .catch((error) => {
+
+                this.loadingModules = false;
+                this.isFormDisabled = false;
+                this.toastr.error(error);
+
             });
+
+        } catch(e) {
+
+            this.loadingModules = false;
+            this.isFormDisabled = false;
+            this.toastr.error(e);
+
+        }
 
     }
 
     getAllPositions(): void {
 
-        this.positions = [];
+        try {
 
-        this.loadingPositions = true;
-        this.isFormDisabled = true;
+            this.positions = [];
+            this.loadingPositions = true;
+            this.isFormDisabled = true;
 
-        this.positionService.getAll().then((result) => {
-
-            this.loadingPositions = false;
-            this.isFormDisabled = false;
-
-            if (result.success) {
-
-                this.positions = result.data as Position[];
-                this.toastr.success(result.message);
-                return;
-
-            }
-
-            this.toastr.error(result.message);
-
-        })
-            .catch((error) => {
+            this.positionService.getAll().then((result) => {
 
                 this.loadingPositions = false;
                 this.isFormDisabled = false;
 
+                if (result.success) {
+
+                    this.positions = result.data as Position[];
+                    this.toastr.success(result.message);
+                    
+                } else {
+                    
+                    this.toastr.error(result.message);
+
+                }
+
+            })
+            .catch((error) => {
+
+                this.loadingPositions = false;
+                this.isFormDisabled = false;
                 this.toastr.error(error);
 
             });
+
+        } catch(e) {
+
+            this.loadingPositions = false;
+            this.isFormDisabled = false;
+            this.toastr.error(e);
+
+        }
 
     }
 
     checkModules(): void {
 
         for (let i = 0; i < this.selectedPosition.modules.length; i++) {
-
             for (let j = 0; j < this.modules.length; j++) {
-
                 if (this.selectedPosition.modules[i]._id === this.modules[j]._id) {
 
                     this.modules[j].selected = true;
 
                 }
-
             }
-
         }
 
     }
@@ -209,12 +226,16 @@ export class PositionComponent implements OnInit {
             return;
 
         this.swal.confirm({
-            title: "Are you sure?",
-            message: "You will be updating this position.",
-            confirmButtonText: "Yes, Update It!",
+            title: "Are You Sure?",
+            message: "You will be updating this position",
+            confirmButtonText: "Yes, Update It",
             callBack: (isConfirm) => {
 
-                this.updatePosition();
+                if(isConfirm) {
+
+                    this.updatePosition();
+
+                }
 
             }
         });
@@ -273,12 +294,16 @@ export class PositionComponent implements OnInit {
             return;
 
         this.swal.confirm({
-            title: "Are you sure?",
-            message: "You will be adding a new position.",
-            confirmButtonText: "Yes, Add",
+            title: "Are You Sure?",
+            message: "You will be adding a new position",
+            confirmButtonText: "Yes, Add It",
             callBack: (isConfirm) => {
 
-                this.addPosition();
+                if(isConfirm) {
+
+                    this.addPosition();
+
+                }
 
             }
         });
@@ -312,13 +337,13 @@ export class PositionComponent implements OnInit {
                 this.toastr.error(result.message);
 
             })
-                .catch((error) => {
+            .catch((error) => {
 
-                    this.addingPosition = false;
-                    this.isFormDisabled = false;
-                    this.toastr.error(error.toString());
+                this.addingPosition = false;
+                this.isFormDisabled = false;
+                this.toastr.error(error.toString());
 
-                });
+            });
 
         } catch (e) {
 
@@ -334,12 +359,16 @@ export class PositionComponent implements OnInit {
     confirmDelete(position: Position): void {
 
         this.swal.confirm({
-            title: "Are you sure?",
-            message: "You will be deleting this position.",
-            confirmButtonText: "Yes, Delete It!",
+            title: "Are You Sure?",
+            message: "You will be deleting this position",
+            confirmButtonText: "Yes, Delete It",
             callBack: (isConfirm) => {
 
-                this.delete(position);
+                if(isConfirm) {
+
+                    this.delete(position);
+
+                }
 
             }
         });
