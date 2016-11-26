@@ -1,67 +1,68 @@
 <div class="row">
-	<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
+	<div class="col-lg-12 module-header">
 		<h2 class="text-center">Employee Information</h2>
 		<hr/>
 	</div>
 </div>
 <form>
-	<!--OVERVIEW-->
+	<!-- OVERVIEW -->
 	<div class="row">
 		<div class="col-lg-3">
 			<ul class="nav nav-pills nav-stacked">
 				<li class="active"><a data-toggle="pill" href="#general"><i class="glyphicon glyphicon-tags"></i>  General</a></li>
 				<li><a data-toggle="pill" href="#employment"><i class="glyphicon glyphicon-folder-open"></i> Employment</a></li>
 				<li><a data-toggle="pill" href="#contacts"><i class="glyphicon glyphicon-phone"></i> Contacts</a></li>
-				<li><a data-toggle="pill" href="#idnumbers"><i class="glyphicon glyphicon-th-list"></i> ID Numbers</a></li>
+				<li><a data-toggle="pill" href="#address"><i class="glyphicon glyphicon-road"></i> Address</a></li>
+				<li><a data-toggle="pill" href="#government-id"><i class="glyphicon glyphicon-th-list"></i> Government IDs</a></li>
 				<li><a data-toggle="pill" href="#family"><i class="glyphicon glyphicon-heart"></i> Family</a></li>
-				<li><a data-toggle="pill" href="#education"><i class="glyphicon glyphicon-education"></i> Education</a></li>
-				<li><a data-toggle="pill" href="#certification"><i class="glyphicon glyphicon-certificate"></i> Certification</a></li>
-				<li><a data-toggle="pill" href="#license"><i class="glyphicon glyphicon-credit-card"></i> License</a></li>
+				<li><a data-toggle="pill" href="#educational-background"><i class="glyphicon glyphicon-education"></i> Education</a></li>
+				<li><a data-toggle="pill" href="#certifications"><i class="glyphicon glyphicon-certificate"></i> Certifications</a></li>
+				<li><a data-toggle="pill" href="#licensure"><i class="glyphicon glyphicon-credit-card"></i> Licensures</a></li>
 				<li><a data-toggle="pill" href="#work-history"><i class="glyphicon glyphicon-briefcase"></i> Work History</a></li>
 			</ul>
 		</div>
 		<div class="col-lg-6">
 			<div class="tab-content">
-				<!--GENERAL-->
+				<!-- GENERAL -->
 				<div id="general" class="tab-pane fade  in active">
-					<h3>General Information</h3>
+					<h3>General</h3>
 					<hr>
 					<div class="form-group">
 						<label for="txtFirstName" class="col-lg-4">First Name*</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
+						<div class="col-lg-8 pad-bottom-10">
 							<input [(ngModel)]="employee.firstName" name="txtFirstName" type="text" class="form-control" id="txtFirstName" placeholder="First Name"
 								required>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="txtMiddleName" class="col-lg-4">Middle Name*</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
+						<div class="col-lg-8 pad-bottom-10">
 							<input [(ngModel)]="employee.middleName" name="txtMiddleName" type="text" class="form-control" id="txtMiddleName" placeholder="Middle Name"
 								required>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="txtLastName" class="col-lg-4">Last Name*</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
+						<div class="col-lg-8 pad-bottom-10">
 							<input [(ngModel)]="employee.lastName" name="txtLastName" type="text" class="form-control" id="txtLastName" placeholder="Last Name"
 								required>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="nbAge" class="col-lg-4">Age</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
+						<div class="col-lg-8 pad-bottom-10">
 							<input [(ngModel)]="employee.age" name="nbAge" type="number" class="form-control" id="nbAge" placeholder="Age" disabled>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="txtBirthPlace" class="col-lg-4">Birth Place</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
+						<div class="col-lg-8 pad-bottom-10">
 							<input [(ngModel)]="employee.birthPlace" name="txtBirthPlace" type="text" class="form-control" id="txtBirthPlace" placeholder="Birth Place">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="slcMaritalStatus" class="col-lg-4">Marital Status</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
+						<div class="col-lg-8 pad-bottom-10">
 							<select [(ngModel)]="employee.maritalStatus" name="slcMaritalStatus" class="form-control" id="slcMaritalStatus">
 								<option>Single</option>
 								<option>Married</option>
@@ -70,7 +71,7 @@
 					</div>
 					<div class="form-group">
 						<label for="slcGender" class="col-lg-4">Gender</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
+						<div class="col-lg-8 pad-bottom-10">
 							<select [(ngModel)]="employee.gender" name="slcGender" class="form-control" id="slcGender">
 								<option>Male</option>
 								<option>Female</option>
@@ -79,58 +80,52 @@
 					</div>
 					<div class="form-group">
 						<label for="txtCitizenship" class="col-lg-4">Citizenship</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
+						<div class="col-lg-8 pad-bottom-10">
 							<input [(ngModel)]="employee.citizenship" name="txtCitizenship" type="text" class="form-control" id="txtCitizenship" placeholder="Citizenship">
 						</div>
 					</div>
-					<div class="form-group" style="text-align: right">
-						<span><button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Save</button></span>
-						<span><button type="button" class="btn btn-default"><i class="fa fa-undo"></i> Reset</button></span>
-					</div>
 				</div>
-				<!--EMPLOYMENT-->
+				<!-- EMPLOYMENT -->
 				<div id="employment" class="tab-pane fade">
-					<h3>Employment Information</h3>
+					<h3>Employment</h3>
 					<hr>
 					<div class="form-group">
 						<label for="txtEmployeeEmail" class="col-lg-4">Employee Number</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
+						<div class="col-lg-8 pad-bottom-10">
 							<input [(ngModel)]="employee.employeeNumber" name="txtEmployeeEmail" type="text" class="form-control" id="txtEmployeeEmail"
 								placeholder="Employee Number">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="slcPosition" class="col-lg-4">Position</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
-							<input type="text">
-							<!--<select [(ngModel)]="employee.position.id" class="form-control" id="slcPosition"></select>-->
+						<div class="col-lg-8 pad-bottom-10">
+							<select class="form-control" id="slcPosition">
+								<option *ngFor="let position of positions" [value]="position._id">{{ position.positionName }}</option>
+							</select>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="dtStartingDate" class="col-lg-4">Starting Date</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
+						<div class="col-lg-8 pad-bottom-10">
 							<input [(ngModel)]="employee.startingDate" name="dtStartingDate" type="date" class="form-control" id="dtStartingDate" placeholder="Starting Date">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="nbSalary" class="col-lg-4">Salary</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
+						<div class="col-lg-8 pad-bottom-10">
 							<input [(ngModel)]="employee.salary" name="nbSalary" type="number" step="any" class="form-control" id="nbSalary" placeholder="Salary">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="slcEmploymentStatus" class="col-lg-4">Employment Status</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
-							<input type="text">
-							<!--<select [(ngModel)]="employee.employmentStatus.id" class="form-control" id="slcEmploymentStatus"></select>-->
+						<div class="col-lg-8 pad-bottom-10">
+							<select class="form-control" id="slcEmploymentStatus">
+								<option *ngFor="let employmentStatus of employmentStatuses" [value]="employmentStatus._id">{{ employmentStatus.employmentStatus }}</option>
+							</select>
 						</div>
 					</div>
-					<div class="form-group" style="text-align: right">
-						<span><button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Save</button></span>
-						<span><button type="button" class="btn btn-default"><i class="fa fa-undo"></i> Reset</button></span>
-					</div>
 				</div>
-				<!--CONTACTS-->
+				<!-- CONTACTS -->
 				<div id="contacts" class="tab-pane fade">
 					<h3>Contact Information</h3>
 					<hr>
@@ -138,7 +133,7 @@
 						<label for="txtPhoneNumber" class="col-lg-4">
 							Phone Numbers <button class="btn btn-success btn-xs" (click)="employee.addPhoneNumber()"><i class="fa fa-plus"></i></button>
 						</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
+						<div class="col-lg-8 pad-bottom-10">
 							<span *ngFor="let phoneNumber of employee.phoneNumbers">
 								<input [(ngModel)]="phoneNumber.number" name="txtPhoneNumber" type="text" class="form-control" id="txtPhoneNumber" placeholder="Phone Number">
 							</span>
@@ -148,12 +143,15 @@
 						<label for="txtLandline" class="col-lg-4">
 							Landlines <button (click)="employee.addLandline()" class="btn btn-success btn-xs"><i class="fa fa-plus"></i></button>
 						</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
+						<div class="col-lg-8 pad-bottom-10">
 							<span *ngFor="let landline of employee.landlines">
 								<input [(ngModel)]="landline.number" name="txtLandline" type="text" class="form-control" id="txtLandline" placeholder="Landline">
 							</span>
 						</div>
 					</div>
+				</div>
+				<!-- ADDRESS -->
+				<div id="address" class="tab-pane fade">
 					<h3>City Address</h3>
 					<div class="checkbox">
 						<label for="chkCityAddressIsPermanent">
@@ -293,21 +291,16 @@
 						<input [(ngModel)]="employee.permanentAddress.zipCode" name="txtPermanentAddressZipCode" type="text" class="form-control"
 							id="txtPermanentAddressZipCode" placeholder="Zip Code">
 					</div>
-					<div class="form-group" style="text-align: right">
-						<span><button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Save</button></span>
-						<span><button type="button" class="btn btn-default"><i class="fa fa-undo"></i> Reset</button></span>
-
-					</div>
 				</div>
-				<!--ID NUMBERS-->
-				<div id="idnumbers" class="tab-pane fade">
-					<h3>ID Numbers</h3>
+				<!-- GOVERNMENT IDs -->
+				<div id="government-id" class="tab-pane fade">
+					<h3>Government IDs</h3>
 					<hr>
 					<div class="form-group">
 						<label for="txtSsNumber" class="col-lg-4">
 							SSS Number
 						</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
+						<div class="col-lg-8 pad-bottom-10">
 							<input [(ngModel)]="employee.ssNumber" name="txtSsNumber" type="text" class="form-control" id="txtSsNumber" placeholder="SS Number">
 						</div>
 					</div>
@@ -315,7 +308,7 @@
 						<label for="txtTinNumber" class="col-lg-4">
 							TIN Number
 						</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
+						<div class="col-lg-8 pad-bottom-10">
 							<input [(ngModel)]="employee.tinNumber" name="txtTinNumber" type="text" class="form-control" id="txtTinNumber" placeholder="TIN Number">
 						</div>
 					</div>
@@ -323,7 +316,7 @@
 						<label for="txtPhilHealthNumber" class="col-lg-4">
 							PhilHealth Number
 						</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
+						<div class="col-lg-8 pad-bottom-10">
 							<input [(ngModel)]="employee.philHealthNumber" name="txtPhilHealthNumber" type="text" class="form-control" id="txtPhilHealthNumber"
 								placeholder="PhilHealth Number">
 						</div>
@@ -332,24 +325,19 @@
 						<label for="txtPagibigNumber" class="col-lg-4">
 							PAGIBIG Number
 						</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
+						<div class="col-lg-8 pad-bottom-10">
 							<input [(ngModel)]="employee.pagibigNumber" name="txtPagibigNumber" type="text" class="form-control" id="txtPagibigNumber"
 								placeholder="PAGIBIG Number">
 						</div>
 					</div>
-					<div class="form-group" style="text-align: right">
-						<span><button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Save</button></span>
-						<span><button type="button" class="btn btn-default"><i class="fa fa-undo"></i> Reset</button></span>
-
-					</div>
 				</div>
-				<!--EDUCATION-->
-				<div id="education" class="tab-pane fade">
+				<!-- EDUCATIONAL BACKGROUND -->
+				<div id="education-background" class="tab-pane fade">
 					<h3>Educational Background</h3>
-					<hr>
+					<hr/>
 					<p>
 						<button (click)="employee.addEducationHistory()" type="button" class="btn btn-success btn-xs">
-							<span class="glyphicon glyphicon-plus"></span> Add Education History
+							<span class="glyphicon glyphicon-plus"></span> Add
 						</button>
 					</p>
 					<table class="table table-condensed">
@@ -372,14 +360,10 @@
 							</tr>
 						</tbody>
 					</table>
-					<div class="form-group" style="text-align: right">
-						<span><button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Save</button></span>
-						<span><button type="button" class="btn btn-default"><i class="fa fa-undo"></i> Reset</button></span>
-					</div>
 				</div>
-				<!--CERTIFICATION-->
-				<div id="certification" class="tab-pane fade">
-					<h3>Certificate</h3>
+				<!-- CERTIFICATIONS -->
+				<div id="certifications" class="tab-pane fade">
+					<h3>Certifications</h3>
 					<hr>
 					<table class="table table-condensed">
 						<thead>
@@ -397,13 +381,9 @@
 							</tr>
 						</tbody>
 					</table>
-					<div class="form-group" style="text-align: right">
-						<span><button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Save</button></span>
-						<span><button type="button" class="btn btn-default"><i class="fa fa-undo"></i> Reset</button></span>
-					</div>
 				</div>
-				<!--LICENSE-->
-				<div id="license" class="tab-pane fade">
+				<!-- LICENSURES -->
+				<div id="licensure" class="tab-pane fade">
 					<h3>License</h3>
 					<hr>
 					<table class="table table-condensed">
@@ -422,12 +402,8 @@
 							</tr>
 						</tbody>
 					</table>
-					<div class="form-group" style="text-align: right">
-						<span><button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Save</button></span>
-						<span><button type="button" class="btn btn-default"><i class="fa fa-undo"></i> Reset</button></span>
-					</div>
 				</div>
-				<!--WORK HISTORY-->
+				<!-- WORK HISTORY -->
 				<div id="work-history" class="tab-pane fade ">
 					<h3>Employment History</h3>
 					<hr>
@@ -438,7 +414,7 @@
 							<label for="txtWorkHistoryPosition" class="col-lg-4">
 								Position
 							</label>
-							<div class="col-lg-8" style="padding-bottom:10px">
+							<div class="col-lg-8 pad-bottom-10">
 								<input [(ngModel)]="workHistory.position" name="txtWorkHistoryPosition" type="text" class="form-control">
 							</div>
 						</div>
@@ -446,7 +422,7 @@
 							<label for="txtWorkHistoryCompanyName" class="col-lg-4">
 								Company Name
 							</label>
-							<div class="col-lg-8" style="padding-bottom:10px">
+							<div class="col-lg-8 pad-bottom-10">
 								<input [(ngModel)]="workHistory.companyName" name="txtWorkHistoryCompanyName" type="text" class="form-control">
 							</div>
 						</div>
@@ -487,89 +463,71 @@
 							<label for="txtWorkHistoryReasonForLeaving" class="col-lg-4">
 								Reason For Leaving
 							</label>
-							<div class="col-lg-8" style="padding-bottom:10px">
+							<div class="col-lg-8 pad-bottom-10">
 								<input [(ngModel)]="workHistory.reasonForLeaving" name="txtWorkHistoryReasonForLeaving" type="text" class="form-control">
 							</div>
 						</div>
 					</span>
-					<div class="form-group" style="text-align: right">
-						<span><button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Save</button></span>
-						<span><button type="button" class="btn btn-default"><i class="fa fa-undo"></i> Reset</button></span>
-					</div>
 				</div>
-				<!--Family-->
+				<!-- Family -->
 				<div id="family" class="tab-pane fade ">
-					<h3>Family Information</h3>
+					<h3>
+						Family
+						<button type="button" title="Add Family" class="btn btn-primary btn-xs">
+							<i class="glyphicon glyphicon-plus"></i>
+						</button>
+					</h3>
 					<hr>
 					<div class="form-group">
-						<label for="txtFathersFirstName" class="col-lg-4">
+						<label for="txtFamilyFirstName" class="col-lg-4">
 							First Name: 
 						</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
-							<input [(ngModel)]="employee.fathersInfo.firstName" name="txtFathersFirstName" type="text" class="form-control" id="txtFathersFirstName"
-								placeholder="Father's First Name">
+						<div class="col-lg-8 pad-bottom-10">
+							<input [(ngModel)]="employee.fathersInfo.firstName" name="txtFamilyFirstName" type="text" class="form-control" id="txtFamilyFirstName"
+								placeholder="First Name">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="txtFathersMiddleName"  class="col-lg-4">
+						<label for="txtFamilyMiddleName" class="col-lg-4">
 							Middle Name: 
 						</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
-							<input [(ngModel)]="employee.fathersInfo.middleName" name="txtFathersMiddleName" type="text" class="form-control" id="txtFathersMiddleName"
-								placeholder="Father's Middle Name'">
+						<div class="col-lg-8 pad-bottom-10">
+							<input [(ngModel)]="employee.fathersInfo.middleName" name="txtFamilyMiddleName" type="text" class="form-control" id="txtFamilyMiddleName"
+								placeholder="Middle Name'">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="txtFathersLastName" class="col-lg-4">
+						<label for="txtFamilyLastName" class="col-lg-4">
 							Last Name: 
 						</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
-							<input [(ngModel)]="txtFathersLastName" name="txtFathersLastName" type="text" class="form-control" id="txtFathersLastName"
-								placeholder="Father's Last Name'">
+						<div class="col-lg-8 pad-bottom-10">
+							<input [(ngModel)]="txtFathersLastName" name="txtFamilyLastName" type="text" class="form-control" id="txtFamilyLastName"
+								placeholder="Last Name'">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="txtFathersOccupation" class="col-lg-4">
 							Occupation:
 						</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
+						<div class="col-lg-8 pad-bottom-10">
 							<input [(ngModel)]="employee.fathersInfo.occupation" name="txtFathersOccupation" type="text" class="form-control" id="txtFathersOccupation"
-								placeholder="Father's Occupation">
+								placeholder="Occupation">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="txtFathersContactNumbers" class="col-lg-4">
-							Contact Numbers: <button (click)="employee.fathersInfo.addContactNumber()" class="btn btn-success btn-xs">Add</button>
-						</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
-							<table class="table table-condensed">
-								<tbody>
-									<tr *ngFor="let contactNumber of employee.fathersInfo.contactNumbers">
-										<td>
-											<button (click)="employee.fathersInfo.deleteContactNumber(contactNumber)" type="button" class="btn btn-danger btn-xs">Delete</button>
-										</td>
-										<td>
-											<input [(ngModel)]="contactNumber.number" name="txtFathersInfoContactNumber" type="text" class="form-control">
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="txtRelationship" class="col-lg-4">
+						<label for="txtFamilyRelationship" class="col-lg-4">
 							Relationship:
 						</label>
-						<div class="col-lg-8" style="padding-bottom:10px">
-							<input name="txtRelationship" type="text" class="form-control" id="txtRelationship"
-								placeholder="Relationship">
+						<div class="col-lg-8 pad-bottom-10">
+							<input name="txtFamilyRelationship" type="text" class="form-control" id="txtFamilyRelationship" placeholder="Relationship">
 						</div>
 					</div>
-					<div class="form-group" style="text-align: right">
-						<span><button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Save</button></span>
-						<span><button type="button" class="btn btn-default"><i class="fa fa-undo"></i> Reset</button></span>
-					</div>
 				</div>
+			</div>
+
+			<div class="form-group text-center pad-top-10">
+				<span><button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Save</button></span>
+				<span><button type="button" class="btn btn-default"><i class="fa fa-undo"></i> Reset</button></span>
 			</div>
 		</div>
 	</div>

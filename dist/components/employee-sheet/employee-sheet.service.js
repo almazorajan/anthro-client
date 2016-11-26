@@ -9,36 +9,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-// user-defined service
 var service_1 = require('../../shared-services/service');
 var EmployeeSheetService = (function () {
     function EmployeeSheetService(service) {
         this.service = service;
     }
-    EmployeeSheetService.prototype.getAll = function () {
-        return this.service.apiCall({
-            verb: "post",
-            uri: "employee/getAll"
-        });
+    EmployeeSheetService.prototype.getRelationships = function () {
+        return [
+            "Father",
+            "Mother",
+            "Spouse",
+            "Child",
+            "Sibling"
+        ];
     };
     EmployeeSheetService.prototype.add = function (employee) {
         return this.service.apiCall({
             verb: "post",
             uri: "employee/add",
-            body: employee
-        });
-    };
-    EmployeeSheetService.prototype.update = function (employee) {
-        return this.service.apiCall({
-            verb: "post",
-            uri: "employee/update",
-            body: employee
-        });
-    };
-    EmployeeSheetService.prototype.delete = function (employee) {
-        return this.service.apiCall({
-            verb: "post",
-            uri: "employee/delete",
             body: employee
         });
     };

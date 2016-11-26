@@ -27,9 +27,11 @@ var EmployeeSheetComponent = (function () {
         this.loadingEmploymentStatuses = false;
         this.loadingPositions = false;
         this.isFormDisabled = false;
+        this.readyToSave = false;
         this.companies = [];
         this.employmentStatuses = [];
         this.positions = [];
+        this.relationships = [];
     }
     EmployeeSheetComponent.prototype.ngOnInit = function () {
         this.employee = new model_1.Employee();
@@ -125,10 +127,98 @@ var EmployeeSheetComponent = (function () {
             this.toastr.error(e);
         }
     };
+    EmployeeSheetComponent.prototype.getRelationships = function () {
+        try {
+            this.relationships = this.employeeSheetService.getRelationships();
+        }
+        catch (e) {
+            this.toastr.error(e);
+        }
+    };
+    EmployeeSheetComponent.prototype.isEmpty = function (str) {
+        if (!str)
+            return false;
+        return str.trim().length <= 0;
+    };
+    EmployeeSheetComponent.prototype.isNameValid = function (employee) {
+        try {
+            if (!employee)
+                return false;
+            if (!employee.firstName)
+                return false;
+            if (!employee.lastName)
+                return false;
+            if (this.isEmpty(employee.firstName))
+                return false;
+            if (this.isEmpty(employee.lastName))
+                return false;
+            return true;
+        }
+        catch (e) {
+            console.log(e);
+            return false;
+        }
+    };
+    EmployeeSheetComponent.prototype.isEmployeePositionValid = function (employee) {
+        try {
+            if (!employee)
+                return false;
+            if (!employee.position)
+                return false;
+            if (!employee.position._id)
+                return false;
+            if (!employee.position._id.trim())
+                return false;
+            if (this.positions.filter(function (position) { return position._id === employee.position._id; }).length !== 1)
+                return false;
+            return true;
+        }
+        catch (e) {
+            console.log(e);
+            return false;
+        }
+    };
+    EmployeeSheetComponent.prototype.isEmploymentStatusValid = function (employee) {
+        try {
+            if (!employee)
+                return false;
+            if (!employee.employmentStatus)
+                return false;
+            if (!employee.employmentStatus._id)
+                return false;
+            if (!employee.employmentStatus._id.trim())
+                return false;
+            if (this.employmentStatuses.filter(function (employmentStatus) { return employmentStatus._id === employee.employmentStatus._id; }).length !== 1)
+                return false;
+            return true;
+        }
+        catch (e) {
+            console.log(e);
+            return false;
+        }
+    };
+    EmployeeSheetComponent.prototype.isMartialStatusValid = function (employee) {
+        try {
+            if (!employee)
+                return false;
+        }
+        catch (e) {
+            console.log(e);
+            return false;
+        }
+    };
+    EmployeeSheetComponent.prototype.isReadyToSave = function () {
+        var condition1 = this.isNameValid(this.employee);
+        var condition2 = this.employee.salary < 0;
+        var condition3 = this.isEmployeePositionValid(this.employee);
+    };
     EmployeeSheetComponent = __decorate([
         core_1.Component({
             selector: 'employee-sheet-component',
             templateUrl: './app/components/employee-sheet/employee-sheet-page.html',
+            styleUrls: [
+                './app/components/employee-sheet/employee-sheet-style.css'
+            ],
             providers: [
                 services_1.SweetAlertService,
                 services_1.ToastrService,
