@@ -4,7 +4,7 @@ import { EmployeeSheetService } from './employee-sheet.service';
 import { CompanyService } from '../company/company.service';
 import { EmploymentStatusService } from '../employment-status/employment-status.service';
 import { PositionService } from '../position/position.service';
-import { EmploymentStatus, Employee, Position, Company, Modal } from '../../models/model';
+import { EmploymentStatus, Employee, Position, Company, Family, Education, Accreditation, Modal } from '../../models/model';
 
 @Component({
     selector: 'employee-sheet-component',
@@ -39,6 +39,8 @@ export class EmployeeSheetComponent implements OnInit {
         this.getCompanies();
         this.getEmploymentStatuses();
         this.getPositions();
+        this.getRelationships();
+        this.getEducationalLevels();
     }
 
     employee: Employee;
@@ -51,6 +53,7 @@ export class EmployeeSheetComponent implements OnInit {
     employmentStatuses: EmploymentStatus[] = [];
     positions: Position[] = [];
     relationships: string[] = [];
+    educationalLevels: string[] = [];
 
     private getCompanies(): void {
         try {
@@ -147,6 +150,14 @@ export class EmployeeSheetComponent implements OnInit {
         }
     }
 
+    private getEducationalLevels(): void {
+        try {
+            this.educationalLevels = this.employeeSheetService.getEducationalLevels();
+        } catch(e) {
+            this.toastr.error(e);
+        }
+    }
+
     private isEmpty(str: string): boolean {
         if(!str) return false;
         return str.trim().length <= 0;
@@ -232,6 +243,98 @@ export class EmployeeSheetComponent implements OnInit {
             console.log(e);
             return false;
         }
+    }
+
+    private isValidFamily(employee: Employee): boolean {
+        try {
+            if(!employee)
+                return false;
+            
+            let uniqueRelationships = this.relationships.filter((relationship) => 
+                relationship.toLowerCase().trim() === "father"
+                || relationship.toLowerCase().trim() === "mother"
+                || relationship.toLowerCase().trim() === "spouse");
+                
+            uniqueRelationships.forEach((relationship) => {
+                let countOfRel = 0;
+
+                this.employee.family.forEach((family) => {
+                    if(family.relationship.toLowerCase().trim() === relationship.toLowerCase().trim()) {
+                        countOfRel += 1;
+                    }
+                });
+
+                if(countOfRel > 0) {
+                    this.toastr.error(`Duplicate relationship: ${relationship}. Only one can be set.`);
+                }
+
+            });
+            
+        } catch(e) {
+            console.log(e);
+            return false;
+        }
+    }
+
+    public addFamily(): void {
+        this.employee.family.unshift(new Family());
+    }
+
+    public addEducation(): void {
+        this.employee.educationHistory.unshift(new Education());
+    }
+
+    public addCertification(): void {
+        this.employee.certifications.unshift(new Accreditation());
+    }
+
+    public addLicensure(): void {
+        this.employee.licensures.unshift(new Accreditation());
+    }
+
+    public deleteEducation(education: Education): void {
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be deleting this educational info",
+            confirmButtonText: "Yes, Delete It!",
+            callBack: (isConfirm) => {
+                if(isConfirm) {
+                    let index = this.employee.educationHistory.indexOf(education);
+                    this.employee.educationHistory.splice(index, 1);
+                    this.toastr.success("Successfully deleted educational info");
+                }
+            }
+        });
+    }
+
+    public deleteCertification(certification: Accreditation): void {
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be deleting this certification info",
+            confirmButtonText: "Yes, Delete It!",
+            callBack: (isConfirm) => {
+                if(isConfirm) {
+                    let index = this.employee.certifications.indexOf(certification);
+                    this.employee.certifications.splice(index, 1);
+                    this.toastr.success("Successfully deleted certification info");
+                }
+            }
+        });
+    }
+
+    public deleteLicensure(licensure: Accreditation): void {
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be deleting this licensure info",
+            confirmButtonText: "Yes, Delete It!",
+            callBack: (isConfirm) => {
+                if(isConfirm) {
+                    let index = this.employee.licensures.indexOf(licensure);
+                    this.employee.licensures.splice(index, 1);
+                    this.toastr.success("Successfully deleted certification info");
+                }
+            }
+        });
     }
 
     public isReadyToSave() {

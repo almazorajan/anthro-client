@@ -111,41 +111,33 @@ export class EmploymentStatusComponent implements OnInit {
     }
 
     add(): void {
-
         this.isFormDisabled = false;
         this.selectedEmploymentStatus = new EmploymentStatus();
-
     }
 
     edit(employmentStatus: EmploymentStatus): void {
-
         employmentStatus.originalInfo = Object.assign({}, employmentStatus);
         employmentStatus.editMode = true;
         employmentStatus.disabled = false;
-
     }
 
     cancelEdit(employmentStatus: EmploymentStatus): void {
-
         employmentStatus.employmentStatus = employmentStatus.originalInfo.employmentStatus;
         employmentStatus.editMode = false;
         employmentStatus.disabled = true;
-
     }
 
     confirmAdd(): void {
-
         this.swal.confirm({
-            title: "Are you sure?",
-            message: "You will be adding this employment status.",
+            title: "Are You Sure?",
+            message: "You will be adding this employment status",
             confirmButtonText: "Yes, Add It!",
             callBack: (isConfirm) => {
-
-                this.addEmploymentStatus();
-
+                if(isConfirm) {
+                    this.addEmploymentStatus();
+                }
             }
         });
-
     }
 
     private addEmploymentStatus(): void {
@@ -191,13 +183,10 @@ export class EmploymentStatusComponent implements OnInit {
 
     }
 
-    confirmSave(employmentStatus: EmploymentStatus) {
-
+    confirmSave(employmentStatus: EmploymentStatus): void {
         if(!employmentStatus.employmentStatus.trim()) {
-
             this.toastr.warn("Please provide an employment status.");
             return;
-        
         }
 
         this.swal.confirm({
@@ -205,12 +194,11 @@ export class EmploymentStatusComponent implements OnInit {
             message: "You will be updating this employment status.",
             confirmButtonText: "Yes, Update It!",
             callBack: (isConfirm) => {
-
-                this.updateEmploymentStatus(employmentStatus);
-
+                if(isConfirm) {
+                    this.updateEmploymentStatus(employmentStatus);
+                }
             }
         });
-
     }
 
     private updateEmploymentStatus(employmentStatus: EmploymentStatus): void {
@@ -256,61 +244,46 @@ export class EmploymentStatusComponent implements OnInit {
     }
 
     confirmDelete(employmentStatus: EmploymentStatus): void {
-
         this.swal.confirm({
             title: "Are you sure?",
             message: "You will be deleting this employment status.",
             confirmButtonText: "Yes, Delete It!",
             callBack: (isConfirm) => {
-
-                this.deleteEmploymentStatus(employmentStatus);
-
+                if(isConfirm) {
+                    this.deleteEmploymentStatus(employmentStatus);
+                }
             }
         });        
-
     }
 
     private deleteEmploymentStatus(employmentStatus: EmploymentStatus): void {
-
         try {
-
             this.deletingEmploymentStatus = true;
             this.isFormDisabled = true;
 
-            this.employmentStatusService.deletEmploymentStatus(employmentStatus).then((result) => {
-                    
+            this.employmentStatusService.deletEmploymentStatus(employmentStatus).then((result) => {                
                 this.deletingEmploymentStatus = false;
                 this.isFormDisabled = false;
 
                 if(result.success) {
-
                     this.toastr.success(result.message);
                     this.getAll();
                     this.modal.hide();
-
                 } else {
-
                     this.toastr.error(result.message);
-
                 }
-
             })
             .catch((error) => {
-
                 this.deletingEmploymentStatus = false;
                 this.isFormDisabled = false;
                 this.toastr.error(error);
-
             });
 
         } catch(e) {
-
             this.deletingEmploymentStatus = false;
             this.isFormDisabled = false;
             this.toastr.error(e);
-
         }
-
     }
 
 }

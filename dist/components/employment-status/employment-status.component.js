@@ -80,11 +80,13 @@ var EmploymentStatusComponent = (function () {
     EmploymentStatusComponent.prototype.confirmAdd = function () {
         var _this = this;
         this.swal.confirm({
-            title: "Are you sure?",
-            message: "You will be adding this employment status.",
+            title: "Are You Sure?",
+            message: "You will be adding this employment status",
             confirmButtonText: "Yes, Add It!",
             callBack: function (isConfirm) {
-                _this.addEmploymentStatus();
+                if (isConfirm) {
+                    _this.addEmploymentStatus();
+                }
             }
         });
     };
@@ -128,7 +130,9 @@ var EmploymentStatusComponent = (function () {
             message: "You will be updating this employment status.",
             confirmButtonText: "Yes, Update It!",
             callBack: function (isConfirm) {
-                _this.updateEmploymentStatus(employmentStatus);
+                if (isConfirm) {
+                    _this.updateEmploymentStatus(employmentStatus);
+                }
             }
         });
     };
@@ -167,7 +171,9 @@ var EmploymentStatusComponent = (function () {
             message: "You will be deleting this employment status.",
             confirmButtonText: "Yes, Delete It!",
             callBack: function (isConfirm) {
-                _this.deleteEmploymentStatus(employmentStatus);
+                if (isConfirm) {
+                    _this.deleteEmploymentStatus(employmentStatus);
+                }
             }
         });
     };

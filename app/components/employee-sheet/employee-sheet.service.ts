@@ -18,6 +18,14 @@ export class EmployeeSheetService {
         ];
     }
 
+    getEducationalLevels(): string[] {
+        return [
+            "Primary",
+            "Secondary",
+            "Tertiary"
+        ]
+    }
+
     add(employee: Employee): Promise<Result> {
         return this.service.apiCall({
             verb: "post",

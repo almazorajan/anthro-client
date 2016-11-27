@@ -1,16 +1,12 @@
 
-export class EducationHistory {
-
-    educationLevel: string;
+export class Education {
+    educationalLevel: string;
     degree: string;
     dateGraduated: Date;
 
     constructor() {
-
-        this.educationLevel = "";
+        this.educationalLevel = "";
         this.degree = "";
         this.dateGraduated = new Date();
-
     }
-
 }

@@ -15,140 +15,152 @@
 				<li><a data-toggle="pill" href="#address"><i class="glyphicon glyphicon-road"></i> Address</a></li>
 				<li><a data-toggle="pill" href="#government-id"><i class="glyphicon glyphicon-th-list"></i> Government IDs</a></li>
 				<li><a data-toggle="pill" href="#family"><i class="glyphicon glyphicon-heart"></i> Family</a></li>
-				<li><a data-toggle="pill" href="#educational-background"><i class="glyphicon glyphicon-education"></i> Education</a></li>
+				<li><a data-toggle="pill" href="#educational-background"><i class="glyphicon glyphicon-education"></i> Educational Background</a></li>
 				<li><a data-toggle="pill" href="#certifications"><i class="glyphicon glyphicon-certificate"></i> Certifications</a></li>
 				<li><a data-toggle="pill" href="#licensure"><i class="glyphicon glyphicon-credit-card"></i> Licensures</a></li>
 				<li><a data-toggle="pill" href="#work-history"><i class="glyphicon glyphicon-briefcase"></i> Work History</a></li>
 			</ul>
 		</div>
-		<div class="col-lg-6">
+		<div class="col-lg-9">
 			<div class="tab-content">
 				<!-- GENERAL -->
-				<div id="general" class="tab-pane fade  in active">
-					<h3>General</h3>
-					<hr>
-					<div class="form-group">
-						<label for="txtFirstName" class="col-lg-4">First Name*</label>
-						<div class="col-lg-8 pad-bottom-10">
-							<input [(ngModel)]="employee.firstName" name="txtFirstName" type="text" class="form-control" id="txtFirstName" placeholder="First Name"
-								required>
+				<div id="general" class="tab-pane fade in active">
+					<form class="form-horizontal">
+						<h3>General</h3>
+						<hr>
+						<div class="form-group">
+							<label for="txtFirstName" class="col-sm-2 control-label text-right">First Name</label>
+							<div class="col-sm-10">
+								<input [(ngModel)]="employee.firstName" name="txtFirstName" type="text" class="form-control" id="txtFirstName" placeholder="First Name"
+									required>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label for="txtMiddleName" class="col-lg-4">Middle Name*</label>
-						<div class="col-lg-8 pad-bottom-10">
-							<input [(ngModel)]="employee.middleName" name="txtMiddleName" type="text" class="form-control" id="txtMiddleName" placeholder="Middle Name"
-								required>
+						<div class="form-group">
+							<label for="txtMiddleName" class="col-sm-2 control-label text-right">Middle Name</label>
+							<div class="col-sm-10">
+								<input [(ngModel)]="employee.middleName" name="txtMiddleName" type="text" class="form-control" id="txtMiddleName" placeholder="Middle Name"
+									required>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label for="txtLastName" class="col-lg-4">Last Name*</label>
-						<div class="col-lg-8 pad-bottom-10">
-							<input [(ngModel)]="employee.lastName" name="txtLastName" type="text" class="form-control" id="txtLastName" placeholder="Last Name"
-								required>
+						<div class="form-group">
+							<label for="txtLastName" class="col-sm-2 control-label text-right">Last Name</label>
+							<div class="col-sm-10">
+								<input [(ngModel)]="employee.lastName" name="txtLastName" type="text" class="form-control" id="txtLastName" placeholder="Last Name"
+									required>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label for="nbAge" class="col-lg-4">Age</label>
-						<div class="col-lg-8 pad-bottom-10">
-							<input [(ngModel)]="employee.age" name="nbAge" type="number" class="form-control" id="nbAge" placeholder="Age" disabled>
+						<div class="form-group">
+							<label for="nbAge" class="col-sm-2 control-label text-right">Age</label>
+							<div class="col-sm-10">
+								<input [(ngModel)]="employee.age" name="nbAge" type="number" class="form-control" id="nbAge" placeholder="Age" disabled>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label for="txtBirthPlace" class="col-lg-4">Birth Place</label>
-						<div class="col-lg-8 pad-bottom-10">
-							<input [(ngModel)]="employee.birthPlace" name="txtBirthPlace" type="text" class="form-control" id="txtBirthPlace" placeholder="Birth Place">
+						<div class="form-group">
+							<label for="txtBirthPlace" class="col-sm-2 control-label text-right">Birth Place</label>
+							<div class="col-sm-10">
+								<input [(ngModel)]="employee.birthPlace" name="txtBirthPlace" type="text" class="form-control" id="txtBirthPlace" placeholder="Birth Place">
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label for="slcMaritalStatus" class="col-lg-4">Marital Status</label>
-						<div class="col-lg-8 pad-bottom-10">
-							<select [(ngModel)]="employee.maritalStatus" name="slcMaritalStatus" class="form-control" id="slcMaritalStatus">
+						<div class="form-group">
+							<label for="slcMaritalStatus" class="col-sm-2 control-label text-right">Marital Status</label>
+							<div class="col-sm-10">
+								<select [(ngModel)]="employee.maritalStatus" name="slcMaritalStatus" class="form-control" id="slcMaritalStatus">
 								<option>Single</option>
 								<option>Married</option>
 							</select>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label for="slcGender" class="col-lg-4">Gender</label>
-						<div class="col-lg-8 pad-bottom-10">
-							<select [(ngModel)]="employee.gender" name="slcGender" class="form-control" id="slcGender">
+						<div class="form-group">
+							<label for="slcGender" class="col-sm-2 control-label text-right">Gender</label>
+							<div class="col-sm-10">
+								<select [(ngModel)]="employee.gender" name="slcGender" class="form-control" id="slcGender">
 								<option>Male</option>
 								<option>Female</option>
 							</select>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label for="txtCitizenship" class="col-lg-4">Citizenship</label>
-						<div class="col-lg-8 pad-bottom-10">
-							<input [(ngModel)]="employee.citizenship" name="txtCitizenship" type="text" class="form-control" id="txtCitizenship" placeholder="Citizenship">
+						<div class="form-group">
+							<label for="txtCitizenship" class="col-sm-2 control-label text-right">Citizenship</label>
+							<div class="col-sm-10">
+								<input [(ngModel)]="employee.citizenship" name="txtCitizenship" type="text" class="form-control" id="txtCitizenship" placeholder="Citizenship">
+							</div>
 						</div>
-					</div>
+					</form>
 				</div>
 				<!-- EMPLOYMENT -->
 				<div id="employment" class="tab-pane fade">
-					<h3>Employment</h3>
-					<hr>
-					<div class="form-group">
-						<label for="txtEmployeeEmail" class="col-lg-4">Employee Number</label>
-						<div class="col-lg-8 pad-bottom-10">
-							<input [(ngModel)]="employee.employeeNumber" name="txtEmployeeEmail" type="text" class="form-control" id="txtEmployeeEmail"
-								placeholder="Employee Number">
+					<form class="form-horizontal">
+						<h3>Employment</h3>
+						<hr>
+						<div class="form-group">
+							<label for="txtEmployeeNumber" class="col-sm-2 control-label text-right">Employee Number</label>
+							<div class="col-sm-10">
+								<input [(ngModel)]="employee.employeeNumber" name="txtEmployeeNumber" type="text" class="form-control" id="txtEmployeeNumber"
+									placeholder="Employee Number">
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label for="slcPosition" class="col-lg-4">Position</label>
-						<div class="col-lg-8 pad-bottom-10">
-							<select class="form-control" id="slcPosition">
+						<div class="form-group">
+							<label for="slcPosition" class="col-sm-2 control-label text-right">Position</label>
+							<div class="col-sm-10">
+								<select class="form-control" id="slcPosition">
 								<option *ngFor="let position of positions" [value]="position._id">{{ position.positionName }}</option>
 							</select>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label for="dtStartingDate" class="col-lg-4">Starting Date</label>
-						<div class="col-lg-8 pad-bottom-10">
-							<input [(ngModel)]="employee.startingDate" name="dtStartingDate" type="date" class="form-control" id="dtStartingDate" placeholder="Starting Date">
+						<div class="form-group">
+							<label for="dtStartingDate" class="col-sm-2 control-label text-right">Starting Date</label>
+							<div class="col-sm-10">
+								<input [(ngModel)]="employee.startingDate" name="dtStartingDate" type="date" class="form-control" id="dtStartingDate" placeholder="Starting Date">
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label for="nbSalary" class="col-lg-4">Salary</label>
-						<div class="col-lg-8 pad-bottom-10">
-							<input [(ngModel)]="employee.salary" name="nbSalary" type="number" step="any" class="form-control" id="nbSalary" placeholder="Salary">
+						<div class="form-group">
+							<label for="nbSalary" class="col-sm-2 control-label text-right">Salary</label>
+							<div class="col-sm-10">
+								<input [(ngModel)]="employee.salary" name="nbSalary" type="number" step="any" class="form-control" id="nbSalary" placeholder="Salary">
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label for="slcEmploymentStatus" class="col-lg-4">Employment Status</label>
-						<div class="col-lg-8 pad-bottom-10">
-							<select class="form-control" id="slcEmploymentStatus">
+						<div class="form-group">
+							<label for="slcEmploymentStatus" class="col-sm-2 control-label text-right">Employment Status</label>
+							<div class="col-sm-10">
+								<select class="form-control" id="slcEmploymentStatus">
 								<option *ngFor="let employmentStatus of employmentStatuses" [value]="employmentStatus._id">{{ employmentStatus.employmentStatus }}</option>
 							</select>
+							</div>
 						</div>
-					</div>
+					</form>
 				</div>
 				<!-- CONTACTS -->
 				<div id="contacts" class="tab-pane fade">
-					<h3>Contact Information</h3>
-					<hr>
-					<div class="form-group">
-						<label for="txtPhoneNumber" class="col-lg-4">
-							Phone Numbers <button class="btn btn-success btn-xs" (click)="employee.addPhoneNumber()"><i class="fa fa-plus"></i></button>
+					<form class="form-horizontal">
+						<h3>Contact Information</h3>
+						<hr/>
+						<div class="form-group">
+							<label for="txtPhoneNumber" class="col-sm-2 control-label text-right">
+							Phone Numbers
+							<button (click)="addPhoneNumber()" type="button" title="Add Phone Number" class="btn btn-primary btn-xs">
+								<i class="glyphicon glyphicon-plus"></i>
+							</button>
 						</label>
-						<div class="col-lg-8 pad-bottom-10">
-							<span *ngFor="let phoneNumber of employee.phoneNumbers">
+							<div class="col-sm-10">
+								<span *ngFor="let phoneNumber of employee.phoneNumbers">
 								<input [(ngModel)]="phoneNumber.number" name="txtPhoneNumber" type="text" class="form-control" id="txtPhoneNumber" placeholder="Phone Number">
 							</span>
+							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label for="txtLandline" class="col-lg-4">
-							Landlines <button (click)="employee.addLandline()" class="btn btn-success btn-xs"><i class="fa fa-plus"></i></button>
+						<div class="form-group">
+							<label for="txtLandline" class="col-sm-2 control-label text-right">
+							landlines
+							<button (click)="addLandline()" type="button" title="Add Phone Number" class="btn btn-primary btn-xs">
+								<i class="glyphicon glyphicon-plus"></i>
+							</button>
 						</label>
-						<div class="col-lg-8 pad-bottom-10">
-							<span *ngFor="let landline of employee.landlines">
+							<div class="col-sm-10">
+								<span *ngFor="let landline of employee.landlines">
 								<input [(ngModel)]="landline.number" name="txtLandline" type="text" class="form-control" id="txtLandline" placeholder="Landline">
 							</span>
+							</div>
 						</div>
-					</div>
+					</form>
 				</div>
 				<!-- ADDRESS -->
 				<div id="address" class="tab-pane fade">
@@ -300,7 +312,7 @@
 						<label for="txtSsNumber" class="col-lg-4">
 							SSS Number
 						</label>
-						<div class="col-lg-8 pad-bottom-10">
+						<div class="col-lg-8">
 							<input [(ngModel)]="employee.ssNumber" name="txtSsNumber" type="text" class="form-control" id="txtSsNumber" placeholder="SS Number">
 						</div>
 					</div>
@@ -308,7 +320,7 @@
 						<label for="txtTinNumber" class="col-lg-4">
 							TIN Number
 						</label>
-						<div class="col-lg-8 pad-bottom-10">
+						<div class="col-lg-8">
 							<input [(ngModel)]="employee.tinNumber" name="txtTinNumber" type="text" class="form-control" id="txtTinNumber" placeholder="TIN Number">
 						</div>
 					</div>
@@ -316,7 +328,7 @@
 						<label for="txtPhilHealthNumber" class="col-lg-4">
 							PhilHealth Number
 						</label>
-						<div class="col-lg-8 pad-bottom-10">
+						<div class="col-lg-8">
 							<input [(ngModel)]="employee.philHealthNumber" name="txtPhilHealthNumber" type="text" class="form-control" id="txtPhilHealthNumber"
 								placeholder="PhilHealth Number">
 						</div>
@@ -325,21 +337,83 @@
 						<label for="txtPagibigNumber" class="col-lg-4">
 							PAGIBIG Number
 						</label>
-						<div class="col-lg-8 pad-bottom-10">
+						<div class="col-lg-8">
 							<input [(ngModel)]="employee.pagibigNumber" name="txtPagibigNumber" type="text" class="form-control" id="txtPagibigNumber"
 								placeholder="PAGIBIG Number">
 						</div>
 					</div>
 				</div>
-				<!-- EDUCATIONAL BACKGROUND -->
-				<div id="education-background" class="tab-pane fade">
-					<h3>Educational Background</h3>
-					<hr/>
-					<p>
-						<button (click)="employee.addEducationHistory()" type="button" class="btn btn-success btn-xs">
-							<span class="glyphicon glyphicon-plus"></span> Add
+				<!-- FAMILY -->
+				<div id="family" class="tab-pane fade ">
+					<h3>
+						Family
+						<button (click)="addFamily()" type="button" title="Add Family" class="btn btn-primary btn-xs">
+							<i class="glyphicon glyphicon-plus"></i>
 						</button>
-					</p>
+					</h3>
+					<hr>
+					<div *ngFor="let family of employee.family">
+						<div class="form-group">
+							<label for="txtFamilyFirstName" class="col-lg-4">
+								First Name: 
+							</label>
+							<div class="col-lg-8">
+								<input [(ngModel)]="family.firstName" name="txtFamilyFirstName" type="text" class="form-control" id="txtFamilyFirstName"
+									placeholder="First Name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="txtFamilyMiddleName" class="col-lg-4">
+								Middle Name: 
+							</label>
+							<div class="col-lg-8">
+								<input [(ngModel)]="family.middleName" name="txtFamilyMiddleName" type="text" class="form-control" id="txtFamilyMiddleName"
+									placeholder="Middle Name'">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="txtFamilyLastName" class="col-lg-4">
+								Last Name: 
+							</label>
+							<div class="col-lg-8">
+								<input [(ngModel)]="family.lastName" name="txtFamilyLastName" type="text" class="form-control" id="txtFamilyLastName" placeholder="Last Name'">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="txtFamilyOccupation" class="col-lg-4">
+								Occupation:
+							</label>
+							<div class="col-lg-8">
+								<input [(ngModel)]="family.occupation" name="txtFathersOccupation" type="text" class="form-control" id="txtFathersOccupation"
+									placeholder="Occupation">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="txtFamilyRelationship" class="col-lg-4">
+								Relationship:
+							</label>
+							<div class="col-lg-8">
+								<select [(ngModel)]="family.relationship" name="slcRelationship" class="form-control">
+									<option *ngFor="let relationship of relationships" [value]="relationship">{{ relationship }}</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-lg-12">
+								<hr/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- EDUCATIONAL BACKGROUND -->
+				<div id="educational-background" class="tab-pane fade">
+					<h3>
+						Educational Background
+						<button (click)="addEducation()" title="Add Education" type="button" class="btn btn-primary btn-xs">
+							<span class="glyphicon glyphicon-plus"></span>
+						</button>
+					</h3>
+					<hr/>
 					<table class="table table-condensed">
 						<thead>
 							<th></th>
@@ -350,7 +424,7 @@
 						<tbody>
 							<tr *ngFor="let education of employee.educationHistory">
 								<td>
-									<button (click)="employee.deleteEducationHistory(education)" type="button" class="btn btn-danger btn-xs">
+									<button (click)="deleteEducation(education)" type="button" class="btn btn-default btn-xs">
 										<span class="glyphicon glyphicon-trash"></span>
 									</button>
 								</td>
@@ -363,8 +437,13 @@
 				</div>
 				<!-- CERTIFICATIONS -->
 				<div id="certifications" class="tab-pane fade">
-					<h3>Certifications</h3>
-					<hr>
+					<h3>
+						Certifications
+						<button (click)="addCertification()" title="Add Certification" type="button" class="btn btn-primary btn-xs">
+							<span class="glyphicon glyphicon-plus"></span>
+						</button>
+					</h3>
+					<hr/>
 					<table class="table table-condensed">
 						<thead>
 							<th></th>
@@ -374,18 +453,26 @@
 						<tbody>
 							<tr *ngFor="let certification of employee.certifications">
 								<td>
-									<button (click)="employee.deleteCertification(certification)" type="button" class="btn btn-dagner btn-xs"></button>
+									<button (click)="deleteCertification(certification)" type="button" class="btn btn-default btn-xs">
+										<span class="glyphicon glyphicon-trash"></span>
+									</button>
 								</td>
 								<td><input [(ngModel)]="certification.title" name="txtCertificationTitle" type="text" class="form-control"></td>
-								<td><input [(ngModel)]="certification.dateAccredited" name="txtCertificationDateAccredited" type="text" class="form-control"></td>
+								<td><input [(ngModel)]="certification.dateAccredited" name="txtCertificationDateAccredited" type="datetime" type="text"
+										class="form-control"></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 				<!-- LICENSURES -->
 				<div id="licensure" class="tab-pane fade">
-					<h3>License</h3>
-					<hr>
+					<h3>
+						Licensure
+						<button (click)="addLicensure()" title="Add Licensure" type="button" class="btn btn-primary btn-xs">
+							<span class="glyphicon glyphicon-plus"></span>
+						</button>
+					</h3>
+					<hr/>
 					<table class="table table-condensed">
 						<thead>
 							<th></th>
@@ -395,7 +482,9 @@
 						<tbody>
 							<tr *ngFor="let licensure of employee.licensures">
 								<td>
-									<button (click)="employee.deleteLicensure(licensure)" type="button" class="btn btn-danger btn-xs"></button>
+									<button (click)="deleteLicensure(licensure)" type="button" class="btn btn-default btn-xs">
+										<span class="glyphicon glyphicon-trash"></span>
+									</button>
 								</td>
 								<td><input [(ngModel)]="licensure.title" name="txtLicensureTitle" type="text" class="form-control"></td>
 								<td><input [(ngModel)]="licensure.dateAccredited" name="txtLicensureDateAccredited" type="text" class="form-control"></td>
@@ -405,129 +494,56 @@
 				</div>
 				<!-- WORK HISTORY -->
 				<div id="work-history" class="tab-pane fade ">
-					<h3>Employment History</h3>
-					<hr>
-					<span *ngFor="let workHistory of employee.workHistory">
-						<button (click)="employee.deleteWorkHistory(workHistory)" type="button" class="btn btn-danger btn-xs">Delete</button><br/>
-									
-						<div class="form-group">
-							<label for="txtWorkHistoryPosition" class="col-lg-4">
-								Position
-							</label>
-							<div class="col-lg-8 pad-bottom-10">
-								<input [(ngModel)]="workHistory.position" name="txtWorkHistoryPosition" type="text" class="form-control">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="txtWorkHistoryCompanyName" class="col-lg-4">
-								Company Name
-							</label>
-							<div class="col-lg-8 pad-bottom-10">
-								<input [(ngModel)]="workHistory.companyName" name="txtWorkHistoryCompanyName" type="text" class="form-control">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="txtWorkHistoryDateFrom" class="col-lg-2">
-								From
-							</label>
-							<div class="col-lg-4" style="padding-bottom:10px">
-								<input [(ngModel)]="workHistory.dateFrom" name="txtWorkHistoryDateFrom" type="date" class="form-control">	
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="txtWorkHistoryDateTo" class="col-lg-2">
-								To
-							</label>
-							<div class="col-lg-4" style="padding-bottom:10px">
-								<input [(ngModel)]="workHistory.dateTo" name="txtWorkHistoryDateTo" type="date" class="form-control">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="txtWorkHistoryEmploymentStatus" class="col-lg-2">
-								Status
-							</label>
-							<div class="col-lg-4" style="padding-bottom:10px">
-								<input [(ngModel)]="workHistory.employmentStatus.employmentStatus" name="txtWorkHistoryEmploymentStatus" type="text"
-										class="form-control">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="txtWorkHistorySalary" class="col-lg-2">
-								Salary
-							</label>
-							<div class="col-lg-4" style="padding-bottom:10px">
-								<input [(ngModel)]="workHistory.salary" name="txtWorkHistorySalary" type="number" step="any" class="form-control">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="txtWorkHistoryReasonForLeaving" class="col-lg-4">
-								Reason For Leaving
-							</label>
-							<div class="col-lg-8 pad-bottom-10">
-								<input [(ngModel)]="workHistory.reasonForLeaving" name="txtWorkHistoryReasonForLeaving" type="text" class="form-control">
-							</div>
-						</div>
-					</span>
-				</div>
-				<!-- Family -->
-				<div id="family" class="tab-pane fade ">
 					<h3>
-						Family
-						<button type="button" title="Add Family" class="btn btn-primary btn-xs">
-							<i class="glyphicon glyphicon-plus"></i>
+						Work History
+						<button (click)="addWorkHistory()" title="Add Work History" type="button" class="btn btn-primary btn-xs">
+							<span class="glyphicon glyphicon-plus"></span>
 						</button>
 					</h3>
-					<hr>
-					<div class="form-group">
-						<label for="txtFamilyFirstName" class="col-lg-4">
-							First Name: 
-						</label>
-						<div class="col-lg-8 pad-bottom-10">
-							<input [(ngModel)]="employee.fathersInfo.firstName" name="txtFamilyFirstName" type="text" class="form-control" id="txtFamilyFirstName"
-								placeholder="First Name">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="txtFamilyMiddleName" class="col-lg-4">
-							Middle Name: 
-						</label>
-						<div class="col-lg-8 pad-bottom-10">
-							<input [(ngModel)]="employee.fathersInfo.middleName" name="txtFamilyMiddleName" type="text" class="form-control" id="txtFamilyMiddleName"
-								placeholder="Middle Name'">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="txtFamilyLastName" class="col-lg-4">
-							Last Name: 
-						</label>
-						<div class="col-lg-8 pad-bottom-10">
-							<input [(ngModel)]="txtFathersLastName" name="txtFamilyLastName" type="text" class="form-control" id="txtFamilyLastName"
-								placeholder="Last Name'">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="txtFathersOccupation" class="col-lg-4">
-							Occupation:
-						</label>
-						<div class="col-lg-8 pad-bottom-10">
-							<input [(ngModel)]="employee.fathersInfo.occupation" name="txtFathersOccupation" type="text" class="form-control" id="txtFathersOccupation"
-								placeholder="Occupation">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="txtFamilyRelationship" class="col-lg-4">
-							Relationship:
-						</label>
-						<div class="col-lg-8 pad-bottom-10">
-							<input name="txtFamilyRelationship" type="text" class="form-control" id="txtFamilyRelationship" placeholder="Relationship">
-						</div>
-					</div>
+					<hr/>
+					<table class="table table-condensed table-responsive">
+						<thead>
+							<th></th>
+							<th class="text-center">Position</th>
+							<th class="text-center">Company Name</th>
+							<th class="text-center">From</th>
+							<th class="text-center">To</th>
+							<th class="text-center">Status</th>
+							<th class="text-center">Salary
+							<th class="text-center">Reason for Leaving</th>
+						</thead>
+						<tbody>
+							<tr *ngFor="let workHistory of employee.workHistory">
+								<td class="text-center">
+									<button (click)="deleteLicensure(licensure)" type="button" class="btn btn-default btn-xs">
+										<span class="glyphicon glyphicon-trash"></span>
+									</button>
+								</td>
+								<td>
+									<input [(ngModel)]="workHistory.position" name="txtWorkHistoryPosition" type="text" class="form-control">
+								</td>
+								<td>
+									<input [(ngModel)]="workHistory.companyName" name="txtWorkHistoryCompanyName" type="text" class="form-control">
+								</td>
+								<td>
+									<input [(ngModel)]="workHistory.from" name="txtWorkHistoryFrom" type="text" class="form-control">
+								</td>
+								<td>
+									<input [(ngModel)]="workHistory.to" name="txtWorkHistoryTo" type="text" class="form-control">
+								</td>
+								<td>
+									<input [(ngModel)]="workHistory.status" name="txtWorkHistoryStatus" type="text" class="form-control">
+								</td>
+								<td>
+									<input [(ngModel)]="workHistory.salary" name="txtWorkHistorySalary" type="text" class="form-control">
+								</td>
+								<td>
+									<input [(ngModel)]="workHistory.reasonForLeaving" name="txtWorkHistoryReasonForLeaving" type="text" class="form-control">
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-			</div>
-
-			<div class="form-group text-center pad-top-10">
-				<span><button type="button" class="btn btn-primary"><i class="fa fa-check"></i> Save</button></span>
-				<span><button type="button" class="btn btn-default"><i class="fa fa-undo"></i> Reset</button></span>
 			</div>
 		</div>
 	</div>

@@ -23,6 +23,13 @@ var EmployeeSheetService = (function () {
             "Sibling"
         ];
     };
+    EmployeeSheetService.prototype.getEducationalLevels = function () {
+        return [
+            "Primary",
+            "Secondary",
+            "Tertiary"
+        ];
+    };
     EmployeeSheetService.prototype.add = function (employee) {
         return this.service.apiCall({
             verb: "post",

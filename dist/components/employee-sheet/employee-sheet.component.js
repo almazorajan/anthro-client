@@ -32,6 +32,7 @@ var EmployeeSheetComponent = (function () {
         this.employmentStatuses = [];
         this.positions = [];
         this.relationships = [];
+        this.educationalLevels = [];
     }
     EmployeeSheetComponent.prototype.ngOnInit = function () {
         this.employee = new model_1.Employee();
@@ -39,6 +40,8 @@ var EmployeeSheetComponent = (function () {
         this.getCompanies();
         this.getEmploymentStatuses();
         this.getPositions();
+        this.getRelationships();
+        this.getEducationalLevels();
     };
     EmployeeSheetComponent.prototype.getCompanies = function () {
         var _this = this;
@@ -135,6 +138,14 @@ var EmployeeSheetComponent = (function () {
             this.toastr.error(e);
         }
     };
+    EmployeeSheetComponent.prototype.getEducationalLevels = function () {
+        try {
+            this.educationalLevels = this.employeeSheetService.getEducationalLevels();
+        }
+        catch (e) {
+            this.toastr.error(e);
+        }
+    };
     EmployeeSheetComponent.prototype.isEmpty = function (str) {
         if (!str)
             return false;
@@ -206,6 +217,90 @@ var EmployeeSheetComponent = (function () {
             console.log(e);
             return false;
         }
+    };
+    EmployeeSheetComponent.prototype.isValidFamily = function (employee) {
+        var _this = this;
+        try {
+            if (!employee)
+                return false;
+            var uniqueRelationships = this.relationships.filter(function (relationship) {
+                return relationship.toLowerCase().trim() === "father"
+                    || relationship.toLowerCase().trim() === "mother"
+                    || relationship.toLowerCase().trim() === "spouse";
+            });
+            uniqueRelationships.forEach(function (relationship) {
+                var countOfRel = 0;
+                _this.employee.family.forEach(function (family) {
+                    if (family.relationship.toLowerCase().trim() === relationship.toLowerCase().trim()) {
+                        countOfRel += 1;
+                    }
+                });
+                if (countOfRel > 0) {
+                    _this.toastr.error("Duplicate relationship: " + relationship + ". Only one can be set.");
+                }
+            });
+        }
+        catch (e) {
+            console.log(e);
+            return false;
+        }
+    };
+    EmployeeSheetComponent.prototype.addFamily = function () {
+        this.employee.family.unshift(new model_1.Family());
+    };
+    EmployeeSheetComponent.prototype.addEducation = function () {
+        this.employee.educationHistory.unshift(new model_1.Education());
+    };
+    EmployeeSheetComponent.prototype.addCertification = function () {
+        this.employee.certifications.unshift(new model_1.Accreditation());
+    };
+    EmployeeSheetComponent.prototype.addLicensure = function () {
+        this.employee.licensures.unshift(new model_1.Accreditation());
+    };
+    EmployeeSheetComponent.prototype.deleteEducation = function (education) {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be deleting this educational info",
+            confirmButtonText: "Yes, Delete It!",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    var index = _this.employee.educationHistory.indexOf(education);
+                    _this.employee.educationHistory.splice(index, 1);
+                    _this.toastr.success("Successfully deleted educational info");
+                }
+            }
+        });
+    };
+    EmployeeSheetComponent.prototype.deleteCertification = function (certification) {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be deleting this certification info",
+            confirmButtonText: "Yes, Delete It!",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    var index = _this.employee.certifications.indexOf(certification);
+                    _this.employee.certifications.splice(index, 1);
+                    _this.toastr.success("Successfully deleted certification info");
+                }
+            }
+        });
+    };
+    EmployeeSheetComponent.prototype.deleteLicensure = function (licensure) {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be deleting this licensure info",
+            confirmButtonText: "Yes, Delete It!",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    var index = _this.employee.licensures.indexOf(licensure);
+                    _this.employee.licensures.splice(index, 1);
+                    _this.toastr.success("Successfully deleted certification info");
+                }
+            }
+        });
     };
     EmployeeSheetComponent.prototype.isReadyToSave = function () {
         var condition1 = this.isNameValid(this.employee);

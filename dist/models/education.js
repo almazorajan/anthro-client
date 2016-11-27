@@ -8,4 +8,4 @@ var Education = (function () {
     return Education;
 }());
 exports.Education = Education;
-//# sourceMappingURL=education-history.js.map
+//# sourceMappingURL=education.js.map
