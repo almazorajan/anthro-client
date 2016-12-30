@@ -10,15 +10,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
+// components
+var company_component_1 = require('./components/company/company.component');
+var employee_sheet_component_1 = require('./components/employee-sheet/employee-sheet.component');
+var employment_status_component_1 = require('./components/employment-status/employment-status.component');
 var login_component_1 = require('./components/login/login.component');
 var main_component_1 = require('./components/main/main.component');
-var employee_sheet_component_1 = require('./components/employee-sheet/employee-sheet.component');
-var user_component_1 = require('./components/user/user.component');
 var module_component_1 = require('./components/module/module.component');
-var position_component_1 = require('./components/position/position.component');
-var employment_status_component_1 = require('./components/employment-status/employment-status.component');
-var company_component_1 = require('./components/company/company.component');
 var page_not_found_component_1 = require('./components/page-not-found/page-not-found.component');
+var position_component_1 = require('./components/position/position.component');
+var user_component_1 = require('./components/user/user.component');
 var routes = [
     {
         path: '',
