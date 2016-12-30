@@ -17,7 +17,7 @@ var EmployeeListComponent = (function () {
     EmployeeListComponent = __decorate([
         core_1.Component({
             selector: 'employee-list-component',
-            templateUrl: './employee-list-page.html'
+            templateUrl: './app/components/employee-list/employee-list-page.html'
         }), 
         __metadata('design:paramtypes', [])
     ], EmployeeListComponent);
