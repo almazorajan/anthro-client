@@ -23,9 +23,19 @@
 			<input [(ngModel)]="employee.lastName" name="txtLastName" type="text" class="form-control" id="txtLastName" placeholder="Last Name"
 				required>
 		</div>
+		<div class="form-group">
+			<label for="slcGender">Gender</label>
+			<select [(ngModel)]="employee.gender" name="slcGender" class="form-control" id="slcGender">
+				<option>Male</option>
+				<option>Female</option>
+			</select>
+		</div>
 	</div>
-
 	<div class="col-lg-6">
+		<div class="form-group">
+			<label for="txtCitizenship">Citizenship</label>
+			<input [(ngModel)]="employee.citizenship" name="txtCitizenship" type="text" class="form-control" id="txtCitizenship" placeholder="Citizenship">
+		</div>
 		<div class="form-group">
 			<label for="nbAge">Age</label>
 			<input [(ngModel)]="employee.age" name="nbAge" type="number" class="form-control" id="nbAge" placeholder="Age" disabled>
@@ -41,17 +51,6 @@
 				<option>Married</option>
 			</select>
 		</div>
-		<div class="form-group">
-			<label for="slcGender">Gender</label>
-			<select [(ngModel)]="employee.gender" name="slcGender" class="form-control" id="slcGender">
-				<option>Male</option>
-				<option>Female</option>
-			</select>
-		</div>
-		<div class="form-group">
-			<label for="txtCitizenship">Citizenship</label>
-			<input [(ngModel)]="employee.citizenship" name="txtCitizenship" type="text" class="form-control" id="txtCitizenship" placeholder="Citizenship">
-		</div>
 	</div>
 </div>
 
@@ -61,7 +60,6 @@
 		<h3 class="text-center">Employment</h3>
 		<hr>
 	</div>
-
 	<div class="col-lg-6">
 		<div class="form-group">
 			<label for="txtEmployeeNumber">Employee Number</label>
@@ -302,248 +300,231 @@
 			<label for="txtSsNumber">
 				SSS Number
 			</label>
-			<input [(ngModel)]="employee.ssNumber" name="txtSsNumber" type="text" class="form-control" id="txtSsNumber" placeholder="SS Number">
+			<input type="text" class="form-control" [(ngModel)]="employee.ssNumber" name="txtSsNumber" id="txtSsNumber" placeholder="SS Number">
 		</div>
 		<div class="form-group">
 			<label for="txtTinNumber">
 				TIN Number
 			</label>
-			<input [(ngModel)]="employee.tinNumber" name="txtTinNumber" type="text" class="form-control" id="txtTinNumber" placeholder="TIN Number">
+			<input type="text" class="form-control" [(ngModel)]="employee.tinNumber" name="txtTinNumber" id="txtTinNumber" placeholder="TIN Number">
 		</div>
 	</div>
 
 	<div class="col-lg-6">
 		<div class="form-group">
-		<label for="txtPhilHealthNumber">
+			<label for="txtPhilHealthNumber">
 			PhilHealth Number
 		</label>
-		<input [(ngModel)]="employee.philHealthNumber" name="txtPhilHealthNumber" type="text" class="form-control" id="txtPhilHealthNumber"
-			placeholder="PhilHealth Number">
-	</div>
-	<div class="form-group">
-		<label for="txtPagibigNumber">
+			<input type="text" class="form-control" [(ngModel)]="employee.philHealthNumber" name="txtPhilHealthNumber" id="txtPhilHealthNumber"
+				placeholder="PhilHealth Number">
+		</div>
+		<div class="form-group">
+			<label for="txtPagibigNumber">
 			PAGIBIG Number
 		</label>
-		<input [(ngModel)]="employee.pagibigNumber" name="txtPagibigNumber" type="text" class="form-control" id="txtPagibigNumber"
-			placeholder="PAGIBIG Number">
-	</div>
-</div>
-
-<!-- family information -->
-<div class="row">
-	<div class="col-lg-12 module-header">
-		<h3>
-			Family
-			<button (click)="addFamily()" type="button" title="Add Family" class="btn btn-primary btn-xs">
-				<i class="glyphicon glyphicon-plus"></i>
-			</button>
-		</h3>
-		<hr>
-	</div>
-	
-	<div *ngFor="let family of employee.family">
-		<div class="col-lg-6">
-			<div class="form-group">
-				<label for="txtFamilyFirstName">
-					First Name: 
-				</label>
-				<input [(ngModel)]="family.firstName" name="txtFamilyFirstName" type="text" class="form-control" id="txtFamilyFirstName"
-					placeholder="First Name">
-			</div>
-			<div class="form-group">
-				<label for="txtFamilyMiddleName">
-					Middle Name: 
-				</label>
-				<input [(ngModel)]="family.middleName" name="txtFamilyMiddleName" type="text" class="form-control" id="txtFamilyMiddleName"
-					placeholder="Middle Name">
-			</div>
-			<div class="form-group">
-				<label for="txtFamilyLastName">
-					Last Name: 
-				</label>
-				<input [(ngModel)]="family.lastName" name="txtFamilyLastName" type="text" class="form-control" id="txtFamilyLastName" placeholder="Last Name'">
-			</div>
-		</div>
-
-		<div class="col-lg-6">
-			<div class="form-group">
-				<label for="txtFamilyOccupation">
-					Occupation:
-				</label>
-				<input [(ngModel)]="family.occupation" name="txtFathersOccupation" type="text" class="form-control" id="txtFathersOccupation"
-					placeholder="Occupation">
-			</div>
-			<div class="form-group">
-				<label for="txtFamilyRelationship">
-					Relationship:
-				</label>
-				<select [(ngModel)]="family.relationship" name="slcRelationship" class="form-control">
-					<option *ngFor="let relationship of relationships" [value]="relationship">{{ relationship }}</option>
-				</select>
-			</div>
+			<input type="text" class="form-control" [(ngModel)]="employee.pagibigNumber" name="txtPagibigNumber" id="txtPagibigNumber"
+				placeholder="PAGIBIG Number">
 		</div>
 	</div>
-</div>
 
-<!-- educational background -->
-<div class="row">
-	<div class="col-lg-12 module-header">
-		<h3>
-			Educational Background
-			<button (click)="addEducation()" title="Add Education" type="button" class="btn btn-primary btn-xs">
-				<span class="glyphicon glyphicon-plus"></span>
-			</button>
-		</h3>
-		<hr>
+	<!-- family information -->
+	<div class="row">
+		<div class="col-lg-12 module-header">
+			<h3 class="text-center">
+				Family
+				<button (click)="addFamily()" type="button" title="Add Family" class="btn btn-primary btn-xs">
+					<i class="glyphicon glyphicon-plus"></i>
+				</button>
+			</h3>
+			<hr>
+		</div>
+		<div class="col-lg-12">
+			<table class="table table-condensed table-responsive">
+				<thead>
+					<th></th>
+					<th>Relationship</th>
+					<th>First Name</th>
+					<th>Middle Name</th>
+					<th>Last Name</th>
+					<th>Occupation</th>
+				</thead>
+				<tbody>
+					<tr *ngFor="let family of employee.family">
+						<td class="text-center">
+							<button (click)="deleteFamilyInfo(family)" type="button" class="btn btn-default btn-xs">
+								<span class="glyphicon glyphicon-trash"></span>
+							</button>
+						</td>
+						<td>
+							<select class="form-control" [(ngModel)]="family.relationship" name="slcRelationship">
+								<option *ngFor="let relationship of relationships" [value]="relationship">{{ relationship }}</option>
+							</select>
+						</td>
+						<td>
+							<input type="text" class="form-control"  [(ngModel)]="family.firstName" name="txtFamilyFirstName" id="txtFamilyFirstName"
+								placeholder="First Name">
+						</td>
+						<td>
+							<input type="text" class="form-control" [(ngModel)]="family.middleName" name="txtFamilyMiddleName" id="txtFamilyMiddleName"
+								placeholder="Middle Name">
+						</td>
+						<td>
+							<input type="text" class="form-control"  [(ngModel)]="family.lastName" name="txtFamilyLastName" id="txtFamilyLastName" placeholder="Last Name'">
+						</td>
+						<td>
+							<input type="text" class="form-control" [(ngModel)]="family.occupation" name="txtFathersOccupation" id="txtFathersOccupation"
+								placeholder="Occupation">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
-	<div class="col-lg-12">
-		<table class="table table-condensed">
-			<thead>
-				<th></th>
-				<th>Education Level</th>
-				<th>Degree</th>
-				<th>Date of Graduation</th>
-			</thead>
-			<tbody>
-				<tr *ngFor="let education of employee.educationHistory">
-					<td>
-						<button (click)="deleteEducation(education)" type="button" class="btn btn-default btn-xs">
+	<!-- educational background -->
+	<div class="row">
+		<div class="col-lg-12 module-header">
+			<h3 class="text-center">
+				Educational Background
+				<button (click)="addEducation()" title="Add Education" type="button" class="btn btn-primary btn-xs">
+				<span class="glyphicon glyphicon-plus"></span>
+			</button>
+			</h3>
+			<hr>
+		</div>
+
+		<div class="col-lg-12">
+			<table class="table table-condensed">
+				<thead>
+					<th></th>
+					<th>Education Level</th>
+					<th>Degree</th>
+					<th>Date of Graduation</th>
+				</thead>
+				<tbody>
+					<tr *ngFor="let education of employee.educationHistory">
+						<td class="text-center">
+							<button (click)="deleteEducation(education)" type="button" class="btn btn-default btn-xs">
 							<span class="glyphicon glyphicon-trash"></span>
 						</button>
-					</td>
-					<td><input [(ngModel)]="education.educationLevel" name="txtEducationLevel" type="text" class="form-control"></td>
-					<td><input [(ngModel)]="education.degree" name="txtEducationDegree" type="text" class="form-control"></td>
-					<td><input [(ngModel)]="education.dateGraduated" name="txtEducationDateGraduated" type="date" class="form-control"></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-</div>
-
-<!-- certifications -->
-<div class="row">
-	<div class="col-lg-12">
-		<h3>
-			Certifications
-			<button (click)="addCertification()" title="Add Certification" type="button" class="btn btn-primary btn-xs">
-				<span class="glyphicon glyphicon-plus"></span>
-			</button>
-		</h3>
-		<hr/>
+						</td>
+						<td><input [(ngModel)]="education.educationLevel" name="txtEducationLevel" type="text" class="form-control"></td>
+						<td><input [(ngModel)]="education.degree" name="txtEducationDegree" type="text" class="form-control"></td>
+						<td><input [(ngModel)]="education.dateGraduated" name="txtEducationDateGraduated" type="date" class="form-control"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
-	<div class="col-lg-12">
-		<table class="table table-condensed">
-			<thead>
-				<th></th>
-				<th>Title</th>
-				<th>Date Accredited</th>
-			</thead>
-			<tbody>
-				<tr *ngFor="let certification of employee.certifications">
-					<td>
-						<button (click)="deleteCertification(certification)" type="button" class="btn btn-default btn-xs">
+	<!-- certifications -->
+	<div class="row">
+		<div class="col-lg-12 module-header">
+			<h3 class="text-center">
+				Certifications
+				<button (click)="addCertification()" title="Add Certification" type="button" class="btn btn-primary btn-xs">
+					<span class="glyphicon glyphicon-plus"></span>
+				</button>
+			</h3>
+			<hr>
+		</div>
+
+		<div class="col-lg-12">
+			<table class="table table-condensed">
+				<thead>
+					<th></th>
+					<th>Title</th>
+					<th>Date Accredited</th>
+				</thead>
+				<tbody>
+					<tr *ngFor="let certification of employee.certifications">
+						<td class="text-center">
+							<button (click)="deleteCertification(certification)" type="button" class="btn btn-default btn-xs">
 							<span class="glyphicon glyphicon-trash"></span>
 						</button>
-					</td>
-					<td><input [(ngModel)]="certification.title" name="txtCertificationTitle" type="text" class="form-control"></td>
-					<td><input [(ngModel)]="certification.dateAccredited" name="txtCertificationDateAccredited" type="datetime" type="text"
-							class="form-control"></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-</div>
-
-<!-- licensure -->
-<div class="row">
-	<div class="col-lg-12 module-header">
-		<h3>
-			Licensure
-			<button (click)="addLicensure()" title="Add Licensure" type="button" class="btn btn-primary btn-xs">
-				<span class="glyphicon glyphicon-plus"></span>
-			</button>
-		</h3>
-		<hr>
+						</td>
+						<td><input type="text" class="form-control" [(ngModel)]="certification.title" name="txtCertificationTitle"></td>
+						<td><input type="datetime" class="form-control" [(ngModel)]="certification.dateAccredited" name="txtCertificationDateAccredited"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
-	<div class="col-lg-12">
-		<table class="table table-condensed">
-			<thead>
-				<th></th>
-				<th>Title</th>
-				<th>Date Accredited</th>
-			</thead>
-			<tbody>
-				<tr *ngFor="let licensure of employee.licensures">
-					<td>
-						<button (click)="deleteLicensure(licensure)" type="button" class="btn btn-default btn-xs">
+	<!-- licensure -->
+	<div class="row">
+		<div class="col-lg-12 module-header">
+			<h3 class="text-center">
+				Licensure
+				<button (click)="addLicensure()" title="Add Licensure" type="button" class="btn btn-primary btn-xs">
+					<span class="glyphicon glyphicon-plus"></span>
+				</button>
+			</h3>
+			<hr>
+		</div>
+
+		<div class="col-lg-12">
+			<table class="table table-condensed">
+				<thead>
+					<th></th>
+					<th>Title</th>
+					<th>Date Accredited</th>
+				</thead>
+				<tbody>
+					<tr *ngFor="let licensure of employee.licensures">
+						<td class="text-center">
+							<button (click)="deleteLicensure(licensure)" type="button" class="btn btn-default btn-xs">
 							<span class="glyphicon glyphicon-trash"></span>
 						</button>
-					</td>
-					<td><input [(ngModel)]="licensure.title" name="txtLicensureTitle" type="text" class="form-control"></td>
-					<td><input [(ngModel)]="licensure.dateAccredited" name="txtLicensureDateAccredited" type="text" class="form-control"></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-</div>
-
-<!-- work history -->
-<div class="row">
-	<div class="col-lg-12 module-header">
-		<h3>
-			Work History
-			<button (click)="addWorkHistory()" title="Add Work History" type="button" class="btn btn-primary btn-xs">
-				<span class="glyphicon glyphicon-plus"></span>
-			</button>
-		</h3>
-		<hr>
+						</td>
+						<td><input type="text" class="form-control" [(ngModel)]="licensure.title" name="txtLicensureTitle"></td>
+						<td><input type="text" class="form-control" [(ngModel)]="licensure.dateAccredited" name="txtLicensureDateAccredited"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
-	<div class="col-lg-12">
-		<table class="table table-condensed table-responsive">
-			<thead>
-				<th></th>
-				<th class="text-center">Position</th>
-				<th class="text-center">Company Name</th>
-				<th class="text-center">From</th>
-				<th class="text-center">To</th>
-				<th class="text-center">Status</th>
-				<th class="text-center">Salary
+	<!-- work history -->
+	<div class="row">
+		<div class="col-lg-12 module-header">
+			<h3 class="text-center">
+				Work History
+				<button (click)="addWorkHistory()" title="Add Work History" type="button" class="btn btn-primary btn-xs">
+					<span class="glyphicon glyphicon-plus"></span>
+				</button>
+			</h3>
+			<hr>
+		</div>
+
+		<div class="col-lg-12">
+			<table class="table table-condensed table-responsive">
+				<thead>
+					<th></th>
+					<th class="text-center">Position</th>
+					<th class="text-center">Company Name</th>
+					<th class="text-center">From</th>
+					<th class="text-center">To</th>
+					<th class="text-center">Status</th>
+					<th class="text-center">Salary</th>
 					<th class="text-center">Reason for Leaving</th>
-			</thead>
-			<tbody>
-				<tr *ngFor="let workHistory of employee.workHistory">
-					<td class="text-center">
-						<button (click)="deleteLicensure(licensure)" type="button" class="btn btn-default btn-xs">
-							<span class="glyphicon glyphicon-trash"></span>
-						</button>
-					</td>
-					<td>
-						<input [(ngModel)]="workHistory.position" name="txtWorkHistoryPosition" type="text" class="form-control">
-					</td>
-					<td>
-						<input [(ngModel)]="workHistory.companyName" name="txtWorkHistoryCompanyName" type="text" class="form-control">
-					</td>
-					<td>
-						<input [(ngModel)]="workHistory.from" name="txtWorkHistoryFrom" type="text" class="form-control">
-					</td>
-					<td>
-						<input [(ngModel)]="workHistory.to" name="txtWorkHistoryTo" type="text" class="form-control">
-					</td>
-					<td>
-						<input [(ngModel)]="workHistory.status" name="txtWorkHistoryStatus" type="text" class="form-control">
-					</td>
-					<td>
-						<input [(ngModel)]="workHistory.salary" name="txtWorkHistorySalary" type="text" class="form-control">
-					</td>
-					<td>
-						<input [(ngModel)]="workHistory.reasonForLeaving" name="txtWorkHistoryReasonForLeaving" type="text" class="form-control">
-					</td>
-				</tr>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					<tr *ngFor="let workHistory of employee.workHistory">
+						<td class="text-center">
+							<button (click)="deleteLicensure(licensure)" type="button" class="btn btn-default btn-xs">
+								<span class="glyphicon glyphicon-trash"></span>
+							</button>
+						</td>
+						<td><input type="text" class="form-control" [(ngModel)]="workHistory.position" name="txtWorkHistoryPosition"></td>
+						<td><input type="text" class="form-control" [(ngModel)]="workHistory.companyName" name="txtWorkHistoryCompanyName"></td>
+						<td><input type="text" class="form-control" [(ngModel)]="workHistory.from" name="txtWorkHistoryFrom"></td>
+						<td><input type="text" class="form-control" [(ngModel)]="workHistory.to" name="txtWorkHistoryTo"></td>
+						<td><input type="text" class="form-control" [(ngModel)]="workHistory.status" name="txtWorkHistoryStatus"></td>
+						<td><input type="text" class="form-control" [(ngModel)]="workHistory.salary" name="txtWorkHistorySalary"></td>
+						<td><input type="text" class="form-control" [(ngModel)]="workHistory.reasonForLeaving" name="txtWorkHistoryReasonForLeaving"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
-</div>
