@@ -302,6 +302,32 @@ var EmployeeSheetComponent = (function () {
             }
         });
     };
+    EmployeeSheetComponent.prototype.deleteFamily = function (family) {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be deleting this family info",
+            confirmButtonText: "Yes, Delete It!",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    var index = _this.employee.family.indexOf(family);
+                    _this.employee.family.splice(index, 1);
+                    _this.toastr.success("Successfully deleted family info");
+                }
+            }
+        });
+    };
+    EmployeeSheetComponent.prototype.computeAge = function () {
+        try {
+            var splitBirthDay = this.employee.birthDate.toString().split("-");
+            var birthDay = new Date(parseInt(splitBirthDay[0]), parseInt(splitBirthDay[1]), parseInt(splitBirthDay[2]));
+            var diff = Date.now() - birthDay.getTime();
+            this.employee.age = Math.abs(new Date(diff).getUTCFullYear() - 1970);
+        }
+        catch (e) {
+            this.toastr.error(e);
+        }
+    };
     EmployeeSheetComponent.prototype.isReadyToSave = function () {
         var condition1 = this.isNameValid(this.employee);
         var condition2 = this.employee.salary < 0;

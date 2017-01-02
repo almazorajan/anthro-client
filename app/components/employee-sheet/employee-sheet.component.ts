@@ -337,6 +337,32 @@ export class EmployeeSheetComponent implements OnInit {
         });
     }
 
+    public deleteFamily(family: Family): void {
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be deleting this family info",
+            confirmButtonText: "Yes, Delete It!",
+            callBack: (isConfirm) => {
+                if(isConfirm) {
+                    let index = this.employee.family.indexOf(family);
+                    this.employee.family.splice(index, 1);
+                    this.toastr.success("Successfully deleted family info");
+                }
+            }
+        });
+    }
+
+    public computeAge(): void {
+        try {
+            var splitBirthDay = this.employee.birthDate.toString().split("-");
+            var birthDay = new Date(parseInt(splitBirthDay[0]), parseInt(splitBirthDay[1]), parseInt(splitBirthDay[2]));
+            var diff = Date.now() - birthDay.getTime();
+            this.employee.age = Math.abs(new Date(diff).getUTCFullYear() - 1970);    
+        } catch(e) {
+            this.toastr.error(e);
+        }
+    }
+
     public isReadyToSave() {
         let condition1: boolean = this.isNameValid(this.employee);
         let condition2: boolean = this.employee.salary < 0;
