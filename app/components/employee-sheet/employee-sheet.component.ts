@@ -4,7 +4,7 @@ import { EmployeeSheetService } from './employee-sheet.service';
 import { CompanyService } from '../company/company.service';
 import { EmploymentStatusService } from '../employment-status/employment-status.service';
 import { PositionService } from '../position/position.service';
-import { EmploymentStatus, Employee, Position, Company, Family, Education, Accreditation, Modal } from '../../models/model';
+import { EmploymentStatus, Employee, Position, Company, Family, Education, Accreditation, WorkHistory, Modal } from '../../models/model';
 
 @Component({
     selector: 'employee-sheet-component',
@@ -49,6 +49,7 @@ export class EmployeeSheetComponent implements OnInit {
     loadingPositions: boolean = false;
     isFormDisabled: boolean = false;
     readyToSave: boolean = false;
+    addingEmployee: boolean = false;
     companies: Company[] = [];
     employmentStatuses: EmploymentStatus[] = [];
     positions: Position[] = [];
@@ -290,6 +291,11 @@ export class EmployeeSheetComponent implements OnInit {
 
     public addLicensure(): void {
         this.employee.licensures.unshift(new Accreditation());
+    
+    }
+
+    public addWorkHistory(): void {
+        this.employee.workHistory.unshift(new WorkHistory());
     }
 
     public deleteEducation(education: Education): void {
@@ -352,6 +358,21 @@ export class EmployeeSheetComponent implements OnInit {
         });
     }
 
+    public deleteWorkHistory(workHistory: WorkHistory): void {
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be deleting this work history info",
+            confirmButtonText: "Yes, Delete It!",
+            callBack: (isConfirm) => {
+                if(isConfirm) {
+                    let index = this.employee.workHistory.indexOf(workHistory);
+                    this.employee.workHistory.splice(index, 1);
+                    this.toastr.success("Successfully deleted work history info");
+                }
+            }
+        });
+    }
+
     public computeAge(): void {
         try {
             var splitBirthDay = this.employee.birthDate.toString().split("-");
@@ -367,5 +388,36 @@ export class EmployeeSheetComponent implements OnInit {
         let condition1: boolean = this.isNameValid(this.employee);
         let condition2: boolean = this.employee.salary < 0;
         let condition3: boolean = this.isEmployeePositionValid(this.employee);
+    }
+
+    public addEmployee(): void {
+        try {
+            this.swal.confirm({
+                title: "Are You Sure?",
+                message: "You will be adding this employee info",
+                confirmButtonText: "Yes, Delete It!",
+                callBack: (isConfirm) => {
+                    if(isConfirm) {
+                        this.addingEmployee = true;
+                        this.employeeSheetService.add(this.employee).then((result) => {
+                            this.addingEmployee = false;
+                            if(result.success) {
+                                this.employee = new Employee();
+                                this.toastr.success(result.message);
+                            } else {
+                                this.toastr.error(result.message);
+                            }
+                        })
+                        .catch((error) => {
+                            this.addingEmployee = false;
+                            this.toastr.error(error);
+                        }); 
+                    }
+                }
+            });
+        } catch(e) {
+            this.toastr.error(e);
+            this.addingEmployee = false;
+        }
     }
 }

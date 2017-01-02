@@ -28,6 +28,7 @@ var EmployeeSheetComponent = (function () {
         this.loadingPositions = false;
         this.isFormDisabled = false;
         this.readyToSave = false;
+        this.addingEmployee = false;
         this.companies = [];
         this.employmentStatuses = [];
         this.positions = [];
@@ -257,6 +258,9 @@ var EmployeeSheetComponent = (function () {
     EmployeeSheetComponent.prototype.addLicensure = function () {
         this.employee.licensures.unshift(new model_1.Accreditation());
     };
+    EmployeeSheetComponent.prototype.addWorkHistory = function () {
+        this.employee.workHistory.unshift(new model_1.WorkHistory());
+    };
     EmployeeSheetComponent.prototype.deleteEducation = function (education) {
         var _this = this;
         this.swal.confirm({
@@ -317,6 +321,21 @@ var EmployeeSheetComponent = (function () {
             }
         });
     };
+    EmployeeSheetComponent.prototype.deleteWorkHistory = function (workHistory) {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be deleting this work history info",
+            confirmButtonText: "Yes, Delete It!",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    var index = _this.employee.workHistory.indexOf(workHistory);
+                    _this.employee.workHistory.splice(index, 1);
+                    _this.toastr.success("Successfully deleted work history info");
+                }
+            }
+        });
+    };
     EmployeeSheetComponent.prototype.computeAge = function () {
         try {
             var splitBirthDay = this.employee.birthDate.toString().split("-");
@@ -332,6 +351,39 @@ var EmployeeSheetComponent = (function () {
         var condition1 = this.isNameValid(this.employee);
         var condition2 = this.employee.salary < 0;
         var condition3 = this.isEmployeePositionValid(this.employee);
+    };
+    EmployeeSheetComponent.prototype.addEmployee = function () {
+        var _this = this;
+        try {
+            this.swal.confirm({
+                title: "Are You Sure?",
+                message: "You will be adding this employee info",
+                confirmButtonText: "Yes, Delete It!",
+                callBack: function (isConfirm) {
+                    if (isConfirm) {
+                        _this.addingEmployee = true;
+                        _this.employeeSheetService.add(_this.employee).then(function (result) {
+                            _this.addingEmployee = false;
+                            if (result.success) {
+                                _this.employee = new model_1.Employee();
+                                _this.toastr.success(result.message);
+                            }
+                            else {
+                                _this.toastr.error(result.message);
+                            }
+                        })
+                            .catch(function (error) {
+                            _this.addingEmployee = false;
+                            _this.toastr.error(error);
+                        });
+                    }
+                }
+            });
+        }
+        catch (e) {
+            this.toastr.error(e);
+            this.addingEmployee = false;
+        }
     };
     EmployeeSheetComponent = __decorate([
         core_1.Component({
