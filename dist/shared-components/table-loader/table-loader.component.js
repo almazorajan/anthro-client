@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 var TableLoaderComponent = (function () {
     function TableLoaderComponent() {
         this.colSpanSize = 0;
@@ -20,26 +20,25 @@ var TableLoaderComponent = (function () {
         console.log("message", this.message);
         console.log("condition", this.condition);
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Number)
-    ], TableLoaderComponent.prototype, "colSpanSize", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], TableLoaderComponent.prototype, "message", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], TableLoaderComponent.prototype, "condition", void 0);
-    TableLoaderComponent = __decorate([
-        core_1.Component({
-            selector: 'table-loader',
-            templateUrl: './app/shared-components/table-loader/table-loader-template.html'
-        }), 
-        __metadata('design:paramtypes', [])
-    ], TableLoaderComponent);
     return TableLoaderComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], TableLoaderComponent.prototype, "colSpanSize", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], TableLoaderComponent.prototype, "message", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], TableLoaderComponent.prototype, "condition", void 0);
+TableLoaderComponent = __decorate([
+    core_1.Component({
+        selector: 'table-loader',
+        templateUrl: './app/shared-components/table-loader/table-loader-template.html'
+    })
+], TableLoaderComponent);
 exports.TableLoaderComponent = TableLoaderComponent;
 //# sourceMappingURL=table-loader.component.js.map

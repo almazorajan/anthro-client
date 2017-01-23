@@ -1,5 +1,5 @@
 "use strict";
-var model_1 = require('./model');
+var model_1 = require("./model");
 var Employee = (function () {
     function Employee() {
         this.employeeNumber = "";
@@ -8,6 +8,15 @@ var Employee = (function () {
         this.position = new model_1.Position();
         this.position._id = "";
         this.position.positionName = "";
+        this.company = new model_1.Company();
+        this.company._id = "";
+        this.company.companyName = "";
+        this.company.companyAddress = "";
+        this.company.contactNumber = "";
+        this.company.emailAddress = "";
+        this.employmentStatus = new model_1.EmploymentStatus();
+        this.employmentStatus._id = "";
+        this.employmentStatus.employmentStatus = "";
         this.firstName = "";
         this.middleName = "";
         this.lastName = "";

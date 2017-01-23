@@ -13,9 +13,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 // @angular
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 // user-defined service
-var service_1 = require('../../shared-services/service');
+var service_1 = require("../../shared-services/service");
 var EmploymentStatusService = (function () {
     function EmploymentStatusService(service) {
         this.service = service;
@@ -47,11 +47,11 @@ var EmploymentStatusService = (function () {
             body: employmentStatus
         });
     };
-    EmploymentStatusService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [service_1.Service])
-    ], EmploymentStatusService);
     return EmploymentStatusService;
 }());
+EmploymentStatusService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [service_1.Service])
+], EmploymentStatusService);
 exports.EmploymentStatusService = EmploymentStatusService;
 //# sourceMappingURL=employment-status.service.js.map

@@ -13,9 +13,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 // @angular
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 // user-defined service
-var service_1 = require('../../shared-services/service');
+var service_1 = require("../../shared-services/service");
 var LoginService = (function () {
     function LoginService(service) {
         this.service = service;
@@ -27,11 +27,11 @@ var LoginService = (function () {
             body: user
         });
     };
-    LoginService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [service_1.Service])
-    ], LoginService);
     return LoginService;
 }());
+LoginService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [service_1.Service])
+], LoginService);
 exports.LoginService = LoginService;
 //# sourceMappingURL=login.service.js.map

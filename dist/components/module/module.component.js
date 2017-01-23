@@ -9,12 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 // @angular
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 // classes
-var model_1 = require('../../models/model');
+var model_1 = require("../../models/model");
 // services
-var module_service_1 = require('./module.service');
-var services_1 = require('../../shared-services/services');
+var module_service_1 = require("./module.service");
+var services_1 = require("../../shared-services/services");
 var ModuleComponent = (function () {
     function ModuleComponent(moduleService, swal, toastr) {
         this.moduleService = moduleService;
@@ -179,19 +179,21 @@ var ModuleComponent = (function () {
             _this.toastr.error(error);
         });
     };
-    ModuleComponent = __decorate([
-        core_1.Component({
-            selector: 'module-component',
-            templateUrl: './app/components/module/module-page.html',
-            providers: [
-                module_service_1.ModuleService,
-                services_1.SweetAlertService,
-                services_1.ToastrService
-            ]
-        }), 
-        __metadata('design:paramtypes', [module_service_1.ModuleService, services_1.SweetAlertService, services_1.ToastrService])
-    ], ModuleComponent);
     return ModuleComponent;
 }());
+ModuleComponent = __decorate([
+    core_1.Component({
+        selector: 'module-component',
+        templateUrl: './app/components/module/module-page.html',
+        providers: [
+            module_service_1.ModuleService,
+            services_1.SweetAlertService,
+            services_1.ToastrService
+        ]
+    }),
+    __metadata("design:paramtypes", [module_service_1.ModuleService,
+        services_1.SweetAlertService,
+        services_1.ToastrService])
+], ModuleComponent);
 exports.ModuleComponent = ModuleComponent;
 //# sourceMappingURL=module.component.js.map

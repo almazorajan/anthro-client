@@ -7,7 +7,8 @@ import {
     WorkHistory, 
     Family,
     Position,
-    ContactNumber 
+    ContactNumber,
+    Company
 } from './model';
 
 export class Employee {
@@ -17,6 +18,7 @@ export class Employee {
     startingDate: Date;
     salary: number;
     position: Position;
+    company: Company;
     employmentStatus: EmploymentStatus;
     firstName: string;
     middleName: string;
@@ -49,6 +51,15 @@ export class Employee {
         this.position = new Position();
         this.position._id = "";
         this.position.positionName = "";
+        this.company = new Company();
+        this.company._id = "";
+        this.company.companyName = "";
+        this.company.companyAddress = "";
+        this.company.contactNumber = "";
+        this.company.emailAddress = "";
+        this.employmentStatus = new EmploymentStatus();
+        this.employmentStatus._id = "";
+        this.employmentStatus.employmentStatus = "";
         this.firstName = "";
         this.middleName = "";
         this.lastName = "";

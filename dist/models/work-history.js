@@ -1,5 +1,5 @@
 "use strict";
-var model_1 = require('./model');
+var model_1 = require("./model");
 var WorkHistory = (function () {
     function WorkHistory() {
         this.position = "";

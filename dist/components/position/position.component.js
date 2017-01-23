@@ -11,11 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 /*
 * position component v1
 **/
-var core_1 = require('@angular/core');
-var position_service_1 = require('./position.service');
-var module_service_1 = require('../module/module.service');
-var services_1 = require('../../shared-services/services');
-var model_1 = require('../../models/model');
+var core_1 = require("@angular/core");
+var position_service_1 = require("./position.service");
+var module_service_1 = require("../module/module.service");
+var services_1 = require("../../shared-services/services");
+var model_1 = require("../../models/model");
 var PositionComponent = (function () {
     function PositionComponent(positionService, moduleService, swal, toastr) {
         this.positionService = positionService;
@@ -279,20 +279,23 @@ var PositionComponent = (function () {
             this.modules[i].selected = val;
         }
     };
-    PositionComponent = __decorate([
-        core_1.Component({
-            selector: 'position-component',
-            templateUrl: './app/components/position/position-page.html',
-            providers: [
-                position_service_1.PositionService,
-                module_service_1.ModuleService,
-                services_1.SweetAlertService,
-                services_1.ToastrService
-            ]
-        }), 
-        __metadata('design:paramtypes', [position_service_1.PositionService, module_service_1.ModuleService, services_1.SweetAlertService, services_1.ToastrService])
-    ], PositionComponent);
     return PositionComponent;
 }());
+PositionComponent = __decorate([
+    core_1.Component({
+        selector: 'position-component',
+        templateUrl: './app/components/position/position-page.html',
+        providers: [
+            position_service_1.PositionService,
+            module_service_1.ModuleService,
+            services_1.SweetAlertService,
+            services_1.ToastrService
+        ]
+    }),
+    __metadata("design:paramtypes", [position_service_1.PositionService,
+        module_service_1.ModuleService,
+        services_1.SweetAlertService,
+        services_1.ToastrService])
+], PositionComponent);
 exports.PositionComponent = PositionComponent;
 //# sourceMappingURL=position.component.js.map

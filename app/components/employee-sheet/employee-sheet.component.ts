@@ -56,6 +56,29 @@ export class EmployeeSheetComponent implements OnInit {
     relationships: string[] = [];
     educationalLevels: string[] = [];
 
+    private setDefaultPosition(): void {
+        if(this.positions.length <= 0) return;
+
+        this.employee.position._id = this.positions[0]._id;
+        this.employee.position.positionName = this.positions[0].positionName;
+    }
+
+    private setDefaultCompany(): void {
+        if(this.companies.length <= 0) return;
+
+        this.employee.company._id = this.companies[0]._id;
+        this.employee.company.companyName = this.companies[0].companyName;
+        this.employee.company.companyAddress = this.companies[0].companyAddress;
+        this.employee.company.emailAddress = this.companies[0].emailAddress;
+    }
+
+    private setDefaultEmploymentStatus(): void {
+        if(this.employmentStatuses.length <= 0) return;
+
+        this.employee.employmentStatus._id = this.employmentStatuses[0]._id;
+        this.employee.employmentStatus.employmentStatus = this.employmentStatuses[0].employmentStatus;
+    }
+
     private getCompanies(): void {
         try {
             this.companies = [];
@@ -68,6 +91,7 @@ export class EmployeeSheetComponent implements OnInit {
 
                 if(result.success) {
                     this.companies = result.data as Company[];
+                    this.setDefaultCompany();
                     this.toastr.success(result.message);
                 } else {
                     this.toastr.error(result.message);
@@ -97,6 +121,7 @@ export class EmployeeSheetComponent implements OnInit {
 
                 if(result.success) {
                     this.employmentStatuses = result.data as EmploymentStatus[];
+                    this.setDefaultEmploymentStatus();
                     this.toastr.success(result.message);
                 } else {
                     this.toastr.error(result.message);
@@ -126,6 +151,7 @@ export class EmployeeSheetComponent implements OnInit {
 
                 if(result.success) {
                     this.positions = result.data as Position[];
+                    this.setDefaultPosition();
                     this.toastr.success(result.message);
                 } else {
                     this.toastr.error(result.message);
@@ -395,7 +421,7 @@ export class EmployeeSheetComponent implements OnInit {
             this.swal.confirm({
                 title: "Are You Sure?",
                 message: "You will be adding this employee info",
-                confirmButtonText: "Yes, Delete It!",
+                confirmButtonText: "Yes, Add It!",
                 callBack: (isConfirm) => {
                     if(isConfirm) {
                         this.addingEmployee = true;

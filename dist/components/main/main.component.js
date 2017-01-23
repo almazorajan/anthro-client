@@ -8,12 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var services_1 = require('../../shared-services/services');
-var position_service_1 = require('../position/position.service');
-var user_service_1 = require('../user/user.service');
-var model_1 = require('../../models/model');
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var services_1 = require("../../shared-services/services");
+var position_service_1 = require("../position/position.service");
+var user_service_1 = require("../user/user.service");
+var model_1 = require("../../models/model");
 var MainComponent = (function () {
     function MainComponent(swal, toastr, localStorage, positionService, userService, router) {
         this.swal = swal;
@@ -175,21 +175,26 @@ var MainComponent = (function () {
         this.localStorage.remove("anthro.user-session");
         this.redirectToLogin();
     };
-    MainComponent = __decorate([
-        core_1.Component({
-            selector: 'main-component',
-            templateUrl: './app/components/main/main-page.html',
-            providers: [
-                services_1.SweetAlertService,
-                services_1.ToastrService,
-                services_1.LocalStorageService,
-                position_service_1.PositionService,
-                user_service_1.UserService
-            ]
-        }), 
-        __metadata('design:paramtypes', [services_1.SweetAlertService, services_1.ToastrService, services_1.LocalStorageService, position_service_1.PositionService, user_service_1.UserService, router_1.Router])
-    ], MainComponent);
     return MainComponent;
 }());
+MainComponent = __decorate([
+    core_1.Component({
+        selector: 'main-component',
+        templateUrl: './app/components/main/main-page.html',
+        providers: [
+            services_1.SweetAlertService,
+            services_1.ToastrService,
+            services_1.LocalStorageService,
+            position_service_1.PositionService,
+            user_service_1.UserService
+        ]
+    }),
+    __metadata("design:paramtypes", [services_1.SweetAlertService,
+        services_1.ToastrService,
+        services_1.LocalStorageService,
+        position_service_1.PositionService,
+        user_service_1.UserService,
+        router_1.Router])
+], MainComponent);
 exports.MainComponent = MainComponent;
 //# sourceMappingURL=main.component.js.map

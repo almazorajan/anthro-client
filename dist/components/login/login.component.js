@@ -8,11 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var login_service_1 = require('./login.service');
-var services_1 = require('../../shared-services/services');
-var model_1 = require('../../models/model');
+var core_1 = require("@angular/core");
+var router_1 = require("@angular/router");
+var login_service_1 = require("./login.service");
+var services_1 = require("../../shared-services/services");
+var model_1 = require("../../models/model");
 var LoginComponent = (function () {
     function LoginComponent(swal, toastr, loginService, localStorage, router) {
         this.swal = swal;
@@ -66,20 +66,24 @@ var LoginComponent = (function () {
             this.toastr.error(e);
         }
     };
-    LoginComponent = __decorate([
-        core_1.Component({
-            selector: 'login-component',
-            templateUrl: './app/components/login/login-page.html',
-            providers: [
-                services_1.SweetAlertService,
-                services_1.ToastrService,
-                login_service_1.LoginService,
-                services_1.LocalStorageService
-            ]
-        }), 
-        __metadata('design:paramtypes', [services_1.SweetAlertService, services_1.ToastrService, login_service_1.LoginService, services_1.LocalStorageService, router_1.Router])
-    ], LoginComponent);
     return LoginComponent;
 }());
+LoginComponent = __decorate([
+    core_1.Component({
+        selector: 'login-component',
+        templateUrl: './app/components/login/login-page.html',
+        providers: [
+            services_1.SweetAlertService,
+            services_1.ToastrService,
+            login_service_1.LoginService,
+            services_1.LocalStorageService
+        ]
+    }),
+    __metadata("design:paramtypes", [services_1.SweetAlertService,
+        services_1.ToastrService,
+        login_service_1.LoginService,
+        services_1.LocalStorageService,
+        router_1.Router])
+], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map

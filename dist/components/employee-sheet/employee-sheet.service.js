@@ -8,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var service_1 = require('../../shared-services/service');
+var core_1 = require("@angular/core");
+var service_1 = require("../../shared-services/service");
 var EmployeeSheetService = (function () {
     function EmployeeSheetService(service) {
         this.service = service;
@@ -33,15 +33,15 @@ var EmployeeSheetService = (function () {
     EmployeeSheetService.prototype.add = function (employee) {
         return this.service.apiCall({
             verb: "post",
-            uri: "employee/add",
+            uri: "employeesheet/add",
             body: employee
         });
     };
-    EmployeeSheetService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [service_1.Service])
-    ], EmployeeSheetService);
     return EmployeeSheetService;
 }());
+EmployeeSheetService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [service_1.Service])
+], EmployeeSheetService);
 exports.EmployeeSheetService = EmployeeSheetService;
 //# sourceMappingURL=employee-sheet.service.js.map

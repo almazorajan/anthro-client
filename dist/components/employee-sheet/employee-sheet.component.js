@@ -8,13 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var services_1 = require('../../shared-services/services');
-var employee_sheet_service_1 = require('./employee-sheet.service');
-var company_service_1 = require('../company/company.service');
-var employment_status_service_1 = require('../employment-status/employment-status.service');
-var position_service_1 = require('../position/position.service');
-var model_1 = require('../../models/model');
+var core_1 = require("@angular/core");
+var services_1 = require("../../shared-services/services");
+var employee_sheet_service_1 = require("./employee-sheet.service");
+var company_service_1 = require("../company/company.service");
+var employment_status_service_1 = require("../employment-status/employment-status.service");
+var position_service_1 = require("../position/position.service");
+var model_1 = require("../../models/model");
 var EmployeeSheetComponent = (function () {
     function EmployeeSheetComponent(swal, toastr, employeeSheetService, companyService, employmentStatusService, positionService) {
         this.swal = swal;
@@ -44,6 +44,26 @@ var EmployeeSheetComponent = (function () {
         this.getRelationships();
         this.getEducationalLevels();
     };
+    EmployeeSheetComponent.prototype.setDefaultPosition = function () {
+        if (this.positions.length <= 0)
+            return;
+        this.employee.position._id = this.positions[0]._id;
+        this.employee.position.positionName = this.positions[0].positionName;
+    };
+    EmployeeSheetComponent.prototype.setDefaultCompany = function () {
+        if (this.companies.length <= 0)
+            return;
+        this.employee.company._id = this.companies[0]._id;
+        this.employee.company.companyName = this.companies[0].companyName;
+        this.employee.company.companyAddress = this.companies[0].companyAddress;
+        this.employee.company.emailAddress = this.companies[0].emailAddress;
+    };
+    EmployeeSheetComponent.prototype.setDefaultEmploymentStatus = function () {
+        if (this.employmentStatuses.length <= 0)
+            return;
+        this.employee.employmentStatus._id = this.employmentStatuses[0]._id;
+        this.employee.employmentStatus.employmentStatus = this.employmentStatuses[0].employmentStatus;
+    };
     EmployeeSheetComponent.prototype.getCompanies = function () {
         var _this = this;
         try {
@@ -55,6 +75,7 @@ var EmployeeSheetComponent = (function () {
                 _this.isFormDisabled = false;
                 if (result.success) {
                     _this.companies = result.data;
+                    _this.setDefaultCompany();
                     _this.toastr.success(result.message);
                 }
                 else {
@@ -84,6 +105,7 @@ var EmployeeSheetComponent = (function () {
                 _this.isFormDisabled = false;
                 if (result.success) {
                     _this.employmentStatuses = result.data;
+                    _this.setDefaultEmploymentStatus();
                     _this.toastr.success(result.message);
                 }
                 else {
@@ -113,6 +135,7 @@ var EmployeeSheetComponent = (function () {
                 _this.isFormDisabled = false;
                 if (result.success) {
                     _this.positions = result.data;
+                    _this.setDefaultPosition();
                     _this.toastr.success(result.message);
                 }
                 else {
@@ -358,7 +381,7 @@ var EmployeeSheetComponent = (function () {
             this.swal.confirm({
                 title: "Are You Sure?",
                 message: "You will be adding this employee info",
-                confirmButtonText: "Yes, Delete It!",
+                confirmButtonText: "Yes, Add It!",
                 callBack: function (isConfirm) {
                     if (isConfirm) {
                         _this.addingEmployee = true;
@@ -385,25 +408,30 @@ var EmployeeSheetComponent = (function () {
             this.addingEmployee = false;
         }
     };
-    EmployeeSheetComponent = __decorate([
-        core_1.Component({
-            selector: 'employee-sheet-component',
-            templateUrl: './app/components/employee-sheet/employee-sheet-page.html',
-            styleUrls: [
-                './app/components/employee-sheet/employee-sheet-style.css'
-            ],
-            providers: [
-                services_1.SweetAlertService,
-                services_1.ToastrService,
-                employee_sheet_service_1.EmployeeSheetService,
-                company_service_1.CompanyService,
-                employment_status_service_1.EmploymentStatusService,
-                position_service_1.PositionService
-            ]
-        }), 
-        __metadata('design:paramtypes', [services_1.SweetAlertService, services_1.ToastrService, employee_sheet_service_1.EmployeeSheetService, company_service_1.CompanyService, employment_status_service_1.EmploymentStatusService, position_service_1.PositionService])
-    ], EmployeeSheetComponent);
     return EmployeeSheetComponent;
 }());
+EmployeeSheetComponent = __decorate([
+    core_1.Component({
+        selector: 'employee-sheet-component',
+        templateUrl: './app/components/employee-sheet/employee-sheet-page.html',
+        styleUrls: [
+            './app/components/employee-sheet/employee-sheet-style.css'
+        ],
+        providers: [
+            services_1.SweetAlertService,
+            services_1.ToastrService,
+            employee_sheet_service_1.EmployeeSheetService,
+            company_service_1.CompanyService,
+            employment_status_service_1.EmploymentStatusService,
+            position_service_1.PositionService
+        ]
+    }),
+    __metadata("design:paramtypes", [services_1.SweetAlertService,
+        services_1.ToastrService,
+        employee_sheet_service_1.EmployeeSheetService,
+        company_service_1.CompanyService,
+        employment_status_service_1.EmploymentStatusService,
+        position_service_1.PositionService])
+], EmployeeSheetComponent);
 exports.EmployeeSheetComponent = EmployeeSheetComponent;
 //# sourceMappingURL=employee-sheet.component.js.map

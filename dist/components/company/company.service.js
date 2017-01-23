@@ -13,9 +13,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 // @angular
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 // user-defined service
-var service_1 = require('../../shared-services/service');
+var service_1 = require("../../shared-services/service");
 var CompanyService = (function () {
     function CompanyService(service) {
         this.service = service;
@@ -47,11 +47,11 @@ var CompanyService = (function () {
             body: company
         });
     };
-    CompanyService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [service_1.Service])
-    ], CompanyService);
     return CompanyService;
 }());
+CompanyService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [service_1.Service])
+], CompanyService);
 exports.CompanyService = CompanyService;
 //# sourceMappingURL=company.service.js.map

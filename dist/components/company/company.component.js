@@ -8,10 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var model_1 = require('../../models/model');
-var company_service_1 = require('./company.service');
-var services_1 = require('../../shared-services/services');
+var core_1 = require("@angular/core");
+var model_1 = require("../../models/model");
+var company_service_1 = require("./company.service");
+var services_1 = require("../../shared-services/services");
 var CompanyComponent = (function () {
     function CompanyComponent(swal, toastr, companyService) {
         this.swal = swal;
@@ -194,19 +194,21 @@ var CompanyComponent = (function () {
             this.toastr.error(e);
         }
     };
-    CompanyComponent = __decorate([
-        core_1.Component({
-            selector: 'company-component',
-            templateUrl: './app/components/company/company-page.html',
-            providers: [
-                services_1.SweetAlertService,
-                services_1.ToastrService,
-                company_service_1.CompanyService
-            ]
-        }), 
-        __metadata('design:paramtypes', [services_1.SweetAlertService, services_1.ToastrService, company_service_1.CompanyService])
-    ], CompanyComponent);
     return CompanyComponent;
 }());
+CompanyComponent = __decorate([
+    core_1.Component({
+        selector: 'company-component',
+        templateUrl: './app/components/company/company-page.html',
+        providers: [
+            services_1.SweetAlertService,
+            services_1.ToastrService,
+            company_service_1.CompanyService
+        ]
+    }),
+    __metadata("design:paramtypes", [services_1.SweetAlertService,
+        services_1.ToastrService,
+        company_service_1.CompanyService])
+], CompanyComponent);
 exports.CompanyComponent = CompanyComponent;
 //# sourceMappingURL=company.component.js.map

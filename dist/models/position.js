@@ -1,5 +1,5 @@
 "use strict";
-var model_1 = require('./model');
+var model_1 = require("./model");
 var Position = (function () {
     function Position() {
         this.positionName = "";

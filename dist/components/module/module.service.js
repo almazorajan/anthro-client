@@ -8,9 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var services_1 = require('../../shared-services/services');
-require('rxjs/add/operator/toPromise');
+var core_1 = require("@angular/core");
+var services_1 = require("../../shared-services/services");
+require("rxjs/add/operator/toPromise");
 var ModuleService = (function () {
     function ModuleService(service) {
         this.service = service;
@@ -48,11 +48,11 @@ var ModuleService = (function () {
             body: _module
         });
     };
-    ModuleService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [services_1.Service])
-    ], ModuleService);
     return ModuleService;
 }());
+ModuleService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [services_1.Service])
+], ModuleService);
 exports.ModuleService = ModuleService;
 //# sourceMappingURL=module.service.js.map

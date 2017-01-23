@@ -11,11 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 /*
 * user component v1
 **/
-var core_1 = require('@angular/core');
-var position_service_1 = require('../position/position.service');
-var user_service_1 = require('./user.service');
-var services_1 = require('../../shared-services/services');
-var model_1 = require('../../models/model');
+var core_1 = require("@angular/core");
+var position_service_1 = require("../position/position.service");
+var user_service_1 = require("./user.service");
+var services_1 = require("../../shared-services/services");
+var model_1 = require("../../models/model");
 var UserComponent = (function () {
     function UserComponent(userService, positionService, swal, toastr) {
         this.userService = userService;
@@ -255,20 +255,23 @@ var UserComponent = (function () {
             this.toastr.error(e);
         }
     };
-    UserComponent = __decorate([
-        core_1.Component({
-            selector: 'user-component',
-            templateUrl: './app/components/user/user-page.html',
-            providers: [
-                user_service_1.UserService,
-                position_service_1.PositionService,
-                services_1.SweetAlertService,
-                services_1.ToastrService
-            ]
-        }), 
-        __metadata('design:paramtypes', [user_service_1.UserService, position_service_1.PositionService, services_1.SweetAlertService, services_1.ToastrService])
-    ], UserComponent);
     return UserComponent;
 }());
+UserComponent = __decorate([
+    core_1.Component({
+        selector: 'user-component',
+        templateUrl: './app/components/user/user-page.html',
+        providers: [
+            user_service_1.UserService,
+            position_service_1.PositionService,
+            services_1.SweetAlertService,
+            services_1.ToastrService
+        ]
+    }),
+    __metadata("design:paramtypes", [user_service_1.UserService,
+        position_service_1.PositionService,
+        services_1.SweetAlertService,
+        services_1.ToastrService])
+], UserComponent);
 exports.UserComponent = UserComponent;
 //# sourceMappingURL=user.component.js.map

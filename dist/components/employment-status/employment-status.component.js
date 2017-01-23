@@ -8,10 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var employment_status_service_1 = require('./employment-status.service');
-var services_1 = require('../../shared-services/services');
-var model_1 = require('../../models/model');
+var core_1 = require("@angular/core");
+var employment_status_service_1 = require("./employment-status.service");
+var services_1 = require("../../shared-services/services");
+var model_1 = require("../../models/model");
 var EmploymentStatusComponent = (function () {
     function EmploymentStatusComponent(swal, toastr, employmentStatusService) {
         this.swal = swal;
@@ -206,19 +206,21 @@ var EmploymentStatusComponent = (function () {
             this.toastr.error(e);
         }
     };
-    EmploymentStatusComponent = __decorate([
-        core_1.Component({
-            selector: 'employment-status-component',
-            templateUrl: './app/components/employment-status/employment-status-page.html',
-            providers: [
-                services_1.SweetAlertService,
-                services_1.ToastrService,
-                employment_status_service_1.EmploymentStatusService
-            ]
-        }), 
-        __metadata('design:paramtypes', [services_1.SweetAlertService, services_1.ToastrService, employment_status_service_1.EmploymentStatusService])
-    ], EmploymentStatusComponent);
     return EmploymentStatusComponent;
 }());
+EmploymentStatusComponent = __decorate([
+    core_1.Component({
+        selector: 'employment-status-component',
+        templateUrl: './app/components/employment-status/employment-status-page.html',
+        providers: [
+            services_1.SweetAlertService,
+            services_1.ToastrService,
+            employment_status_service_1.EmploymentStatusService
+        ]
+    }),
+    __metadata("design:paramtypes", [services_1.SweetAlertService,
+        services_1.ToastrService,
+        employment_status_service_1.EmploymentStatusService])
+], EmploymentStatusComponent);
 exports.EmploymentStatusComponent = EmploymentStatusComponent;
 //# sourceMappingURL=employment-status.component.js.map
