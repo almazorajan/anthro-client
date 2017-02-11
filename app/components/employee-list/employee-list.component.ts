@@ -39,7 +39,6 @@ export class EmployeeListComponent implements OnInit {
     readyToSave: boolean = false;
     addingEmployee: boolean = false;
     employees: Employee[] = [];
-    displayedEmployees: Employee[] = [];
     companies: Company[] = [];
     employmentStatuses: EmploymentStatus[] = [];
     positions: Position[] = [];
@@ -61,7 +60,6 @@ export class EmployeeListComponent implements OnInit {
 
                 if(result.success) {
                     this.employees = result.data as Employee[];
-                    this.displayedEmployees = result.data as Employee[];
                     console.log(result.data);
                     toastr.success(result.message);
                 } else {

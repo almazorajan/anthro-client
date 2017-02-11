@@ -31,7 +31,6 @@ var EmployeeListComponent = (function () {
         this.readyToSave = false;
         this.addingEmployee = false;
         this.employees = [];
-        this.displayedEmployees = [];
         this.companies = [];
         this.employmentStatuses = [];
         this.positions = [];
@@ -51,7 +50,6 @@ var EmployeeListComponent = (function () {
                 _this.isFormDisabled = false;
                 if (result.success) {
                     _this.employees = result.data;
-                    _this.displayedEmployees = result.data;
                     console.log(result.data);
                     toastr.success(result.message);
                 }
