@@ -13,15 +13,17 @@ var services_1 = require("../../shared-services/services");
 var employee_list_service_1 = require("./employee-list.service");
 var company_service_1 = require("../company/company.service");
 var employment_status_service_1 = require("../employment-status/employment-status.service");
+var employee_sheet_service_1 = require("../employee-sheet/employee-sheet.service");
 var position_service_1 = require("../position/position.service");
 var EmployeeListComponent = (function () {
-    function EmployeeListComponent(swal, toastr, employeeListService, companyService, employmentStatusService, positionService) {
+    function EmployeeListComponent(swal, toastr, employeeListService, companyService, employmentStatusService, positionService, employeeSheetService) {
         this.swal = swal;
         this.toastr = toastr;
         this.employeeListService = employeeListService;
         this.companyService = companyService;
         this.employmentStatusService = employmentStatusService;
         this.positionService = positionService;
+        this.employeeSheetService = employeeSheetService;
         this.searchFilter = "";
         this.loadingEmployees = false;
         this.loadingCompanies = false;
@@ -38,6 +40,10 @@ var EmployeeListComponent = (function () {
     }
     EmployeeListComponent.prototype.ngOnInit = function () {
         this.getAllEmployees();
+        this.getCompanies();
+        this.getEmploymentStatuses();
+        this.getPositions();
+        this.getRelationships();
     };
     EmployeeListComponent.prototype.getAllEmployees = function () {
         var _this = this;
@@ -50,7 +56,6 @@ var EmployeeListComponent = (function () {
                 _this.isFormDisabled = false;
                 if (result.success) {
                     _this.employees = result.data;
-                    console.log(result.data);
                     toastr.success(result.message);
                 }
                 else {
@@ -161,6 +166,7 @@ var EmployeeListComponent = (function () {
     };
     EmployeeListComponent.prototype.getRelationships = function () {
         try {
+            this.relationships = this.employeeSheetService.getRelationships();
         }
         catch (e) {
             this.toastr.error(e);
@@ -178,7 +184,8 @@ EmployeeListComponent = __decorate([
             employee_list_service_1.EmployeeListService,
             company_service_1.CompanyService,
             employment_status_service_1.EmploymentStatusService,
-            position_service_1.PositionService
+            position_service_1.PositionService,
+            employee_sheet_service_1.EmployeeSheetService
         ]
     }),
     __metadata("design:paramtypes", [services_1.SweetAlertService,
@@ -186,7 +193,8 @@ EmployeeListComponent = __decorate([
         employee_list_service_1.EmployeeListService,
         company_service_1.CompanyService,
         employment_status_service_1.EmploymentStatusService,
-        position_service_1.PositionService])
+        position_service_1.PositionService,
+        employee_sheet_service_1.EmployeeSheetService])
 ], EmployeeListComponent);
 exports.EmployeeListComponent = EmployeeListComponent;
 //# sourceMappingURL=employee-list.component.js.map

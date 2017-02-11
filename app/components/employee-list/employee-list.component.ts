@@ -3,6 +3,7 @@ import { SweetAlertService, ToastrService } from '../../shared-services/services
 import { EmployeeListService } from './employee-list.service';
 import { CompanyService } from '../company/company.service';
 import { EmploymentStatusService } from '../employment-status/employment-status.service';
+import { EmployeeSheetService } from '../employee-sheet/employee-sheet.service';
 import { PositionService } from '../position/position.service';
 import { EmploymentStatus, Employee, Position, Company, Family, Education, Accreditation, WorkHistory, Modal } from '../../models/model';
 
@@ -15,7 +16,8 @@ import { EmploymentStatus, Employee, Position, Company, Family, Education, Accre
         EmployeeListService,
         CompanyService,
         EmploymentStatusService,
-        PositionService
+        PositionService,
+        EmployeeSheetService
     ]
 })
 
@@ -27,7 +29,8 @@ export class EmployeeListComponent implements OnInit {
         private employeeListService: EmployeeListService,
         private companyService: CompanyService,
         private employmentStatusService: EmploymentStatusService,
-        private positionService: PositionService
+        private positionService: PositionService,
+        private employeeSheetService: EmployeeSheetService
     ) { }
 
     searchFilter: string = "";
@@ -46,6 +49,10 @@ export class EmployeeListComponent implements OnInit {
 
     ngOnInit() {
         this.getAllEmployees();
+        this.getCompanies();
+        this.getEmploymentStatuses();
+        this.getPositions();
+        this.getRelationships();
     }
 
     private getAllEmployees() {
@@ -60,7 +67,6 @@ export class EmployeeListComponent implements OnInit {
 
                 if(result.success) {
                     this.employees = result.data as Employee[];
-                    console.log(result.data);
                     toastr.success(result.message);
                 } else {
                     toastr.error(result.message);
@@ -170,7 +176,7 @@ export class EmployeeListComponent implements OnInit {
 
     private getRelationships(): void {
         try {
-            //this.relationships = this.employeeSheetService.getRelationships();
+            this.relationships = this.employeeSheetService.getRelationships();
         } catch (e) {
             this.toastr.error(e);
         }
