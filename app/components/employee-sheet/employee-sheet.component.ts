@@ -77,6 +77,8 @@ export class EmployeeSheetComponent implements OnInit {
 
         this.employee.employmentStatus._id = this.employmentStatuses[0]._id;
         this.employee.employmentStatus.employmentStatus = this.employmentStatuses[0].employmentStatus;
+        this.employee.workHistory[0].employmentStatus._id = this.employmentStatuses[0]._id;
+        this.employee.workHistory[0].employmentStatus.employmentStatus = this.employmentStatuses[0].employmentStatus;
     }
 
     private getCompanies(): void {
@@ -429,6 +431,9 @@ export class EmployeeSheetComponent implements OnInit {
                             this.addingEmployee = false;
                             if(result.success) {
                                 this.employee = new Employee();
+                                this.setDefaultCompany();
+                                this.setDefaultEmploymentStatus();
+                                this.setDefaultPosition();
                                 this.toastr.success(result.message);
                             } else {
                                 this.toastr.error(result.message);

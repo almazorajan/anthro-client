@@ -1,35 +1,29 @@
-// /*
-// version: 1
-// Employee List Service
-// **/
+import { Injectable } from '@angular/core';
+import { Search, Employee, Result } from '../../models/model';
+import { Service } from '../../shared-services/service';
 
-// // @angular
-// import { Injectable } from '@angular/core';
+@Injectable() export class EmployeeListService extends Service {
 
-// // user-defined models
-// import { Search, Employee, Result } from '../../models/model';
+    getAllEmployees(): Promise<Result> {
+        return this.apiCall({
+            verb: "post",
+            uri: "employeelist/getall"
+        });
+    }
 
-// // user-defined service
-// import { Service } from '../../shared-services/service';
+    updateEmployee(employee: Employee): Promise<Result> {
+        return this.apiCall({
+            verb: "post",
+            uri: "employeelist/updateemployee",
+            body: employee 
+        });
+    }
 
-// @Injectable() export class EmployeeListService extends Service {
-
-//     addEmployee(company: Employee): Promise<Result> {
-
-//         return this.apiCall("post", "employee/addemployee", company);
-
-//     }
-
-//     updateEmployee(company: Employee): Promise<Result> {
-
-//         return this.apiCall("post", "employee/updateemployee", company);
-
-//     }
-
-//     deleteEmployee(company: Employee): Promise<Result> {
-
-//         return this.apiCall("post", "employee/deleteemployee", company);
-
-//     }
-
-// }
+    deleteEmployee(employee: Employee): Promise<Result> {
+        return this.apiCall({
+            verb: "post",
+            uri: "employeelist/deleteemployee",
+            body: employee 
+        });
+    }
+}

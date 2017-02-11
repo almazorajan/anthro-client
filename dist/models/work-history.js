@@ -3,7 +3,7 @@ var model_1 = require("./model");
 var WorkHistory = (function () {
     function WorkHistory() {
         this.position = "";
-        this.company = new model_1.Company();
+        this.companyName = "";
         this.dateFrom = new Date();
         this.dateTo = new Date();
         this.isPresent = false;

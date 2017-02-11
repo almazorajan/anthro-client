@@ -36,6 +36,10 @@ const routes: Routes = [
                 component: EmployeeSheetComponent
             },
             {
+                path: 'employeelist',
+                component: EmployeeListComponent
+            },
+            {
                 path: 'user',
                 component: UserComponent
             },

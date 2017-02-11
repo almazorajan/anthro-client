@@ -1,10 +1,10 @@
 
-import { EmploymentStatus, Company } from './model';
+import { EmploymentStatus } from './model';
 
 export class WorkHistory {
 
     position: string;
-    company: Company;
+    companyName: string;
     dateFrom: Date;
     dateTo: Date;
     isPresent: boolean;
@@ -15,7 +15,7 @@ export class WorkHistory {
     constructor() {
 
         this.position = "";
-        this.company = new Company();
+        this.companyName = "";
         this.dateFrom = new Date();
         this.dateTo = new Date();
         this.isPresent = false;

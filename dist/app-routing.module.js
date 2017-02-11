@@ -9,6 +9,7 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 // components
 var company_component_1 = require("./components/company/company.component");
+var employee_list_component_1 = require("./components/employee-list/employee-list.component");
 var employee_sheet_component_1 = require("./components/employee-sheet/employee-sheet.component");
 var employment_status_component_1 = require("./components/employment-status/employment-status.component");
 var login_component_1 = require("./components/login/login.component");
@@ -38,6 +39,10 @@ var routes = [
             {
                 path: 'employeesheet',
                 component: employee_sheet_component_1.EmployeeSheetComponent
+            },
+            {
+                path: 'employeelist',
+                component: employee_list_component_1.EmployeeListComponent
             },
             {
                 path: 'user',

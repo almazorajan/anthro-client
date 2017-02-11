@@ -63,6 +63,8 @@ var EmployeeSheetComponent = (function () {
             return;
         this.employee.employmentStatus._id = this.employmentStatuses[0]._id;
         this.employee.employmentStatus.employmentStatus = this.employmentStatuses[0].employmentStatus;
+        this.employee.workHistory[0].employmentStatus._id = this.employmentStatuses[0]._id;
+        this.employee.workHistory[0].employmentStatus.employmentStatus = this.employmentStatuses[0].employmentStatus;
     };
     EmployeeSheetComponent.prototype.getCompanies = function () {
         var _this = this;
@@ -389,6 +391,9 @@ var EmployeeSheetComponent = (function () {
                             _this.addingEmployee = false;
                             if (result.success) {
                                 _this.employee = new model_1.Employee();
+                                _this.setDefaultCompany();
+                                _this.setDefaultEmploymentStatus();
+                                _this.setDefaultPosition();
                                 _this.toastr.success(result.message);
                             }
                             else {
