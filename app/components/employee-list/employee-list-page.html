@@ -63,7 +63,7 @@
 <div class="modal fade" id="mdlModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document" style="width: 1450px;">
         <div class="modal-content">
-            <form autocomplete="off">
+            <form autocomplete="off" *ngIf="currentEmployee">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Employee Information</h4>
@@ -72,42 +72,86 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">First Name</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                <label for="txtFirstName">First Name</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtFirstName" 
+                                    name="txtFirstName" 
+                                    placeholder="First Name" 
+                                    [(ngModel)]="currentEmployee.firstName">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Middle Name</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtMiddleName">Middle Name</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtMiddleName" 
+                                    name="txtMiddleName" 
+                                    placeholder="Middle Name"
+                                    [(ngModel)]="currentEmployee.middleName">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Last Name</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtLastName">Last Name</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtLastName" 
+                                    name="txtLastName" 
+                                    placeholder="Last Name"
+                                    [(ngModel)]="currentEmployee.lastName">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Gender</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                <label for="slcMaritalStatus">Gender</label>
+                                <select [(ngModel)]="currentEmployee.maritalStatus" name="slcMaritalStatus" class="form-control" id="slcMaritalStatus">
+                                    <option>Single</option>
+                                    <option>Married</option>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Citizenship</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtCitizenship">Citizenship</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtCitizenship"
+                                    name="txtCitizenship"
+                                    placeholder="Citizenship"
+                                    [(ngModel)]="currentEmployee.citizenship">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Birth Date</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="dtBirthDate">Birth Date</label>
+                                <input 
+                                    type="datetime" 
+                                    class="form-control" 
+                                    id="dtBirthDate"
+                                    [(ngModel)]="currentEmployee.birthDate">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Age</label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                <label for="nbAge">Age</label>
+                                <input 
+                                    type="number" 
+                                    class="form-control" 
+                                    id="nbAge" 
+                                    name="ngAge"
+                                    [(ngModel)]="currentEmployee.age">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Birth Place</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtBirthPlace">Birth Place</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtBirthPlace" 
+                                    placeholder="Birth Place"
+                                    [(ngModel)]="currentEmployee.birthPlace">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Marital Status</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="slcMaritalStatus">Marital Status</label>
+                                <select [(ngModel)]="currentEmployee.maritalStatus" name="slcMaritalStatus" class="form-control" id="slcMaritalStatus">
+                                    <option>Single</option>
+                                    <option>Married</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -118,26 +162,48 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Employee Number</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtEmployeeNumber">Employee Number</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtEmployeeNumber" 
+                                    placeholder="Employee Number"
+                                    [(ngModel)]="currentEmployee.employeeNumber">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Position</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="slcPosition">Position</label>
+                                <select class="form-control" id="slcPosition">
+                                    <option *ngFor="let position of positions" [value]="position._id">{{ position.positionName }}</option>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Starting Date</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="dtStartingDate">Starting Date</label>
+                                <input 
+                                    type="datetime" 
+                                    class="form-control" 
+                                    id="dtStartingDate" 
+                                    name="dtStartingDate" 
+                                    [(ngModel)]="currentEmployee.startingDate">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Salary</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <input 
+                                    type="number" 
+                                    class="form-control" 
+                                    id="nbSalary"
+                                    [(ngModel)]="currentEmployee.salary">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Employment Status</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="slcEmploymentStatus">Employment Status</label>
+                                <select 
+                                    class="form-control" 
+                                    id="slcEmploymentStatus" 
+                                    name="slcEmploymentStatus" 
+                                    [(ngModel)]="currentEmployee.employmentStatus._id">
+                                    <option *ngFor="let employmentStatus of employmentStatuses" [value]="employmentStatus._id">{{ employmentStatus.employmentStatus }}</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -148,14 +214,33 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Phone Numbers</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtPhoneNumber">
+                                    Phone Numbers
+                                    <button (click)="addPhoneNumber()" type="button" title="Add Phone Number" class="btn btn-primary btn-xs">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                    </button>
+                                </label>
+                                <span *ngFor="let phoneNumber of currentEmployee.phoneNumbers">
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        id="txtPhoneNumber" 
+                                        placeholder="Phone Number"
+                                        [(ngModel)]="phoneNumber.number">
+                                </span>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Landlines</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="exampleInputPassword1">
+                                    Landlines
+                                    <button (click)="addLandline()" type="button" title="Add Phone Number" class="btn btn-primary btn-xs">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                    </button>
+                                </label>
+                                <span *ngFor="let landline of currentEmployee.landlines">
+                                    <input [(ngModel)]="landline.number" name="txtLandline" type="text" class="form-control" id="txtLandline" placeholder="Landline">
+                                </span>
                             </div>
                         </div>
                     </div>
