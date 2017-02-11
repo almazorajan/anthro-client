@@ -20,7 +20,7 @@ import { UserComponent } from './components/user/user.component';
 import { Service } from './shared-services/service';
 
 // pipes
-import { UserFilter } from './pipes/pipe';
+import { UserFilter, EmployeeFilter } from './pipes/pipe';
 
 // shared-components
 import { TableLoaderComponent } from './shared-components/components';
@@ -45,7 +45,8 @@ import { TableLoaderComponent } from './shared-components/components';
         PositionComponent,
         UserComponent,
 
-        UserFilter
+        UserFilter,
+        EmployeeFilter
     ],
 
     providers: [Service],

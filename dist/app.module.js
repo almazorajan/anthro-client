@@ -50,7 +50,8 @@ AppModule = __decorate([
             page_not_found_component_1.PageNotFoundComponent,
             position_component_1.PositionComponent,
             user_component_1.UserComponent,
-            pipe_1.UserFilter
+            pipe_1.UserFilter,
+            pipe_1.EmployeeFilter
         ],
         providers: [service_1.Service],
         bootstrap: [app_component_1.AppComponent]

@@ -22,6 +22,7 @@ var EmployeeListComponent = (function () {
         this.companyService = companyService;
         this.employmentStatusService = employmentStatusService;
         this.positionService = positionService;
+        this.searchFilter = "";
         this.loadingEmployees = false;
         this.loadingCompanies = false;
         this.loadingEmploymentStatuses = false;
@@ -30,6 +31,7 @@ var EmployeeListComponent = (function () {
         this.readyToSave = false;
         this.addingEmployee = false;
         this.employees = [];
+        this.displayedEmployees = [];
         this.companies = [];
         this.employmentStatuses = [];
         this.positions = [];
@@ -49,6 +51,7 @@ var EmployeeListComponent = (function () {
                 _this.isFormDisabled = false;
                 if (result.success) {
                     _this.employees = result.data;
+                    _this.displayedEmployees = result.data;
                     console.log(result.data);
                     toastr.success(result.message);
                 }
