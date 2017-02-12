@@ -103,7 +103,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="slcMaritalStatus">Gender</label>
-                                <select [(ngModel)]="currentEmployee.maritalStatus" name="slcMaritalStatus" class="form-control" id="slcMaritalStatus">
+                                <select 
+                                    class="form-control" 
+                                    id="slcMaritalStatus"
+                                    name="slcMaritalStatus" 
+                                    [(ngModel)]="currentEmployee.maritalStatus">
                                     <option>Single</option>
                                     <option>Married</option>
                                 </select>
@@ -173,7 +177,11 @@
                             <div class="form-group">
                                 <label for="slcPosition">Position</label>
                                 <select class="form-control" id="slcPosition">
-                                    <option *ngFor="let position of positions" [value]="position._id">{{ position.positionName }}</option>
+                                    <option 
+                                        *ngFor="let position of positions" 
+                                        [value]="position._id">
+                                        {{ position.positionName }}
+                                    </option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -202,7 +210,11 @@
                                     id="slcEmploymentStatus" 
                                     name="slcEmploymentStatus" 
                                     [(ngModel)]="currentEmployee.employmentStatus._id">
-                                    <option *ngFor="let employmentStatus of employmentStatuses" [value]="employmentStatus._id">{{ employmentStatus.employmentStatus }}</option>
+                                    <option 
+                                        *ngFor="let employmentStatus of employmentStatuses" 
+                                        [value]="employmentStatus._id">
+                                        {{ employmentStatus.employmentStatus }}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -253,91 +265,205 @@
                             <h3>City Address</h3>
                             <div class="checkbox">
                                 <label for="chkCityAddressIsPermanent">
-                                    <input name="chkCityAddressIsPermanent" type="checkbox" id="chkCityAddressIsPermanent"> Permanent Address
+                                    <input 
+                                        name="chkCityAddressIsPermanent" 
+                                        type="checkbox" 
+                                        id="chkCityAddressIsPermanent"
+                                        [(ngModel)]="currentEmployee.cityAddress.isPermanent"> Permanent Address
                                 </label>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Unit/Floor</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtCityAddressUnitFloor">Unit/Floor</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtCityAddressUnitFloor" 
+                                    name="txtCityAddressUnitFloor" 
+                                    placeholder="Unit Floor"
+                                    [(ngModel)]="currentEmployee.cityAddress.unitFloor">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Building</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtCityAddressBuilding">Building</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtCityAddressBuilding"
+                                    name="txtCityAddressBuilding"
+                                    placeholder="Building"
+                                    [(ngModel)]="currentEmployee.cityAddress.building">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Street Name</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtCityAddressStreetName">Street Name</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtCityAddressStreetName"
+                                    name="txtCityAddressStreetName"
+                                    placeholder="Street Name"
+                                    [(ngModel)]="currentEmployee.cityAddress.streetName">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Barangay</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtCityAddressBarangay">Barangay</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtCityAddressBarangay"
+                                    name="txtCityAddressBarangay" 
+                                    placeholder="Barangay"
+                                    [(ngModel)]="currentEmployee.cityAddress.barangay">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">City</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtCityAddressCity">City</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtCityAddressCity"
+                                    name="txtCityAddressCity" 
+                                    placeholder="City"
+                                    [(ngModel)]="currentEmployee.cityAddress.city">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Zip Code</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtCityAddressZipCode">Zip Code</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtCityAddressZipCode"
+                                    name="txtCityAddressZipCode" 
+                                    placeholder="Zip Code"
+                                    [(ngModel)]="currentEmployee.cityAddress.zipCode">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <h3>Provincial Address</h3>
                             <div class="checkbox">
-                                <label for="chkCityAddressIsPermanent">
-                                    <input name="chkCityAddressIsPermanent" type="checkbox" id="chkCityAddressIsPermanent"> Permanent Address
+                                <label for="chkProvincialAddressIsPermanent">
+                                    <input 
+                                        type="checkbox" 
+                                        id="chkProvincialAddressIsPermanent"
+                                        name="chkProvincialAddressIsPermanent" 
+                                        [(ngModel)]="currentEmployee.provincialAddress.isPermanent"> Permanent Address
                                 </label>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Unit/Floor</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtProvincialAddressUnitFloor">Unit/Floor</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtProvincialAddressUnitFloor"
+                                    name="txtProvincialAddressUnitFloor" 
+                                    placeholder="Unit/Floor"
+                                    [(ngModel)]="currentEmployee.provincialAddress.unitFloor">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Building</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtProvincialAddressBuilding">Building</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtProvincialAddressBuilding"
+                                    name="txtProvincialAddressBuilding" 
+                                    placeholder="Building"
+                                    [(ngModel)]="currentEmployee.provincialAddress.building">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Street Name</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtProvincialAddressStreetName">Street Name</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtProvincialAddressStreetName"
+                                    name="txtProvincialAddressStreetName"
+                                    placeholder="Street Name"
+                                    [(ngModel)]="currentEmployee.provincialAddress.streetName">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Barangay</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtProvincialAddressBarangay">Barangay</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtProvincialAddressBarangay"
+                                    name="txtProvincialAddressBarangay" 
+                                    placeholder="Barangay"
+                                    [(ngModel)]="currentEmployee.provincialAddress.barangay">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">City</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtProvincialAddressCity">City</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtProvincialAddressCity"
+                                    name="txtProvincialAddressCity"
+                                    placeholder="City"
+                                    [(ngModel)]="currentEmployee.provincialAddress.city">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Zip Code</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtProvincialAddressZipCode">Zip Code</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtProvincialAddressZipCode" 
+                                    placeholder="Zip Code"
+                                    [(ngModel)]="currentEmployee.provincialAddress.zipCode">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <h3>Permanent Address</h3>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Unit/Floor</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtPermanentAddressUnitFloor">Unit/Floor</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtPermanentAddressUnitFloor" 
+                                    placeholder="Unit Floor"
+                                    [(ngModel)]="currentEmployee.permanentAddress.unitFloor">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Building</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtPermanentAddressBuilding">Building</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtPermanentAddressBuilding"
+                                    name="txtPermanentAddressBuilding" 
+                                    placeholder="Building"
+                                    [(ngModel)]="currentEmployee.permanentAddress.building">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Street Name</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtPermanentAddressStreetName">Street Name</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtPermanentAddressStreetName"
+                                    name="txtPermanentAddressStreetName" 
+                                    placeholder="Password"
+                                    [(ngModel)]="currentEmployee.permanentAddress.streetName">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Barangay</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtPermanentAddressBarangay">Barangay</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtPermanentAddressBarangay"
+                                    name="txtPermanentAddressBarangay" 
+                                    placeholder="Barangay"
+                                    [(ngModel)]="currentEmployee.permanentAddress.barangay">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">City</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtPermanentAddressCity">City</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtPermanentAddressCity"
+                                    name="txtPermanentAddressCity" 
+                                    placeholder="City"
+                                    [(ngModel)]="currentEmployee.permanentAddress.city">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Zip Code</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtPermanentAddressZipCode">Zip Code</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtPermanentAddressZipCode"
+                                    name="txtPermanentAddressZipCode" 
+                                    placeholder="Zip Code"
+                                    [(ngModel)]="currentEmployee.permanentAddress.zipCode">
                             </div>
                         </div>
                         <div class="col-lg-offset-6"></div>
