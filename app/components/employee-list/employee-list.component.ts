@@ -33,6 +33,7 @@ export class EmployeeListComponent implements OnInit {
         private employeeSheetService: EmployeeSheetService
     ) { }
 
+    currentEmployee: Employee;
     searchFilter: string = "";
     loadingEmployees: boolean = false;
     loadingCompanies: boolean = false;
@@ -55,7 +56,7 @@ export class EmployeeListComponent implements OnInit {
         this.getRelationships();
     }
 
-    private getAllEmployees() {
+    private getAllEmployees(): void {
         try {
             this.employees = [];
             this.loadingEmployees = true;
@@ -180,5 +181,9 @@ export class EmployeeListComponent implements OnInit {
         } catch (e) {
             this.toastr.error(e);
         }
+    }
+
+    view(employee: Employee): void {
+        this.currentEmployee = employee;
     }
 }

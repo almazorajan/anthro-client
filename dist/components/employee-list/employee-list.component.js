@@ -172,6 +172,9 @@ var EmployeeListComponent = (function () {
             this.toastr.error(e);
         }
     };
+    EmployeeListComponent.prototype.view = function (employee) {
+        this.currentEmployee = employee;
+    };
     return EmployeeListComponent;
 }());
 EmployeeListComponent = __decorate([

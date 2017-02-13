@@ -28,9 +28,9 @@ var UserComponent = (function () {
     }
     UserComponent.prototype.ngOnInit = function () {
         this.modal = new model_1.Modal("#mdlModalInfo");
+        this.search = new model_1.Search();
         this.getAllUsers();
         this.getAllPositions();
-        this.search = new model_1.Search();
     };
     UserComponent.prototype.getAllUsers = function () {
         var _this = this;

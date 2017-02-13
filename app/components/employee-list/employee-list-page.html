@@ -37,7 +37,7 @@
         <tbody>
             <tr *ngFor="let employee of (employees | employeeFilter: searchFilter )">
                 <td>
-                    <button class="btn btn-primary btn-xs" title="View information" data-toggle="modal" data-target="#mdlModalInfo">
+                    <button (click)="view(employee)" class="btn btn-primary btn-xs" title="View information" data-toggle="modal" data-target="#mdlModalInfo">
                         <i class="glyphicon glyphicon-info-sign"></i>
                     </button>
                 </td>
@@ -130,6 +130,7 @@
                                     type="datetime" 
                                     class="form-control" 
                                     id="dtBirthDate"
+                                    name="dtBirthDate"
                                     [(ngModel)]="currentEmployee.birthDate">
                             </div>
                             <div class="form-group">
@@ -146,13 +147,18 @@
                                 <input 
                                     type="text" 
                                     class="form-control" 
-                                    id="txtBirthPlace" 
+                                    id="txtBirthPlace"
+                                    name="txtBirthPlace"
                                     placeholder="Birth Place"
                                     [(ngModel)]="currentEmployee.birthPlace">
                             </div>
                             <div class="form-group">
                                 <label for="slcMaritalStatus">Marital Status</label>
-                                <select [(ngModel)]="currentEmployee.maritalStatus" name="slcMaritalStatus" class="form-control" id="slcMaritalStatus">
+                                <select 
+                                    class="form-control"
+                                    id="slcMaritalStatus"
+                                    name="slcMaritalStatus" 
+                                    [(ngModel)]="currentEmployee.maritalStatus">
                                     <option>Single</option>
                                     <option>Married</option>
                                 </select>
@@ -170,13 +176,18 @@
                                 <input 
                                     type="text" 
                                     class="form-control" 
-                                    id="txtEmployeeNumber" 
+                                    id="txtEmployeeNumber"
+                                    name="txtEmployeeNumber"
                                     placeholder="Employee Number"
                                     [(ngModel)]="currentEmployee.employeeNumber">
                             </div>
                             <div class="form-group">
                                 <label for="slcPosition">Position</label>
-                                <select class="form-control" id="slcPosition">
+                                <select 
+                                    class="form-control" 
+                                    id="slcPosition"
+                                    name="slcPosition"
+                                    [(ngModel)]="currentEmployee.position._id">
                                     <option 
                                         *ngFor="let position of positions" 
                                         [value]="position._id">
@@ -196,11 +207,12 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Salary</label>
+                                <label for="nbSalary">Salary</label>
                                 <input 
                                     type="number" 
                                     class="form-control" 
                                     id="nbSalary"
+                                    name="dbSalary"
                                     [(ngModel)]="currentEmployee.salary">
                             </div>
                             <div class="form-group">
@@ -210,7 +222,7 @@
                                     id="slcEmploymentStatus" 
                                     name="slcEmploymentStatus" 
                                     [(ngModel)]="currentEmployee.employmentStatus._id">
-                                    <option 
+                                    <option
                                         *ngFor="let employmentStatus of employmentStatuses" 
                                         [value]="employmentStatus._id">
                                         {{ employmentStatus.employmentStatus }}
@@ -228,7 +240,11 @@
                             <div class="form-group">
                                 <label for="txtPhoneNumber">
                                     Phone Numbers
-                                    <button (click)="addPhoneNumber()" type="button" title="Add Phone Number" class="btn btn-primary btn-xs">
+                                    <button 
+                                        (click)="addPhoneNumber()" 
+                                        type="button" 
+                                        title="Add Phone Number" 
+                                        class="btn btn-primary btn-xs">
                                         <i class="glyphicon glyphicon-plus"></i>
                                     </button>
                                 </label>
@@ -236,7 +252,8 @@
                                     <input 
                                         type="text" 
                                         class="form-control" 
-                                        id="txtPhoneNumber" 
+                                        id="txtPhoneNumber"
+                                        name="txtPhoneNumber" 
                                         placeholder="Phone Number"
                                         [(ngModel)]="phoneNumber.number">
                                 </span>
@@ -244,14 +261,24 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">
+                                <label for="txtLandline">
                                     Landlines
-                                    <button (click)="addLandline()" type="button" title="Add Phone Number" class="btn btn-primary btn-xs">
+                                    <button 
+                                        (click)="addLandline()" 
+                                        type="button" 
+                                        title="Add Phone Number" 
+                                        class="btn btn-primary btn-xs">
                                         <i class="glyphicon glyphicon-plus"></i>
                                     </button>
                                 </label>
                                 <span *ngFor="let landline of currentEmployee.landlines">
-                                    <input [(ngModel)]="landline.number" name="txtLandline" type="text" class="form-control" id="txtLandline" placeholder="Landline">
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        id="txtLandline" 
+                                        name="txtLandline"
+                                        placeholder="Landline"
+                                        [(ngModel)]="landline.number">
                                 </span>
                             </div>
                         </div>
@@ -266,9 +293,9 @@
                             <div class="checkbox">
                                 <label for="chkCityAddressIsPermanent">
                                     <input 
-                                        name="chkCityAddressIsPermanent" 
                                         type="checkbox" 
                                         id="chkCityAddressIsPermanent"
+                                        name="chkCityAddressIsPermanent" 
                                         [(ngModel)]="currentEmployee.cityAddress.isPermanent"> Permanent Address
                                 </label>
                             </div>
@@ -475,22 +502,46 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">SSS Number</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtssNumber">SSS Number</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtssNumber"
+                                    name="txtssNumber" 
+                                    placeholder="SS Number"
+                                    [(ngModel)]="currentEmployee.ssNumber">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">TIN Number</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtTinNumber">TIN Number</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtTinNumber"
+                                    name="txtTinNumber"
+                                    placeholder="TIN Number"
+                                    [(ngModel)]="currentEmployee.tinNumber">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="exampleInputPassword1">PhilHealth Number</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtPhilHealthNumber">PhilHealth Number</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtPhilHealthNumber"
+                                    name="txtPhilHealthNumber" 
+                                    placeholder="PhilHealth Number"
+                                    [(ngModel)]="currentEmployee.philHealthNumber">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">PAGIBIG Number</label>
-                                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="txtPagIbigNumber">PAGIBIG Number</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="txtPagIbigNumber"
+                                    name="txtPagIbigNumber" 
+                                    placeholder="PAGIBIG Number"
+                                    [(ngModel)]="currentEmployee.pagibigNumber">
                             </div>
                         </div>
                     </div>
