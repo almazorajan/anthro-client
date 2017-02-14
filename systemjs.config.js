@@ -26,7 +26,6 @@
             'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
 
             'angular-2-local-storage': 'vendor/angular-2-local-storage'
-
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
@@ -41,7 +40,10 @@
                 main: './index.js',
                 defaultExtension: 'js'
             },
-            'angular-2-local-storage': { main: 'index.js', defaultExtension: 'js' },
+            'angular-2-local-storage': { 
+                main: 'index.js', 
+                defaultExtension: 'js' 
+            }
         }
     });
 })(this);

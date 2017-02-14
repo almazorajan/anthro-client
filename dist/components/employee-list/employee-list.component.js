@@ -145,8 +145,6 @@ var EmployeeListComponent = (function () {
                 _this.isFormDisabled = false;
                 if (result.success) {
                     _this.positions = result.data;
-                    //this.setDefaultPosition();
-                    _this.toastr.success(result.message);
                 }
                 else {
                     _this.toastr.error(result.message);
@@ -174,6 +172,7 @@ var EmployeeListComponent = (function () {
     };
     EmployeeListComponent.prototype.view = function (employee) {
         this.currentEmployee = employee;
+        console.log(employee);
     };
     return EmployeeListComponent;
 }());

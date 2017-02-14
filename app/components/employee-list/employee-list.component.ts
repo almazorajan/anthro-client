@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { SweetAlertService, ToastrService } from '../../shared-services/services';
 import { EmployeeListService } from './employee-list.service';
 import { CompanyService } from '../company/company.service';
@@ -157,8 +158,6 @@ export class EmployeeListComponent implements OnInit {
 
                 if (result.success) {
                     this.positions = result.data as Position[];
-                    //this.setDefaultPosition();
-                    this.toastr.success(result.message);
                 } else {
                     this.toastr.error(result.message);
                 }
@@ -185,5 +184,6 @@ export class EmployeeListComponent implements OnInit {
 
     view(employee: Employee): void {
         this.currentEmployee = employee;
+        console.log(employee);
     }
 }

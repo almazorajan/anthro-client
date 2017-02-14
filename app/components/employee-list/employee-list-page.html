@@ -127,7 +127,7 @@
                             <div class="form-group">
                                 <label for="dtBirthDate">Birth Date</label>
                                 <input 
-                                    type="datetime" 
+                                    type="date" 
                                     class="form-control" 
                                     id="dtBirthDate"
                                     name="dtBirthDate"
@@ -188,21 +188,20 @@
                                     id="slcPosition"
                                     name="slcPosition"
                                     [(ngModel)]="currentEmployee.position._id">
-                                    <option 
-                                        *ngFor="let position of positions" 
-                                        [value]="position._id">
+                                    <option *ngFor="let position of positions" [value]="position._id">
                                         {{ position.positionName }}
                                     </option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="dtStartingDate">Starting Date</label>
+                                <label for="dtStartingDate">Starting Date {{ currentEmployee.startingDate | date:'yyyy-MM-dd' }}</label>
                                 <input 
-                                    type="datetime" 
+                                    type="date" 
                                     class="form-control" 
                                     id="dtStartingDate" 
-                                    name="dtStartingDate" 
-                                    [(ngModel)]="currentEmployee.startingDate">
+                                    name="dtStartingDate"
+                                    [value]="currentEmployee.startingDate | date:'yyyy-mm-dd'"
+                                    (input)="currentEmployee.startingDate = $event.target.value">
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -426,7 +425,8 @@
                                 <input 
                                     type="text" 
                                     class="form-control" 
-                                    id="txtProvincialAddressZipCode" 
+                                    id="txtProvincialAddressZipCode"
+                                    name="txtProvincialAddressZipCode" 
                                     placeholder="Zip Code"
                                     [(ngModel)]="currentEmployee.provincialAddress.zipCode">
                             </div>
@@ -438,7 +438,8 @@
                                 <input 
                                     type="text" 
                                     class="form-control" 
-                                    id="txtPermanentAddressUnitFloor" 
+                                    id="txtPermanentAddressUnitFloor"
+                                    name="txtPermanentAddressUnitFloor" 
                                     placeholder="Unit Floor"
                                     [(ngModel)]="currentEmployee.permanentAddress.unitFloor">
                             </div>
@@ -566,7 +567,50 @@
                                     <th>Occupation</th>
                                 </thead>
                                 <tbody>
-                                    <tr></tr>
+                                    <tr *ngFor="let family of currentEmployee.family">
+                                        <td class="text-center">
+                                            <button (click)="deleteFamily(family)" type="button" class="btn btn-default btn-xs">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <select [(ngModel)]="family.relationship" class="form-control" id="slcFamilyRelationship" name="slcFamilyRelationship">
+                                                <option *ngFor="let relationship of relationships" [value]="relationship">{{ relationship }}<option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input 
+                                                type="text"
+                                                class="form-control"
+                                                id="txtFamilyFirstName" 
+                                                name="txtFamilyFirstName"
+                                                [(ngModel)]="family.firstName">
+                                        </td>
+                                        <td>
+                                            <input 
+                                                type="text"
+                                                class="form-control"
+                                                id="txtFamilyMiddleName" 
+                                                name="txtFamilyMiddleName"
+                                                [(ngModel)]="family.middleName">
+                                        </td>
+                                        <td>
+                                            <input 
+                                                type="text"
+                                                class="form-control"
+                                                id="txtFamilyLastName" 
+                                                name="txtFamilyLastName"
+                                                [(ngModel)]="family.lastName">
+                                        </td>
+                                        <td>
+                                            <input 
+                                                type="text"
+                                                class="form-control"
+                                                id="txtFamilyOccupation" 
+                                                name="txtFamilyOccupation"
+                                                [(ngModel)]="family.occupation">
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
