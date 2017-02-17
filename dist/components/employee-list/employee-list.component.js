@@ -56,7 +56,6 @@ var EmployeeListComponent = (function () {
                 _this.isFormDisabled = false;
                 if (result.success) {
                     _this.employees = result.data;
-                    toastr.success(result.message);
                 }
                 else {
                     toastr.error(result.message);
@@ -85,8 +84,6 @@ var EmployeeListComponent = (function () {
                 _this.isFormDisabled = false;
                 if (result.success) {
                     _this.companies = result.data;
-                    //this.setDefaultCompany();
-                    _this.toastr.success(result.message);
                 }
                 else {
                     _this.toastr.error(result.message);
@@ -115,8 +112,6 @@ var EmployeeListComponent = (function () {
                 _this.isFormDisabled = false;
                 if (result.success) {
                     _this.employmentStatuses = result.data;
-                    //this.setDefaultEmploymentStatus();
-                    _this.toastr.success(result.message);
                 }
                 else {
                     _this.toastr.error(result.message);

@@ -37,7 +37,6 @@ var EmployeeSheetComponent = (function () {
     }
     EmployeeSheetComponent.prototype.ngOnInit = function () {
         this.employee = new model_1.Employee();
-        this.toastr.info("Loading resources...");
         this.getCompanies();
         this.getEmploymentStatuses();
         this.getPositions();
@@ -81,7 +80,6 @@ var EmployeeSheetComponent = (function () {
                 if (result.success) {
                     _this.companies = result.data;
                     _this.setDefaultCompany();
-                    _this.toastr.success(result.message);
                 }
                 else {
                     _this.toastr.error(result.message);
@@ -111,7 +109,6 @@ var EmployeeSheetComponent = (function () {
                 if (result.success) {
                     _this.employmentStatuses = result.data;
                     _this.setDefaultEmploymentStatus();
-                    _this.toastr.success(result.message);
                 }
                 else {
                     _this.toastr.error(result.message);
@@ -141,7 +138,6 @@ var EmployeeSheetComponent = (function () {
                 if (result.success) {
                     _this.positions = result.data;
                     _this.setDefaultPosition();
-                    _this.toastr.success(result.message);
                 }
                 else {
                     _this.toastr.error(result.message);

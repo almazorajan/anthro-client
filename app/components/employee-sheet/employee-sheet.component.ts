@@ -48,7 +48,6 @@ export class EmployeeSheetComponent implements OnInit {
 
     ngOnInit() {
         this.employee = new Employee();
-        this.toastr.info("Loading resources...");
         this.getCompanies();
         this.getEmploymentStatuses();
         this.getPositions();
@@ -97,7 +96,6 @@ export class EmployeeSheetComponent implements OnInit {
                 if(result.success) {
                     this.companies = result.data as Company[];
                     this.setDefaultCompany();
-                    this.toastr.success(result.message);
                 } else {
                     this.toastr.error(result.message);
                 }
@@ -127,7 +125,6 @@ export class EmployeeSheetComponent implements OnInit {
                 if(result.success) {
                     this.employmentStatuses = result.data as EmploymentStatus[];
                     this.setDefaultEmploymentStatus();
-                    this.toastr.success(result.message);
                 } else {
                     this.toastr.error(result.message);
                 }
@@ -157,7 +154,6 @@ export class EmployeeSheetComponent implements OnInit {
                 if(result.success) {
                     this.positions = result.data as Position[];
                     this.setDefaultPosition();
-                    this.toastr.success(result.message);
                 } else {
                     this.toastr.error(result.message);
                 }
@@ -195,7 +191,7 @@ export class EmployeeSheetComponent implements OnInit {
         return str.trim().length <= 0;
     }
 
-    private isNameValid(employee: Employee) : boolean {
+    private isNameValid(employee : Employee) : boolean {
         try {
             if(!employee)
                 return false;

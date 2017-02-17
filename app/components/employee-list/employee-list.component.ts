@@ -68,7 +68,6 @@ export class EmployeeListComponent implements OnInit {
 
                 if(result.success) {
                     this.employees = result.data as Employee[];
-                    toastr.success(result.message);
                 } else {
                     toastr.error(result.message);
                 }
@@ -98,7 +97,6 @@ export class EmployeeListComponent implements OnInit {
                 if (result.success) {
                     this.companies = result.data as Company[];
                     //this.setDefaultCompany();
-                    this.toastr.success(result.message);
                 } else {
                     this.toastr.error(result.message);
                 }
@@ -128,7 +126,6 @@ export class EmployeeListComponent implements OnInit {
                 if (result.success) {
                     this.employmentStatuses = result.data as EmploymentStatus[];
                     //this.setDefaultEmploymentStatus();
-                    this.toastr.success(result.message);
                 } else {
                     this.toastr.error(result.message);
                 }
