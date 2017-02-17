@@ -8,9 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-/*
-* position component v1
-**/
 var core_1 = require("@angular/core");
 var position_service_1 = require("./position.service");
 var module_service_1 = require("../module/module.service");
@@ -44,7 +41,6 @@ var PositionComponent = (function () {
                 _this.isFormDisabled = false;
                 if (result.success) {
                     _this.modules = result.data;
-                    _this.toastr.success(result.message);
                 }
                 else {
                     _this.toastr.error(result.message);
@@ -73,7 +69,6 @@ var PositionComponent = (function () {
                 _this.isFormDisabled = false;
                 if (result.success) {
                     _this.positions = result.data;
-                    _this.toastr.success(result.message);
                 }
                 else {
                     _this.toastr.error(result.message);

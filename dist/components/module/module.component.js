@@ -8,11 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-// @angular
 var core_1 = require("@angular/core");
-// classes
 var model_1 = require("../../models/model");
-// services
 var module_service_1 = require("./module.service");
 var services_1 = require("../../shared-services/services");
 var ModuleComponent = (function () {
@@ -42,9 +39,10 @@ var ModuleComponent = (function () {
             if (result.success) {
                 _this.modules = result.data;
                 _this.toastr.success(result.message);
-                return;
             }
-            _this.toastr.error(result.message);
+            else {
+                _this.toastr.error(result.message);
+            }
         })
             .catch(function (error) {
             _this.loading = false;
@@ -86,8 +84,9 @@ var ModuleComponent = (function () {
             message: "You will be adding this module.",
             confirmButtonText: "Yes, update it!",
             callBack: function (isConfirm) {
-                if (isConfirm)
+                if (isConfirm) {
                     _this.addModule();
+                }
             }
         });
     };
@@ -102,9 +101,10 @@ var ModuleComponent = (function () {
                 _this.toastr.success(result.message);
                 _this.mdlModalInfo.hide();
                 _this.getAllModules();
-                return;
             }
-            _this.toastr.error(result.message);
+            else {
+                _this.toastr.error(result.message);
+            }
         })
             .catch(function (error) {
             _this.addingModule = false;
@@ -122,8 +122,9 @@ var ModuleComponent = (function () {
             message: "You will be updating this module.",
             confirmButtonText: "Yes, update it!",
             callBack: function (isConfirm) {
-                if (isConfirm)
+                if (isConfirm) {
                     _this.update();
+                }
             }
         });
     };
@@ -154,8 +155,9 @@ var ModuleComponent = (function () {
             message: "You will be deleting this module.",
             confirmButtonText: "Yes, delete it!",
             callBack: function (isConfirm) {
-                if (isConfirm)
+                if (isConfirm) {
                     _this.delete(mod);
+                }
             }
         });
     };

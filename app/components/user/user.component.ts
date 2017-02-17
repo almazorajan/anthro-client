@@ -62,8 +62,7 @@ export class UserComponent implements OnInit {
                 this.isFormDisabled = false;
 
                 if(result.success) {
-                    this.users = result.data as User[];
-                    this.toastr.success(result.message);                
+                    this.users = result.data as User[];                
                 } else {
                     this.toastr.error(result.message)
                 }
@@ -92,7 +91,6 @@ export class UserComponent implements OnInit {
 
                 if(result.success) {
                     this.positions = result.data as Position[];
-                    this.toastr.success(result.message);
                 } else {
                     this.toastr.error(result.message);
                 }
@@ -113,7 +111,6 @@ export class UserComponent implements OnInit {
         this.operation = 1;
         this.isFormDisabled = false;
         this.selectedUser = new User();
-
         this.selectedUser.position = new Position();
         this.selectedUser.position._id = this.positions[0]._id;
         this.selectedUser.position.positionName = this.positions[0].positionName;

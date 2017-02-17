@@ -43,7 +43,6 @@ var UserComponent = (function () {
                 _this.isFormDisabled = false;
                 if (result.success) {
                     _this.users = result.data;
-                    _this.toastr.success(result.message);
                 }
                 else {
                     _this.toastr.error(result.message);
@@ -72,7 +71,6 @@ var UserComponent = (function () {
                 _this.isFormDisabled = false;
                 if (result.success) {
                     _this.positions = result.data;
-                    _this.toastr.success(result.message);
                 }
                 else {
                     _this.toastr.error(result.message);
