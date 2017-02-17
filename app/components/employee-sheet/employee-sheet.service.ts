@@ -3,12 +3,13 @@ import { Service } from '../../shared-services/service';
 import { Employee, Result } from '../../models/model';
 
 @Injectable()
-
 export class EmployeeSheetService {
 
-    constructor(private service: Service) { }
+    constructor(
+        private service : Service
+    ) { }
 
-    getRelationships(): string[] {
+    getRelationships() : string[] {
         return [
             "Father",
             "Mother",
@@ -18,15 +19,15 @@ export class EmployeeSheetService {
         ];
     }
 
-    getEducationalLevels(): string[] {
+    getEducationalLevels() : string[] {
         return [
             "Primary",
             "Secondary",
             "Tertiary"
-        ]
+        ];
     }
 
-    add(employee: Employee): Promise<Result> {
+    add(employee : Employee) : Promise<Result> {
         return this.service.apiCall({
             verb: "post",
             uri: "employeesheet/add",

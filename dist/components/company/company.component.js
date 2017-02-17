@@ -79,8 +79,9 @@ var CompanyComponent = (function () {
             message: "You will be adding this module.",
             confirmButtonText: "Yes, add it!",
             callBack: function (isConfirm) {
-                if (isConfirm)
+                if (isConfirm) {
                     _this.addCompany();
+                }
             }
         });
     };
@@ -120,8 +121,9 @@ var CompanyComponent = (function () {
             message: "You will be updating this company.",
             confirmButtonText: "Yes, Update It!",
             callBack: function (isConfirm) {
-                if (isConfirm)
+                if (isConfirm) {
                     _this.updateCompany();
+                }
             }
         });
     };

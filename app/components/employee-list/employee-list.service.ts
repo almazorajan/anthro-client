@@ -4,14 +4,14 @@ import { Service } from '../../shared-services/service';
 
 @Injectable() export class EmployeeListService extends Service {
 
-    getAllEmployees(): Promise<Result> {
+    getAllEmployees() : Promise<Result> {
         return this.apiCall({
             verb: "post",
             uri: "employeelist/getall"
         });
     }
 
-    updateEmployee(employee: Employee): Promise<Result> {
+    updateEmployee(employee : Employee) : Promise<Result> {
         return this.apiCall({
             verb: "post",
             uri: "employeelist/updateemployee",
@@ -19,7 +19,7 @@ import { Service } from '../../shared-services/service';
         });
     }
 
-    deleteEmployee(employee: Employee): Promise<Result> {
+    deleteEmployee(employee : Employee) : Promise<Result> {
         return this.apiCall({
             verb: "post",
             uri: "employeelist/deleteemployee",

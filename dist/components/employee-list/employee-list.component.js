@@ -172,7 +172,6 @@ var EmployeeListComponent = (function () {
     };
     EmployeeListComponent.prototype.view = function (employee) {
         this.currentEmployee = employee;
-        console.log(employee);
     };
     return EmployeeListComponent;
 }());

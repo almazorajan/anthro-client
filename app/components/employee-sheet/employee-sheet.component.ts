@@ -25,13 +25,26 @@ import { EmploymentStatus, Employee, Position, Company, Family, Education, Accre
 export class EmployeeSheetComponent implements OnInit {
 
     constructor(
-        private swal: SweetAlertService,
-        private toastr: ToastrService,
-        private employeeSheetService: EmployeeSheetService,
-        private companyService: CompanyService,
-        private employmentStatusService: EmploymentStatusService,
-        private positionService: PositionService
+        private swal : SweetAlertService,
+        private toastr : ToastrService,
+        private employeeSheetService : EmployeeSheetService,
+        private companyService : CompanyService,
+        private employmentStatusService : EmploymentStatusService,
+        private positionService : PositionService
     ) { }
+
+    employee : Employee;
+    loadingCompanies : boolean = false;
+    loadingEmploymentStatuses : boolean = false;
+    loadingPositions : boolean = false;
+    isFormDisabled : boolean = false;
+    readyToSave : boolean = false;
+    addingEmployee : boolean = false;
+    companies : Company[] = [];
+    employmentStatuses : EmploymentStatus[] = [];
+    positions : Position[] = [];
+    relationships : string[] = [];
+    educationalLevels : string[] = [];
 
     ngOnInit() {
         this.employee = new Employee();
@@ -43,45 +56,35 @@ export class EmployeeSheetComponent implements OnInit {
         this.getEducationalLevels();
     }
 
-    employee: Employee;
-    loadingCompanies: boolean = false;
-    loadingEmploymentStatuses: boolean = false;
-    loadingPositions: boolean = false;
-    isFormDisabled: boolean = false;
-    readyToSave: boolean = false;
-    addingEmployee: boolean = false;
-    companies: Company[] = [];
-    employmentStatuses: EmploymentStatus[] = [];
-    positions: Position[] = [];
-    relationships: string[] = [];
-    educationalLevels: string[] = [];
-
-    private setDefaultPosition(): void {
-        if(this.positions.length <= 0) return;
-
+    private setDefaultPosition() : void {
+        if(this.positions.length <= 0) {
+            return;
+        }
         this.employee.position._id = this.positions[0]._id;
         this.employee.position.positionName = this.positions[0].positionName;
     }
 
-    private setDefaultCompany(): void {
-        if(this.companies.length <= 0) return;
-
+    private setDefaultCompany() : void {
+        if(this.companies.length <= 0) {
+            return;
+        }
         this.employee.company._id = this.companies[0]._id;
         this.employee.company.companyName = this.companies[0].companyName;
         this.employee.company.companyAddress = this.companies[0].companyAddress;
         this.employee.company.emailAddress = this.companies[0].emailAddress;
     }
 
-    private setDefaultEmploymentStatus(): void {
-        if(this.employmentStatuses.length <= 0) return;
-
+    private setDefaultEmploymentStatus() : void {
+        if(this.employmentStatuses.length <= 0) {
+            return;
+        }
         this.employee.employmentStatus._id = this.employmentStatuses[0]._id;
         this.employee.employmentStatus.employmentStatus = this.employmentStatuses[0].employmentStatus;
         this.employee.workHistory[0].employmentStatus._id = this.employmentStatuses[0]._id;
         this.employee.workHistory[0].employmentStatus.employmentStatus = this.employmentStatuses[0].employmentStatus;
     }
 
-    private getCompanies(): void {
+    private getCompanies() : void {
         try {
             this.companies = [];
             this.loadingCompanies = true;
@@ -111,7 +114,7 @@ export class EmployeeSheetComponent implements OnInit {
         }
     }
 
-    private getEmploymentStatuses(): void {
+    private getEmploymentStatuses() : void {
         try {
             this.employmentStatuses = [];
             this.loadingEmploymentStatuses = true;
@@ -141,7 +144,7 @@ export class EmployeeSheetComponent implements OnInit {
         }
     }
 
-    private getPositions(): void {
+    private getPositions() : void {
         try {
             this.positions = [];
             this.loadingPositions = true;
@@ -171,7 +174,7 @@ export class EmployeeSheetComponent implements OnInit {
         }
     }
 
-    private getRelationships(): void {
+    private getRelationships() : void {
         try {      
             this.relationships = this.employeeSheetService.getRelationships();
         } catch(e) {
@@ -179,7 +182,7 @@ export class EmployeeSheetComponent implements OnInit {
         }
     }
 
-    private getEducationalLevels(): void {
+    private getEducationalLevels() : void {
         try {
             this.educationalLevels = this.employeeSheetService.getEducationalLevels();
         } catch(e) {
@@ -187,12 +190,12 @@ export class EmployeeSheetComponent implements OnInit {
         }
     }
 
-    private isEmpty(str: string): boolean {
+    private isEmpty(str : string) : boolean {
         if(!str) return false;
         return str.trim().length <= 0;
     }
 
-    private isNameValid(employee: Employee): boolean {
+    private isNameValid(employee: Employee) : boolean {
         try {
             if(!employee)
                 return false;
@@ -216,7 +219,7 @@ export class EmployeeSheetComponent implements OnInit {
         }
     }
 
-    private isEmployeePositionValid(employee: Employee): boolean {
+    private isEmployeePositionValid(employee : Employee):  boolean {
         try {      
             if(!employee)
                 return false;
@@ -240,7 +243,7 @@ export class EmployeeSheetComponent implements OnInit {
         }
     }
 
-    private isEmploymentStatusValid(employee: Employee): boolean {
+    private isEmploymentStatusValid(employee : Employee) : boolean {
         try {
             if(!employee)
                 return false;
@@ -264,7 +267,7 @@ export class EmployeeSheetComponent implements OnInit {
         }
     }
 
-    private isMartialStatusValid(employee: Employee): boolean {
+    private isMartialStatusValid(employee : Employee) : boolean {
         try {
             if(!employee)
                 return false;
@@ -274,7 +277,7 @@ export class EmployeeSheetComponent implements OnInit {
         }
     }
 
-    private isValidFamily(employee: Employee): boolean {
+    private isValidFamily(employee : Employee) : boolean {
         try {
             if(!employee)
                 return false;
@@ -305,28 +308,28 @@ export class EmployeeSheetComponent implements OnInit {
         }
     }
 
-    public addFamily(): void {
+    public addFamily() : void {
         this.employee.family.unshift(new Family());
     }
 
-    public addEducation(): void {
+    public addEducation() : void {
         this.employee.educationHistory.unshift(new Education());
     }
 
-    public addCertification(): void {
+    public addCertification() : void {
         this.employee.certifications.unshift(new Accreditation());
     }
 
-    public addLicensure(): void {
+    public addLicensure() : void {
         this.employee.licensures.unshift(new Accreditation());
     
     }
 
-    public addWorkHistory(): void {
+    public addWorkHistory() : void {
         this.employee.workHistory.unshift(new WorkHistory());
     }
 
-    public deleteEducation(education: Education): void {
+    public deleteEducation(education : Education) : void {
         this.swal.confirm({
             title: "Are You Sure?",
             message: "You will be deleting this educational info",
@@ -341,7 +344,7 @@ export class EmployeeSheetComponent implements OnInit {
         });
     }
 
-    public deleteCertification(certification: Accreditation): void {
+    public deleteCertification(certification : Accreditation) : void {
         this.swal.confirm({
             title: "Are You Sure?",
             message: "You will be deleting this certification info",
@@ -356,7 +359,7 @@ export class EmployeeSheetComponent implements OnInit {
         });
     }
 
-    public deleteLicensure(licensure: Accreditation): void {
+    public deleteLicensure(licensure : Accreditation) : void {
         this.swal.confirm({
             title: "Are You Sure?",
             message: "You will be deleting this licensure info",
@@ -371,7 +374,7 @@ export class EmployeeSheetComponent implements OnInit {
         });
     }
 
-    public deleteFamily(family: Family): void {
+    public deleteFamily(family : Family) : void {
         this.swal.confirm({
             title: "Are You Sure?",
             message: "You will be deleting this family info",
@@ -386,7 +389,7 @@ export class EmployeeSheetComponent implements OnInit {
         });
     }
 
-    public deleteWorkHistory(workHistory: WorkHistory): void {
+    public deleteWorkHistory(workHistory : WorkHistory) : void {
         this.swal.confirm({
             title: "Are You Sure?",
             message: "You will be deleting this work history info",
@@ -401,7 +404,7 @@ export class EmployeeSheetComponent implements OnInit {
         });
     }
 
-    public computeAge(): void {
+    public computeAge() : void {
         try {
             var splitBirthDay = this.employee.birthDate.toString().split("-");
             var birthDay = new Date(parseInt(splitBirthDay[0]), parseInt(splitBirthDay[1]), parseInt(splitBirthDay[2]));
@@ -418,7 +421,7 @@ export class EmployeeSheetComponent implements OnInit {
         let condition3: boolean = this.isEmployeePositionValid(this.employee);
     }
 
-    public addEmployee(): void {
+    public addEmployee() : void {
         try {
             this.swal.confirm({
                 title: "Are You Sure?",

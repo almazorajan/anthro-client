@@ -14,7 +14,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 // @angular
 var core_1 = require("@angular/core");
-// user-defined service
 var service_1 = require("../../shared-services/service");
 var LoginService = (function () {
     function LoginService(service) {

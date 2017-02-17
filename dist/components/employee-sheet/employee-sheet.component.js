@@ -45,22 +45,25 @@ var EmployeeSheetComponent = (function () {
         this.getEducationalLevels();
     };
     EmployeeSheetComponent.prototype.setDefaultPosition = function () {
-        if (this.positions.length <= 0)
+        if (this.positions.length <= 0) {
             return;
+        }
         this.employee.position._id = this.positions[0]._id;
         this.employee.position.positionName = this.positions[0].positionName;
     };
     EmployeeSheetComponent.prototype.setDefaultCompany = function () {
-        if (this.companies.length <= 0)
+        if (this.companies.length <= 0) {
             return;
+        }
         this.employee.company._id = this.companies[0]._id;
         this.employee.company.companyName = this.companies[0].companyName;
         this.employee.company.companyAddress = this.companies[0].companyAddress;
         this.employee.company.emailAddress = this.companies[0].emailAddress;
     };
     EmployeeSheetComponent.prototype.setDefaultEmploymentStatus = function () {
-        if (this.employmentStatuses.length <= 0)
+        if (this.employmentStatuses.length <= 0) {
             return;
+        }
         this.employee.employmentStatus._id = this.employmentStatuses[0]._id;
         this.employee.employmentStatus.employmentStatus = this.employmentStatuses[0].employmentStatus;
         this.employee.workHistory[0].employmentStatus._id = this.employmentStatuses[0]._id;

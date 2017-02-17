@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { SweetAlertService, ToastrService } from '../../shared-services/services';
 import { EmployeeListService } from './employee-list.service';
 import { CompanyService } from '../company/company.service';
@@ -25,29 +24,29 @@ import { EmploymentStatus, Employee, Position, Company, Family, Education, Accre
 export class EmployeeListComponent implements OnInit {
 
     constructor(
-        private swal: SweetAlertService,
-        private toastr: ToastrService,
-        private employeeListService: EmployeeListService,
-        private companyService: CompanyService,
-        private employmentStatusService: EmploymentStatusService,
-        private positionService: PositionService,
-        private employeeSheetService: EmployeeSheetService
+        private swal : SweetAlertService,
+        private toastr : ToastrService,
+        private employeeListService : EmployeeListService,
+        private companyService : CompanyService,
+        private employmentStatusService : EmploymentStatusService,
+        private positionService : PositionService,
+        private employeeSheetService : EmployeeSheetService
     ) { }
 
-    currentEmployee: Employee;
-    searchFilter: string = "";
-    loadingEmployees: boolean = false;
-    loadingCompanies: boolean = false;
-    loadingEmploymentStatuses: boolean = false;
-    loadingPositions: boolean = false;
-    isFormDisabled: boolean = false;
-    readyToSave: boolean = false;
-    addingEmployee: boolean = false;
-    employees: Employee[] = [];
-    companies: Company[] = [];
-    employmentStatuses: EmploymentStatus[] = [];
-    positions: Position[] = [];
-    relationships: string[] = [];
+    currentEmployee : Employee;
+    searchFilter : string = "";
+    loadingEmployees : boolean = false;
+    loadingCompanies : boolean = false;
+    loadingEmploymentStatuses : boolean = false;
+    loadingPositions : boolean = false;
+    isFormDisabled : boolean = false;
+    readyToSave : boolean = false;
+    addingEmployee : boolean = false;
+    employees : Employee[] = [];
+    companies : Company[] = [];
+    employmentStatuses : EmploymentStatus[] = [];
+    positions : Position[] = [];
+    relationships : string[] = [];
 
     ngOnInit() {
         this.getAllEmployees();
@@ -57,7 +56,7 @@ export class EmployeeListComponent implements OnInit {
         this.getRelationships();
     }
 
-    private getAllEmployees(): void {
+    private getAllEmployees() : void {
         try {
             this.employees = [];
             this.loadingEmployees = true;
@@ -86,7 +85,7 @@ export class EmployeeListComponent implements OnInit {
         }
     }
 
-    private getCompanies(): void {
+    private getCompanies() : void {
         try {
             this.companies = [];
             this.loadingCompanies = true;
@@ -116,7 +115,7 @@ export class EmployeeListComponent implements OnInit {
         }
     }
 
-    private getEmploymentStatuses(): void {
+    private getEmploymentStatuses() : void {
         try {
             this.employmentStatuses = [];
             this.loadingEmploymentStatuses = true;
@@ -146,7 +145,7 @@ export class EmployeeListComponent implements OnInit {
         }
     }
 
-    private getPositions(): void {
+    private getPositions() : void {
         try {
             this.positions = [];
             this.loadingPositions = true;
@@ -174,7 +173,7 @@ export class EmployeeListComponent implements OnInit {
         }
     }
 
-    private getRelationships(): void {
+    private getRelationships() : void {
         try {
             this.relationships = this.employeeSheetService.getRelationships();
         } catch (e) {
@@ -182,8 +181,7 @@ export class EmployeeListComponent implements OnInit {
         }
     }
 
-    view(employee: Employee): void {
+    view(employee : Employee) : void {
         this.currentEmployee = employee;
-        console.log(employee);
     }
 }
