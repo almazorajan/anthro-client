@@ -8,9 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-/*
-* user component v1
-**/
 var core_1 = require("@angular/core");
 var position_service_1 = require("../position/position.service");
 var user_service_1 = require("./user.service");

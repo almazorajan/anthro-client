@@ -148,7 +148,7 @@ export class ModuleComponent implements OnInit {
         });
     }
 
-    private update() {
+    private update() : void {
         this.isFormDisabled = true;
         this.updatingModule = true;
 
@@ -184,7 +184,7 @@ export class ModuleComponent implements OnInit {
         });
     }
 
-    private delete(mod : Module) {
+    private delete(mod : Module) : void {
         this.isFormDisabled = true;
         this.deletingModule = true;
 

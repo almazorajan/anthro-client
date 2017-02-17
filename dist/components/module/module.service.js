@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var services_1 = require("../../shared-services/services");
-require("rxjs/add/operator/toPromise");
 var ModuleService = (function () {
     function ModuleService(service) {
         this.service = service;

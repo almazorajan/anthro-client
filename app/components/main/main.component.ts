@@ -6,9 +6,9 @@ import { UserService } from '../user/user.service';
 import { User, Position, Module, Session, NavigationGroup, Navigation, Modal } from '../../models/model';
 
 @Component({
-    selector: 'main-component',
-    templateUrl: './app/components/main/main-page.html',
-    providers: [
+    selector : 'main-component',
+    templateUrl : './app/components/main/main-page.html',
+    providers : [
         SweetAlertService,
         ToastrService,
         LocalStorageService,
@@ -20,14 +20,26 @@ import { User, Position, Module, Session, NavigationGroup, Navigation, Modal } f
 export class MainComponent implements OnInit {
 
     constructor(
-        private swal: SweetAlertService,
-        private toastr: ToastrService,
-        private localStorage: LocalStorageService,
-        private positionService: PositionService,
-        private userService: UserService,
-        private router: Router
+        private swal : SweetAlertService,
+        private toastr : ToastrService,
+        private localStorage : LocalStorageService,
+        private positionService : PositionService,
+        private userService : UserService,
+        private router : Router
     ) { }
 
+    private session : Session;
+    loadingPositions : boolean;
+    updatingUserProfile : boolean;
+    userProfileDisabled : boolean;
+    currentUser : User;
+    originalUser : User;
+    greetings : string;
+    navigation : Navigation;
+    validRoute : boolean;
+    positions : Position[];
+    modal : Modal;
+    
     ngOnInit() {
         try {
             this.session = new Session();
@@ -60,30 +72,18 @@ export class MainComponent implements OnInit {
         }
     }
 
-    private session: Session;
-    loadingPositions: boolean;
-    updatingUserProfile: boolean;
-    userProfileDisabled: boolean;
-    currentUser: User;
-    originalUser: User;
-    greetings: string;
-    navigation: Navigation;
-    validRoute: boolean;
-    positions: Position[];
-    modal: Modal;
-    
-    private redirectToLogin() {
+    private redirectToLogin() : void {
         this.router.navigate(["/login"]);
     }
 
-    private formatAvailableModules(session: Session): void {
+    private formatAvailableModules(session : Session) : void {
         this.navigation = new Navigation();
         this.navigation.withGroup = [];
         this.navigation.withoutGroup = [];
 
         session.user.position.modules.forEach((mod) => {
             if (mod.group) {
-                let isGroupExists: boolean = false;
+                let isGroupExists : boolean = false;
 
                 for (let i = 0; i < this.navigation.withGroup.length; i++) {
                     if (this.navigation.withGroup[i].group === mod.group) {
@@ -105,7 +105,7 @@ export class MainComponent implements OnInit {
         });
     }
 
-    private isValidRoute(session: Session): boolean {
+    private isValidRoute(session : Session) : boolean {
         for (let i = 0; i < session.user.position.modules.length; i++) {
             if (session.user.position.modules[i].link === this.router.url) {
                 return true;
@@ -114,11 +114,11 @@ export class MainComponent implements OnInit {
         return false;
     }
 
-    private readyGreetings(): void {
+    private readyGreetings() : void {
         this.greetings = "Hi " + this.session.user.firstName;
     }
 
-    private getPositions(): void {
+    private getPositions() : void {
         try {
             this.positions = [];
             this.loadingPositions = true;
@@ -146,7 +146,7 @@ export class MainComponent implements OnInit {
         }
     }
 
-    private updateUser(): void {
+    private updateUser() : void {
         try {
             this.updatingUserProfile = true;
             this.userProfileDisabled = true;
@@ -176,22 +176,22 @@ export class MainComponent implements OnInit {
         }
     }
 
-    viewProfile(): void {
+    viewProfile() : void {
         this.originalUser = Object.assign({}, this.currentUser);
     }
 
-    cancelEdit(): void {
+    cancelEdit() : void {
         this.modal.hide();
         this.currentUser = Object.assign({}, this.originalUser);
         this.originalUser = null;
     }
 
-    confirmUpdate(): void {
+    confirmUpdate() : void {
         this.swal.confirm({
-            title: "Are You Sure?",
-            message: "you will be updating your user information",
-            confirmButtonText: "Yes, Update it",
-            callBack: (isConfirm) => {
+            title : "Are You Sure?",
+            message : "you will be updating your user information",
+            confirmButtonText : "Yes, Update it",
+            callBack : (isConfirm) => {
                 if(isConfirm) {
                     this.updateUser();
                 }
@@ -199,7 +199,7 @@ export class MainComponent implements OnInit {
         });
     }
 
-    signOut(): void {
+    signOut() : void {
         this.localStorage.remove("anthro.user-session");
         this.redirectToLogin();
     }

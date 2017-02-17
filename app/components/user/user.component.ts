@@ -1,6 +1,3 @@
-/*
-* user component v1
-**/
 import { Component, OnInit } from '@angular/core';
 import { PositionService } from '../position/position.service';
 import { UserService } from './user.service';
@@ -9,9 +6,9 @@ import { User, Position, Modal, Search } from '../../models/model';
 import { UserFilter } from '../../pipes/pipe';
 
 @Component({
-    selector: 'user-component',
-    templateUrl: './app/components/user/user-page.html',
-    providers: [
+    selector : 'user-component',
+    templateUrl : './app/components/user/user-page.html',
+    providers : [
         UserService,
         PositionService,
         SweetAlertService,
@@ -22,11 +19,27 @@ import { UserFilter } from '../../pipes/pipe';
 export class UserComponent implements OnInit {
 
     constructor(
-        private userService: UserService,
-        private positionService: PositionService,
-        private swal: SweetAlertService,
-        private toastr: ToastrService
+        private userService : UserService,
+        private positionService : PositionService,
+        private swal : SweetAlertService,
+        private toastr : ToastrService
     ) { }
+
+    positions : Position[] = [];
+    users : User[] = [];
+    selectedUser : User;
+    originalUserInfo : User;
+    loadingPositions : boolean;
+    loadingUsers : boolean;
+    loadingCompanies : boolean;
+    loadingEmploymentStatuses : boolean;
+    addingUser : boolean;
+    updatingUser : boolean;
+    deletingUser : boolean;
+    isFormDisabled : boolean;
+    modal : Modal;
+    operation : number = 0;
+    search : Search;
 
     ngOnInit() {
         this.modal = new Modal("#mdlModalInfo");
@@ -35,23 +48,7 @@ export class UserComponent implements OnInit {
         this.getAllPositions();
     }
 
-    positions: Position[] = [];
-    users: User[] = [];
-    selectedUser: User;
-    originalUserInfo: User;
-    loadingPositions: boolean;
-    loadingUsers: boolean;
-    loadingCompanies: boolean;
-    loadingEmploymentStatuses: boolean;
-    addingUser: boolean;
-    updatingUser: boolean;
-    deletingUser: boolean;
-    isFormDisabled: boolean;
-    modal: Modal;
-    operation: number = 0;
-    search: Search;
-
-    getAllUsers(): void {
+    getAllUsers() : void {
         try {
             this.users = [];
             this.loadingUsers = true;
@@ -79,7 +76,7 @@ export class UserComponent implements OnInit {
         }
     }   
 
-    getAllPositions(): void {
+    getAllPositions() : void {
         try {
             this.positions = [];
             this.loadingPositions = true;
@@ -107,7 +104,7 @@ export class UserComponent implements OnInit {
         }
     }
 
-    add(): void {
+    add() : void {
         this.operation = 1;
         this.isFormDisabled = false;
         this.selectedUser = new User();
@@ -116,7 +113,7 @@ export class UserComponent implements OnInit {
         this.selectedUser.position.positionName = this.positions[0].positionName;
     }
 
-    private identifyPositionName(position: Position): string {
+    private identifyPositionName(position : Position) : string {
         for(let i=0; i < this.positions.length; i++) {
             if(this.positions[i]._id === position._id)
                 return this.positions[i].positionName;
@@ -124,12 +121,12 @@ export class UserComponent implements OnInit {
         return "";
     }
 
-    confirmAdd(): void {
+    confirmAdd() : void {
         this.swal.confirm({
-            title: "Are You Sure?",
-            message: "You will be adding this user",
-            confirmButtonText: "Yes, Add It",
-            callBack: (isConfirm) => {
+            title : "Are You Sure?",
+            message : "You will be adding this user",
+            confirmButtonText : "Yes, Add It",
+            callBack : (isConfirm) => {
                 if(isConfirm) {
                     this.addUser();
                 }
@@ -137,7 +134,7 @@ export class UserComponent implements OnInit {
         });
     }
 
-    private addUser(): void {
+    private addUser() : void {
         try {
             this.addingUser = true;
             this.isFormDisabled = true;
@@ -168,7 +165,7 @@ export class UserComponent implements OnInit {
         }
     }
 
-    view(user: User): void {
+    view(user : User) : void {
         this.operation = 0;
         this.isFormDisabled = true;
         this.selectedUser = user;
@@ -180,24 +177,24 @@ export class UserComponent implements OnInit {
         }
     }
 
-    edit(): void {
+    edit() : void {
         this.operation = 2;
         this.isFormDisabled = false;
         this.originalUserInfo = Object.assign({}, this.selectedUser) as User;
     }
 
-    cancelEdit(): void {
+    cancelEdit() : void {
         this.selectedUser = Object.assign({}, this.originalUserInfo) as User;
         this.selectedUser.position.positionName = this.identifyPositionName(this.selectedUser.position);
         this.view(this.selectedUser);
     }
 
-    confirmUpdate(): void {
+    confirmUpdate() : void {
         this.swal.confirm({
-            title: "Are You Sure?",
-            message: "You will be updating this user",
-            confirmButtonText: "Yes, Update It",
-            callBack: (isConfirm) => {
+            title : "Are You Sure?",
+            message : "You will be updating this user",
+            confirmButtonText : "Yes, Update It",
+            callBack : (isConfirm) => {
                 if(isConfirm) {
                     this.updateUser();
                 } 
@@ -205,7 +202,7 @@ export class UserComponent implements OnInit {
         });
     }
 
-    private updateUser(): void {
+    private updateUser() : void {
         try {
             this.updatingUser = true;
             this.isFormDisabled = true;
@@ -235,12 +232,12 @@ export class UserComponent implements OnInit {
         }
     }
 
-    confirmDelete(user: User): void {
+    confirmDelete(user : User) : void {
         this.swal.confirm({
-            title: "Are You Sure?",
-            message: "You will be deleting this user",
-            confirmButtonText: "Yes, Delete It",
-            callBack: (isConfirm) => {
+            title : "Are You Sure?",
+            message : "You will be deleting this user",
+            confirmButtonText : "Yes, Delete It",
+            callBack : (isConfirm) => {
                 if(isConfirm) {
                     this.deleteUser(user);
                 }
@@ -248,7 +245,7 @@ export class UserComponent implements OnInit {
         });
     }
 
-    private deleteUser(user: User): void {
+    private deleteUser(user : User) : void {
         try {
             this.deletingUser = true;
             this.isFormDisabled = true;

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { LoginService } from './login.service';
 import { SweetAlertService, ToastrService, LocalStorageService } from '../../shared-services/services';
-
 import { User, Modal } from '../../models/model';
 
 @Component({
@@ -36,7 +34,6 @@ export class LoginComponent implements OnInit {
         document.title = "Ad-haven - Login";
 
         this.user = new User();
-
         let credential = this.localStorage.get<User>("athro.user-credential");
 
         if(credential) {
