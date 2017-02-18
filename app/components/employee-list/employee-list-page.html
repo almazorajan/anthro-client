@@ -4,17 +4,20 @@
         <hr>
     </div>
 </div>
-
 <!-- search filter -->
 <div class="row" style="margin-bottom: 50px;">
     <div class="col-lg-2">
         <p><strong>Total no. of employees:</strong> {{ employees.length }}</p>
     </div>
     <div class="col-lg-offset-6 col-lg-4">
-        <input name="txtSearchKeyword" type="text" class="form-control" placeholder="Type in keyword here..." [(ngModel)]="searchFilter">
+        <input 
+            name="txtSearchKeyword" 
+            type="text" 
+            class="form-control" 
+            placeholder="Type in keyword here..." 
+            [(ngModel)]="searchFilter">
     </div>
 </div>
-
 <!-- employee list -->
 <div class="row">
     <table class="table table-bordered table-striped table-hover table-condensed">
@@ -49,7 +52,7 @@
                 <td>{{ employee.position.positionName }}</td>
                 <td>{{ employee.salary | currency : 'PHP' : true : '1.2-2' }}</td>
                 <td>{{ employee.employmentStatus.employmentStatus }}</td>
-                <td>{{ employee.birthDate | date: 'dd/MM/yyyy' }}</td>
+                <td>{{ employee.birthDate | date: 'MM/dd/yyyy' }}</td>
                 <td>{{ employee.ssNumber }}</td>
                 <td>{{ employee.philHealthNumber }}</td>
                 <td>{{ employee.tinNumber }}</td>
@@ -58,7 +61,6 @@
         </tbody>
     </table>
 </div>
-
 <!-- Modal -->
 <div class="modal fade" id="mdlModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document" style="width: 1450px;">
@@ -66,7 +68,10 @@
             <form autocomplete="off" *ngIf="currentEmployee">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Employee Information</h4>
+                    <h4 class="modal-title" id="myModalLabel">
+                        Employee Information
+                        <span *ngIf="isFormDisabled"><strong>(Read-only mode)</strong></span>
+                    </h4>
                 </div>
                 <div class="modal-body">
                     <div class="row">
@@ -79,7 +84,8 @@
                                     id="txtFirstName" 
                                     name="txtFirstName" 
                                     placeholder="First Name" 
-                                    [(ngModel)]="currentEmployee.firstName">
+                                    [(ngModel)]="currentEmployee.firstName"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="txtMiddleName">Middle Name</label>
@@ -89,7 +95,8 @@
                                     id="txtMiddleName" 
                                     name="txtMiddleName" 
                                     placeholder="Middle Name"
-                                    [(ngModel)]="currentEmployee.middleName">
+                                    [(ngModel)]="currentEmployee.middleName"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="txtLastName">Last Name</label>
@@ -99,7 +106,8 @@
                                     id="txtLastName" 
                                     name="txtLastName" 
                                     placeholder="Last Name"
-                                    [(ngModel)]="currentEmployee.lastName">
+                                    [(ngModel)]="currentEmployee.lastName"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="slcMaritalStatus">Gender</label>
@@ -107,7 +115,8 @@
                                     class="form-control" 
                                     id="slcMaritalStatus"
                                     name="slcMaritalStatus" 
-                                    [(ngModel)]="currentEmployee.maritalStatus">
+                                    [(ngModel)]="currentEmployee.maritalStatus"
+                                    [disabled]="isFormDisabled">
                                     <option>Single</option>
                                     <option>Married</option>
                                 </select>
@@ -120,18 +129,21 @@
                                     id="txtCitizenship"
                                     name="txtCitizenship"
                                     placeholder="Citizenship"
-                                    [(ngModel)]="currentEmployee.citizenship">
+                                    [(ngModel)]="currentEmployee.citizenship"
+                                    [disabled]="isFormDisabled">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="dtBirthDate">Birth Date</label>
+                                <label for="dtBirthDate">Birth Date {{ currentEmployee.birthDate }}</label>
                                 <input 
                                     type="date" 
                                     class="form-control" 
                                     id="dtBirthDate"
                                     name="dtBirthDate"
-                                    [(ngModel)]="currentEmployee.birthDate">
+                                    [value]="currentEmployee.birthDate | date : 'yyyy-MM-dd'"
+                                    (input)="currentEmployee.birthDate = parseDate($event.target.value)"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="nbAge">Age</label>
@@ -140,7 +152,8 @@
                                     class="form-control" 
                                     id="nbAge" 
                                     name="ngAge"
-                                    [(ngModel)]="currentEmployee.age">
+                                    [value]="currentEmployee.age"
+                                    disabled>
                             </div>
                             <div class="form-group">
                                 <label for="txtBirthPlace">Birth Place</label>
@@ -150,7 +163,8 @@
                                     id="txtBirthPlace"
                                     name="txtBirthPlace"
                                     placeholder="Birth Place"
-                                    [(ngModel)]="currentEmployee.birthPlace">
+                                    [(ngModel)]="currentEmployee.birthPlace"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="slcMaritalStatus">Marital Status</label>
@@ -158,7 +172,8 @@
                                     class="form-control"
                                     id="slcMaritalStatus"
                                     name="slcMaritalStatus" 
-                                    [(ngModel)]="currentEmployee.maritalStatus">
+                                    [(ngModel)]="currentEmployee.maritalStatus"
+                                    [disabled]="isFormDisabled">
                                     <option>Single</option>
                                     <option>Married</option>
                                 </select>
@@ -179,7 +194,8 @@
                                     id="txtEmployeeNumber"
                                     name="txtEmployeeNumber"
                                     placeholder="Employee Number"
-                                    [(ngModel)]="currentEmployee.employeeNumber">
+                                    [(ngModel)]="currentEmployee.employeeNumber"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="slcPosition">Position</label>
@@ -187,7 +203,8 @@
                                     class="form-control" 
                                     id="slcPosition"
                                     name="slcPosition"
-                                    [(ngModel)]="currentEmployee.position._id">
+                                    [(ngModel)]="currentEmployee.position._id"
+                                    [disabled]="isFormDisabled">
                                     <option *ngFor="let position of positions" [value]="position._id">
                                         {{ position.positionName }}
                                     </option>
@@ -201,7 +218,8 @@
                                     id="dtStartingDate" 
                                     name="dtStartingDate"
                                     [value]="currentEmployee.startingDate | date:'yyyy-mm-dd'"
-                                    (input)="currentEmployee.startingDate = $event.target.value">
+                                    (input)="currentEmployee.startingDate = $event.target.value"
+                                    [disabled]="isFormDisabled">
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -212,7 +230,8 @@
                                     class="form-control" 
                                     id="nbSalary"
                                     name="dbSalary"
-                                    [(ngModel)]="currentEmployee.salary">
+                                    [(ngModel)]="currentEmployee.salary"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="slcEmploymentStatus">Employment Status</label>
@@ -220,7 +239,8 @@
                                     class="form-control" 
                                     id="slcEmploymentStatus" 
                                     name="slcEmploymentStatus" 
-                                    [(ngModel)]="currentEmployee.employmentStatus._id">
+                                    [(ngModel)]="currentEmployee.employmentStatus._id"
+                                    [disabled]="isFormDisabled">
                                     <option
                                         *ngFor="let employmentStatus of employmentStatuses" 
                                         [value]="employmentStatus._id">
@@ -240,7 +260,8 @@
                                 <label for="txtPhoneNumber">
                                     Phone Numbers
                                     <button 
-                                        (click)="addPhoneNumber()" 
+                                        (click)="addPhoneNumber()"
+                                        [disabled]="isFormDisabled"
                                         type="button" 
                                         title="Add Phone Number" 
                                         class="btn btn-primary btn-xs">
@@ -254,7 +275,8 @@
                                         id="txtPhoneNumber"
                                         name="txtPhoneNumber" 
                                         placeholder="Phone Number"
-                                        [(ngModel)]="phoneNumber.number">
+                                        [(ngModel)]="phoneNumber.number"
+                                        [disabled]="isFormDisabled">
                                 </span>
                             </div>
                         </div>
@@ -263,7 +285,8 @@
                                 <label for="txtLandline">
                                     Landlines
                                     <button 
-                                        (click)="addLandline()" 
+                                        (click)="addLandline()"
+                                        [disabled]="isFormDisabled"
                                         type="button" 
                                         title="Add Phone Number" 
                                         class="btn btn-primary btn-xs">
@@ -277,7 +300,8 @@
                                         id="txtLandline" 
                                         name="txtLandline"
                                         placeholder="Landline"
-                                        [(ngModel)]="landline.number">
+                                        [(ngModel)]="landline.number"
+                                        [disabled]="isFormDisabled">
                                 </span>
                             </div>
                         </div>
@@ -295,7 +319,8 @@
                                         type="checkbox" 
                                         id="chkCityAddressIsPermanent"
                                         name="chkCityAddressIsPermanent" 
-                                        [(ngModel)]="currentEmployee.cityAddress.isPermanent"> Permanent Address
+                                        [(ngModel)]="currentEmployee.cityAddress.isPermanent"
+                                        [disabled]="isFormDisabled"> Permanent Address
                                 </label>
                             </div>
                             <div class="form-group">
@@ -306,7 +331,8 @@
                                     id="txtCityAddressUnitFloor" 
                                     name="txtCityAddressUnitFloor" 
                                     placeholder="Unit Floor"
-                                    [(ngModel)]="currentEmployee.cityAddress.unitFloor">
+                                    [(ngModel)]="currentEmployee.cityAddress.unitFloor"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="txtCityAddressBuilding">Building</label>
@@ -316,7 +342,8 @@
                                     id="txtCityAddressBuilding"
                                     name="txtCityAddressBuilding"
                                     placeholder="Building"
-                                    [(ngModel)]="currentEmployee.cityAddress.building">
+                                    [(ngModel)]="currentEmployee.cityAddress.building"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="txtCityAddressStreetName">Street Name</label>
@@ -326,7 +353,8 @@
                                     id="txtCityAddressStreetName"
                                     name="txtCityAddressStreetName"
                                     placeholder="Street Name"
-                                    [(ngModel)]="currentEmployee.cityAddress.streetName">
+                                    [(ngModel)]="currentEmployee.cityAddress.streetName"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="txtCityAddressBarangay">Barangay</label>
@@ -336,7 +364,8 @@
                                     id="txtCityAddressBarangay"
                                     name="txtCityAddressBarangay" 
                                     placeholder="Barangay"
-                                    [(ngModel)]="currentEmployee.cityAddress.barangay">
+                                    [(ngModel)]="currentEmployee.cityAddress.barangay"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="txtCityAddressCity">City</label>
@@ -346,7 +375,8 @@
                                     id="txtCityAddressCity"
                                     name="txtCityAddressCity" 
                                     placeholder="City"
-                                    [(ngModel)]="currentEmployee.cityAddress.city">
+                                    [(ngModel)]="currentEmployee.cityAddress.city"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="txtCityAddressZipCode">Zip Code</label>
@@ -356,7 +386,8 @@
                                     id="txtCityAddressZipCode"
                                     name="txtCityAddressZipCode" 
                                     placeholder="Zip Code"
-                                    [(ngModel)]="currentEmployee.cityAddress.zipCode">
+                                    [(ngModel)]="currentEmployee.cityAddress.zipCode"
+                                    [disabled]="isFormDisabled">
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -367,7 +398,8 @@
                                         type="checkbox" 
                                         id="chkProvincialAddressIsPermanent"
                                         name="chkProvincialAddressIsPermanent" 
-                                        [(ngModel)]="currentEmployee.provincialAddress.isPermanent"> Permanent Address
+                                        [(ngModel)]="currentEmployee.provincialAddress.isPermanent"
+                                        [disabled]="isFormDisabled"> Permanent Address
                                 </label>
                             </div>
                             <div class="form-group">
@@ -378,7 +410,8 @@
                                     id="txtProvincialAddressUnitFloor"
                                     name="txtProvincialAddressUnitFloor" 
                                     placeholder="Unit/Floor"
-                                    [(ngModel)]="currentEmployee.provincialAddress.unitFloor">
+                                    [(ngModel)]="currentEmployee.provincialAddress.unitFloor"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="txtProvincialAddressBuilding">Building</label>
@@ -388,7 +421,8 @@
                                     id="txtProvincialAddressBuilding"
                                     name="txtProvincialAddressBuilding" 
                                     placeholder="Building"
-                                    [(ngModel)]="currentEmployee.provincialAddress.building">
+                                    [(ngModel)]="currentEmployee.provincialAddress.building"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="txtProvincialAddressStreetName">Street Name</label>
@@ -398,7 +432,8 @@
                                     id="txtProvincialAddressStreetName"
                                     name="txtProvincialAddressStreetName"
                                     placeholder="Street Name"
-                                    [(ngModel)]="currentEmployee.provincialAddress.streetName">
+                                    [(ngModel)]="currentEmployee.provincialAddress.streetName"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="txtProvincialAddressBarangay">Barangay</label>
@@ -408,7 +443,8 @@
                                     id="txtProvincialAddressBarangay"
                                     name="txtProvincialAddressBarangay" 
                                     placeholder="Barangay"
-                                    [(ngModel)]="currentEmployee.provincialAddress.barangay">
+                                    [(ngModel)]="currentEmployee.provincialAddress.barangay"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="txtProvincialAddressCity">City</label>
@@ -418,7 +454,8 @@
                                     id="txtProvincialAddressCity"
                                     name="txtProvincialAddressCity"
                                     placeholder="City"
-                                    [(ngModel)]="currentEmployee.provincialAddress.city">
+                                    [(ngModel)]="currentEmployee.provincialAddress.city"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="txtProvincialAddressZipCode">Zip Code</label>
@@ -428,7 +465,8 @@
                                     id="txtProvincialAddressZipCode"
                                     name="txtProvincialAddressZipCode" 
                                     placeholder="Zip Code"
-                                    [(ngModel)]="currentEmployee.provincialAddress.zipCode">
+                                    [(ngModel)]="currentEmployee.provincialAddress.zipCode"
+                                    [disabled]="isFormDisabled">
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -441,7 +479,8 @@
                                     id="txtPermanentAddressUnitFloor"
                                     name="txtPermanentAddressUnitFloor" 
                                     placeholder="Unit Floor"
-                                    [(ngModel)]="currentEmployee.permanentAddress.unitFloor">
+                                    [(ngModel)]="currentEmployee.permanentAddress.unitFloor"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="txtPermanentAddressBuilding">Building</label>
@@ -451,7 +490,8 @@
                                     id="txtPermanentAddressBuilding"
                                     name="txtPermanentAddressBuilding" 
                                     placeholder="Building"
-                                    [(ngModel)]="currentEmployee.permanentAddress.building">
+                                    [(ngModel)]="currentEmployee.permanentAddress.building"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="txtPermanentAddressStreetName">Street Name</label>
@@ -461,7 +501,8 @@
                                     id="txtPermanentAddressStreetName"
                                     name="txtPermanentAddressStreetName" 
                                     placeholder="Password"
-                                    [(ngModel)]="currentEmployee.permanentAddress.streetName">
+                                    [(ngModel)]="currentEmployee.permanentAddress.streetName"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="txtPermanentAddressBarangay">Barangay</label>
@@ -471,7 +512,8 @@
                                     id="txtPermanentAddressBarangay"
                                     name="txtPermanentAddressBarangay" 
                                     placeholder="Barangay"
-                                    [(ngModel)]="currentEmployee.permanentAddress.barangay">
+                                    [(ngModel)]="currentEmployee.permanentAddress.barangay"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="txtPermanentAddressCity">City</label>
@@ -481,7 +523,8 @@
                                     id="txtPermanentAddressCity"
                                     name="txtPermanentAddressCity" 
                                     placeholder="City"
-                                    [(ngModel)]="currentEmployee.permanentAddress.city">
+                                    [(ngModel)]="currentEmployee.permanentAddress.city"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="txtPermanentAddressZipCode">Zip Code</label>
@@ -491,7 +534,8 @@
                                     id="txtPermanentAddressZipCode"
                                     name="txtPermanentAddressZipCode" 
                                     placeholder="Zip Code"
-                                    [(ngModel)]="currentEmployee.permanentAddress.zipCode">
+                                    [(ngModel)]="currentEmployee.permanentAddress.zipCode"
+                                    [disabled]="isFormDisabled">
                             </div>
                         </div>
                         <div class="col-lg-offset-6"></div>
@@ -510,7 +554,8 @@
                                     id="txtssNumber"
                                     name="txtssNumber" 
                                     placeholder="SS Number"
-                                    [(ngModel)]="currentEmployee.ssNumber">
+                                    [(ngModel)]="currentEmployee.ssNumber"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="txtTinNumber">TIN Number</label>
@@ -520,7 +565,8 @@
                                     id="txtTinNumber"
                                     name="txtTinNumber"
                                     placeholder="TIN Number"
-                                    [(ngModel)]="currentEmployee.tinNumber">
+                                    [(ngModel)]="currentEmployee.tinNumber"
+                                    [disabled]="isFormDisabled">
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -532,7 +578,8 @@
                                     id="txtPhilHealthNumber"
                                     name="txtPhilHealthNumber" 
                                     placeholder="PhilHealth Number"
-                                    [(ngModel)]="currentEmployee.philHealthNumber">
+                                    [(ngModel)]="currentEmployee.philHealthNumber"
+                                    [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
                                 <label for="txtPagIbigNumber">PAGIBIG Number</label>
@@ -542,7 +589,8 @@
                                     id="txtPagIbigNumber"
                                     name="txtPagIbigNumber" 
                                     placeholder="PAGIBIG Number"
-                                    [(ngModel)]="currentEmployee.pagibigNumber">
+                                    [(ngModel)]="currentEmployee.pagibigNumber"
+                                    [disabled]="isFormDisabled">
                             </div>
                         </div>
                     </div>
@@ -550,7 +598,12 @@
                         <div class="col-lg-12 module-header">
                             <h3 class="text-center">
                                 Family
-                                <button (click)="addEducation()" title="Add Education" type="button" class="btn btn-primary btn-xs">
+                                <button 
+                                    (click)="addEducation()"
+                                    [disabled]="isFormDisabled" 
+                                    title="Add Family" 
+                                    type="button" 
+                                    class="btn btn-primary btn-xs">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </h3>
@@ -569,13 +622,26 @@
                                 <tbody>
                                     <tr *ngFor="let family of currentEmployee.family">
                                         <td class="text-center">
-                                            <button (click)="deleteFamily(family)" type="button" class="btn btn-default btn-xs">
+                                            <button 
+                                                (click)="deleteFamily(family)" 
+                                                [disabled]="isFormDisabled"
+                                                type="button" 
+                                                class="btn btn-default btn-xs">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </button>
                                         </td>
                                         <td>
-                                            <select [(ngModel)]="family.relationship" class="form-control" id="slcFamilyRelationship" name="slcFamilyRelationship">
-                                                <option *ngFor="let relationship of relationships" [value]="relationship">{{ relationship }}<option>
+                                            <select 
+                                                [(ngModel)]="family.relationship" 
+                                                [disabled]="isFormDisabled"
+                                                class="form-control" 
+                                                id="slcFamilyRelationship" 
+                                                name="slcFamilyRelationship">
+                                                <option 
+                                                    *ngFor="let relationship of relationships" 
+                                                    [value]="relationship">
+                                                    {{ relationship }}
+                                                <option>
                                             </select>
                                         </td>
                                         <td>
@@ -584,7 +650,8 @@
                                                 class="form-control"
                                                 id="txtFamilyFirstName" 
                                                 name="txtFamilyFirstName"
-                                                [(ngModel)]="family.firstName">
+                                                [(ngModel)]="family.firstName"
+                                                [disabled]="isFormDisabled">
                                         </td>
                                         <td>
                                             <input 
@@ -592,7 +659,8 @@
                                                 class="form-control"
                                                 id="txtFamilyMiddleName" 
                                                 name="txtFamilyMiddleName"
-                                                [(ngModel)]="family.middleName">
+                                                [(ngModel)]="family.middleName"
+                                                [disabled]="isFormDisabled">
                                         </td>
                                         <td>
                                             <input 
@@ -600,7 +668,8 @@
                                                 class="form-control"
                                                 id="txtFamilyLastName" 
                                                 name="txtFamilyLastName"
-                                                [(ngModel)]="family.lastName">
+                                                [(ngModel)]="family.lastName"
+                                                [disabled]="isFormDisabled">
                                         </td>
                                         <td>
                                             <input 
@@ -608,7 +677,8 @@
                                                 class="form-control"
                                                 id="txtFamilyOccupation" 
                                                 name="txtFamilyOccupation"
-                                                [(ngModel)]="family.occupation">
+                                                [(ngModel)]="family.occupation"
+                                                [disabled]="isFormDisabled">
                                         </td>
                                     </tr>
                                 </tbody>
@@ -619,7 +689,12 @@
                         <div class="col-lg-12 module-header">
                             <h3 class="text-center">
                                 Educational Background
-                                <button (click)="addCertification()" title="Add Certification" type="button" class="btn btn-primary btn-xs">
+                                <button 
+                                    (click)="addEducation()" 
+                                    [disabled]="isFormDisabled"
+                                    title="Add Education" 
+                                    type="button" 
+                                    class="btn btn-primary btn-xs">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </h3>
@@ -633,7 +708,43 @@
                                     <th>Degree</th>
                                     <th>Date of Graduation</th>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                    <tr *ngFor="let education of currentEmployee.educationHistory">
+                                        <td class="text-center">
+                                            <button 
+                                                (click)="deleteEducation(education)" 
+                                                [disabled]="isFormDisabled"
+                                                type="button" 
+                                                class="btn btn-default btn-xs">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <input 
+                                                name="txtEducationLevel" 
+                                                type="text" 
+                                                class="form-control"
+                                                [(ngModel)]="education.educationLevel"
+                                                [disabled]="isFormDisabled">
+                                        </td>
+                                        <td>
+                                            <input 
+                                                name="txtEducationDegree" 
+                                                type="text" 
+                                                class="form-control"
+                                                [(ngModel)]="education.degree"
+                                                [disabled]="isFormDisabled">
+                                        </td>
+                                        <td>
+                                            <input 
+                                                name="txtEducationDateGraduated" 
+                                                type="date" 
+                                                class="form-control"
+                                                [(ngModel)]="education.dateGraduated"
+                                                [disabled]="isFormDisabled">
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -641,7 +752,12 @@
                         <div class="col-lg-12 module-header">
                             <h3 class="text-center">
                                 Certifications
-                                <button (click)="addCertification()" title="Add Certification" type="button" class="btn btn-primary btn-xs">
+                                <button 
+                                    (click)="addCertification()" 
+                                    [disabled]="isFormDisabled"
+                                    title="Add Certification" 
+                                    type="button" 
+                                    class="btn btn-primary btn-xs">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </h3>
@@ -655,7 +771,33 @@
                                     <th>Date Accredited</th>
                                 </thead>
                                 <tbody>
-
+                                    <tr *ngFor="let certification of currentEmployee.certifications">
+                                        <td class="text-center">
+                                            <button 
+                                                (click)="deleteCertification(certification)" 
+                                                [disabled]="isFormDisabled"
+                                                type="button" 
+                                                class="btn btn-default btn-xs">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                                        </td>
+                                        <td>
+                                            <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                name="txtCertificationTitle"
+                                                [(ngModel)]="certification.title"
+                                                [disabled]="isFormDisabled">
+                                        </td>
+                                        <td>
+                                            <input 
+                                                type="date" 
+                                                class="form-control" 
+                                                name="txtCertificationDateAccredited"
+                                                [(ngModel)]="certification.dateAccredited"
+                                                [disabled]="isFormDisabled">
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -664,7 +806,12 @@
                         <div class="col-lg-12 module-header">
                             <h3 class="text-center">
                                 Licensures
-                                <button (click)="addLicensure()" title="Add Licensure" type="button" class="btn btn-primary btn-xs">
+                                <button 
+                                    (click)="addLicensure()"
+                                    [disabled]="isFormDisabled"
+                                    title="Add Licensure" 
+                                    type="button" 
+                                    class="btn btn-primary btn-xs">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </h3>
@@ -678,7 +825,33 @@
                                     <th>Date Accredited</th>
                                 </thead>
                                 <tbody>
-
+                                    <tr *ngFor="let licensure of currentEmployee.licensures">
+                                        <td class="text-center">
+                                            <button 
+                                                (click)="deletLicense(licensure)" 
+                                                [disabled]="isFormDisabled"
+                                                type="button" 
+                                                class="btn btn-default btn-xs">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                name="txtLicensureTitle"
+                                                [(ngModel)]="licensure.title"
+                                                [disabled]="isFormDisabled">
+                                        </td>
+                                        <td>
+                                            <input 
+                                                type="date" 
+                                                class="form-control" 
+                                                name="txtLicensureDateAccredited"
+                                                [(ngModel)]="licensure.dateAccredited"
+                                                [disabled]="isFormDisabled">
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -687,7 +860,12 @@
                         <div class="col-lg-12 module-header">
                             <h3 class="text-center">
                                 Work History
-                                <button (click)="addWorkHistory()" title="Add Work History" type="button" class="btn btn-primary btn-xs">
+                                <button 
+                                    (click)="addWorkHistory()" 
+                                    [disabled]="isFormDisabled"
+                                    title="Add Work History" 
+                                    type="button" 
+                                    class="btn btn-primary btn-xs">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </h3>
@@ -705,13 +883,90 @@
                                     <th class="text-center">Salary</th>
                                     <th class="text-center">Reason for Leaving</th>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
+                                    <tr *ngFor="let workHistory of currentEmployee.workHistory">
+                                        <td class="text-center">
+                                            <button 
+                                                (click)="deleteWorkHistory(workHistory)" 
+                                                [disabled]="isFormDisabled"
+                                                type="button" 
+                                                class="btn btn-default btn-xs">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                name="txtWorkHistoryPosition"
+                                                [(ngModel)]="workHistory.position"
+                                                [disabled]="isFormDisabled">
+                                        </td>
+                                        <td>
+                                            <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                name="txtWorkHistoryCompanyName"
+                                                [(ngModel)]="workHistory.companyName"
+                                                [disabled]="isFormDisabled">
+                                        </td>
+                                        <td>
+                                            <input 
+                                                type="date" 
+                                                class="form-control" 
+                                                name="txtWorkHistoryFrom"
+                                                [(ngModel)]="workHistory.from"
+                                                [disabled]="isFormDisabled">
+                                        </td>
+                                        <td>
+                                            <input 
+                                                type="date" 
+                                                class="form-control" 
+                                                name="txtWorkHistoryTo"
+                                                [(ngModel)]="workHistory.to"
+                                                [disabled]="isFormDisabled">
+                                        </td>
+                                        <td>
+                                            <select 
+                                                class="form-control"
+                                                name="slcWorkHistoryEmploymentStatus" 
+                                                [(ngModel)]="workHistory.employmentStatus._id"
+                                                [disabled]="isFormDisabled">
+                                                <option 
+                                                    *ngFor="let employmentStatus of employmentStatuses" 
+                                                    [value]="employmentStatus._id">
+                                                    {{ employmentStatus.employmentStatus }}
+                                                </option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input 
+                                                type="text" 
+                                                class="form-control"
+                                                name="txtWorkHistorySalary"
+                                                [(ngModel)]="workHistory.salary"
+                                                [disabled]="isFormDisabled">
+                                        </td>
+                                        <td>
+                                            <input 
+                                                type="text" 
+                                                class="form-control"
+                                                name="txtWorkHistoryReasonForLeaving"
+                                                [(ngModel)]="workHistory.reasonForLeaving"
+                                                [disabled]="isFormDisabled">
+                                        </td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-default">Submit</button>
+                <div class="modal-footer" *ngIf="operation === 0">
+                    <button (click)="edit()" type="button" class="btn btn-default">Edit</button>
+                </div>
+                <div class="modal-footer" *ngIf="operation === 1">
+                    <button (click)="confirmSave()" type="button" class="btn btn-default" [disabled]="isFormDisabled">Save</button>
+                    <button (click)="cancelEdit()" type="button" class="btn btn-danger" [disabled]="isFormDisabled">Cancel</button>
                 </div>
             </form>
         </div>

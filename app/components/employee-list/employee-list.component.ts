@@ -33,13 +33,15 @@ export class EmployeeListComponent implements OnInit {
         private employeeSheetService : EmployeeSheetService
     ) { }
 
+    operation : number = 0;
+    originalEmployeeInfo : Employee;
     currentEmployee : Employee;
     searchFilter : string = "";
     loadingEmployees : boolean = false;
     loadingCompanies : boolean = false;
     loadingEmploymentStatuses : boolean = false;
     loadingPositions : boolean = false;
-    isFormDisabled : boolean = false;
+    isFormDisabled : boolean = true;
     readyToSave : boolean = false;
     addingEmployee : boolean = false;
     employees : Employee[] = [];
@@ -130,11 +132,11 @@ export class EmployeeListComponent implements OnInit {
                     this.toastr.error(result.message);
                 }
             })
-                .catch((error) => {
-                    this.loadingEmploymentStatuses = false;
-                    this.isFormDisabled = false;
-                    this.toastr.error(error);
-                });
+            .catch((error) => {
+                this.loadingEmploymentStatuses = false;
+                this.isFormDisabled = false;
+                this.toastr.error(error);
+            });
         } catch (e) {
             this.loadingEmploymentStatuses = false;
             this.isFormDisabled = false;
@@ -158,11 +160,11 @@ export class EmployeeListComponent implements OnInit {
                     this.toastr.error(result.message);
                 }
             })
-                .catch((error) => {
-                    this.loadingPositions = false;
-                    this.isFormDisabled = false;
-                    this.toastr.error(error);
-                });
+            .catch((error) => {
+                this.loadingPositions = false;
+                this.isFormDisabled = false;
+                this.toastr.error(error);
+            });
         } catch (e) {
             this.loadingPositions = false;
             this.isFormDisabled = false;
@@ -178,7 +180,74 @@ export class EmployeeListComponent implements OnInit {
         }
     }
 
+    parseDate(dateString : string) : Date {
+        if(dateString) {
+            return new Date(dateString);
+        }
+        return null;
+    }
+
     view(employee : Employee) : void {
+        this.operation = 0;
+        this.isFormDisabled = true;
         this.currentEmployee = employee;
+    }
+
+    edit() : void {
+        this.operation = 1;
+        this.isFormDisabled = false;
+        this.originalEmployeeInfo = JSON.parse(JSON.stringify(this.currentEmployee)) as Employee;
+    }
+
+    cancelEdit() : void {
+        this.operation = 0;
+        this.isFormDisabled = true;
+        this.currentEmployee = JSON.parse(JSON.stringify(this.originalEmployeeInfo)) as Employee;
+        this.originalEmployeeInfo = null;
+    }
+
+    addFamily() : void {
+        this.currentEmployee.family.push(new Family());
+    }
+
+    addCertification() : void {
+        this.currentEmployee.certifications.push(new Accreditation());
+    }
+
+    addLicensure() : void {
+        this.currentEmployee.licensures.push(new Accreditation());
+    }
+
+    addEducation() : void {
+        this.currentEmployee.educationHistory.push(new Education());
+    }
+
+    addWorkHistory() : void {
+        this.currentEmployee.workHistory.push(new WorkHistory());
+    }
+    
+    deleteFamily(family : Family) : void {
+        let index = this.currentEmployee.family.indexOf(family);
+        this.currentEmployee.family.splice(index, 1);
+    }
+
+    deleteCertification(certification : Accreditation) : void {
+        let index = this.currentEmployee.certifications.indexOf(certification);
+        this.currentEmployee.certifications.splice(index, 1);
+    }
+
+    deleteLicense(license : Accreditation) : void {
+        let index = this.currentEmployee.licensures.indexOf(license);
+        this.currentEmployee.licensures.splice(index, 1);
+    }
+
+    deleteEducation(education : Education) : void {
+        let index = this.currentEmployee.educationHistory.indexOf(education);
+        this.currentEmployee.educationHistory.splice(index, 1);
+    }
+
+    deleteWorkHistory(workHistory : WorkHistory) : void {
+        let index = this.currentEmployee.workHistory.indexOf(workHistory);
+        this.currentEmployee.workHistory.splice(index, 1);
     }
 }
