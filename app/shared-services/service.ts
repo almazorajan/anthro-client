@@ -49,8 +49,6 @@ export class Service implements iService {
                 .then(response => response.json() as Result)
                 .catch(this.handleError);
         } else {
-            console.log("without token");
-
             return this.http[request.verb](this.endpoint(request.uri), payload)
                 .toPromise()
                 .then(response => response.json() as Result)
