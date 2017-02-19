@@ -102,7 +102,6 @@ export class EmployeeListComponent implements OnInit {
 
                 if (result.success) {
                     this.companies = result.data as Company[];
-                    //this.setDefaultCompany();
                 } else {
                     this.toastr.error(result.message);
                 }
@@ -131,7 +130,6 @@ export class EmployeeListComponent implements OnInit {
 
                 if (result.success) {
                     this.employmentStatuses = result.data as EmploymentStatus[];
-                    //this.setDefaultEmploymentStatus();
                 } else {
                     this.toastr.error(result.message);
                 }
@@ -195,6 +193,7 @@ export class EmployeeListComponent implements OnInit {
         this.operation = 0;
         this.isFormDisabled = true;
         this.currentEmployee = employee;
+        this.computeAge(this.currentEmployee);
         console.log(this.currentEmployee);
     }
 
@@ -348,5 +347,16 @@ export class EmployeeListComponent implements OnInit {
         if(this.isFormDisabled) return;
         let index = this.currentEmployee.workHistory.indexOf(workHistory);
         this.currentEmployee.workHistory.splice(index, 1);
+    }
+
+    computeAge(employee : Employee) : void {
+        try {
+            var birthDate = new Date(employee.birthDate);
+            var birthDay = new Date(birthDate.getFullYear(), birthDate.getMonth(), birthDate.getDay());
+            var diff = Date.now() - birthDay.getTime();
+            this.currentEmployee.age = Math.abs(new Date(diff).getUTCFullYear() - 1970);    
+        } catch(e) {
+            this.toastr.error(e);
+        }
     }
 }

@@ -141,8 +141,9 @@
                                     class="form-control" 
                                     id="dtBirthDate"
                                     name="dtBirthDate"
-                                    [value]="currentEmployee.birthDate | date : 'yyyy-MM-dd'"
                                     (input)="currentEmployee.birthDate = parseDate($event.target.value)"
+                                    (change)="computeAge(currentEmployee)"
+                                    [value]="currentEmployee.birthDate | date : 'yyyy-MM-dd'"
                                     [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
@@ -973,8 +974,9 @@
                     </button>
                 </div>
                 <div class="modal-footer" *ngIf="operation === 1">
-                    <button (click)="confirmSave()" type="button" class="btn btn-default" [disabled]="isFormDisabled">Save</button>
-                    <button (click)="cancelEdit()" type="button" class="btn btn-danger" [disabled]="isFormDisabled">Cancel</button>
+                    <button (click)="cancelEdit()" type="button" class="btn btn-default" [disabled]="isFormDisabled">Cancel</button>
+                    <button (click)="confirmSave()" type="button" class="btn btn-primary" [disabled]="isFormDisabled">Save</button>
+                    
                 </div>
             </form>
         </div>
