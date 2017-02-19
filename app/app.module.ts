@@ -18,6 +18,7 @@ import { UserComponent } from './components/user/user.component';
 
 // providers
 import { Service } from './shared-services/service';
+import { LocalStorageService } from './shared-services/local-storage.service';
 
 // pipes
 import { UserFilter, EmployeeFilter } from './pipes/pipe';
@@ -48,7 +49,7 @@ import { TableLoaderComponent } from './shared-components/components';
         UserFilter,
         EmployeeFilter],
 
-    providers: [Service],
+    providers: [Service, LocalStorageService],
     bootstrap: [AppComponent]
 })
 

@@ -46,5 +46,4 @@ export class ModuleService {
             body: _module
         });
     }
-
 }

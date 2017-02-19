@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
             this.loginService.attemptLogin(this.user).then((result) => {
                 this.attempingLogin = false;
                 this.isFormDisabled = false;
-
+                
                 if(result.success) {
                     this.toastr.success(result.message);
 
