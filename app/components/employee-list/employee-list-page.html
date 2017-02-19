@@ -110,11 +110,11 @@
                                     [disabled]="isFormDisabled">
                             </div>
                             <div class="form-group">
-                                <label for="slcMaritalStatus">Gender</label>
+                                <label for="slcGender">Gender</label>
                                 <select 
                                     class="form-control" 
-                                    id="slcMaritalStatus"
-                                    name="slcMaritalStatus" 
+                                    id="slcGender"
+                                    name="slcGender" 
                                     [(ngModel)]="currentEmployee.maritalStatus"
                                     [disabled]="isFormDisabled">
                                     <option>Single</option>
@@ -135,8 +135,8 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="dtBirthDate">Birth Date {{ currentEmployee.birthDate }}</label>
-                                <input 
+                                <label for="dtBirthDate">Birth Date</label>
+                                <input
                                     type="date" 
                                     class="form-control" 
                                     id="dtBirthDate"
@@ -599,11 +599,11 @@
                             <h3 class="text-center">
                                 Family
                                 <button 
-                                    (click)="addEducation()"
-                                    [disabled]="isFormDisabled" 
                                     title="Add Family" 
                                     type="button" 
-                                    class="btn btn-primary btn-xs">
+                                    class="btn btn-primary btn-xs"
+                                    (click)="addFamily()"
+                                    [disabled]="isFormDisabled">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </h3>
@@ -620,7 +620,7 @@
                                     <th>Occupation</th>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let family of currentEmployee.family">
+                                    <tr *ngFor="let family of currentEmployee.family; let index = index; trackBy: family">
                                         <td class="text-center">
                                             <button 
                                                 (click)="deleteFamily(family)" 
@@ -632,11 +632,11 @@
                                         </td>
                                         <td>
                                             <select 
-                                                [(ngModel)]="family.relationship" 
-                                                [disabled]="isFormDisabled"
                                                 class="form-control" 
                                                 id="slcFamilyRelationship" 
-                                                name="slcFamilyRelationship">
+                                                [(ngModel)]="family.relationship" 
+                                                [name]="'slcFamilyRelationship' + index"
+                                                [disabled]="isFormDisabled">
                                                 <option 
                                                     *ngFor="let relationship of relationships" 
                                                     [value]="relationship">
@@ -649,8 +649,8 @@
                                                 type="text"
                                                 class="form-control"
                                                 id="txtFamilyFirstName" 
-                                                name="txtFamilyFirstName"
                                                 [(ngModel)]="family.firstName"
+                                                [name]="'txtFamilyFirstName' + index"
                                                 [disabled]="isFormDisabled">
                                         </td>
                                         <td>
@@ -658,8 +658,8 @@
                                                 type="text"
                                                 class="form-control"
                                                 id="txtFamilyMiddleName" 
-                                                name="txtFamilyMiddleName"
                                                 [(ngModel)]="family.middleName"
+                                                [name]="'txtFamilyMiddleName' + index"
                                                 [disabled]="isFormDisabled">
                                         </td>
                                         <td>
@@ -667,8 +667,8 @@
                                                 type="text"
                                                 class="form-control"
                                                 id="txtFamilyLastName" 
-                                                name="txtFamilyLastName"
                                                 [(ngModel)]="family.lastName"
+                                                [name]="'txtFamilyLastName' + index"
                                                 [disabled]="isFormDisabled">
                                         </td>
                                         <td>
@@ -676,8 +676,8 @@
                                                 type="text"
                                                 class="form-control"
                                                 id="txtFamilyOccupation" 
-                                                name="txtFamilyOccupation"
                                                 [(ngModel)]="family.occupation"
+                                                [name]="'txtFamilyOccupation' + index"
                                                 [disabled]="isFormDisabled">
                                         </td>
                                     </tr>
@@ -690,11 +690,11 @@
                             <h3 class="text-center">
                                 Educational Background
                                 <button 
-                                    (click)="addEducation()" 
-                                    [disabled]="isFormDisabled"
                                     title="Add Education" 
                                     type="button" 
-                                    class="btn btn-primary btn-xs">
+                                    class="btn btn-primary btn-xs"
+                                    (click)="addEducation()" 
+                                    [disabled]="isFormDisabled">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </h3>
@@ -709,7 +709,7 @@
                                     <th>Date of Graduation</th>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let education of currentEmployee.educationHistory">
+                                    <tr *ngFor="let education of currentEmployee.educationHistory; let index = index; trackBy: education;">
                                         <td class="text-center">
                                             <button 
                                                 (click)="deleteEducation(education)" 
@@ -721,27 +721,27 @@
                                         </td>
                                         <td>
                                             <input 
-                                                name="txtEducationLevel" 
                                                 type="text" 
                                                 class="form-control"
+                                                [name]="'txtEducationLevel' + index" 
                                                 [(ngModel)]="education.educationLevel"
                                                 [disabled]="isFormDisabled">
                                         </td>
                                         <td>
                                             <input 
-                                                name="txtEducationDegree" 
                                                 type="text" 
                                                 class="form-control"
                                                 [(ngModel)]="education.degree"
+                                                [name]="'txtEducationDegree' + index"
                                                 [disabled]="isFormDisabled">
                                         </td>
                                         <td>
-                                            <input 
-                                                name="txtEducationDateGraduated" 
-                                                type="date" 
+                                            <input
+                                                type="date"
                                                 class="form-control"
+                                                [name]="'txtEducationDateGraduated' + index"
+                                                (input)="education.dateGraduated = parseDate($event.target.value)"
                                                 [value]="education.dateGraduated | date : 'yyyy-MM-dd'"
-                                                (inpput)="education.dateGraduated = parseDate($event.target.value)"
                                                 [disabled]="isFormDisabled">
                                         </td>
                                     </tr>
@@ -754,11 +754,11 @@
                             <h3 class="text-center">
                                 Certifications
                                 <button 
-                                    (click)="addCertification()" 
-                                    [disabled]="isFormDisabled"
                                     title="Add Certification" 
                                     type="button" 
-                                    class="btn btn-primary btn-xs">
+                                    class="btn btn-primary btn-xs"
+                                    (click)="addCertification()" 
+                                    [disabled]="isFormDisabled">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </h3>
@@ -772,13 +772,13 @@
                                     <th>Date Accredited</th>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let certification of currentEmployee.certifications">
+                                    <tr *ngFor="let certification of currentEmployee.certifications; let index = index; trackBy: certification;">
                                         <td class="text-center">
                                             <button 
-                                                (click)="deleteCertification(certification)" 
-                                                [disabled]="isFormDisabled"
                                                 type="button" 
-                                                class="btn btn-default btn-xs">
+                                                class="btn btn-default btn-xs"
+                                                (click)="deleteCertification(certification)" 
+                                                [disabled]="isFormDisabled">
                                             <span class="glyphicon glyphicon-trash"></span>
                                         </button>
                                         </td>
@@ -786,17 +786,17 @@
                                             <input 
                                                 type="text" 
                                                 class="form-control" 
-                                                name="txtCertificationTitle"
                                                 [(ngModel)]="certification.title"
+                                                [name]="'txtCertificationTitle' + index"
                                                 [disabled]="isFormDisabled">
                                         </td>
                                         <td>
                                             <input 
                                                 type="date" 
                                                 class="form-control" 
-                                                name="txtCertificationDateAccredited"
-                                                [value]="certification.dateAccredited | date : 'yyyy-MM-dd'"
                                                 (input)="certification.dateAccredited = parseDate($event.target.value)"
+                                                [name]="'txtCertificationDateAccredited' + index"
+                                                [value]="certification.dateAccredited | date : 'yyyy-MM-dd'"
                                                 [disabled]="isFormDisabled">
                                         </td>
                                     </tr>
@@ -809,11 +809,11 @@
                             <h3 class="text-center">
                                 Licensures
                                 <button 
-                                    (click)="addLicensure()"
-                                    [disabled]="isFormDisabled"
                                     title="Add Licensure" 
-                                    type="button" 
-                                    class="btn btn-primary btn-xs">
+                                    type="button"
+                                    class="btn btn-primary btn-xs"
+                                    (click)="addLicensure()"
+                                    [disabled]="isFormDisabled">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </h3>
@@ -827,13 +827,13 @@
                                     <th>Date Accredited</th>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let licensure of currentEmployee.licensures">
+                                    <tr *ngFor="let licensure of currentEmployee.licensures; let index = index; trackBy: licensure">
                                         <td class="text-center">
                                             <button 
-                                                (click)="deletLicense(licensure)" 
-                                                [disabled]="isFormDisabled"
                                                 type="button" 
-                                                class="btn btn-default btn-xs">
+                                                class="btn btn-default btn-xs"
+                                                (click)="deleteLicense(licensure)" 
+                                                [disabled]="isFormDisabled">
                                                 <span class="glyphicon glyphicon-trash"></span>
                                             </button>
                                         </td>
@@ -841,17 +841,17 @@
                                             <input 
                                                 type="text" 
                                                 class="form-control" 
-                                                name="txtLicensureTitle"
                                                 [(ngModel)]="licensure.title"
+                                                [name]="'txtLicensureTitle' + index"
                                                 [disabled]="isFormDisabled">
                                         </td>
                                         <td>
                                             <input 
                                                 type="date" 
                                                 class="form-control" 
-                                                name="txtLicensureDateAccredited"
-                                                [value]="licensure.dateAccredited | date : 'yyyy-MM-dd'"
                                                 (input)="licensure.dateAccredited = parseDate($event.target.value)"
+                                                [name]="'txtLicensureDateAccredited' + index"
+                                                [value]="licensure.dateAccredited | date : 'yyyy-MM-dd'"
                                                 [disabled]="isFormDisabled">
                                         </td>
                                     </tr>
@@ -864,11 +864,11 @@
                             <h3 class="text-center">
                                 Work History
                                 <button 
-                                    (click)="addWorkHistory()" 
-                                    [disabled]="isFormDisabled"
                                     title="Add Work History" 
                                     type="button" 
-                                    class="btn btn-primary btn-xs">
+                                    class="btn btn-primary btn-xs"
+                                    (click)="addWorkHistory()" 
+                                    [disabled]="isFormDisabled">
                                     <span class="glyphicon glyphicon-plus"></span>
                                 </button>
                             </h3>
@@ -887,10 +887,10 @@
                                     <th class="text-center">Reason for Leaving</th>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let workHistory of currentEmployee.workHistory">
+                                    <tr *ngFor="let workHistory of currentEmployee.workHistory; let index = index; trackBy: workHistory">
                                         <td class="text-center">
                                             <button 
-                                                (click)="deleteWorkHistory(workHistory)" 
+                                                (click)="deleteWorkHistory(workHistory)"
                                                 [disabled]="isFormDisabled"
                                                 type="button" 
                                                 class="btn btn-default btn-xs">
@@ -901,7 +901,7 @@
                                             <input 
                                                 type="text" 
                                                 class="form-control" 
-                                                name="txtWorkHistoryPosition"
+                                                [name]="'txtWorkHistoryPosition' + index"
                                                 [(ngModel)]="workHistory.position"
                                                 [disabled]="isFormDisabled">
                                         </td>
@@ -909,7 +909,7 @@
                                             <input 
                                                 type="text" 
                                                 class="form-control" 
-                                                name="txtWorkHistoryCompanyName"
+                                                [name]="'txtWorkHistoryCompanyName' + index"
                                                 [(ngModel)]="workHistory.companyName"
                                                 [disabled]="isFormDisabled">
                                         </td>
@@ -917,25 +917,25 @@
                                             <input 
                                                 type="date" 
                                                 class="form-control" 
-                                                name="txtWorkHistoryFrom"
-                                                [value]="workHistory.dateFrom | date : 'yyyy-MM-dd'"
                                                 (input)="workHistory.dateFrom = parseDate($event.target.value)"
+                                                [name]="'txtWorkHistoryFrom' + index"
+                                                [value]="workHistory.dateFrom | date : 'yyyy-MM-dd'"
                                                 [disabled]="isFormDisabled">
                                         </td>
                                         <td>
                                             <input 
                                                 type="date" 
                                                 class="form-control" 
-                                                name="txtWorkHistoryTo"
-                                                [value]="workHistory.dateTo | date : 'yyyy-MM-dd'"
                                                 (input)="workHistory.dateTo = parseDate($event.target.value)"
+                                                [name]="'txtWorkHistoryTo' + index"
+                                                [value]="workHistory.dateTo | date : 'yyyy-MM-dd'"
                                                 [disabled]="isFormDisabled">
                                         </td>
                                         <td>
                                             <select 
                                                 class="form-control"
-                                                name="slcWorkHistoryEmploymentStatus" 
                                                 [(ngModel)]="workHistory.employmentStatus._id"
+                                                [name]="'slcWorkHistoryEmploymentStatus' + index" 
                                                 [disabled]="isFormDisabled">
                                                 <option
                                                     *ngFor="let employmentStatus of employmentStatuses" 
@@ -948,16 +948,16 @@
                                             <input 
                                                 type="text" 
                                                 class="form-control"
-                                                name="txtWorkHistorySalary"
                                                 [(ngModel)]="workHistory.salary"
+                                                [name]="'txtWorkHistorySalary' + index"
                                                 [disabled]="isFormDisabled">
                                         </td>
                                         <td>
                                             <input 
                                                 type="text" 
                                                 class="form-control"
-                                                name="txtWorkHistoryReasonForLeaving"
                                                 [(ngModel)]="workHistory.reasonForLeaving"
+                                                [name]="'txtWorkHistoryReasonForLeaving' + index"
                                                 [disabled]="isFormDisabled">
                                         </td>
                                     </tr>
@@ -967,7 +967,10 @@
                     </div>
                 </div>
                 <div class="modal-footer" *ngIf="operation === 0">
-                    <button (click)="edit()" type="button" class="btn btn-default">Edit</button>
+                    <button (click)="edit()" type="button" class="btn btn-primary">Edit</button>
+                    <button (click)="confirmDelete()" type="button" class="btn btn-default pull-left">
+                        <i class="glyphicon glyphicon-warning-sign"></i> Delete
+                    </button>
                 </div>
                 <div class="modal-footer" *ngIf="operation === 1">
                     <button (click)="confirmSave()" type="button" class="btn btn-default" [disabled]="isFormDisabled">Save</button>

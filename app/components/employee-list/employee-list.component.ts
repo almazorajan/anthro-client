@@ -38,6 +38,7 @@ export class EmployeeListComponent implements OnInit {
     currentEmployee : Employee;
     searchFilter : string = "";
     updatingEmployee : boolean = false;
+    deletingEmployee : boolean = false;
     loadingEmployees : boolean = false;
     loadingCompanies : boolean = false;
     loadingEmploymentStatuses : boolean = false;
@@ -58,7 +59,7 @@ export class EmployeeListComponent implements OnInit {
         this.getEmploymentStatuses();
         this.getPositions();
         this.getRelationships();
-        //this.modal = new Modal("#mdlModalInfo");
+        this.modal = new Modal("#mdlModalInfo");
     }
 
     private getAllEmployees() : void {
@@ -206,7 +207,7 @@ export class EmployeeListComponent implements OnInit {
     confirmSave() : void {
         this.swal.confirm({
             title: "Are You Sure?",
-            message: "You will be this employee information",
+            message: "You will be updating this employee information",
             confirmButtonText: "Yes, Update It!",
             callBack: (isConfirm) => {
                 if(isConfirm) {
@@ -216,7 +217,20 @@ export class EmployeeListComponent implements OnInit {
         });
     }
 
-    saveUpdates() : void {
+    confirmDelete() : void {
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be deleting this employee information",
+            confirmButtonText: "Delete",
+            callBack: (isConfirm) => {
+                if(isConfirm) {
+                    this.deleteEmployee();
+                }
+            }
+        });
+    }
+
+    private saveUpdates() : void {
         try {
             this.isFormDisabled = true;
             this.updatingEmployee = true;
@@ -229,7 +243,7 @@ export class EmployeeListComponent implements OnInit {
                     this.isFormDisabled = false;
                     this.currentEmployee = null;
                     this.originalEmployeeInfo = null;
-                    //this.modal.hide();
+                    this.modal.hide();
                     this.getAllEmployees();
                     this.toastr.success(result.message);
                 } else {
@@ -242,6 +256,35 @@ export class EmployeeListComponent implements OnInit {
             });
         } catch(e) {
             this.updatingEmployee = false;
+            this.toastr.error(e);
+        }
+    }
+
+    private deleteEmployee() : void {
+        try {
+            this.isFormDisabled = true;
+            this.deletingEmployee = true;
+
+            this.employeeListService.deleteEmployee(this.currentEmployee).then((result) => {
+                this.isFormDisabled = false;
+                this.deletingEmployee = false;
+
+                if(result.success) {
+                    this.getAllEmployees();
+                    this.modal.hide();
+                    this.toastr.success(result.message);
+                } else {
+                    this.toastr.error(result.message);
+                }
+            })
+            .catch((error) => {
+                this.isFormDisabled = false;
+                this.deletingEmployee = false;
+                this.toastr.error(error);
+            });
+        } catch(e) {
+            this.isFormDisabled = false;
+            this.deletingEmployee = false;
             this.toastr.error(e);
         }
     }
