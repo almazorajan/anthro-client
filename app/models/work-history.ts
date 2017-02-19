@@ -3,17 +3,16 @@ import { EmploymentStatus } from './model';
 
 export class WorkHistory {
 
-    position: string;
-    companyName: string;
-    dateFrom: Date;
-    dateTo: Date;
-    isPresent: boolean;
-    employmentStatus: EmploymentStatus;
-    salary: number;
-    reasonForLeaving: string;
+    position : string;
+    companyName : string;
+    dateFrom : Date;
+    dateTo : Date;
+    isPresent : boolean;
+    employmentStatus : EmploymentStatus;
+    salary : number;
+    reasonForLeaving : string;
 
     constructor() {
-
         this.position = "";
         this.companyName = "";
         this.dateFrom = new Date();
@@ -22,7 +21,5 @@ export class WorkHistory {
         this.employmentStatus = new EmploymentStatus();
         this.salary = 0;
         this.reasonForLeaving = "";
-
     }
-
 }

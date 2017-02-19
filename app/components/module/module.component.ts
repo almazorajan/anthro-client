@@ -96,9 +96,9 @@ export class ModuleComponent implements OnInit {
         }
 
         this.swal.confirm({
-            title: "Are you sure?",
+            title: "Are You Sure?",
             message: "You will be adding this module.",
-            confirmButtonText: "Yes, update it!",
+            confirmButtonText: "Yes, Update It!",
             callBack: (isConfirm) => {
                 if(isConfirm) {
                     this.addModule();

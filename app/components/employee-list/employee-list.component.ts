@@ -37,6 +37,7 @@ export class EmployeeListComponent implements OnInit {
     originalEmployeeInfo : Employee;
     currentEmployee : Employee;
     searchFilter : string = "";
+    updatingEmployee : boolean = false;
     loadingEmployees : boolean = false;
     loadingCompanies : boolean = false;
     loadingEmploymentStatuses : boolean = false;
@@ -49,6 +50,7 @@ export class EmployeeListComponent implements OnInit {
     employmentStatuses : EmploymentStatus[] = [];
     positions : Position[] = [];
     relationships : string[] = [];
+    modal: Modal;
 
     ngOnInit() {
         this.getAllEmployees();
@@ -56,6 +58,7 @@ export class EmployeeListComponent implements OnInit {
         this.getEmploymentStatuses();
         this.getPositions();
         this.getRelationships();
+        //this.modal = new Modal("#mdlModalInfo");
     }
 
     private getAllEmployees() : void {
@@ -191,12 +194,56 @@ export class EmployeeListComponent implements OnInit {
         this.operation = 0;
         this.isFormDisabled = true;
         this.currentEmployee = employee;
+        console.log(this.currentEmployee);
     }
 
     edit() : void {
         this.operation = 1;
         this.isFormDisabled = false;
         this.originalEmployeeInfo = JSON.parse(JSON.stringify(this.currentEmployee)) as Employee;
+    }
+
+    confirmSave() : void {
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be this employee information",
+            confirmButtonText: "Yes, Update It!",
+            callBack: (isConfirm) => {
+                if(isConfirm) {
+                    this.saveUpdates();
+                }
+            }
+        });
+    }
+
+    saveUpdates() : void {
+        try {
+            this.isFormDisabled = true;
+            this.updatingEmployee = true;
+
+            this.employeeListService.updateEmployee(this.currentEmployee).then((result) => {
+                this.updatingEmployee = false;
+                
+                if(result.success) {
+                    this.operation = 0;
+                    this.isFormDisabled = false;
+                    this.currentEmployee = null;
+                    this.originalEmployeeInfo = null;
+                    //this.modal.hide();
+                    this.getAllEmployees();
+                    this.toastr.success(result.message);
+                } else {
+                    this.toastr.error(result.message);
+                }
+            })
+            .catch((error) => {
+                this.updatingEmployee = false;
+                this.toastr.error(error);
+            });
+        } catch(e) {
+            this.updatingEmployee = false;
+            this.toastr.error(e);
+        }
     }
 
     cancelEdit() : void {
@@ -207,22 +254,27 @@ export class EmployeeListComponent implements OnInit {
     }
 
     addFamily() : void {
+        if(this.isFormDisabled) return;
         this.currentEmployee.family.push(new Family());
     }
 
     addCertification() : void {
+        if(this.isFormDisabled) return;
         this.currentEmployee.certifications.push(new Accreditation());
     }
 
     addLicensure() : void {
+        if(this.isFormDisabled) return;
         this.currentEmployee.licensures.push(new Accreditation());
     }
 
     addEducation() : void {
+        if(this.isFormDisabled) return;
         this.currentEmployee.educationHistory.push(new Education());
     }
 
     addWorkHistory() : void {
+        if(this.isFormDisabled) return;
         this.currentEmployee.workHistory.push(new WorkHistory());
     }
     
@@ -232,21 +284,25 @@ export class EmployeeListComponent implements OnInit {
     }
 
     deleteCertification(certification : Accreditation) : void {
+        if(this.isFormDisabled) return;
         let index = this.currentEmployee.certifications.indexOf(certification);
         this.currentEmployee.certifications.splice(index, 1);
     }
 
     deleteLicense(license : Accreditation) : void {
+        if(this.isFormDisabled) return;
         let index = this.currentEmployee.licensures.indexOf(license);
         this.currentEmployee.licensures.splice(index, 1);
     }
 
     deleteEducation(education : Education) : void {
+        if(this.isFormDisabled) return;
         let index = this.currentEmployee.educationHistory.indexOf(education);
         this.currentEmployee.educationHistory.splice(index, 1);
     }
 
     deleteWorkHistory(workHistory : WorkHistory) : void {
+        if(this.isFormDisabled) return;
         let index = this.currentEmployee.workHistory.indexOf(workHistory);
         this.currentEmployee.workHistory.splice(index, 1);
     }

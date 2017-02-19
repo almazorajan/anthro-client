@@ -740,7 +740,8 @@
                                                 name="txtEducationDateGraduated" 
                                                 type="date" 
                                                 class="form-control"
-                                                [(ngModel)]="education.dateGraduated"
+                                                [value]="education.dateGraduated | date : 'yyyy-MM-dd'"
+                                                (inpput)="education.dateGraduated = parseDate($event.target.value)"
                                                 [disabled]="isFormDisabled">
                                         </td>
                                     </tr>
@@ -794,7 +795,8 @@
                                                 type="date" 
                                                 class="form-control" 
                                                 name="txtCertificationDateAccredited"
-                                                [(ngModel)]="certification.dateAccredited"
+                                                [value]="certification.dateAccredited | date : 'yyyy-MM-dd'"
+                                                (input)="certification.dateAccredited = parseDate($event.target.value)"
                                                 [disabled]="isFormDisabled">
                                         </td>
                                     </tr>
@@ -848,7 +850,8 @@
                                                 type="date" 
                                                 class="form-control" 
                                                 name="txtLicensureDateAccredited"
-                                                [(ngModel)]="licensure.dateAccredited"
+                                                [value]="licensure.dateAccredited | date : 'yyyy-MM-dd'"
+                                                (input)="licensure.dateAccredited = parseDate($event.target.value)"
                                                 [disabled]="isFormDisabled">
                                         </td>
                                     </tr>
@@ -915,7 +918,8 @@
                                                 type="date" 
                                                 class="form-control" 
                                                 name="txtWorkHistoryFrom"
-                                                [(ngModel)]="workHistory.from"
+                                                [value]="workHistory.dateFrom | date : 'yyyy-MM-dd'"
+                                                (input)="workHistory.dateFrom = parseDate($event.target.value)"
                                                 [disabled]="isFormDisabled">
                                         </td>
                                         <td>
@@ -923,7 +927,8 @@
                                                 type="date" 
                                                 class="form-control" 
                                                 name="txtWorkHistoryTo"
-                                                [(ngModel)]="workHistory.to"
+                                                [value]="workHistory.dateTo | date : 'yyyy-MM-dd'"
+                                                (input)="workHistory.dateTo = parseDate($event.target.value)"
                                                 [disabled]="isFormDisabled">
                                         </td>
                                         <td>
@@ -932,7 +937,7 @@
                                                 name="slcWorkHistoryEmploymentStatus" 
                                                 [(ngModel)]="workHistory.employmentStatus._id"
                                                 [disabled]="isFormDisabled">
-                                                <option 
+                                                <option
                                                     *ngFor="let employmentStatus of employmentStatuses" 
                                                     [value]="employmentStatus._id">
                                                     {{ employmentStatus.employmentStatus }}

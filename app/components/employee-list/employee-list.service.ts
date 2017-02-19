@@ -14,7 +14,7 @@ import { Service } from '../../shared-services/service';
     updateEmployee(employee : Employee) : Promise<Result> {
         return this.apiCall({
             verb: "post",
-            uri: "employeelist/updateemployee",
+            uri: "employeelist/update",
             body: employee 
         });
     }
@@ -22,7 +22,7 @@ import { Service } from '../../shared-services/service';
     deleteEmployee(employee : Employee) : Promise<Result> {
         return this.apiCall({
             verb: "post",
-            uri: "employeelist/deleteemployee",
+            uri: "employeelist/delete",
             body: employee 
         });
     }
