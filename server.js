@@ -1,10 +1,16 @@
 "use strict";
 
 const express = require("express");
+const process = require("process");
 const app = express();
 
 app.use(express.static("./"));
 
-app.listen(1100, () => {
-    console.log("Client is now listening to 1100");
+const config = {
+    port: process.pid ? process.pid : 1100,
+    name: "anthro-client"
+};
+
+app.listen(config.port, () => {
+    console.log(`${config.name} is now listening to ${config.port}`);
 });
