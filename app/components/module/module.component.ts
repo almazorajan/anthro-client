@@ -196,7 +196,7 @@ export class ModuleComponent implements OnInit {
                 this.getAllModules();
                 return;
             }
-
+            console.log(result);
             this.toastr.error(result.message);
         })
         .catch((error) => {
