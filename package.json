@@ -2,7 +2,8 @@
   "name": "project-anthro-rachet",
   "version": "1.0.0",
   "scripts": {
-    "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
+    "start": "node server.js",
+    "build": "tsc && concurrently \"tsc -w\" \"lite-server\"",
     "lite": "lite-server",
     "tsc": "tsc",
     "tsc:w": "tsc -w"
@@ -33,7 +34,7 @@
     "angular2-moment": "^1.2.0",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
-    "express": "^4.14.0",
+    "express": "^4.14.1",
     "gulp": "^3.9.1",
     "reflect-metadata": "^0.1.8",
     "rxjs": "5.0.0-beta.12",
