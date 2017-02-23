@@ -90,6 +90,18 @@
                             placeholder="Username" 
                             requried>
                     </div>
+                    <div class="form-group" *ngIf="operation === 1">
+                        <label for="txtPassword">Password</label>
+                        <input 
+                            [(ngModel)]="selectedUser.password" 
+                            [disabled]="isFormDisabled" 
+                            type="password" 
+                            name="txtPassword" 
+                            class="form-control"
+                            id="txtPassword" 
+                            placeholder="Password" 
+                            requried>
+                    </div>
                     <div class="form-group">
                         <label for="txtFirstName">First Name</label>
                         <input 
@@ -102,6 +114,7 @@
                             placeholder="First Name" 
                             requried>
                     </div>
+                    
                     <div class="form-group">
                         <label for="txtMiddleName">Middle Name</label>
                         <input 
