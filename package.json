@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "node server.js",
-    "build": "tsc && concurrently \"tsc -w\" \"lite-server\"",
+    "test": "tsc && concurrently \"tsc -w\" \"lite-server\"",
     "lite": "lite-server",
     "tsc": "tsc",
     "tsc:w": "tsc -w"

@@ -31,6 +31,14 @@ import { Service } from '../../shared-services/service';
         });
     }
 
+    updatePassword(user : User): Promise<Result> {
+        return this.service.apiCall({
+            verb: "post",
+            uri: "user/updatepassword",
+            body: user
+        });
+    }
+
     delete(user : User) : Promise<Result> {     
         return this.service.apiCall({
             verb : "post",

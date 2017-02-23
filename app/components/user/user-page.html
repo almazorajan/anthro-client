@@ -77,64 +77,113 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="mdlModalInfoLabel">User</h4>
                 </div>
-
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="txtUsername">Username</label>
-                        <input [(ngModel)]="selectedUser.userName" [disabled]="isFormDisabled" type="text" name="txtUsername" class="form-control"
-                            id="txtUsername" placeholder="Username" requried>
+                        <input 
+                            [(ngModel)]="selectedUser.userName" 
+                            [disabled]="isFormDisabled" 
+                            type="text" 
+                            name="txtUsername" 
+                            class="form-control"
+                            id="txtUsername" 
+                            placeholder="Username" 
+                            requried>
                     </div>
-
-                    <div class="form-group">
-                        <label for="txtPassword">Password</label>
-                        <input [(ngModel)]="selectedUser.password" [disabled]="isFormDisabled" type="password" name="txtPassword" class="form-control"
-                            id="txtPassword" placeholder="Password" requried>
-                    </div>
-
                     <div class="form-group">
                         <label for="txtFirstName">First Name</label>
-                        <input [(ngModel)]="selectedUser.firstName" [disabled]="isFormDisabled" type="text" name="txtFirstName" class="form-control"
-                            id="txtFirstName" placeholder="First Name" requried>
+                        <input 
+                            [(ngModel)]="selectedUser.firstName" 
+                            [disabled]="isFormDisabled" 
+                            type="text" 
+                            name="txtFirstName" 
+                            class="form-control"
+                            id="txtFirstName" 
+                            placeholder="First Name" 
+                            requried>
                     </div>
-
                     <div class="form-group">
                         <label for="txtMiddleName">Middle Name</label>
-                        <input [(ngModel)]="selectedUser.middleName" [disabled]="isFormDisabled" type="text" name="txtMiddleName" class="form-control"
-                            id="txtMiddleName" placeholder="Middle Name">
+                        <input 
+                            [(ngModel)]="selectedUser.middleName" 
+                            [disabled]="isFormDisabled" 
+                            type="text" 
+                            name="txtMiddleName" 
+                            class="form-control"
+                            id="txtMiddleName" 
+                            placeholder="Middle Name">
                     </div>
-
                     <div class="form-group">
                         <label for="txtLastName">Last Name</label>
-                        <input [(ngModel)]="selectedUser.lastName" [disabled]="isFormDisabled" type="text" name="txtLastName" class="form-control"
-                            id="txtLastName" placeholder="Last Name" requried>
+                        <input 
+                            [(ngModel)]="selectedUser.lastName" 
+                            [disabled]="isFormDisabled" 
+                            type="text" 
+                            name="txtLastName" 
+                            class="form-control"
+                            id="txtLastName" 
+                            placeholder="Last Name" 
+                            requried>
                     </div>
-
                     <div class="form-group" *ngIf="selectedUser.position._id">
                         <label for="txtPosition">Position</label>
-                        <select [(ngModel)]="selectedUser.position._id" [disabled]="isFormDisabled" name="slcPosition" class="form-control" id="slcPosition"
+                        <select 
+                            [(ngModel)]="selectedUser.position._id" 
+                            [disabled]="isFormDisabled" 
+                            name="slcPosition" 
+                            class="form-control" 
+                            id="slcPosition"
                             required>
                             <option *ngFor="let position of positions" [value]="position._id">{{ position.positionName }}</option>
                         </select>
                     </div>
                 </div>
-
                 <div *ngIf="operation === 0" class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button (click)="edit()" type="button" class="btn btn-primary">Edit</button>
                 </div>
-
                 <div *ngIf="operation === 1" class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button (click)="confirmAdd()" type="button" class="btn btn-primary">Add</button>
                 </div>
-
                 <div *ngIf="operation === 2" class="modal-footer">
                     <button (click)="cancelEdit()" class="btn btn-default">Cancel</button>
                     <button (click)="confirmUpdate()" type="button" class="btn btn-primary">Save</button>
+                    <button (click)="displayChangePassword()" type="button" class="btn btn-primary pull-left">Change Password</button>
                 </div>
-
             </form>
+        </div>
+    </div>
+</div>
 
+<!-- Password Modal -->
+<div class="modal fade" id="mdlUserPassword" tabindex="-1" role="dialog" aria-labelledby="mdlUserPasswordLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form autocomplete="off">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="mdlUserPasswordLabel">User</h4>
+                </div>
+                <div class="modal-body" *ngIf="selectedUser">
+                    <div class="form-group">
+                        <label for="txtPassword">Password</label>
+                        <input 
+                            [(ngModel)]="selectedUser.password" 
+                            [disabled]="isFormDisabled" 
+                            type="password" 
+                            name="txtPassword" 
+                            class="form-control"
+                            id="txtPassword" 
+                            placeholder="Password" 
+                            requried>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button (click)="displayUserProfile()" class="btn btn-default">Cancel</button>
+                    <button (click)="confirmUpdatePassword()" type="button" class="btn btn-primary">Save</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

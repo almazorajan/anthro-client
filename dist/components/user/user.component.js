@@ -14,17 +14,19 @@ var user_service_1 = require("./user.service");
 var services_1 = require("../../shared-services/services");
 var model_1 = require("../../models/model");
 var UserComponent = (function () {
-    function UserComponent(userService, positionService, swal, toastr) {
+    function UserComponent(userService, positionService, swal, toastr, localStorage) {
         this.userService = userService;
         this.positionService = positionService;
         this.swal = swal;
         this.toastr = toastr;
+        this.localStorage = localStorage;
         this.positions = [];
         this.users = [];
         this.operation = 0;
     }
     UserComponent.prototype.ngOnInit = function () {
-        this.modal = new model_1.Modal("#mdlModalInfo");
+        this.userProfileModal = new model_1.Modal("#mdlModalInfo");
+        this.userPasswordModal = new model_1.Modal("#mdlUserPassword");
         this.search = new model_1.Search();
         this.getAllUsers();
         this.getAllPositions();
@@ -39,7 +41,8 @@ var UserComponent = (function () {
                 _this.loadingUsers = false;
                 _this.isFormDisabled = false;
                 if (result.success) {
-                    _this.users = result.data;
+                    var currentUserId = _this.localStorage.get("anthro.user-session").user._id;
+                    _this.users = result.data.filter(function (user) { return user._id !== currentUserId; });
                 }
                 else {
                     _this.toastr.error(result.message);
@@ -126,7 +129,7 @@ var UserComponent = (function () {
                     _this.toastr.success(result.message);
                     _this.getAllUsers();
                     _this.getAllPositions();
-                    _this.modal.hide();
+                    _this.userProfileModal.hide();
                 }
                 else {
                     _this.toastr.error(result.message);
@@ -160,6 +163,15 @@ var UserComponent = (function () {
         this.isFormDisabled = false;
         this.originalUserInfo = Object.assign({}, this.selectedUser);
     };
+    UserComponent.prototype.displayChangePassword = function () {
+        this.selectedUser.password = "";
+        this.userProfileModal.hide();
+        this.userPasswordModal.show();
+    };
+    UserComponent.prototype.displayUserProfile = function () {
+        this.userPasswordModal.hide();
+        this.userProfileModal.show();
+    };
     UserComponent.prototype.cancelEdit = function () {
         this.selectedUser = Object.assign({}, this.originalUserInfo);
         this.selectedUser.position.positionName = this.identifyPositionName(this.selectedUser.position);
@@ -178,6 +190,27 @@ var UserComponent = (function () {
             }
         });
     };
+    UserComponent.prototype.confirmUpdatePassword = function () {
+        var _this = this;
+        if (!this.selectedUser.password.trim()) {
+            this.toastr.info("A password is required.");
+            return;
+        }
+        if (this.selectedUser.password.length < 6) {
+            this.toastr.info("Password length should be greater than 6 characters.");
+            return;
+        }
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "you will be updating your password",
+            confirmButtonText: "Yes, Update It",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    _this.updatePassword();
+                }
+            }
+        });
+    };
     UserComponent.prototype.updateUser = function () {
         var _this = this;
         try {
@@ -190,7 +223,7 @@ var UserComponent = (function () {
                     _this.toastr.success(result.message);
                     _this.getAllUsers();
                     _this.getAllPositions();
-                    _this.modal.hide();
+                    _this.userProfileModal.hide();
                 }
                 else {
                     _this.toastr.error(result.message);
@@ -204,6 +237,34 @@ var UserComponent = (function () {
         }
         catch (e) {
             this.updatingUser = false;
+            this.isFormDisabled = false;
+            this.toastr.error(e);
+        }
+    };
+    UserComponent.prototype.updatePassword = function () {
+        var _this = this;
+        try {
+            this.updatingUserPassword = true;
+            this.isFormDisabled = true;
+            this.userService.updatePassword(this.selectedUser).then(function (result) {
+                _this.updatingUserPassword = false;
+                _this.isFormDisabled = false;
+                if (result.success) {
+                    _this.toastr.success(result.message);
+                    _this.getAllUsers();
+                }
+                else {
+                    _this.toastr.error(result.message);
+                }
+            })
+                .catch(function (error) {
+                _this.updatingUserPassword = false;
+                _this.isFormDisabled = false;
+                _this.toastr.error(error);
+            });
+        }
+        catch (e) {
+            this.updatingUserPassword = false;
             this.isFormDisabled = false;
             this.toastr.error(e);
         }
@@ -260,13 +321,15 @@ UserComponent = __decorate([
             user_service_1.UserService,
             position_service_1.PositionService,
             services_1.SweetAlertService,
-            services_1.ToastrService
+            services_1.ToastrService,
+            services_1.LocalStorageService
         ]
     }),
     __metadata("design:paramtypes", [user_service_1.UserService,
         position_service_1.PositionService,
         services_1.SweetAlertService,
-        services_1.ToastrService])
+        services_1.ToastrService,
+        services_1.LocalStorageService])
 ], UserComponent);
 exports.UserComponent = UserComponent;
 //# sourceMappingURL=user.component.js.map

@@ -31,6 +31,7 @@ export class MainComponent implements OnInit {
     private session : Session;
     loadingPositions : boolean;
     updatingUserProfile : boolean;
+    updatingUserPassword : boolean;
     userProfileDisabled : boolean;
     currentUser : User;
     originalUser : User;
@@ -38,7 +39,8 @@ export class MainComponent implements OnInit {
     navigation : Navigation;
     validRoute : boolean;
     positions : Position[];
-    modal : Modal;
+    userProfileModal : Modal;
+    userPasswordModal : Modal;
     
     ngOnInit() {
         try {
@@ -65,7 +67,8 @@ export class MainComponent implements OnInit {
             this.formatAvailableModules(this.session);
             this.getPositions();
             this.readyGreetings();
-            this.modal = new Modal("#mdlUserProfile");
+            this.userProfileModal = new Modal("#mdlUserProfile");
+            this.userPasswordModal = new Modal("#mdlUserPassword");
         } catch (e) {
             this.toastr.error(e);
             this.redirectToLogin();
@@ -156,7 +159,7 @@ export class MainComponent implements OnInit {
                 this.userProfileDisabled = false;
 
                 if(result.success) {
-                    this.modal.hide();
+                    this.userProfileModal.hide();
                     this.toastr.success(result.message);
                     this.toastr.info("Please re-login to continue.");
                     this.redirectToLogin();
@@ -176,12 +179,54 @@ export class MainComponent implements OnInit {
         }
     }
 
+    private updatePassword() : void {
+        try {
+            this.updatingUserPassword = true;
+            this.userProfileDisabled = true;
+
+            this.userService.updatePassword(this.currentUser).then((result) => {
+                this.updatingUserPassword = false;
+                this.userProfileDisabled = false;
+
+                if(result.success) {
+                    this.userPasswordModal.hide();
+                    this.userProfileModal.hide();
+                    this.toastr.success(result.message);
+                    this.toastr.info("Please re-login to continue.");
+                    this.redirectToLogin();
+                } else {
+                    this.toastr.error(result.message)
+                }
+            })
+            .catch((error) => {
+                this.updatingUserPassword = false;
+                this.userProfileDisabled = false;
+                this.toastr.error(error)
+            });
+        } catch(e) {
+            this.updatingUserPassword = false;
+            this.userProfileDisabled = false;
+            this.toastr.error(e);
+        }
+    }
+
     viewProfile() : void {
         this.originalUser = Object.assign({}, this.currentUser);
     }
 
+    displayChangePassword() : void {
+        this.currentUser.password = "";
+        this.userProfileModal.hide();
+        this.userPasswordModal.show();
+    }
+
+    displayUserProfile() : void {
+        this.userPasswordModal.hide();
+        this.userProfileModal.show();
+    }
+
     cancelEdit() : void {
-        this.modal.hide();
+        this.userProfileModal.hide();
         this.currentUser = Object.assign({}, this.originalUser);
         this.originalUser = null;
     }
@@ -194,6 +239,30 @@ export class MainComponent implements OnInit {
             callBack : (isConfirm) => {
                 if(isConfirm) {
                     this.updateUser();
+                }
+            }
+        });
+    }
+
+    confirmUpdatePassword() : void {
+
+        if(!this.currentUser.password.trim()) {
+            this.toastr.info("A password is required.");
+            return;
+        }
+        
+        if(this.currentUser.password.length < 6) {
+            this.toastr.info("Password length should be greater than 6 characters.");
+            return;
+        }
+
+        this.swal.confirm({
+            title : "Are You Sure?",
+            message : "you will be updating your password",
+            confirmButtonText : "Yes, Update It",
+            callBack : (isConfirm) => {
+                if(isConfirm) {
+                    this.updatePassword();
                 }
             }
         });

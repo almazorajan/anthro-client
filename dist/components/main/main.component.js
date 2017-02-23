@@ -44,7 +44,8 @@ var MainComponent = (function () {
             this.formatAvailableModules(this.session);
             this.getPositions();
             this.readyGreetings();
-            this.modal = new model_1.Modal("#mdlUserProfile");
+            this.userProfileModal = new model_1.Modal("#mdlUserProfile");
+            this.userPasswordModal = new model_1.Modal("#mdlUserPassword");
         }
         catch (e) {
             this.toastr.error(e);
@@ -129,7 +130,7 @@ var MainComponent = (function () {
                 _this.updatingUserProfile = false;
                 _this.userProfileDisabled = false;
                 if (result.success) {
-                    _this.modal.hide();
+                    _this.userProfileModal.hide();
                     _this.toastr.success(result.message);
                     _this.toastr.info("Please re-login to continue.");
                     _this.redirectToLogin();
@@ -150,11 +151,51 @@ var MainComponent = (function () {
             this.toastr.error(e);
         }
     };
+    MainComponent.prototype.updatePassword = function () {
+        var _this = this;
+        try {
+            this.updatingUserPassword = true;
+            this.userProfileDisabled = true;
+            this.userService.updatePassword(this.currentUser).then(function (result) {
+                _this.updatingUserPassword = false;
+                _this.userProfileDisabled = false;
+                if (result.success) {
+                    _this.userPasswordModal.hide();
+                    _this.userProfileModal.hide();
+                    _this.toastr.success(result.message);
+                    _this.toastr.info("Please re-login to continue.");
+                    _this.redirectToLogin();
+                }
+                else {
+                    _this.toastr.error(result.message);
+                }
+            })
+                .catch(function (error) {
+                _this.updatingUserPassword = false;
+                _this.userProfileDisabled = false;
+                _this.toastr.error(error);
+            });
+        }
+        catch (e) {
+            this.updatingUserPassword = false;
+            this.userProfileDisabled = false;
+            this.toastr.error(e);
+        }
+    };
     MainComponent.prototype.viewProfile = function () {
         this.originalUser = Object.assign({}, this.currentUser);
     };
+    MainComponent.prototype.displayChangePassword = function () {
+        this.currentUser.password = "";
+        this.userProfileModal.hide();
+        this.userPasswordModal.show();
+    };
+    MainComponent.prototype.displayUserProfile = function () {
+        this.userPasswordModal.hide();
+        this.userProfileModal.show();
+    };
     MainComponent.prototype.cancelEdit = function () {
-        this.modal.hide();
+        this.userProfileModal.hide();
         this.currentUser = Object.assign({}, this.originalUser);
         this.originalUser = null;
     };
@@ -167,6 +208,27 @@ var MainComponent = (function () {
             callBack: function (isConfirm) {
                 if (isConfirm) {
                     _this.updateUser();
+                }
+            }
+        });
+    };
+    MainComponent.prototype.confirmUpdatePassword = function () {
+        var _this = this;
+        if (!this.currentUser.password.trim()) {
+            this.toastr.info("A password is required.");
+            return;
+        }
+        if (this.currentUser.password.length < 6) {
+            this.toastr.info("Password length should be greater than 6 characters.");
+            return;
+        }
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "you will be updating your password",
+            confirmButtonText: "Yes, Update It",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    _this.updatePassword();
                 }
             }
         });

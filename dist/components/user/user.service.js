@@ -34,6 +34,13 @@ var UserService = (function () {
             body: user
         });
     };
+    UserService.prototype.updatePassword = function (user) {
+        return this.service.apiCall({
+            verb: "post",
+            uri: "user/updatepassword",
+            body: user
+        });
+    };
     UserService.prototype.delete = function (user) {
         return this.service.apiCall({
             verb: "post",

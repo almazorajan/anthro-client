@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PositionService } from '../position/position.service';
 import { UserService } from './user.service';
-import { SweetAlertService, ToastrService } from '../../shared-services/services';
-import { User, Position, Modal, Search } from '../../models/model';
+import { SweetAlertService, ToastrService, LocalStorageService } from '../../shared-services/services';
+import { User, Position, Modal, Search, Session } from '../../models/model';
 import { UserFilter } from '../../pipes/pipe';
 
 @Component({
@@ -12,7 +12,8 @@ import { UserFilter } from '../../pipes/pipe';
         UserService,
         PositionService,
         SweetAlertService,
-        ToastrService
+        ToastrService,
+        LocalStorageService
     ]
 })
 
@@ -22,7 +23,8 @@ export class UserComponent implements OnInit {
         private userService : UserService,
         private positionService : PositionService,
         private swal : SweetAlertService,
-        private toastr : ToastrService
+        private toastr : ToastrService,
+        private localStorage : LocalStorageService
     ) { }
 
     positions : Position[] = [];
@@ -35,14 +37,17 @@ export class UserComponent implements OnInit {
     loadingEmploymentStatuses : boolean;
     addingUser : boolean;
     updatingUser : boolean;
+    updatingUserPassword : boolean;
     deletingUser : boolean;
     isFormDisabled : boolean;
-    modal : Modal;
+    userProfileModal : Modal;
+    userPasswordModal : Modal;
     operation : number = 0;
     search : Search;
 
     ngOnInit() {
-        this.modal = new Modal("#mdlModalInfo");
+        this.userProfileModal = new Modal("#mdlModalInfo");
+        this.userPasswordModal = new Modal("#mdlUserPassword");
         this.search = new Search();
         this.getAllUsers();
         this.getAllPositions();
@@ -59,7 +64,8 @@ export class UserComponent implements OnInit {
                 this.isFormDisabled = false;
 
                 if(result.success) {
-                    this.users = result.data as User[];                
+                    var currentUserId = this.localStorage.get<Session>("anthro.user-session").user._id;
+                    this.users = (result.data as User[]).filter(user => user._id !== currentUserId);                
                 } else {
                     this.toastr.error(result.message)
                 }
@@ -148,7 +154,7 @@ export class UserComponent implements OnInit {
                     this.toastr.success(result.message);
                     this.getAllUsers();
                     this.getAllPositions();
-                    this.modal.hide();
+                    this.userProfileModal.hide();
                 } else {
                     this.toastr.error(result.message);
                 }
@@ -169,7 +175,7 @@ export class UserComponent implements OnInit {
         this.operation = 0;
         this.isFormDisabled = true;
         this.selectedUser = user;
-
+        
         if(!this.selectedUser.position) {
             this.selectedUser.position = this.positions[0];
         } else {
@@ -181,6 +187,17 @@ export class UserComponent implements OnInit {
         this.operation = 2;
         this.isFormDisabled = false;
         this.originalUserInfo = Object.assign({}, this.selectedUser) as User;
+    }
+
+    displayChangePassword() : void {
+        this.selectedUser.password = "";
+        this.userProfileModal.hide();
+        this.userPasswordModal.show();
+    }
+
+    displayUserProfile() : void {
+        this.userPasswordModal.hide();
+        this.userProfileModal.show();
     }
 
     cancelEdit() : void {
@@ -202,6 +219,30 @@ export class UserComponent implements OnInit {
         });
     }
 
+    confirmUpdatePassword() : void {
+
+        if(!this.selectedUser.password.trim()) {
+            this.toastr.info("A password is required.");
+            return;
+        }
+        
+        if(this.selectedUser.password.length < 6) {
+            this.toastr.info("Password length should be greater than 6 characters.");
+            return;
+        }
+
+        this.swal.confirm({
+            title : "Are You Sure?",
+            message : "you will be updating your password",
+            confirmButtonText : "Yes, Update It",
+            callBack : (isConfirm) => {
+                if(isConfirm) {
+                    this.updatePassword();
+                }
+            }
+        });
+    }
+
     private updateUser() : void {
         try {
             this.updatingUser = true;
@@ -215,7 +256,7 @@ export class UserComponent implements OnInit {
                     this.toastr.success(result.message);
                     this.getAllUsers();
                     this.getAllPositions();
-                    this.modal.hide();          
+                    this.userProfileModal.hide();          
                 } else {
                     this.toastr.error(result.message);           
                 }
@@ -231,6 +272,35 @@ export class UserComponent implements OnInit {
             this.toastr.error(e);
         }
     }
+
+     private updatePassword() : void {
+        try {
+            this.updatingUserPassword = true;
+            this.isFormDisabled = true;
+
+            this.userService.updatePassword(this.selectedUser).then((result) => {
+                this.updatingUserPassword = false;
+                this.isFormDisabled = false;
+
+                if(result.success) {
+                    this.toastr.success(result.message);
+                    this.getAllUsers();
+                } else {
+                    this.toastr.error(result.message)
+                }
+            })
+            .catch((error) => {
+                this.updatingUserPassword = false;
+                this.isFormDisabled = false;
+                this.toastr.error(error)
+            });
+        } catch(e) {
+            this.updatingUserPassword = false;
+            this.isFormDisabled = false;
+            this.toastr.error(e);
+        }
+    }
+
 
     confirmDelete(user : User) : void {
         this.swal.confirm({
