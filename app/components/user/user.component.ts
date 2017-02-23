@@ -283,6 +283,8 @@ export class UserComponent implements OnInit {
                 this.isFormDisabled = false;
 
                 if(result.success) {
+                    this.userPasswordModal.hide();
+                    this.userProfileModal.hide();
                     this.toastr.success(result.message);
                     this.getAllUsers();
                 } else {

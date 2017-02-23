@@ -250,6 +250,8 @@ var UserComponent = (function () {
                 _this.updatingUserPassword = false;
                 _this.isFormDisabled = false;
                 if (result.success) {
+                    _this.userPasswordModal.hide();
+                    _this.userProfileModal.hide();
                     _this.toastr.success(result.message);
                     _this.getAllUsers();
                 }
