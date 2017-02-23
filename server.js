@@ -7,7 +7,7 @@ const app = express();
 app.use(express.static("./"));
 
 const config = {
-    port: process.pid ? process.pid : 1100,
+    port: process.env.PORT ? process.env.PORT : 1100,
     name: "anthro-client"
 };
 
