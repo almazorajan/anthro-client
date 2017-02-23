@@ -49,7 +49,6 @@ export class CompanyComponent implements OnInit {
 
                 if(result.success) {
                     this.companies = result.data as Company[];
-                    this.toastr.success(result.message);
                 } else {
                     this.toastr.error(result.message);
                 }

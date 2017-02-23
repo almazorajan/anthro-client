@@ -47,7 +47,6 @@ export class EmploymentStatusComponent implements OnInit {
                 this.isFormDisabled = false;
 
                 if(result.success) {
-                    this.toastr.success(result.message);
                     this.employmentStatuses = result.data as EmploymentStatus[];
                     this.disableEmploymentStatuses(true);
                     this.toggleAllEditMode(false);

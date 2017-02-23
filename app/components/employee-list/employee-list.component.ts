@@ -71,6 +71,8 @@ export class EmployeeListComponent implements OnInit {
             this.employeeListService.getAllEmployees().then((result) => {
                 this.loadingEmployees = false;
                 this.isFormDisabled = false;
+                
+                console.log(result);
 
                 if(result.success) {
                     this.employees = result.data as Employee[];

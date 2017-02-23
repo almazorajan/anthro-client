@@ -30,7 +30,7 @@
             <th class="text-center">Last Name</th>
             <th class="text-center">Position</th>
             <th class="text-center">Salary</th>
-            <th class="text-center">Emplymt Status</th>
+            <th class="text-center">Employment Status</th>
             <th class="text-center">Birth Date</th>
             <th class="text-center">SS Number</th>
             <th class="text-center">Philhealth Number</th>
@@ -38,7 +38,10 @@
             <th class="text-center">PAG-IBIG Number</th>
         </thead>
         <tbody>
-            <tr *ngFor="let employee of (employees | employeeFilter: searchFilter )">
+            <tr *ngIf="employees.length <= 0 && !loadingEmployees">
+                <td colspan="14" class="text-center">Sorry, no records found</td>
+            </tr>
+            <tr *ngFor="let employee of (employees | employeeFilter: searchFilter)">
                 <td>
                     <button (click)="view(employee)" class="btn btn-primary btn-xs" title="View information" data-toggle="modal" data-target="#mdlModalInfo">
                         <i class="glyphicon glyphicon-info-sign"></i>
@@ -117,8 +120,8 @@
                                     name="slcGender" 
                                     [(ngModel)]="currentEmployee.maritalStatus"
                                     [disabled]="isFormDisabled">
-                                    <option>Single</option>
-                                    <option>Married</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
                                 </select>
                             </div>
                             <div class="form-group">

@@ -47,8 +47,7 @@ export class ModuleComponent implements OnInit {
             this.loading = false;
 
             if(result.success) {
-                this.modules = result.data as Module[];     
-                this.toastr.success(result.message);
+                this.modules = result.data as Module[];
             } else {
                 this.toastr.error(result.message);
             }
