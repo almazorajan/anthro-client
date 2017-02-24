@@ -20,20 +20,20 @@ var EmployeeListService = (function (_super) {
     EmployeeListService.prototype.getAllEmployees = function () {
         return this.apiCall({
             verb: "post",
-            uri: "employeelist/getall"
+            uri: "employee/getall"
         });
     };
     EmployeeListService.prototype.updateEmployee = function (employee) {
         return this.apiCall({
             verb: "post",
-            uri: "employeelist/update",
+            uri: "employee/update",
             body: employee
         });
     };
     EmployeeListService.prototype.deleteEmployee = function (employee) {
         return this.apiCall({
             verb: "post",
-            uri: "employeelist/delete",
+            uri: "employee/delete",
             body: employee
         });
     };

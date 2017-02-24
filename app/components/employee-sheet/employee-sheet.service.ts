@@ -30,7 +30,7 @@ export class EmployeeSheetService {
     add(employee : Employee) : Promise<Result> {
         return this.service.apiCall({
             verb: "post",
-            uri: "employeesheet/add",
+            uri: "employee/add",
             body: employee
         });
     }

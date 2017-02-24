@@ -33,7 +33,7 @@ var EmployeeSheetService = (function () {
     EmployeeSheetService.prototype.add = function (employee) {
         return this.service.apiCall({
             verb: "post",
-            uri: "employeesheet/add",
+            uri: "employee/add",
             body: employee
         });
     };

@@ -7,14 +7,14 @@ import { Service } from '../../shared-services/service';
     getAllEmployees() : Promise<Result> {
         return this.apiCall({
             verb: "post",
-            uri: "employeelist/getall"
+            uri: "employee/getall"
         });
     }
 
     updateEmployee(employee : Employee) : Promise<Result> {
         return this.apiCall({
             verb: "post",
-            uri: "employeelist/update",
+            uri: "employee/update",
             body: employee 
         });
     }
@@ -22,7 +22,7 @@ import { Service } from '../../shared-services/service';
     deleteEmployee(employee : Employee) : Promise<Result> {
         return this.apiCall({
             verb: "post",
-            uri: "employeelist/delete",
+            uri: "employee/delete",
             body: employee 
         });
     }
