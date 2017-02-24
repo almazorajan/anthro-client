@@ -47,7 +47,11 @@
                         <i class="glyphicon glyphicon-info-sign"></i>
                     </button>
                 </td>
-                <td>{{ employee.company.companyName }}</td>
+                <td>
+                    <span *ngIf="employee.company">
+                        {{ employee.company.companyName }}
+                    </span>
+                </td>
                 <td>{{ employee.employeeNumber }}</td>
                 <td>{{ employee.firstName }}</td>
                 <td>{{ employee.middleName }}</td>
@@ -227,6 +231,19 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
+                            <label for="slcCompany">Company</label>
+                                <select 
+                                    class="form-control" 
+                                    id="slcCompany" 
+                                    name="slcCompany"
+                                    [(ngModel)]="currentEmployee.company._id"
+                                    [disabled]="isFormDisabled">
+                                    <option
+                                        *ngFor="let company of companies" 
+                                        [value]="company._id">
+                                        {{ company.companyName }}
+                                    </option>
+                                </select>
                             <div class="form-group">
                                 <label for="nbSalary">Salary</label>
                                 <input 

@@ -5,7 +5,7 @@ import { CompanyService } from '../company/company.service';
 import { EmploymentStatusService } from '../employment-status/employment-status.service';
 import { EmployeeSheetService } from '../employee-sheet/employee-sheet.service';
 import { PositionService } from '../position/position.service';
-import { EmploymentStatus, Employee, Position, Company, Family, Education, Accreditation, WorkHistory, Modal } from '../../models/model';
+import { EmploymentStatus, Employee, Position, Company, Family, Education, Accreditation, WorkHistory, Modal, Address } from '../../models/model';
 
 @Component({
     selector: 'employee-list-component',
@@ -195,8 +195,24 @@ export class EmployeeListComponent implements OnInit {
         this.operation = 0;
         this.isFormDisabled = true;
         this.currentEmployee = employee;
+
+        if(!this.currentEmployee.cityAddress) {
+            this.currentEmployee.cityAddress = new Address();
+        }
+
+        if(!this.currentEmployee.permanentAddress) {
+            this.currentEmployee.permanentAddress = new Address();
+        }
+
+        if(!this.currentEmployee.provincialAddress) {
+            this.currentEmployee.provincialAddress = new Address();
+        }
+
+        if(!this.currentEmployee.company) {
+            this.currentEmployee.company = new Company();
+        }
+
         this.computeAge(this.currentEmployee);
-        console.log(this.currentEmployee);
     }
 
     edit() : void {

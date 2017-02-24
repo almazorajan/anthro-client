@@ -181,8 +181,19 @@ var EmployeeListComponent = (function () {
         this.operation = 0;
         this.isFormDisabled = true;
         this.currentEmployee = employee;
+        if (!this.currentEmployee.cityAddress) {
+            this.currentEmployee.cityAddress = new model_1.Address();
+        }
+        if (!this.currentEmployee.permanentAddress) {
+            this.currentEmployee.permanentAddress = new model_1.Address();
+        }
+        if (!this.currentEmployee.provincialAddress) {
+            this.currentEmployee.provincialAddress = new model_1.Address();
+        }
+        if (!this.currentEmployee.company) {
+            this.currentEmployee.company = new model_1.Company();
+        }
         this.computeAge(this.currentEmployee);
-        console.log(this.currentEmployee);
     };
     EmployeeListComponent.prototype.edit = function () {
         this.operation = 1;
