@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var Modal = (function () {
     function Modal(id) {
         this.id = id;

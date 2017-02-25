@@ -9,3 +9,11 @@
     margin-left: 2.5%;
     padding-right: 2.5%;
 }
+
+.loader {
+    position: absolute;
+    left: 46%;
+    top: 40%;
+    margin-left: -32px;
+    margin-top: -32px;
+};

@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var accreditation_1 = require("./accreditation");
 exports.Accreditation = accreditation_1.Accreditation;
 var address_1 = require("./address");
