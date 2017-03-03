@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SweetAlertService, ToastrService } from '../../shared-services/services';
-import { EmployeeService } from '../../services/employee.service';
-import { CompanyService, EmploymentStatusService, PositionService } from '../../services/services';
-import { EmploymentStatus, Employee, Position, Company, Family, Education, Accreditation, WorkHistory, Modal, Address } from '../../models/model';
+import { CompanyService, EmploymentStatusService, PositionService, EmployeeService } from '../../services/services';
+import { EmploymentStatus, Employee, Position, Company, Family, Education, Accreditation, WorkHistory, Modal, Address } from '../../models/models';
 
 @Component({
     selector: 'employee-info-component',

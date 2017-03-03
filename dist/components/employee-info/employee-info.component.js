@@ -21,7 +21,7 @@ var EmployeeInfoComponent = (function () {
 }());
 __decorate([
     core_1.Input(),
-    __metadata("design:type", model_1.Employee)
+    __metadata("design:type", typeof (_a = typeof model_1.Employee !== "undefined" && model_1.Employee) === "function" && _a || Object)
 ], EmployeeInfoComponent.prototype, "employee", void 0);
 __decorate([
     core_1.Input(),
@@ -50,4 +50,5 @@ EmployeeInfoComponent = __decorate([
     })
 ], EmployeeInfoComponent);
 exports.EmployeeInfoComponent = EmployeeInfoComponent;
+var _a;
 //# sourceMappingURL=employee-info.component.js.map

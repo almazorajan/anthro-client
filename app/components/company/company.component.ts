@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Company, Modal } from '../../models/model';
+import { Company, Modal } from '../../models/models';
 import { CompanyService } from '../../services/services';
 import { SweetAlertService, ToastrService } from '../../shared-services/services';
 

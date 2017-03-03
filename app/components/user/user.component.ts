@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SweetAlertService, ToastrService  } from '../../shared-services/services';
 import { PositionService, LocalStorageService, UserService } from '../../services/services';
-import { User, Position, Modal, Search, Session } from '../../models/model';
+import { User, Position, Modal, Search, Session } from '../../models/models';
 import { UserFilter } from '../../pipes/pipe';
 
 @Component({

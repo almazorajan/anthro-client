@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PositionService } from '../../services/services';
 import { ModuleService } from '../../services/module.service';
 import { SweetAlertService, ToastrService } from '../../shared-services/services';
-import { Module, Position, Modal } from '../../models/model';
+import { Module, Position, Modal } from '../../models/models';
 
 @Component({
     selector: 'position-component',

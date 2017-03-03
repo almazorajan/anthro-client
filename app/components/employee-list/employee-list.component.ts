@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SweetAlertService, ToastrService } from '../../shared-services/services';
 import { EmployeeService, CompanyService, EmploymentStatusService, PositionService } from '../../services/services';
-import { EmploymentStatus, Employee, Position, Company, Family, Education, Accreditation, WorkHistory, Modal, Address } from '../../models/model';
+import { EmploymentStatus, Employee, Position, Company, Family, Education, Accreditation, WorkHistory, Modal, Address } from '../../models/models';
 
 @Component({
     selector: 'employee-list-component',

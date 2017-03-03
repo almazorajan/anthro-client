@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Module, Modal } from '../../models/model';
+import { Module, Modal } from '../../models/models';
 import { ModuleService } from '../../services/services';
 import { SweetAlertService, ToastrService } from '../../shared-services/services';
 

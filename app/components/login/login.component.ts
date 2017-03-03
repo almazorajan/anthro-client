@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService, LocalStorageService } from '../../services/services';
 import { SweetAlertService, ToastrService } from '../../shared-services/services';
-import { User, Modal } from '../../models/model';
+import { User, Modal } from '../../models/models';
 
 @Component({
     selector: 'login-component',
