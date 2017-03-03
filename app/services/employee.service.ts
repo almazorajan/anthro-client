@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Search, Employee, Result } from '../models/model';
+import { Search, Employee, Result } from '../models/models';
 import { ProviderService } from './provider.service';
 
 @Injectable() export class EmployeeService extends ProviderService {

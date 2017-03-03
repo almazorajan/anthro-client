@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { PositionService } from '../../services/services';
-import { ModuleService } from '../../services/module.service';
+import { PositionService, ModuleService } from '../../services/services';
 import { SweetAlertService, ToastrService } from '../../shared-services/services';
 import { Module, Position, Modal } from '../../models/models';
 
 @Component({
     selector: 'position-component',
-    templateUrl: './app/components/position/position-page.html',
+    templateUrl: './app/components/position/position.page.html',
     providers: [
         PositionService,
         ModuleService,

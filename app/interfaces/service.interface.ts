@@ -1,4 +1,4 @@
-import { Result } from '../models/model';
+import { Result } from '../models/models';
 import { iApiCall } from './api-call.interface';
 
 export interface iService {    

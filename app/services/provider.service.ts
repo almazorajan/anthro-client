@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions } from '@angular/http';
-import { iService, iApiCall } from '../interfaces/interface';
-import { Result } from '../models/model';
+import { iService, iApiCall } from '../interfaces/interfaces';
 import { LocalStorageService } from './local-storage.service';
-import { Session } from '../models/model';
+import { Result, Session } from '../models/models';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
