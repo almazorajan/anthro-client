@@ -15,11 +15,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { PositionComponent } from './components/position/position.component';
 import { UserComponent } from './components/user/user.component';
 
-// providers
 import { Service } from './shared-services/service';
 import { LocalStorageService } from './shared-services/local-storage.service';
 
-// pipes
 import { UserFilter, EmployeeFilter } from './pipes/pipe';
 
 @NgModule({
