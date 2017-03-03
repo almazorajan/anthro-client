@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Module, Modal } from '../../models/models';
 import { ModuleService } from '../../services/services';
-import { SweetAlertService, ToastrService } from '../../shared-services/services';
+import { SwalHelper, ToastHelper } from '../../helpers/helpers';
 
 @Component({
     selector: 'module-component',
     templateUrl: './app/components/module/module-page.html',
     providers: [
         ModuleService,
-        SweetAlertService,
-        ToastrService
+        SwalHelper,
+        ToastHelper
     ]
 })
 
@@ -17,8 +17,8 @@ export class ModuleComponent implements OnInit {
 
     constructor(
         private moduleService: ModuleService, 
-        private swal: SweetAlertService,
-        private toastr: ToastrService
+        private swal: SwalHelper,
+        private toast: ToastHelper
     ) { }
 
     loading: boolean = false;
@@ -49,12 +49,12 @@ export class ModuleComponent implements OnInit {
             if(result.success) {
                 this.modules = result.data as Module[];
             } else {
-                this.toastr.error(result.message);
+                this.toast.error(result.message);
             }
         })
         .catch((error) => {
             this.loading = false;
-            this.toastr.error(error);
+            this.toast.error(error);
         });
     }
 
@@ -90,7 +90,7 @@ export class ModuleComponent implements OnInit {
     confirmAdd(): void {
 
         if(!this.selectedModule.moduleName.trim() && !this.selectedModule.link.trim()) {
-            this.toastr.warn("Please provide all the required fields.");
+            this.toast.warn("Please provide all the required fields.");
             return;
         }
 
@@ -115,11 +115,11 @@ export class ModuleComponent implements OnInit {
             this.isFormDisabled = false;
 
             if(result.success) {
-                this.toastr.success(result.message);
+                this.toast.success(result.message);
                 this.mdlModalInfo.hide();
                 this.getAllModules();   
             } else {
-                this.toastr.error(result.message);
+                this.toast.error(result.message);
             }
         })
         .catch((error) => {
@@ -131,7 +131,7 @@ export class ModuleComponent implements OnInit {
     confirmUpdate(): void {
 
         if(!this.selectedModule.moduleName.trim() && !this.selectedModule.link.trim()) {
-            this.toastr.warn("Please provide all the required fields.");
+            this.toast.warn("Please provide all the required fields.");
             return;
         }
 
@@ -157,12 +157,12 @@ export class ModuleComponent implements OnInit {
             this.mdlModalInfo.hide();
             
             if(result.success) {
-                this.toastr.success(result.message);
+                this.toast.success(result.message);
                 this.getAllModules();
                 return;
             }
 
-            this.toastr.error(result.message);
+            this.toast.error(result.message);
         })
         .catch((error) => {
             this.isFormDisabled = false;
@@ -192,17 +192,17 @@ export class ModuleComponent implements OnInit {
             this.deletingModule = false;
 
             if(result.success) {
-                this.toastr.success(result.message);
+                this.toast.success(result.message);
                 this.getAllModules();
                 return;
             }
             console.log(result);
-            this.toastr.error(result.message);
+            this.toast.error(result.message);
         })
         .catch((error) => {
             this.isFormDisabled = false;
             this.deletingModule = false;
-            this.toastr.error(error);
+            this.toast.error(error);
         });
     }
 }

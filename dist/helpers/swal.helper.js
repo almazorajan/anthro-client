@@ -7,17 +7,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var PageNotFoundComponent = (function () {
-    function PageNotFoundComponent() {
+var SweetAlertService = (function () {
+    function SweetAlertService() {
     }
-    PageNotFoundComponent.prototype.ngOnInit = function () { };
-    return PageNotFoundComponent;
+    SweetAlertService.prototype.confirm = function (sweet) {
+        swal({
+            title: sweet.title,
+            text: sweet.message,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d9230f',
+            confirmButtonText: sweet.confirmButtonText
+        }, function (isConfirm) {
+            sweet.callBack(isConfirm);
+        });
+    };
+    return SweetAlertService;
 }());
-PageNotFoundComponent = __decorate([
-    core_1.Component({
-        selector: 'page-not-found-component',
-        templateUrl: './app/components/page-not-found/page-not-found.page.html'
-    })
-], PageNotFoundComponent);
-exports.PageNotFoundComponent = PageNotFoundComponent;
-//# sourceMappingURL=page-not-found.component.js.map
+SweetAlertService = __decorate([
+    core_1.Injectable()
+], SweetAlertService);
+exports.SweetAlertService = SweetAlertService;
+//# sourceMappingURL=swal.helper.js.map

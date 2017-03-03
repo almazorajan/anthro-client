@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SweetAlertService, ToastrService } from '../../shared-services/services';
+import { SwalHelper, ToastHelper } from '../../helpers/helpers';
 import { EmployeeService, CompanyService, EmploymentStatusService, PositionService } from '../../services/services';
 import { EmploymentStatus, Employee, Position, Company, Family, Education, Accreditation, WorkHistory, Modal, Address } from '../../models/models';
 
@@ -7,8 +7,8 @@ import { EmploymentStatus, Employee, Position, Company, Family, Education, Accre
     selector: 'employee-list-component',
     templateUrl: './app/components/employee-list/employee-list.page.html',
     providers: [
-        SweetAlertService,
-        ToastrService,
+        SwalHelper,
+        ToastHelper,
         EmployeeService,
         CompanyService,
         EmploymentStatusService,
@@ -19,8 +19,8 @@ import { EmploymentStatus, Employee, Position, Company, Family, Education, Accre
 export class EmployeeListComponent implements OnInit {
 
     constructor(
-        private swal: SweetAlertService,
-        private toastr: ToastrService,
+        private swal: SwalHelper,
+        private toast: ToastHelper,
         private employeeService: EmployeeService,
         private companyService: CompanyService,
         private employmentStatusService: EmploymentStatusService,
@@ -99,18 +99,18 @@ export class EmployeeListComponent implements OnInit {
                 if (result.success) {
                     this.companies = result.data as Company[];
                 } else {
-                    this.toastr.error(result.message);
+                    this.toast.error(result.message);
                 }
             })
             .catch((error) => {
                 this.loadingCompanies = false;
                 this.isFormDisabled = false;
-                this.toastr.error(error);
+                this.toast.error(error);
             });
         } catch (e) {
             this.loadingCompanies = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 
@@ -127,18 +127,18 @@ export class EmployeeListComponent implements OnInit {
                 if (result.success) {
                     this.employmentStatuses = result.data as EmploymentStatus[];
                 } else {
-                    this.toastr.error(result.message);
+                    this.toast.error(result.message);
                 }
             })
             .catch((error) => {
                 this.loadingEmploymentStatuses = false;
                 this.isFormDisabled = false;
-                this.toastr.error(error);
+                this.toast.error(error);
             });
         } catch (e) {
             this.loadingEmploymentStatuses = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 
@@ -155,18 +155,18 @@ export class EmployeeListComponent implements OnInit {
                 if (result.success) {
                     this.positions = result.data as Position[];
                 } else {
-                    this.toastr.error(result.message);
+                    this.toast.error(result.message);
                 }
             })
             .catch((error) => {
                 this.loadingPositions = false;
                 this.isFormDisabled = false;
-                this.toastr.error(error);
+                this.toast.error(error);
             });
         } catch (e) {
             this.loadingPositions = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 
@@ -174,7 +174,7 @@ export class EmployeeListComponent implements OnInit {
         try {
             this.relationships = this.employeeService.getRelationships();
         } catch (e) {
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 
@@ -223,18 +223,18 @@ export class EmployeeListComponent implements OnInit {
                     this.originalEmployeeInfo = null;
                     this.modal.hide();
                     this.getAllEmployees();
-                    this.toastr.success(result.message);
+                    this.toast.success(result.message);
                 } else {
-                    this.toastr.error(result.message);
+                    this.toast.error(result.message);
                 }
             })
             .catch((error) => {
                 this.updatingEmployee = false;
-                this.toastr.error(error);
+                this.toast.error(error);
             });
         } catch(e) {
             this.updatingEmployee = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 
@@ -309,18 +309,18 @@ export class EmployeeListComponent implements OnInit {
                     this.originalEmployeeInfo = null;
                     this.modal.hide();
                     this.getAllEmployees();
-                    this.toastr.success(result.message);
+                    this.toast.success(result.message);
                 } else {
-                    this.toastr.error(result.message);
+                    this.toast.error(result.message);
                 }
             })
             .catch((error) => {
                 this.updatingEmployee = false;
-                this.toastr.error(error);
+                this.toast.error(error);
             });
         } catch(e) {
             this.updatingEmployee = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 
@@ -336,20 +336,20 @@ export class EmployeeListComponent implements OnInit {
                 if(result.success) {
                     this.getAllEmployees();
                     this.modal.hide();
-                    this.toastr.success(result.message);
+                    this.toast.success(result.message);
                 } else {
-                    this.toastr.error(result.message);
+                    this.toast.error(result.message);
                 }
             })
             .catch((error) => {
                 this.isFormDisabled = false;
                 this.deletingEmployee = false;
-                this.toastr.error(error);
+                this.toast.error(error);
             });
         } catch(e) {
             this.isFormDisabled = false;
             this.deletingEmployee = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 
@@ -421,7 +421,7 @@ export class EmployeeListComponent implements OnInit {
             var diff = Date.now() - birthDay.getTime();
             this.currentEmployee.age = Math.abs(new Date(diff).getUTCFullYear() - 1970);    
         } catch(e) {
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 

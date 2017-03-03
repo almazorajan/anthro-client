@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SweetAlertService, ToastrService } from '../../shared-services/services';
+import { SwalHelper, ToastHelper } from '../../helpers/helpers';
 import { UserService, LocalStorageService, PositionService } from '../../services/services';
 import { User, Position, Module, Session, NavigationGroup, Navigation, Modal } from '../../models/models';
 
 @Component({
-    selector : 'main-component',
-    templateUrl : './app/components/main/main-page.html',
-    providers : [
-        SweetAlertService,
-        ToastrService,
+    selector: 'main-component',
+    templateUrl: './app/components/main/main-page.html',
+    providers: [
+        SwalHelper,
+        ToastHelper,
         LocalStorageService,
         PositionService,
         UserService
@@ -19,27 +19,27 @@ import { User, Position, Module, Session, NavigationGroup, Navigation, Modal } f
 export class MainComponent implements OnInit {
 
     constructor(
-        private swal : SweetAlertService,
-        private toastr : ToastrService,
-        private localStorage : LocalStorageService,
-        private positionService : PositionService,
-        private userService : UserService,
-        private router : Router
+        private swal: SwalHelper,
+        private toast: ToastHelper,
+        private localStorage: LocalStorageService,
+        private positionService: PositionService,
+        private userService: UserService,
+        private router: Router
     ) { }
 
-    private session : Session;
-    loadingPositions : boolean;
-    updatingUserProfile : boolean;
-    updatingUserPassword : boolean;
-    userProfileDisabled : boolean;
-    currentUser : User;
-    originalUser : User;
-    greetings : string;
-    navigation : Navigation;
-    validRoute : boolean;
-    positions : Position[];
-    userProfileModal : Modal;
-    userPasswordModal : Modal;
+    private session: Session;
+    loadingPositions: boolean;
+    updatingUserProfile: boolean;
+    updatingUserPassword: boolean;
+    userProfileDisabled: boolean;
+    currentUser: User;
+    originalUser: User;
+    greetings: string;
+    navigation: Navigation;
+    validRoute: boolean;
+    positions: Position[];
+    userProfileModal: Modal;
+    userPasswordModal: Modal;
     
     ngOnInit() {
         try {
@@ -49,7 +49,7 @@ export class MainComponent implements OnInit {
 
             // check if there is a session.
             if (!this.session) {
-                this.toastr.error("No session detected. Proceeding to logout.");
+                this.toast.error("No session detected. Proceeding to logout.");
                 this.redirectToLogin();
                 return;
             }
@@ -58,7 +58,7 @@ export class MainComponent implements OnInit {
             this.validRoute = this.isValidRoute(this.session);
 
             if (!this.validRoute) {
-                this.toastr.error("The page you are looking for is either inaccessible or does not exist.");
+                this.toast.error("The page you are looking for is either inaccessible or does not exist.");
                 this.redirectToLogin();
                 return;
             }
@@ -69,23 +69,23 @@ export class MainComponent implements OnInit {
             this.userProfileModal = new Modal("#mdlUserProfile");
             this.userPasswordModal = new Modal("#mdlUserPassword");
         } catch (e) {
-            this.toastr.error(e);
+            this.toast.error(e);
             this.redirectToLogin();
         }
     }
 
-    private redirectToLogin() : void {
+    private redirectToLogin(): void {
         this.router.navigate(["/login"]);
     }
 
-    private formatAvailableModules(session : Session) : void {
+    private formatAvailableModules(session: Session): void {
         this.navigation = new Navigation();
         this.navigation.withGroup = [];
         this.navigation.withoutGroup = [];
 
         session.user.position.modules.forEach((mod) => {
             if (mod.group) {
-                let isGroupExists : boolean = false;
+                let isGroupExists: boolean = false;
 
                 for (let i = 0; i < this.navigation.withGroup.length; i++) {
                     if (this.navigation.withGroup[i].group === mod.group) {
@@ -107,7 +107,7 @@ export class MainComponent implements OnInit {
         });
     }
 
-    private isValidRoute(session : Session) : boolean {
+    private isValidRoute(session: Session): boolean {
         for (let i = 0; i < session.user.position.modules.length; i++) {
             if (session.user.position.modules[i].link === this.router.url) {
                 return true;
@@ -116,11 +116,11 @@ export class MainComponent implements OnInit {
         return false;
     }
 
-    private readyGreetings() : void {
+    private readyGreetings(): void {
         this.greetings = "Hi " + this.session.user.firstName;
     }
 
-    private getPositions() : void {
+    private getPositions(): void {
         try {
             this.positions = [];
             this.loadingPositions = true;
@@ -133,22 +133,22 @@ export class MainComponent implements OnInit {
                 if(result.success) {
                     this.positions = result.data as Position[];
                 } else {
-                    this.toastr.error(result.message);
+                    this.toast.error(result.message);
                 }
             })
             .catch((error) => {
                 this.loadingPositions = false;
                 this.userProfileDisabled = false;
-                this.toastr.error(error);
+                this.toast.error(error);
             });
         } catch(e) {
             this.loadingPositions = false;
             this.userProfileDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 
-    private updateUser() : void {
+    private updateUser(): void {
         try {
             this.updatingUserProfile = true;
             this.userProfileDisabled = true;
@@ -159,26 +159,26 @@ export class MainComponent implements OnInit {
 
                 if(result.success) {
                     this.userProfileModal.hide();
-                    this.toastr.success(result.message);
-                    this.toastr.info("Please re-login to continue.");
+                    this.toast.success(result.message);
+                    this.toast.info("Please re-login to continue.");
                     this.redirectToLogin();
                 } else {
-                    this.toastr.error(result.message)
+                    this.toast.error(result.message)
                 }
             })
             .catch((error) => {
                 this.updatingUserProfile = false;
                 this.userProfileDisabled = false;
-                this.toastr.error(error)
+                this.toast.error(error)
             });
         } catch(e) {
             this.updatingUserProfile = false;
             this.userProfileDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 
-    private updatePassword() : void {
+    private updatePassword(): void {
         try {
             this.updatingUserPassword = true;
             this.userProfileDisabled = true;
@@ -190,52 +190,52 @@ export class MainComponent implements OnInit {
                 if(result.success) {
                     this.userPasswordModal.hide();
                     this.userProfileModal.hide();
-                    this.toastr.success(result.message);
-                    this.toastr.info("Please re-login to continue.");
+                    this.toast.success(result.message);
+                    this.toast.info("Please re-login to continue.");
                     this.redirectToLogin();
                 } else {
-                    this.toastr.error(result.message)
+                    this.toast.error(result.message)
                 }
             })
             .catch((error) => {
                 this.updatingUserPassword = false;
                 this.userProfileDisabled = false;
-                this.toastr.error(error)
+                this.toast.error(error)
             });
         } catch(e) {
             this.updatingUserPassword = false;
             this.userProfileDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 
-    viewProfile() : void {
+    viewProfile(): void {
         this.originalUser = Object.assign({}, this.currentUser);
     }
 
-    displayChangePassword() : void {
+    displayChangePassword(): void {
         this.currentUser.password = "";
         this.userProfileModal.hide();
         this.userPasswordModal.show();
     }
 
-    displayUserProfile() : void {
+    displayUserProfile(): void {
         this.userPasswordModal.hide();
         this.userProfileModal.show();
     }
 
-    cancelEdit() : void {
+    cancelEdit(): void {
         this.userProfileModal.hide();
         this.currentUser = Object.assign({}, this.originalUser);
         this.originalUser = null;
     }
 
-    confirmUpdate() : void {
+    confirmUpdate(): void {
         this.swal.confirm({
-            title : "Are You Sure?",
-            message : "you will be updating your user information",
-            confirmButtonText : "Yes, Update it",
-            callBack : (isConfirm) => {
+            title: "Are You Sure?",
+            message: "you will be updating your user information",
+            confirmButtonText: "Yes, Update it",
+            callBack: (isConfirm) => {
                 if(isConfirm) {
                     this.updateUser();
                 }
@@ -243,23 +243,23 @@ export class MainComponent implements OnInit {
         });
     }
 
-    confirmUpdatePassword() : void {
+    confirmUpdatePassword(): void {
 
         if(!this.currentUser.password.trim()) {
-            this.toastr.info("A password is required.");
+            this.toast.info("A password is required.");
             return;
         }
         
         if(this.currentUser.password.length < 6) {
-            this.toastr.info("Password length should be greater than 6 characters.");
+            this.toast.info("Password length should be greater than 6 characters.");
             return;
         }
 
         this.swal.confirm({
-            title : "Are You Sure?",
-            message : "you will be updating your password",
-            confirmButtonText : "Yes, Update It",
-            callBack : (isConfirm) => {
+            title: "Are You Sure?",
+            message: "you will be updating your password",
+            confirmButtonText: "Yes, Update It",
+            callBack: (isConfirm) => {
                 if(isConfirm) {
                     this.updatePassword();
                 }
@@ -267,7 +267,7 @@ export class MainComponent implements OnInit {
         });
     }
 
-    signOut() : void {
+    signOut(): void {
         this.localStorage.remove("anthro.user-session");
         this.redirectToLogin();
     }

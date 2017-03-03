@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { EmploymentStatusService } from '../../services/services';
-import { SweetAlertService, ToastrService } from '../../shared-services/services';
+import { SwalHelper, ToastHelper } from '../../helpers/helpers';
 import { EmploymentStatus, Modal } from '../../models/models';
 
 @Component({
     selector: 'employment-status-component',
     templateUrl: './app/components/employment-status/employment-status.page.html',
     providers: [
-        SweetAlertService,
-        ToastrService,
+        SwalHelper,
+        ToastHelper,
         EmploymentStatusService
     ]
 })
@@ -16,27 +16,27 @@ import { EmploymentStatus, Modal } from '../../models/models';
 export class EmploymentStatusComponent implements OnInit {
 
     constructor(
-        private swal : SweetAlertService,
-        private toastr : ToastrService,
-        private employmentStatusService : EmploymentStatusService
+        private swal: SwalHelper,
+        private toast: ToastHelper,
+        private employmentStatusService: EmploymentStatusService
     ) { }
 
-    employmentStatuses : EmploymentStatus[];
-    selectedEmploymentStatus : EmploymentStatus;
-    originalEmploymentStatusInfo : EmploymentStatus;
-    loadingEmploymentStatus : boolean;
-    addingEmploymentStatus : boolean;
-    updatingEmploymentStatus : boolean;
-    deletingEmploymentStatus : boolean;
-    isFormDisabled : boolean;
-    modal : Modal;
+    employmentStatuses: EmploymentStatus[];
+    selectedEmploymentStatus: EmploymentStatus;
+    originalEmploymentStatusInfo: EmploymentStatus;
+    loadingEmploymentStatus: boolean;
+    addingEmploymentStatus: boolean;
+    updatingEmploymentStatus: boolean;
+    deletingEmploymentStatus: boolean;
+    isFormDisabled: boolean;
+    modal: Modal;
 
     ngOnInit() {
         this.modal = new Modal("#mdlModalInfo");
         this.getAll();
     }
 
-    private getAll() : void {
+    private getAll(): void {
         try {
             this.employmentStatuses = [];
             this.loadingEmploymentStatus = true;
@@ -51,52 +51,52 @@ export class EmploymentStatusComponent implements OnInit {
                     this.disableEmploymentStatuses(true);
                     this.toggleAllEditMode(false);
                 } else {
-                    this.toastr.error(result.message);
+                    this.toast.error(result.message);
                 } 
             })
             .catch((error) => {
                 this.loadingEmploymentStatus = false;
                 this.isFormDisabled = false;
-                this.toastr.error(error);
+                this.toast.error(error);
             });
 
         } catch(e) {
             this.loadingEmploymentStatus = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 
-    private disableEmploymentStatuses(val : boolean) : void {
+    private disableEmploymentStatuses(val: boolean): void {
         for(let i=0; i < this.employmentStatuses.length; i++) {
             this.employmentStatuses[i].disabled = val;
         }
     }
 
-    private toggleAllEditMode(val : boolean) : void {
+    private toggleAllEditMode(val: boolean): void {
         for(let i=0; i < this.employmentStatuses.length; i++) {
             this.employmentStatuses[i].editMode = val;
         }
     }
 
-    add() : void {
+    add(): void {
         this.isFormDisabled = false;
         this.selectedEmploymentStatus = new EmploymentStatus();
     }
 
-    edit(employmentStatus : EmploymentStatus) : void {
+    edit(employmentStatus: EmploymentStatus): void {
         employmentStatus.originalInfo = Object.assign({}, employmentStatus);
         employmentStatus.editMode = true;
         employmentStatus.disabled = false;
     }
 
-    cancelEdit(employmentStatus : EmploymentStatus) : void {
+    cancelEdit(employmentStatus: EmploymentStatus): void {
         employmentStatus.employmentStatus = employmentStatus.originalInfo.employmentStatus;
         employmentStatus.editMode = false;
         employmentStatus.disabled = true;
     }
 
-    confirmAdd() : void {
+    confirmAdd(): void {
         this.swal.confirm({
             title: "Are You Sure?",
             message: "You will be adding this employment status",
@@ -109,7 +109,7 @@ export class EmploymentStatusComponent implements OnInit {
         });
     }
 
-    private addEmploymentStatus() : void {
+    private addEmploymentStatus(): void {
         try {
             this.isFormDisabled = true;
             this.addingEmploymentStatus = true;
@@ -119,28 +119,28 @@ export class EmploymentStatusComponent implements OnInit {
                 this.addingEmploymentStatus = false;
                 
                 if(result.success) {
-                    this.toastr.success(result.message);
+                    this.toast.success(result.message);
                     this.modal.hide();
                     this.getAll();
                 } else {
-                    this.toastr.error(result.message);
+                    this.toast.error(result.message);
                 }
             })
             .catch((error) => {
                 this.isFormDisabled = false;
                 this.addingEmploymentStatus = false;
-                this.toastr.error(error);
+                this.toast.error(error);
             });
         } catch(e) {
             this.isFormDisabled = false;
             this.addingEmploymentStatus = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 
-    confirmSave(employmentStatus : EmploymentStatus) : void {
+    confirmSave(employmentStatus: EmploymentStatus): void {
         if(!employmentStatus.employmentStatus.trim()) {
-            this.toastr.warn("Please provide an employment status.");
+            this.toast.warn("Please provide an employment status.");
             return;
         }
 
@@ -156,7 +156,7 @@ export class EmploymentStatusComponent implements OnInit {
         });
     }
 
-    private updateEmploymentStatus(employmentStatus : EmploymentStatus) : void {
+    private updateEmploymentStatus(employmentStatus: EmploymentStatus): void {
         try {
             this.updatingEmploymentStatus = true;
             this.isFormDisabled = true;
@@ -166,26 +166,26 @@ export class EmploymentStatusComponent implements OnInit {
                 this.isFormDisabled = false;
 
                 if(result.success) {
-                    this.toastr.success(result.message);
+                    this.toast.success(result.message);
                     this.getAll();
                 } else {
-                    this.toastr.error(result.message);
+                    this.toast.error(result.message);
                 }
             })
             .catch((error) => {              
                 this.updatingEmploymentStatus = false;
                 this.isFormDisabled = false;
-                this.toastr.error(error);
+                this.toast.error(error);
             });
         } catch(e) {
             this.updatingEmploymentStatus = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
 
     }
 
-    confirmDelete(employmentStatus : EmploymentStatus) : void {
+    confirmDelete(employmentStatus: EmploymentStatus): void {
         this.swal.confirm({
             title: "Are you sure?",
             message: "You will be deleting this employment status.",
@@ -198,7 +198,7 @@ export class EmploymentStatusComponent implements OnInit {
         });        
     }
 
-    private deleteEmploymentStatus(employmentStatus : EmploymentStatus) : void {
+    private deleteEmploymentStatus(employmentStatus: EmploymentStatus): void {
         try {
             this.deletingEmploymentStatus = true;
             this.isFormDisabled = true;
@@ -208,23 +208,23 @@ export class EmploymentStatusComponent implements OnInit {
                 this.isFormDisabled = false;
 
                 if(result.success) {
-                    this.toastr.success(result.message);
+                    this.toast.success(result.message);
                     this.getAll();
                     this.modal.hide();
                 } else {
-                    this.toastr.error(result.message);
+                    this.toast.error(result.message);
                 }
             })
             .catch((error) => {
                 this.deletingEmploymentStatus = false;
                 this.isFormDisabled = false;
-                this.toastr.error(error);
+                this.toast.error(error);
             });
 
         } catch(e) {
             this.deletingEmploymentStatus = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 

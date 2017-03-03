@@ -1,5 +1,4 @@
-
-import { Module } from './model';
+import { Module } from './models';
 
 export class NavigationGroup {
     group: string;

@@ -13,7 +13,7 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var services_1 = require("../../shared-services/services");
 var services_2 = require("../../services/services");
-var model_1 = require("../../models/model");
+var models_1 = require("../../models/models");
 var MainComponent = (function () {
     function MainComponent(swal, toastr, localStorage, positionService, userService, router) {
         this.swal = swal;
@@ -25,7 +25,7 @@ var MainComponent = (function () {
     }
     MainComponent.prototype.ngOnInit = function () {
         try {
-            this.session = new model_1.Session();
+            this.session = new models_1.Session();
             this.session = this.localStorage.get("anthro.user-session");
             this.currentUser = Object.assign({}, this.session.user);
             // check if there is a session.
@@ -44,8 +44,8 @@ var MainComponent = (function () {
             this.formatAvailableModules(this.session);
             this.getPositions();
             this.readyGreetings();
-            this.userProfileModal = new model_1.Modal("#mdlUserProfile");
-            this.userPasswordModal = new model_1.Modal("#mdlUserPassword");
+            this.userProfileModal = new models_1.Modal("#mdlUserProfile");
+            this.userPasswordModal = new models_1.Modal("#mdlUserPassword");
         }
         catch (e) {
             this.toastr.error(e);
@@ -57,7 +57,7 @@ var MainComponent = (function () {
     };
     MainComponent.prototype.formatAvailableModules = function (session) {
         var _this = this;
-        this.navigation = new model_1.Navigation();
+        this.navigation = new models_1.Navigation();
         this.navigation.withGroup = [];
         this.navigation.withoutGroup = [];
         session.user.position.modules.forEach(function (mod) {
@@ -70,7 +70,7 @@ var MainComponent = (function () {
                     }
                 }
                 if (!isGroupExists) {
-                    var wgroup = new model_1.NavigationGroup();
+                    var wgroup = new models_1.NavigationGroup();
                     wgroup.group = mod.group;
                     wgroup.modules = [];
                     wgroup.modules.push(mod);
@@ -251,12 +251,11 @@ MainComponent = __decorate([
             services_2.UserService
         ]
     }),
-    __metadata("design:paramtypes", [services_1.SweetAlertService,
-        services_1.ToastrService,
-        services_2.LocalStorageService,
+    __metadata("design:paramtypes", [typeof (_a = typeof services_1.SweetAlertService !== "undefined" && services_1.SweetAlertService) === "function" && _a || Object, typeof (_b = typeof services_1.ToastrService !== "undefined" && services_1.ToastrService) === "function" && _b || Object, services_2.LocalStorageService,
         services_2.PositionService,
         services_2.UserService,
         router_1.Router])
 ], MainComponent);
 exports.MainComponent = MainComponent;
+var _a, _b;
 //# sourceMappingURL=main.component.js.map

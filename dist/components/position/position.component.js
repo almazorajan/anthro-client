@@ -11,9 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var services_1 = require("../../services/services");
-var module_service_1 = require("../../services/module.service");
 var services_2 = require("../../shared-services/services");
-var model_1 = require("../../models/model");
+var models_1 = require("../../models/models");
 var PositionComponent = (function () {
     function PositionComponent(positionService, moduleService, swal, toastr) {
         this.positionService = positionService;
@@ -27,7 +26,7 @@ var PositionComponent = (function () {
         this.deletingPosition = false;
     }
     PositionComponent.prototype.ngOnInit = function () {
-        this.modal = new model_1.Modal("#mdlModalInfo");
+        this.modal = new models_1.Modal("#mdlModalInfo");
         this.getAllModules();
         this.getAllPositions();
     };
@@ -108,7 +107,7 @@ var PositionComponent = (function () {
         this.isFormDisabled = false;
         this.moduleSelector = false;
         this.toggleModuleSelection(false);
-        this.selectedPosition = new model_1.Position();
+        this.selectedPosition = new models_1.Position();
     };
     PositionComponent.prototype.edit = function () {
         this.operation = 2;
@@ -212,7 +211,7 @@ var PositionComponent = (function () {
                     _this.getAllPositions();
                     _this.getAllModules();
                     _this.toggleModuleSelection(false);
-                    _this.selectedPosition = new model_1.Position();
+                    _this.selectedPosition = new models_1.Position();
                     return;
                 }
                 _this.toastr.error(result.message);
@@ -280,18 +279,17 @@ var PositionComponent = (function () {
 PositionComponent = __decorate([
     core_1.Component({
         selector: 'position-component',
-        templateUrl: './app/components/position/position-page.html',
+        templateUrl: './app/components/position/position.page.html',
         providers: [
             services_1.PositionService,
-            module_service_1.ModuleService,
+            services_1.ModuleService,
             services_2.SweetAlertService,
             services_2.ToastrService
         ]
     }),
     __metadata("design:paramtypes", [services_1.PositionService,
-        module_service_1.ModuleService,
-        services_2.SweetAlertService,
-        services_2.ToastrService])
+        services_1.ModuleService, typeof (_a = typeof services_2.SweetAlertService !== "undefined" && services_2.SweetAlertService) === "function" && _a || Object, typeof (_b = typeof services_2.ToastrService !== "undefined" && services_2.ToastrService) === "function" && _b || Object])
 ], PositionComponent);
 exports.PositionComponent = PositionComponent;
+var _a, _b;
 //# sourceMappingURL=position.component.js.map

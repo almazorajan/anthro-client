@@ -1,7 +1,18 @@
 
-import { Position } from './model';
+import { Position } from './models';
 
 export class User {
+
+    constructor() {
+        this.userName = "";
+        this.firstName = "";
+        this.middleName = "";
+        this.lastName  = "";
+        this.password = "";
+        this.dateCreated = new Date();
+        this.dateUpdated = new Date();
+        this.position = new Position();
+    }
 
     _id: string;
     userName: string;
@@ -13,18 +24,4 @@ export class User {
     dateUpdated: Date;
     position: Position;
     dateDeactivated: Date;
-
-    constructor() {
-
-        this.userName = "";
-        this.firstName = "";
-        this.middleName = "";
-        this.lastName  = "";
-        this.password = "";
-        this.dateCreated = new Date();
-        this.dateUpdated = new Date();
-        this.position = new Position();
-
-    }
-
 }

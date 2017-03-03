@@ -11,9 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var services_1 = require("../../shared-services/services");
-var employee_service_1 = require("../../services/employee.service");
 var services_2 = require("../../services/services");
-var model_1 = require("../../models/model");
+var models_1 = require("../../models/models");
 var EmployeeInfoComponent = (function () {
     function EmployeeInfoComponent() {
     }
@@ -21,7 +20,7 @@ var EmployeeInfoComponent = (function () {
 }());
 __decorate([
     core_1.Input(),
-    __metadata("design:type", typeof (_a = typeof model_1.Employee !== "undefined" && model_1.Employee) === "function" && _a || Object)
+    __metadata("design:type", models_1.Employee)
 ], EmployeeInfoComponent.prototype, "employee", void 0);
 __decorate([
     core_1.Input(),
@@ -42,7 +41,7 @@ EmployeeInfoComponent = __decorate([
         providers: [
             services_1.SweetAlertService,
             services_1.ToastrService,
-            employee_service_1.EmployeeService,
+            services_2.EmployeeService,
             services_2.CompanyService,
             services_2.EmploymentStatusService,
             services_2.PositionService,
@@ -50,5 +49,4 @@ EmployeeInfoComponent = __decorate([
     })
 ], EmployeeInfoComponent);
 exports.EmployeeInfoComponent = EmployeeInfoComponent;
-var _a;
 //# sourceMappingURL=employee-info.component.js.map

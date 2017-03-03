@@ -1,48 +1,6 @@
-
-import { 
-    EmploymentStatus, 
-    Address, 
-    Education, 
-    Accreditation, 
-    WorkHistory, 
-    Family,
-    Position,
-    ContactNumber,
-    Company
-} from './model';
+import { EmploymentStatus, Address, Education, Accreditation, WorkHistory, Family,Position,ContactNumber, Company } from './models';
 
 export class Employee {
-    _id: string;
-    image: string;
-    employeeNumber: string;
-    startingDate: Date;
-    salary: number;
-    position: Position;
-    company: Company;
-    employmentStatus: EmploymentStatus;
-    firstName: string;
-    middleName: string;
-    lastName: string;
-    birthDate: Date;
-    age: number;
-    birthPlace: string;
-    phoneNumbers: ContactNumber[];
-    landlines: ContactNumber[];
-    maritalStatus: string;
-    gender: string;
-    citizenship: string;
-    cityAddress: Address;
-    provincialAddress: Address;
-    permanentAddress: Address;
-    ssNumber: string;
-    tinNumber: string;
-    philHealthNumber: string;
-    pagibigNumber: string;
-    educationHistory: Education[];
-    certifications: Accreditation[];
-    licensures: Accreditation[];
-    workHistory: WorkHistory[];
-    family: Family[];
 
     constructor() {
         this.employeeNumber = "";
@@ -84,4 +42,36 @@ export class Employee {
         this.workHistory = [new WorkHistory()];
         this.family = [new Family()];
     }
+
+    _id: string;
+    image: string;
+    employeeNumber: string;
+    startingDate: Date;
+    salary: number;
+    position: Position;
+    company: Company;
+    employmentStatus: EmploymentStatus;
+    firstName: string;
+    middleName: string;
+    lastName: string;
+    birthDate: Date;
+    age: number;
+    birthPlace: string;
+    phoneNumbers: ContactNumber[];
+    landlines: ContactNumber[];
+    maritalStatus: string;
+    gender: string;
+    citizenship: string;
+    cityAddress: Address;
+    provincialAddress: Address;
+    permanentAddress: Address;
+    ssNumber: string;
+    tinNumber: string;
+    philHealthNumber: string;
+    pagibigNumber: string;
+    educationHistory: Education[];
+    certifications: Accreditation[];
+    licensures: Accreditation[];
+    workHistory: WorkHistory[];
+    family: Family[];
 };

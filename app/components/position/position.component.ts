@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PositionService, ModuleService } from '../../services/services';
-import { SweetAlertService, ToastrService } from '../../shared-services/services';
+import { SwalHelper, ToastHelper } from '../../helpers/helpers';
 import { Module, Position, Modal } from '../../models/models';
 
 @Component({
@@ -9,8 +9,8 @@ import { Module, Position, Modal } from '../../models/models';
     providers: [
         PositionService,
         ModuleService,
-        SweetAlertService,
-        ToastrService
+        SwalHelper,
+        ToastHelper
     ]
 })
 
@@ -19,8 +19,8 @@ export class PositionComponent implements OnInit {
     constructor(
         private positionService: PositionService,
         private moduleService: ModuleService,
-        private swal: SweetAlertService,
-        private toastr: ToastrService
+        private swal: SwalHelper,
+        private toast: ToastHelper
     ) { }
 
     modules: Module[];
@@ -56,18 +56,18 @@ export class PositionComponent implements OnInit {
                 if (result.success) {
                     this.modules = result.data as Module[];
                 } else {
-                    this.toastr.error(result.message);
+                    this.toast.error(result.message);
                 }
             })
             .catch((error) => {
                 this.loadingModules = false;
                 this.isFormDisabled = false;
-                this.toastr.error(error);
+                this.toast.error(error);
             });
         } catch(e) {
             this.loadingModules = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 
@@ -84,18 +84,18 @@ export class PositionComponent implements OnInit {
                 if (result.success) {
                     this.positions = result.data as Position[];
                 } else {
-                    this.toastr.error(result.message);
+                    this.toast.error(result.message);
                 }
             })
             .catch((error) => {
                 this.loadingPositions = false;
                 this.isFormDisabled = false;
-                this.toastr.error(error);
+                this.toast.error(error);
             });
         } catch(e) {
             this.loadingPositions = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 
@@ -140,7 +140,7 @@ export class PositionComponent implements OnInit {
     private validPosition(position: Position): boolean {
 
         if (!this.selectedPosition.positionName.trim()) {
-            this.toastr.warn("Please provide a position name.");
+            this.toast.warn("Please provide a position name.");
             return false;
         }
 
@@ -152,7 +152,7 @@ export class PositionComponent implements OnInit {
         }
 
         if (this.selectedPosition.modules.length <= 0) {
-            this.toastr.warn("Please select atleast one(1) module.");
+            this.toast.warn("Please select atleast one(1) module.");
             return false;
         }
 
@@ -190,23 +190,23 @@ export class PositionComponent implements OnInit {
                 this.isFormDisabled = false;
 
                 if(result.success) {
-                    this.toastr.success(result.message);
+                    this.toast.success(result.message);
                     this.getAllPositions();
                     this.getAllModules();
                     this.modal.hide();
                 } else {
-                    this.toastr.error(result.message);
+                    this.toast.error(result.message);
                 }
             })
             .catch((error) => {
                 this.updatingPosition = false;
                 this.isFormDisabled = false;
-                this.toastr.error(error);
+                this.toast.error(error);
             });
         } catch(e) {
             this.updatingPosition = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 
@@ -239,7 +239,7 @@ export class PositionComponent implements OnInit {
 
                 if (result.success) {
                     this.modal.hide();
-                    this.toastr.success(result.message);
+                    this.toast.success(result.message);
                     this.getAllPositions();
                     this.getAllModules();
                     this.toggleModuleSelection(false);
@@ -247,17 +247,17 @@ export class PositionComponent implements OnInit {
                     return;
                 }
 
-                this.toastr.error(result.message);
+                this.toast.error(result.message);
             })
             .catch((error) => {
                 this.addingPosition = false;
                 this.isFormDisabled = false;
-                this.toastr.error(error.toString());
+                this.toast.error(error.toString());
             });
         } catch (e) {
             this.addingPosition = false;
             this.isFormDisabled = false;
-            this.toastr.error((e || e.message).toString());
+            this.toast.error((e || e.message).toString());
         }
     }
 
@@ -285,17 +285,17 @@ export class PositionComponent implements OnInit {
                 this.isFormDisabled = false;
 
                 if(result.success) {
-                    this.toastr.success(result.message);
+                    this.toast.success(result.message);
                     this.getAllPositions();
                     this.getAllModules();
                 } else {
-                    this.toastr.error(result.message);
+                    this.toast.error(result.message);
                 }
             })
             .catch((error) => {
                 this.deletingPosition = false;
                 this.isFormDisabled = false;
-                this.toastr.error(error);
+                this.toast.error(error);
             });
         } catch(e) {
             this.deletingPosition = false;

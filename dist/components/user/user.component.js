@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var services_1 = require("../../shared-services/services");
 var services_2 = require("../../services/services");
-var model_1 = require("../../models/model");
+var models_1 = require("../../models/models");
 var UserComponent = (function () {
     function UserComponent(userService, positionService, swal, toastr, localStorage) {
         this.userService = userService;
@@ -25,9 +25,9 @@ var UserComponent = (function () {
         this.operation = 0;
     }
     UserComponent.prototype.ngOnInit = function () {
-        this.userProfileModal = new model_1.Modal("#mdlModalInfo");
-        this.userPasswordModal = new model_1.Modal("#mdlUserPassword");
-        this.search = new model_1.Search();
+        this.userProfileModal = new models_1.Modal("#mdlModalInfo");
+        this.userPasswordModal = new models_1.Modal("#mdlUserPassword");
+        this.search = new models_1.Search();
         this.getAllUsers();
         this.getAllPositions();
     };
@@ -91,8 +91,8 @@ var UserComponent = (function () {
     UserComponent.prototype.add = function () {
         this.operation = 1;
         this.isFormDisabled = false;
-        this.selectedUser = new model_1.User();
-        this.selectedUser.position = new model_1.Position();
+        this.selectedUser = new models_1.User();
+        this.selectedUser.position = new models_1.Position();
         this.selectedUser.position._id = this.positions[0]._id;
         this.selectedUser.position.positionName = this.positions[0].positionName;
     };
@@ -328,10 +328,8 @@ UserComponent = __decorate([
         ]
     }),
     __metadata("design:paramtypes", [services_2.UserService,
-        services_2.PositionService,
-        services_1.SweetAlertService,
-        services_1.ToastrService,
-        services_2.LocalStorageService])
+        services_2.PositionService, typeof (_a = typeof services_1.SweetAlertService !== "undefined" && services_1.SweetAlertService) === "function" && _a || Object, typeof (_b = typeof services_1.ToastrService !== "undefined" && services_1.ToastrService) === "function" && _b || Object, services_2.LocalStorageService])
 ], UserComponent);
 exports.UserComponent = UserComponent;
+var _a, _b;
 //# sourceMappingURL=user.component.js.map

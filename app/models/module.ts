@@ -1,5 +1,4 @@
-
-import { iModule } from '../interfaces/module.interface';
+import { iModule } from '../interfaces/interfaces';
 
 export class Module implements iModule {
 
@@ -11,5 +10,4 @@ export class Module implements iModule {
 
     selected: boolean;
     disabled: boolean;
-
 }

@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var services_1 = require("../../services/services");
 var services_2 = require("../../shared-services/services");
-var model_1 = require("../../models/model");
+var models_1 = require("../../models/models");
 var EmploymentStatusComponent = (function () {
     function EmploymentStatusComponent(swal, toastr, employmentStatusService) {
         this.swal = swal;
@@ -20,7 +20,7 @@ var EmploymentStatusComponent = (function () {
         this.employmentStatusService = employmentStatusService;
     }
     EmploymentStatusComponent.prototype.ngOnInit = function () {
-        this.modal = new model_1.Modal("#mdlModalInfo");
+        this.modal = new models_1.Modal("#mdlModalInfo");
         this.getAll();
     };
     EmploymentStatusComponent.prototype.getAll = function () {
@@ -65,7 +65,7 @@ var EmploymentStatusComponent = (function () {
     };
     EmploymentStatusComponent.prototype.add = function () {
         this.isFormDisabled = false;
-        this.selectedEmploymentStatus = new model_1.EmploymentStatus();
+        this.selectedEmploymentStatus = new models_1.EmploymentStatus();
     };
     EmploymentStatusComponent.prototype.edit = function (employmentStatus) {
         employmentStatus.originalInfo = Object.assign({}, employmentStatus);
@@ -211,16 +211,15 @@ var EmploymentStatusComponent = (function () {
 EmploymentStatusComponent = __decorate([
     core_1.Component({
         selector: 'employment-status-component',
-        templateUrl: './app/components/employment-status/employment-status-page.html',
+        templateUrl: './app/components/employment-status/employment-status.page.html',
         providers: [
             services_2.SweetAlertService,
             services_2.ToastrService,
             services_1.EmploymentStatusService
         ]
     }),
-    __metadata("design:paramtypes", [services_2.SweetAlertService,
-        services_2.ToastrService,
-        services_1.EmploymentStatusService])
+    __metadata("design:paramtypes", [typeof (_a = typeof services_2.SweetAlertService !== "undefined" && services_2.SweetAlertService) === "function" && _a || Object, typeof (_b = typeof services_2.ToastrService !== "undefined" && services_2.ToastrService) === "function" && _b || Object, services_1.EmploymentStatusService])
 ], EmploymentStatusComponent);
 exports.EmploymentStatusComponent = EmploymentStatusComponent;
+var _a, _b;
 //# sourceMappingURL=employment-status.component.js.map

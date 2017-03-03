@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var model_1 = require("../../models/model");
+var models_1 = require("../../models/models");
 var services_1 = require("../../services/services");
 var services_2 = require("../../shared-services/services");
 var CompanyComponent = (function () {
@@ -22,7 +22,7 @@ var CompanyComponent = (function () {
         this.companies = [];
     }
     CompanyComponent.prototype.ngOnInit = function () {
-        this.modal = new model_1.Modal("#mdlModalInfo");
+        this.modal = new models_1.Modal("#mdlModalInfo");
         this.getAll();
     };
     CompanyComponent.prototype.getAll = function () {
@@ -70,7 +70,7 @@ var CompanyComponent = (function () {
     CompanyComponent.prototype.add = function () {
         this.operation = 1;
         this.isFormDisabled = false;
-        this.selectedCompany = new model_1.Company();
+        this.selectedCompany = new models_1.Company();
     };
     CompanyComponent.prototype.confirmAdd = function () {
         var _this = this;
@@ -208,9 +208,8 @@ CompanyComponent = __decorate([
             services_1.CompanyService
         ]
     }),
-    __metadata("design:paramtypes", [services_2.SweetAlertService,
-        services_2.ToastrService,
-        services_1.CompanyService])
+    __metadata("design:paramtypes", [typeof (_a = typeof services_2.SweetAlertService !== "undefined" && services_2.SweetAlertService) === "function" && _a || Object, typeof (_b = typeof services_2.ToastrService !== "undefined" && services_2.ToastrService) === "function" && _b || Object, services_1.CompanyService])
 ], CompanyComponent);
 exports.CompanyComponent = CompanyComponent;
+var _a, _b;
 //# sourceMappingURL=company.component.js.map

@@ -6,7 +6,7 @@ toastr.options.timeOut = 2000;
 toastr.options.extendedTimeOut = 2000;
 toastr.options.newestOnTop = true;
 
-@Injectable() export class ToastrService {
+@Injectable() export class ToastHelper {
 
     warn(msg: string): void {
         toastr.warning(msg, "Wait...");

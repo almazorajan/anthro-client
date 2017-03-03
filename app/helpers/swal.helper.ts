@@ -3,7 +3,7 @@ import { iSwal } from '../interfaces/interfaces';
 
 declare var swal: SweetAlert.SweetAlertStatic;
 
-@Injectable() export class SweetAlertService {
+@Injectable() export class SwalHelper {
 
     confirm(sweet: iSwal): void {
         swal({

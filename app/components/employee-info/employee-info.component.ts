@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SweetAlertService, ToastrService } from '../../shared-services/services';
+import { SwalHelper, ToastHelper } from '../../helpers/helpers';
 import { CompanyService, EmploymentStatusService, PositionService, EmployeeService } from '../../services/services';
 import { EmploymentStatus, Employee, Position, Company, Family, Education, Accreditation, WorkHistory, Modal, Address } from '../../models/models';
 
@@ -7,8 +7,8 @@ import { EmploymentStatus, Employee, Position, Company, Family, Education, Accre
     selector: 'employee-info-component',
     templateUrl: './app/components/employee-list/employee-info.page.html',
     providers: [
-        SweetAlertService,
-        ToastrService,
+        SwalHelper,
+        ToastHelper,
         EmployeeService,
         CompanyService,
         EmploymentStatusService,

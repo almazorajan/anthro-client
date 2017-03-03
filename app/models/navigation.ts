@@ -1,5 +1,4 @@
-
-import { NavigationGroup, Module } from './model';
+import { NavigationGroup, Module } from './models';
 
 export class Navigation {
     withGroup: NavigationGroup[];

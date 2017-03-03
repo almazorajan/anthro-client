@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Company, Modal } from '../../models/models';
 import { CompanyService } from '../../services/services';
-import { SweetAlertService, ToastrService } from '../../shared-services/services';
+import { SwalHelper, ToastHelper } from '../../helpers/helpers';
 
 @Component({
     selector: 'company-component',
     templateUrl: './app/components/company/company-page.html',
     providers: [
-        SweetAlertService,
-        ToastrService,
+        SwalHelper,
+        ToastHelper,
         CompanyService
     ]
 })
@@ -16,8 +16,8 @@ import { SweetAlertService, ToastrService } from '../../shared-services/services
 export class CompanyComponent implements OnInit {
 
     constructor(
-        private swal : SweetAlertService,
-        private toastr : ToastrService,
+        private swal : SwalHelper,
+        private toast : ToastHelper,
         private companyService : CompanyService
     ) { }
 
@@ -50,18 +50,18 @@ export class CompanyComponent implements OnInit {
                 if(result.success) {
                     this.companies = result.data as Company[];
                 } else {
-                    this.toastr.error(result.message);
+                    this.toast.error(result.message);
                 }
             })
             .catch((error) => {
                 this.loadingCompanies = true;
                 this.isFormDisabled = true;
-                this.toastr.error(error);
+                this.toast.error(error);
             });
         } catch(e) {
             this.loadingCompanies = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 
@@ -111,22 +111,22 @@ export class CompanyComponent implements OnInit {
                 this.isFormDisabled = false;
 
                 if(result.success) {
-                    this.toastr.success(result.message);
+                    this.toast.success(result.message);
                     this.getAll();
                     this.modal.hide();
                 } else {
-                    this.toastr.error(result.message);
+                    this.toast.error(result.message);
                 }
             })
             .catch((error) => {
                 this.addingCompany = false;
                 this.isFormDisabled = false;
-                this.toastr.error(error);
+                this.toast.error(error);
             });
         } catch(e) {
             this.addingCompany = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 
@@ -153,22 +153,22 @@ export class CompanyComponent implements OnInit {
                 this.isFormDisabled = false;
 
                 if(result.success) {
-                    this.toastr.success(result.message);
+                    this.toast.success(result.message);
                     this.modal.hide();
                     this.getAll();
                 } else {
-                    this.toastr.error(result.message);
+                    this.toast.error(result.message);
                 }
             })
             .catch((error) => {
                 this.deletingCompany = false;
                 this.isFormDisabled = false;
-                this.toastr.error(error);
+                this.toast.error(error);
             });
         } catch(e) {
             this.deletingCompany = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 
@@ -193,21 +193,21 @@ export class CompanyComponent implements OnInit {
                 this.isFormDisabled = false;
 
                 if(result.success) {
-                    this.toastr.success(result.message);
+                    this.toast.success(result.message);
                     this.getAll();
                 } else {
-                    this.toastr.error(result.message);
+                    this.toast.error(result.message);
                 }
             })
             .catch((error) => {
                 this.deletingCompany = false;
                 this.isFormDisabled = false;
-                this.toastr.error(error);
+                this.toast.error(error);
             });
         } catch(e) {
             this.deletingCompany = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 }

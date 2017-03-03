@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var model_1 = require("../../models/model");
+var models_1 = require("../../models/models");
 var services_1 = require("../../services/services");
 var services_2 = require("../../shared-services/services");
 var ModuleComponent = (function () {
@@ -27,7 +27,7 @@ var ModuleComponent = (function () {
         this.operation = 0; // 0 view, 1 add, 2 edit
     }
     ModuleComponent.prototype.ngOnInit = function () {
-        this.mdlModalInfo = new model_1.Modal("#mdlModalInfo");
+        this.mdlModalInfo = new models_1.Modal("#mdlModalInfo");
         this.getGroups();
         this.getAllModules();
     };
@@ -55,7 +55,7 @@ var ModuleComponent = (function () {
     ModuleComponent.prototype.add = function () {
         this.operation = 1;
         this.isFormDisabled = false;
-        this.selectedModule = new model_1.Module();
+        this.selectedModule = new models_1.Module();
     };
     ModuleComponent.prototype.view = function (mod) {
         this.operation = 0;
@@ -194,9 +194,8 @@ ModuleComponent = __decorate([
             services_2.ToastrService
         ]
     }),
-    __metadata("design:paramtypes", [services_1.ModuleService,
-        services_2.SweetAlertService,
-        services_2.ToastrService])
+    __metadata("design:paramtypes", [services_1.ModuleService, typeof (_a = typeof services_2.SweetAlertService !== "undefined" && services_2.SweetAlertService) === "function" && _a || Object, typeof (_b = typeof services_2.ToastrService !== "undefined" && services_2.ToastrService) === "function" && _b || Object])
 ], ModuleComponent);
 exports.ModuleComponent = ModuleComponent;
+var _a, _b;
 //# sourceMappingURL=module.component.js.map

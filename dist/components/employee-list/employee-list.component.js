@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var services_1 = require("../../shared-services/services");
 var services_2 = require("../../services/services");
-var model_1 = require("../../models/model");
+var models_1 = require("../../models/models");
 var EmployeeListComponent = (function () {
     function EmployeeListComponent(swal, toastr, employeeService, companyService, employmentStatusService, positionService) {
         this.swal = swal;
@@ -44,7 +44,7 @@ var EmployeeListComponent = (function () {
         this.getEmploymentStatuses();
         this.getPositions();
         this.getRelationships();
-        this.modal = new model_1.Modal("#mdlModalInfo");
+        this.modal = new models_1.Modal("#mdlModalInfo");
     };
     EmployeeListComponent.prototype.getAllEmployees = function () {
         var _this = this;
@@ -177,7 +177,7 @@ var EmployeeListComponent = (function () {
         this.modal.show();
         this.operation = 2;
         this.isFormDisabled = false;
-        this.currentEmployee = new model_1.Employee();
+        this.currentEmployee = new models_1.Employee();
         this.currentEmployee.company = this.companies[0];
         this.currentEmployee.position = this.positions[0];
         this.currentEmployee.employmentStatus = this.employmentStatuses[0];
@@ -230,16 +230,16 @@ var EmployeeListComponent = (function () {
         this.isFormDisabled = true;
         this.currentEmployee = employee;
         if (!this.currentEmployee.cityAddress) {
-            this.currentEmployee.cityAddress = new model_1.Address();
+            this.currentEmployee.cityAddress = new models_1.Address();
         }
         if (!this.currentEmployee.permanentAddress) {
-            this.currentEmployee.permanentAddress = new model_1.Address();
+            this.currentEmployee.permanentAddress = new models_1.Address();
         }
         if (!this.currentEmployee.provincialAddress) {
-            this.currentEmployee.provincialAddress = new model_1.Address();
+            this.currentEmployee.provincialAddress = new models_1.Address();
         }
         if (!this.currentEmployee.company) {
-            this.currentEmployee.company = new model_1.Company();
+            this.currentEmployee.company = new models_1.Company();
         }
         this.computeAge(this.currentEmployee);
     };
@@ -342,27 +342,27 @@ var EmployeeListComponent = (function () {
     EmployeeListComponent.prototype.addFamily = function () {
         if (this.isFormDisabled)
             return;
-        this.currentEmployee.family.push(new model_1.Family());
+        this.currentEmployee.family.push(new models_1.Family());
     };
     EmployeeListComponent.prototype.addCertification = function () {
         if (this.isFormDisabled)
             return;
-        this.currentEmployee.certifications.push(new model_1.Accreditation());
+        this.currentEmployee.certifications.push(new models_1.Accreditation());
     };
     EmployeeListComponent.prototype.addLicensure = function () {
         if (this.isFormDisabled)
             return;
-        this.currentEmployee.licensures.push(new model_1.Accreditation());
+        this.currentEmployee.licensures.push(new models_1.Accreditation());
     };
     EmployeeListComponent.prototype.addEducation = function () {
         if (this.isFormDisabled)
             return;
-        this.currentEmployee.educationHistory.push(new model_1.Education());
+        this.currentEmployee.educationHistory.push(new models_1.Education());
     };
     EmployeeListComponent.prototype.addWorkHistory = function () {
         if (this.isFormDisabled)
             return;
-        this.currentEmployee.workHistory.push(new model_1.WorkHistory());
+        this.currentEmployee.workHistory.push(new models_1.WorkHistory());
     };
     EmployeeListComponent.prototype.deleteFamily = function (family) {
         var index = this.currentEmployee.family.indexOf(family);
@@ -426,12 +426,11 @@ EmployeeListComponent = __decorate([
             services_2.PositionService,
         ]
     }),
-    __metadata("design:paramtypes", [services_1.SweetAlertService,
-        services_1.ToastrService,
-        services_2.EmployeeService,
+    __metadata("design:paramtypes", [typeof (_a = typeof services_1.SweetAlertService !== "undefined" && services_1.SweetAlertService) === "function" && _a || Object, typeof (_b = typeof services_1.ToastrService !== "undefined" && services_1.ToastrService) === "function" && _b || Object, services_2.EmployeeService,
         services_2.CompanyService,
         services_2.EmploymentStatusService,
         services_2.PositionService])
 ], EmployeeListComponent);
 exports.EmployeeListComponent = EmployeeListComponent;
+var _a, _b;
 //# sourceMappingURL=employee-list.component.js.map

@@ -1,24 +1,16 @@
-
 export class Modal {
+
+    constructor(id: string) {
+        this.id = id;
+    }    
 
     id: string;
 
-    constructor(id: string) {
-
-        this.id = id;
-
-    }
-
     show(): void {
-
         $(this.id).modal("show");
-
     }
 
     hide(): void {
-
-        $(this.id).modal("hide");
-        
+        $(this.id).modal("hide");     
     }
-
 }

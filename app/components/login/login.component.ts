@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService, LocalStorageService } from '../../services/services';
-import { SweetAlertService, ToastrService } from '../../shared-services/services';
+import { SwalHelper, ToastHelper } from '../../helpers/helpers';
 import { User, Modal } from '../../models/models';
 
 @Component({
     selector: 'login-component',
     templateUrl: './app/components/login/login-page.html',
     providers: [
-        SweetAlertService,
-        ToastrService,
+        SwalHelper,
+        ToastHelper,
         LoginService,
         LocalStorageService
     ]
@@ -18,17 +18,17 @@ import { User, Modal } from '../../models/models';
 export class LoginComponent implements OnInit {
 
     constructor(
-        private swal: SweetAlertService,
-        private toastr: ToastrService,
+        private swal: SwalHelper,
+        private toast: ToastHelper,
         private loginService: LoginService,
         private localStorage: LocalStorageService,
         private router: Router
     ) { }
 
-    rememberMe : boolean = false;
-    isFormDisabled : boolean;
-    attempingLogin : boolean;
-    user : User;
+    rememberMe: boolean = false;
+    isFormDisabled: boolean;
+    attempingLogin: boolean;
+    user: User;
 
     ngOnInit() {        
         document.title = "Ad-haven - Login";
@@ -43,18 +43,18 @@ export class LoginComponent implements OnInit {
         }
     }
 
-    attemptLogin() : void {
+    attemptLogin(): void {
         try {
             this.attempingLogin = true;
             this.isFormDisabled = true;
-            this.toastr.info("Attempting login.");
+            this.toast.info("Attempting login.");
 
             this.loginService.attemptLogin(this.user).then((result) => {
                 this.attempingLogin = false;
                 this.isFormDisabled = false;
                 
                 if(result.success) {
-                    this.toastr.success(result.message);
+                    this.toast.success(result.message);
 
                     if(this.rememberMe) {
                         this.localStorage.set("athro.user-credential", this.user);
@@ -63,19 +63,19 @@ export class LoginComponent implements OnInit {
                     this.localStorage.set<User>("anthro.user-session", result.data as User);
                     this.router.navigate(["/main/user"]);
                 } else {
-                    this.toastr.error(result.message);
+                    this.toast.error(result.message);
                     this.user = new User();
                 }
             })
             .catch((error) => {
                 this.attempingLogin = false;
                 this.isFormDisabled = false;
-                this.toastr.error(error);
+                this.toast.error(error);
             });
         } catch(e) {
             this.attempingLogin = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     }
 }
