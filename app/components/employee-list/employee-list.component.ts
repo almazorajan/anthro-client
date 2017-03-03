@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { SweetAlertService, ToastrService } from '../../shared-services/services';
-import { EmployeeListService } from './employee-list.service';
-import { CompanyService } from '../company/company.service';
-import { EmploymentStatusService } from '../employment-status/employment-status.service';
-import { PositionService } from '../position/position.service';
+import { EmployeeService, CompanyService, EmploymentStatusService, PositionService } from '../../services/services';
 import { EmploymentStatus, Employee, Position, Company, Family, Education, Accreditation, WorkHistory, Modal, Address } from '../../models/model';
 
 @Component({
     selector: 'employee-list-component',
-    templateUrl: './app/components/employee-list/employee-list-page.html',
+    templateUrl: './app/components/employee-list/employee-list.page.html',
     providers: [
         SweetAlertService,
         ToastrService,
-        EmployeeListService,
+        EmployeeService,
         CompanyService,
         EmploymentStatusService,
         PositionService,
@@ -22,32 +19,32 @@ import { EmploymentStatus, Employee, Position, Company, Family, Education, Accre
 export class EmployeeListComponent implements OnInit {
 
     constructor(
-        private swal : SweetAlertService,
-        private toastr : ToastrService,
-        private employeeListService : EmployeeListService,
-        private companyService : CompanyService,
-        private employmentStatusService : EmploymentStatusService,
-        private positionService : PositionService
+        private swal: SweetAlertService,
+        private toastr: ToastrService,
+        private employeeService: EmployeeService,
+        private companyService: CompanyService,
+        private employmentStatusService: EmploymentStatusService,
+        private positionService: PositionService
     ) { }
 
-    operation : number = 0;
-    originalEmployeeInfo : Employee;
-    currentEmployee : Employee;
-    searchFilter : string = "";
-    updatingEmployee : boolean = false;
-    deletingEmployee : boolean = false;
-    loadingEmployees : boolean = false;
-    loadingCompanies : boolean = false;
-    loadingEmploymentStatuses : boolean = false;
-    loadingPositions : boolean = false;
-    isFormDisabled : boolean = true;
-    readyToSave : boolean = false;
-    addingEmployee : boolean = false;
-    employees : Employee[] = [];
-    companies : Company[] = [];
-    employmentStatuses : EmploymentStatus[] = [];
-    positions : Position[] = [];
-    relationships : string[] = [];
+    operation: number = 0;
+    originalEmployeeInfo: Employee;
+    currentEmployee: Employee;
+    searchFilter: string = "";
+    updatingEmployee: boolean = false;
+    deletingEmployee: boolean = false;
+    loadingEmployees: boolean = false;
+    loadingCompanies: boolean = false;
+    loadingEmploymentStatuses: boolean = false;
+    loadingPositions: boolean = false;
+    isFormDisabled: boolean = true;
+    readyToSave: boolean = false;
+    addingEmployee: boolean = false;
+    employees: Employee[] = [];
+    companies: Company[] = [];
+    employmentStatuses: EmploymentStatus[] = [];
+    positions: Position[] = [];
+    relationships: string[] = [];
     modal: Modal;
 
     ngOnInit() {
@@ -59,13 +56,13 @@ export class EmployeeListComponent implements OnInit {
         this.modal = new Modal("#mdlModalInfo");
     }
 
-    private getAllEmployees() : void {
+    private getAllEmployees(): void {
         try {
             this.employees = [];
             this.loadingEmployees = true;
             this.isFormDisabled = true;
 
-            this.employeeListService.getAllEmployees().then((result) => {
+            this.employeeService.getAllEmployees().then((result) => {
                 this.loadingEmployees = false;
                 this.isFormDisabled = false;
                 
@@ -89,7 +86,7 @@ export class EmployeeListComponent implements OnInit {
         }
     }
 
-    private getCompanies() : void {
+    private getCompanies(): void {
         try {
             this.companies = [];
             this.loadingCompanies = true;
@@ -117,7 +114,7 @@ export class EmployeeListComponent implements OnInit {
         }
     }
 
-    private getEmploymentStatuses() : void {
+    private getEmploymentStatuses(): void {
         try {
             this.employmentStatuses = [];
             this.loadingEmploymentStatuses = true;
@@ -145,7 +142,7 @@ export class EmployeeListComponent implements OnInit {
         }
     }
 
-    private getPositions() : void {
+    private getPositions(): void {
         try {
             this.positions = [];
             this.loadingPositions = true;
@@ -173,15 +170,15 @@ export class EmployeeListComponent implements OnInit {
         }
     }
 
-    private getRelationships() : void {
+    private getRelationships(): void {
         try {
-            this.relationships = this.employeeListService.getRelationships();
+            this.relationships = this.employeeService.getRelationships();
         } catch (e) {
             this.toastr.error(e);
         }
     }
 
-    parseDate(dateString : string) : Date {
+    parseDate(dateString: string): Date {
         if(dateString) {
             return new Date(dateString);
         }
@@ -198,7 +195,7 @@ export class EmployeeListComponent implements OnInit {
         this.currentEmployee.employmentStatus = this.employmentStatuses[0];
     }
 
-    confirmAdd() : void {
+    confirmAdd(): void {
         this.swal.confirm({
             title: "Are You Sure?",
             message: "You will be adding this employee information",
@@ -211,12 +208,12 @@ export class EmployeeListComponent implements OnInit {
         });
     }
 
-    saveNewEmployee() : void {
+    saveNewEmployee(): void {
         try {
             this.isFormDisabled = true;
             this.updatingEmployee = true;
 
-            this.employeeListService.addEmployee(this.currentEmployee).then((result) => {
+            this.employeeService.addEmployee(this.currentEmployee).then((result) => {
                 this.updatingEmployee = false;
                 
                 if(result.success) {
@@ -241,7 +238,7 @@ export class EmployeeListComponent implements OnInit {
         }
     }
 
-    view(employee : Employee) : void {
+    view(employee: Employee): void {
         this.operation = 0;
         this.isFormDisabled = true;
         this.currentEmployee = employee;
@@ -265,13 +262,13 @@ export class EmployeeListComponent implements OnInit {
         this.computeAge(this.currentEmployee);
     }
 
-    edit() : void {
+    edit(): void {
         this.operation = 1;
         this.isFormDisabled = false;
         this.originalEmployeeInfo = JSON.parse(JSON.stringify(this.currentEmployee)) as Employee;
     }
 
-    confirmSave() : void {
+    confirmSave(): void {
         this.swal.confirm({
             title: "Are You Sure?",
             message: "You will be updating this employee information",
@@ -284,7 +281,7 @@ export class EmployeeListComponent implements OnInit {
         });
     }
 
-    confirmDelete() : void {
+    confirmDelete(): void {
         this.swal.confirm({
             title: "Are You Sure?",
             message: "You will be deleting this employee information",
@@ -297,12 +294,12 @@ export class EmployeeListComponent implements OnInit {
         });
     }
 
-    private saveUpdates() : void {
+    private saveUpdates(): void {
         try {
             this.isFormDisabled = true;
             this.updatingEmployee = true;
 
-            this.employeeListService.updateEmployee(this.currentEmployee).then((result) => {
+            this.employeeService.updateEmployee(this.currentEmployee).then((result) => {
                 this.updatingEmployee = false;
                 
                 if(result.success) {
@@ -327,12 +324,12 @@ export class EmployeeListComponent implements OnInit {
         }
     }
 
-    private deleteEmployee() : void {
+    private deleteEmployee(): void {
         try {
             this.isFormDisabled = true;
             this.deletingEmployee = true;
 
-            this.employeeListService.deleteEmployee(this.currentEmployee).then((result) => {
+            this.employeeService.deleteEmployee(this.currentEmployee).then((result) => {
                 this.isFormDisabled = false;
                 this.deletingEmployee = false;
 
@@ -356,68 +353,68 @@ export class EmployeeListComponent implements OnInit {
         }
     }
 
-    cancelEdit() : void {
+    cancelEdit(): void {
         this.operation = 0;
         this.isFormDisabled = true;
         this.currentEmployee = JSON.parse(JSON.stringify(this.originalEmployeeInfo)) as Employee;
         this.originalEmployeeInfo = null;
     }
 
-    addFamily() : void {
+    addFamily(): void {
         if(this.isFormDisabled) return;
         this.currentEmployee.family.push(new Family());
     }
 
-    addCertification() : void {
+    addCertification(): void {
         if(this.isFormDisabled) return;
         this.currentEmployee.certifications.push(new Accreditation());
     }
 
-    addLicensure() : void {
+    addLicensure(): void {
         if(this.isFormDisabled) return;
         this.currentEmployee.licensures.push(new Accreditation());
     }
 
-    addEducation() : void {
+    addEducation(): void {
         if(this.isFormDisabled) return;
         this.currentEmployee.educationHistory.push(new Education());
     }
 
-    addWorkHistory() : void {
+    addWorkHistory(): void {
         if(this.isFormDisabled) return;
         this.currentEmployee.workHistory.push(new WorkHistory());
     }
     
-    deleteFamily(family : Family) : void {
+    deleteFamily(family: Family): void {
         let index = this.currentEmployee.family.indexOf(family);
         this.currentEmployee.family.splice(index, 1);
     }
 
-    deleteCertification(certification : Accreditation) : void {
+    deleteCertification(certification: Accreditation): void {
         if(this.isFormDisabled) return;
         let index = this.currentEmployee.certifications.indexOf(certification);
         this.currentEmployee.certifications.splice(index, 1);
     }
 
-    deleteLicense(license : Accreditation) : void {
+    deleteLicense(license: Accreditation): void {
         if(this.isFormDisabled) return;
         let index = this.currentEmployee.licensures.indexOf(license);
         this.currentEmployee.licensures.splice(index, 1);
     }
 
-    deleteEducation(education : Education) : void {
+    deleteEducation(education: Education): void {
         if(this.isFormDisabled) return;
         let index = this.currentEmployee.educationHistory.indexOf(education);
         this.currentEmployee.educationHistory.splice(index, 1);
     }
 
-    deleteWorkHistory(workHistory : WorkHistory) : void {
+    deleteWorkHistory(workHistory: WorkHistory): void {
         if(this.isFormDisabled) return;
         let index = this.currentEmployee.workHistory.indexOf(workHistory);
         this.currentEmployee.workHistory.splice(index, 1);
     }
 
-    computeAge(employee : Employee) : void {
+    computeAge(employee: Employee): void {
         try {
             var birthDate = new Date(employee.birthDate);
             var birthDay = new Date(birthDate.getFullYear(), birthDate.getMonth(), birthDate.getDay());

@@ -12,8 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var services_1 = require("../../shared-services/services");
-var position_service_1 = require("../position/position.service");
-var user_service_1 = require("../user/user.service");
+var services_2 = require("../../services/services");
 var model_1 = require("../../models/model");
 var MainComponent = (function () {
     function MainComponent(swal, toastr, localStorage, positionService, userService, router) {
@@ -247,16 +246,16 @@ MainComponent = __decorate([
         providers: [
             services_1.SweetAlertService,
             services_1.ToastrService,
-            services_1.LocalStorageService,
-            position_service_1.PositionService,
-            user_service_1.UserService
+            services_2.LocalStorageService,
+            services_2.PositionService,
+            services_2.UserService
         ]
     }),
     __metadata("design:paramtypes", [services_1.SweetAlertService,
         services_1.ToastrService,
-        services_1.LocalStorageService,
-        position_service_1.PositionService,
-        user_service_1.UserService,
+        services_2.LocalStorageService,
+        services_2.PositionService,
+        services_2.UserService,
         router_1.Router])
 ], MainComponent);
 exports.MainComponent = MainComponent;

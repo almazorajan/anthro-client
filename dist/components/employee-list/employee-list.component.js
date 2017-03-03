@@ -11,16 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var services_1 = require("../../shared-services/services");
-var employee_list_service_1 = require("./employee-list.service");
-var company_service_1 = require("../company/company.service");
-var employment_status_service_1 = require("../employment-status/employment-status.service");
-var position_service_1 = require("../position/position.service");
+var services_2 = require("../../services/services");
 var model_1 = require("../../models/model");
 var EmployeeListComponent = (function () {
-    function EmployeeListComponent(swal, toastr, employeeListService, companyService, employmentStatusService, positionService) {
+    function EmployeeListComponent(swal, toastr, employeeService, companyService, employmentStatusService, positionService) {
         this.swal = swal;
         this.toastr = toastr;
-        this.employeeListService = employeeListService;
+        this.employeeService = employeeService;
         this.companyService = companyService;
         this.employmentStatusService = employmentStatusService;
         this.positionService = positionService;
@@ -55,7 +52,7 @@ var EmployeeListComponent = (function () {
             this.employees = [];
             this.loadingEmployees = true;
             this.isFormDisabled = true;
-            this.employeeListService.getAllEmployees().then(function (result) {
+            this.employeeService.getAllEmployees().then(function (result) {
                 _this.loadingEmployees = false;
                 _this.isFormDisabled = false;
                 console.log(result);
@@ -164,7 +161,7 @@ var EmployeeListComponent = (function () {
     };
     EmployeeListComponent.prototype.getRelationships = function () {
         try {
-            this.relationships = this.employeeListService.getRelationships();
+            this.relationships = this.employeeService.getRelationships();
         }
         catch (e) {
             this.toastr.error(e);
@@ -203,7 +200,7 @@ var EmployeeListComponent = (function () {
         try {
             this.isFormDisabled = true;
             this.updatingEmployee = true;
-            this.employeeListService.addEmployee(this.currentEmployee).then(function (result) {
+            this.employeeService.addEmployee(this.currentEmployee).then(function (result) {
                 _this.updatingEmployee = false;
                 if (result.success) {
                     _this.operation = 0;
@@ -282,7 +279,7 @@ var EmployeeListComponent = (function () {
         try {
             this.isFormDisabled = true;
             this.updatingEmployee = true;
-            this.employeeListService.updateEmployee(this.currentEmployee).then(function (result) {
+            this.employeeService.updateEmployee(this.currentEmployee).then(function (result) {
                 _this.updatingEmployee = false;
                 if (result.success) {
                     _this.operation = 0;
@@ -312,7 +309,7 @@ var EmployeeListComponent = (function () {
         try {
             this.isFormDisabled = true;
             this.deletingEmployee = true;
-            this.employeeListService.deleteEmployee(this.currentEmployee).then(function (result) {
+            this.employeeService.deleteEmployee(this.currentEmployee).then(function (result) {
                 _this.isFormDisabled = false;
                 _this.deletingEmployee = false;
                 if (result.success) {
@@ -419,22 +416,22 @@ var EmployeeListComponent = (function () {
 EmployeeListComponent = __decorate([
     core_1.Component({
         selector: 'employee-list-component',
-        templateUrl: './app/components/employee-list/employee-list-page.html',
+        templateUrl: './app/components/employee-list/employee-list.page.html',
         providers: [
             services_1.SweetAlertService,
             services_1.ToastrService,
-            employee_list_service_1.EmployeeListService,
-            company_service_1.CompanyService,
-            employment_status_service_1.EmploymentStatusService,
-            position_service_1.PositionService,
+            services_2.EmployeeService,
+            services_2.CompanyService,
+            services_2.EmploymentStatusService,
+            services_2.PositionService,
         ]
     }),
     __metadata("design:paramtypes", [services_1.SweetAlertService,
         services_1.ToastrService,
-        employee_list_service_1.EmployeeListService,
-        company_service_1.CompanyService,
-        employment_status_service_1.EmploymentStatusService,
-        position_service_1.PositionService])
+        services_2.EmployeeService,
+        services_2.CompanyService,
+        services_2.EmploymentStatusService,
+        services_2.PositionService])
 ], EmployeeListComponent);
 exports.EmployeeListComponent = EmployeeListComponent;
 //# sourceMappingURL=employee-list.component.js.map

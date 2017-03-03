@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-var login_service_1 = require("./login.service");
-var services_1 = require("../../shared-services/services");
+var services_1 = require("../../services/services");
+var services_2 = require("../../shared-services/services");
 var model_1 = require("../../models/model");
 var LoginComponent = (function () {
     function LoginComponent(swal, toastr, loginService, localStorage, router) {
@@ -74,15 +74,15 @@ LoginComponent = __decorate([
         selector: 'login-component',
         templateUrl: './app/components/login/login-page.html',
         providers: [
-            services_1.SweetAlertService,
-            services_1.ToastrService,
-            login_service_1.LoginService,
+            services_2.SweetAlertService,
+            services_2.ToastrService,
+            services_1.LoginService,
             services_1.LocalStorageService
         ]
     }),
-    __metadata("design:paramtypes", [services_1.SweetAlertService,
-        services_1.ToastrService,
-        login_service_1.LoginService,
+    __metadata("design:paramtypes", [services_2.SweetAlertService,
+        services_2.ToastrService,
+        services_1.LoginService,
         services_1.LocalStorageService,
         router_1.Router])
 ], LoginComponent);

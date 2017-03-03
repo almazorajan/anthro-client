@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Search, Employee, Result } from '../../models/model';
-import { Service } from '../../shared-services/service';
+import { Search, Employee, Result } from '../models/model';
+import { ProviderService } from './provider.service';
 
-@Injectable() export class EmployeeListService extends Service {
+@Injectable() export class EmployeeService extends ProviderService {
 
-    getRelationships() : string[] {
+    getRelationships(): string[] {
         return [
             "Father",
             "Mother",
@@ -14,7 +14,7 @@ import { Service } from '../../shared-services/service';
         ];
     }
 
-    getEducationalLevels() : string[] {
+    getEducationalLevels(): string[] {
         return [
             "Primary",
             "Secondary",
@@ -22,7 +22,7 @@ import { Service } from '../../shared-services/service';
         ];
     }
 
-    addEmployee(employee : Employee) : Promise<Result> {
+    addEmployee(employee: Employee): Promise<Result> {
         return this.apiCall({
             verb: "post",
             uri: "employee/add",
@@ -30,14 +30,14 @@ import { Service } from '../../shared-services/service';
         });
     }    
 
-    getAllEmployees() : Promise<Result> {
+    getAllEmployees(): Promise<Result> {
         return this.apiCall({
             verb: "post",
             uri: "employee/getall"
         });
     }
 
-    updateEmployee(employee : Employee) : Promise<Result> {
+    updateEmployee(employee: Employee): Promise<Result> {
         return this.apiCall({
             verb: "post",
             uri: "employee/update",
@@ -45,7 +45,7 @@ import { Service } from '../../shared-services/service';
         });
     }
 
-    deleteEmployee(employee : Employee) : Promise<Result> {
+    deleteEmployee(employee: Employee): Promise<Result> {
         return this.apiCall({
             verb: "post",
             uri: "employee/delete",

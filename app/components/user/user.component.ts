@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PositionService } from '../position/position.service';
-import { UserService } from './user.service';
-import { SweetAlertService, ToastrService, LocalStorageService } from '../../shared-services/services';
+import { SweetAlertService, ToastrService  } from '../../shared-services/services';
+import { PositionService, LocalStorageService, UserService } from '../../services/services';
 import { User, Position, Modal, Search, Session } from '../../models/model';
 import { UserFilter } from '../../pipes/pipe';
 

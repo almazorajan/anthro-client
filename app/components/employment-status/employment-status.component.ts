@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EmploymentStatusService } from './employment-status.service';
+import { EmploymentStatusService } from '../../services/services';
 import { SweetAlertService, ToastrService } from '../../shared-services/services';
 import { EmploymentStatus, Modal } from '../../models/model';
 

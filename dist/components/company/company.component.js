@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var model_1 = require("../../models/model");
-var company_service_1 = require("./company.service");
-var services_1 = require("../../shared-services/services");
+var services_1 = require("../../services/services");
+var services_2 = require("../../shared-services/services");
 var CompanyComponent = (function () {
     function CompanyComponent(swal, toastr, companyService) {
         this.swal = swal;
@@ -203,14 +203,14 @@ CompanyComponent = __decorate([
         selector: 'company-component',
         templateUrl: './app/components/company/company-page.html',
         providers: [
-            services_1.SweetAlertService,
-            services_1.ToastrService,
-            company_service_1.CompanyService
+            services_2.SweetAlertService,
+            services_2.ToastrService,
+            services_1.CompanyService
         ]
     }),
-    __metadata("design:paramtypes", [services_1.SweetAlertService,
-        services_1.ToastrService,
-        company_service_1.CompanyService])
+    __metadata("design:paramtypes", [services_2.SweetAlertService,
+        services_2.ToastrService,
+        services_1.CompanyService])
 ], CompanyComponent);
 exports.CompanyComponent = CompanyComponent;
 //# sourceMappingURL=company.component.js.map

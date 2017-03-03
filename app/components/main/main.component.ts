@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SweetAlertService, ToastrService, LocalStorageService } from '../../shared-services/services';
-import { PositionService } from '../position/position.service';
-import { UserService } from '../user/user.service';
+import { SweetAlertService, ToastrService } from '../../shared-services/services';
+import { UserService, LocalStorageService, PositionService } from '../../services/services';
 import { User, Position, Module, Session, NavigationGroup, Navigation, Modal } from '../../models/model';
 
 @Component({

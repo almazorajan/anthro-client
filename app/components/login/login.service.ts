@@ -5,10 +5,10 @@ import { Service } from '../../shared-services/service';
 @Injectable() export class LoginService {
 
     constructor(
-        private service : Service
+        private service: Service
     ) { }
 
-    attemptLogin(user : User) : Promise<Result> {
+    attemptLogin(user: User): Promise<Result> {
         return this.service.apiCall({
             verb: "post",
             uri: "login/attemptlogin",

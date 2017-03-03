@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from './login.service';
-import { SweetAlertService, ToastrService, LocalStorageService } from '../../shared-services/services';
+import { LoginService, LocalStorageService } from '../../services/services';
+import { SweetAlertService, ToastrService } from '../../shared-services/services';
 import { User, Modal } from '../../models/model';
 
 @Component({

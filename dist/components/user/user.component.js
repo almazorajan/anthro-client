@@ -10,9 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var position_service_1 = require("../position/position.service");
-var user_service_1 = require("./user.service");
 var services_1 = require("../../shared-services/services");
+var services_2 = require("../../services/services");
 var model_1 = require("../../models/model");
 var UserComponent = (function () {
     function UserComponent(userService, positionService, swal, toastr, localStorage) {
@@ -321,18 +320,18 @@ UserComponent = __decorate([
         selector: 'user-component',
         templateUrl: './app/components/user/user-page.html',
         providers: [
-            user_service_1.UserService,
-            position_service_1.PositionService,
+            services_2.UserService,
+            services_2.PositionService,
             services_1.SweetAlertService,
             services_1.ToastrService,
-            services_1.LocalStorageService
+            services_2.LocalStorageService
         ]
     }),
-    __metadata("design:paramtypes", [user_service_1.UserService,
-        position_service_1.PositionService,
+    __metadata("design:paramtypes", [services_2.UserService,
+        services_2.PositionService,
         services_1.SweetAlertService,
         services_1.ToastrService,
-        services_1.LocalStorageService])
+        services_2.LocalStorageService])
 ], UserComponent);
 exports.UserComponent = UserComponent;
 //# sourceMappingURL=user.component.js.map

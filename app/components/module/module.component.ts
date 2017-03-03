@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Module, Modal } from '../../models/model';
-import { ModuleService } from './module.service';
+import { ModuleService } from '../../services/services';
 import { SweetAlertService, ToastrService } from '../../shared-services/services';
 
 @Component({
@@ -16,22 +16,22 @@ import { SweetAlertService, ToastrService } from '../../shared-services/services
 export class ModuleComponent implements OnInit {
 
     constructor(
-        private moduleService : ModuleService, 
-        private swal : SweetAlertService,
-        private toastr : ToastrService
+        private moduleService: ModuleService, 
+        private swal: SweetAlertService,
+        private toastr: ToastrService
     ) { }
 
-    loading : boolean = false;
-    updatingModule : boolean = false;
-    addingModule : boolean = false;
-    deletingModule : boolean = false;
-    selectedModule : Module;
-    originalData : Module;
-    modules : Module[] = [];
-    groups : string[];
-    isFormDisabled : boolean = true;
-    operation : number = 0; // 0 view, 1 add, 2 edit
-    mdlModalInfo : Modal;
+    loading: boolean = false;
+    updatingModule: boolean = false;
+    addingModule: boolean = false;
+    deletingModule: boolean = false;
+    selectedModule: Module;
+    originalData: Module;
+    modules: Module[] = [];
+    groups: string[];
+    isFormDisabled: boolean = true;
+    operation: number = 0; // 0 view, 1 add, 2 edit
+    mdlModalInfo: Modal;
 
     ngOnInit() {
         this.mdlModalInfo = new Modal("#mdlModalInfo");
@@ -39,7 +39,7 @@ export class ModuleComponent implements OnInit {
         this.getAllModules();
     }
 
-    getAllModules() : void {   
+    getAllModules(): void {   
         this.loading = true;
         this.modules = [];
 
@@ -58,36 +58,36 @@ export class ModuleComponent implements OnInit {
         });
     }
 
-    getGroups() : void {
+    getGroups(): void {
         this.groups = this.moduleService.getGroups();
     }
 
-    add() : void {
+    add(): void {
         this.operation = 1;
         this.isFormDisabled = false;
         this.selectedModule = new Module();
     }
 
-     view(mod : Module) : void {
+     view(mod: Module): void {
         this.operation = 0;
         this.isFormDisabled = true;
         this.selectedModule = mod;
     }
 
-    edit() : void {
+    edit(): void {
         this.operation = 2;
         this.isFormDisabled = false;
         this.originalData = this.selectedModule;
     }
 
-    cancelEdit() : void {
+    cancelEdit(): void {
         this.operation = 0;
         this.isFormDisabled = true;
         this.selectedModule = this.originalData;
         this.originalData = null;
     }
 
-    confirmAdd() : void {
+    confirmAdd(): void {
 
         if(!this.selectedModule.moduleName.trim() && !this.selectedModule.link.trim()) {
             this.toastr.warn("Please provide all the required fields.");
@@ -106,7 +106,7 @@ export class ModuleComponent implements OnInit {
         });
     }
 
-    addModule() : void {
+    addModule(): void {
         this.addingModule = true;
         this.isFormDisabled = true;
 
@@ -128,7 +128,7 @@ export class ModuleComponent implements OnInit {
         });
     }
 
-    confirmUpdate() : void {
+    confirmUpdate(): void {
 
         if(!this.selectedModule.moduleName.trim() && !this.selectedModule.link.trim()) {
             this.toastr.warn("Please provide all the required fields.");
@@ -147,7 +147,7 @@ export class ModuleComponent implements OnInit {
         });
     }
 
-    private update() : void {
+    private update(): void {
         this.isFormDisabled = true;
         this.updatingModule = true;
 
@@ -170,7 +170,7 @@ export class ModuleComponent implements OnInit {
         });
     }
 
-    confirmDelete(mod : Module) : void {
+    confirmDelete(mod: Module): void {
         this.swal.confirm({
             title: "Are you sure?",
             message: "You will be deleting this module.",
@@ -183,7 +183,7 @@ export class ModuleComponent implements OnInit {
         });
     }
 
-    private delete(mod : Module) : void {
+    private delete(mod: Module): void {
         this.isFormDisabled = true;
         this.deletingModule = true;
 

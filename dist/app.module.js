@@ -21,10 +21,7 @@ var module_component_1 = require("./components/module/module.component");
 var page_not_found_component_1 = require("./components/page-not-found/page-not-found.component");
 var position_component_1 = require("./components/position/position.component");
 var user_component_1 = require("./components/user/user.component");
-// providers
-var service_1 = require("./shared-services/service");
-var local_storage_service_1 = require("./shared-services/local-storage.service");
-// pipes
+var services_1 = require("./services/services");
 var pipe_1 = require("./pipes/pipe");
 var AppModule = (function () {
     function AppModule() {
@@ -53,7 +50,7 @@ AppModule = __decorate([
             pipe_1.UserFilter,
             pipe_1.EmployeeFilter
         ],
-        providers: [service_1.Service, local_storage_service_1.LocalStorageService],
+        providers: [services_1.ProviderService, services_1.LocalStorageService],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

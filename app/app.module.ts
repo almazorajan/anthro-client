@@ -15,8 +15,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { PositionComponent } from './components/position/position.component';
 import { UserComponent } from './components/user/user.component';
 
-import { Service } from './shared-services/service';
-import { LocalStorageService } from './shared-services/local-storage.service';
+import { ProviderService, LocalStorageService } from './services/services';
 
 import { UserFilter, EmployeeFilter } from './pipes/pipe';
 
@@ -42,7 +41,7 @@ import { UserFilter, EmployeeFilter } from './pipes/pipe';
         UserFilter,
         EmployeeFilter],
 
-    providers: [Service, LocalStorageService],
+    providers: [ProviderService, LocalStorageService],
     bootstrap: [AppComponent]
 })
 
