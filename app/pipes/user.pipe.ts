@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-
-import { User } from '../models/model';
+import { User } from '../models/models';
 
 @Pipe({
     name: 'userFilter'
@@ -16,7 +15,5 @@ export class UserFilter implements PipeTransform {
             || item.middleName.toLowerCase().indexOf(keyword.toLowerCase()) > -1
             || item.lastName.toLowerCase().indexOf(keyword.toLowerCase()) > -1
             || item.position.positionName.toLowerCase().indexOf(keyword.toLowerCase()) > -1);
-    
     }
-
 }

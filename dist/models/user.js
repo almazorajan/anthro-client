@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var model_1 = require("./model");
+var models_1 = require("./models");
 var User = (function () {
     function User() {
         this.userName = "";
@@ -10,7 +10,7 @@ var User = (function () {
         this.password = "";
         this.dateCreated = new Date();
         this.dateUpdated = new Date();
-        this.position = new model_1.Position();
+        this.position = new models_1.Position();
     }
     return User;
 }());

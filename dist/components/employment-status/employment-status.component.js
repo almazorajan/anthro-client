@@ -11,12 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var services_1 = require("../../services/services");
-var services_2 = require("../../shared-services/services");
+var helpers_1 = require("../../helpers/helpers");
 var models_1 = require("../../models/models");
 var EmploymentStatusComponent = (function () {
-    function EmploymentStatusComponent(swal, toastr, employmentStatusService) {
+    function EmploymentStatusComponent(swal, toast, employmentStatusService) {
         this.swal = swal;
-        this.toastr = toastr;
+        this.toast = toast;
         this.employmentStatusService = employmentStatusService;
     }
     EmploymentStatusComponent.prototype.ngOnInit = function () {
@@ -38,19 +38,19 @@ var EmploymentStatusComponent = (function () {
                     _this.toggleAllEditMode(false);
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.loadingEmploymentStatus = false;
                 _this.isFormDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.loadingEmploymentStatus = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     EmploymentStatusComponent.prototype.disableEmploymentStatuses = function (val) {
@@ -99,30 +99,30 @@ var EmploymentStatusComponent = (function () {
                 _this.isFormDisabled = false;
                 _this.addingEmploymentStatus = false;
                 if (result.success) {
-                    _this.toastr.success(result.message);
+                    _this.toast.success(result.message);
                     _this.modal.hide();
                     _this.getAll();
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.isFormDisabled = false;
                 _this.addingEmploymentStatus = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.isFormDisabled = false;
             this.addingEmploymentStatus = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     EmploymentStatusComponent.prototype.confirmSave = function (employmentStatus) {
         var _this = this;
         if (!employmentStatus.employmentStatus.trim()) {
-            this.toastr.warn("Please provide an employment status.");
+            this.toast.warn("Please provide an employment status.");
             return;
         }
         this.swal.confirm({
@@ -145,23 +145,23 @@ var EmploymentStatusComponent = (function () {
                 _this.updatingEmploymentStatus = false;
                 _this.isFormDisabled = false;
                 if (result.success) {
-                    _this.toastr.success(result.message);
+                    _this.toast.success(result.message);
                     _this.getAll();
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.updatingEmploymentStatus = false;
                 _this.isFormDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.updatingEmploymentStatus = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     EmploymentStatusComponent.prototype.confirmDelete = function (employmentStatus) {
@@ -186,24 +186,24 @@ var EmploymentStatusComponent = (function () {
                 _this.deletingEmploymentStatus = false;
                 _this.isFormDisabled = false;
                 if (result.success) {
-                    _this.toastr.success(result.message);
+                    _this.toast.success(result.message);
                     _this.getAll();
                     _this.modal.hide();
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.deletingEmploymentStatus = false;
                 _this.isFormDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.deletingEmploymentStatus = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     return EmploymentStatusComponent;
@@ -213,13 +213,14 @@ EmploymentStatusComponent = __decorate([
         selector: 'employment-status-component',
         templateUrl: './app/components/employment-status/employment-status.page.html',
         providers: [
-            services_2.SweetAlertService,
-            services_2.ToastrService,
+            helpers_1.SwalHelper,
+            helpers_1.ToastHelper,
             services_1.EmploymentStatusService
         ]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof services_2.SweetAlertService !== "undefined" && services_2.SweetAlertService) === "function" && _a || Object, typeof (_b = typeof services_2.ToastrService !== "undefined" && services_2.ToastrService) === "function" && _b || Object, services_1.EmploymentStatusService])
+    __metadata("design:paramtypes", [helpers_1.SwalHelper,
+        helpers_1.ToastHelper,
+        services_1.EmploymentStatusService])
 ], EmploymentStatusComponent);
 exports.EmploymentStatusComponent = EmploymentStatusComponent;
-var _a, _b;
 //# sourceMappingURL=employment-status.component.js.map

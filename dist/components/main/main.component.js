@@ -11,13 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
-var services_1 = require("../../shared-services/services");
-var services_2 = require("../../services/services");
+var helpers_1 = require("../../helpers/helpers");
+var services_1 = require("../../services/services");
 var models_1 = require("../../models/models");
 var MainComponent = (function () {
-    function MainComponent(swal, toastr, localStorage, positionService, userService, router) {
+    function MainComponent(swal, toast, localStorage, positionService, userService, router) {
         this.swal = swal;
-        this.toastr = toastr;
+        this.toast = toast;
         this.localStorage = localStorage;
         this.positionService = positionService;
         this.userService = userService;
@@ -30,14 +30,14 @@ var MainComponent = (function () {
             this.currentUser = Object.assign({}, this.session.user);
             // check if there is a session.
             if (!this.session) {
-                this.toastr.error("No session detected. Proceeding to logout.");
+                this.toast.error("No session detected. Proceeding to logout.");
                 this.redirectToLogin();
                 return;
             }
             // check the current route is valid.
             this.validRoute = this.isValidRoute(this.session);
             if (!this.validRoute) {
-                this.toastr.error("The page you are looking for is either inaccessible or does not exist.");
+                this.toast.error("The page you are looking for is either inaccessible or does not exist.");
                 this.redirectToLogin();
                 return;
             }
@@ -48,7 +48,7 @@ var MainComponent = (function () {
             this.userPasswordModal = new models_1.Modal("#mdlUserPassword");
         }
         catch (e) {
-            this.toastr.error(e);
+            this.toast.error(e);
             this.redirectToLogin();
         }
     };
@@ -106,19 +106,19 @@ var MainComponent = (function () {
                     _this.positions = result.data;
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.loadingPositions = false;
                 _this.userProfileDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.loadingPositions = false;
             this.userProfileDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     MainComponent.prototype.updateUser = function () {
@@ -131,24 +131,24 @@ var MainComponent = (function () {
                 _this.userProfileDisabled = false;
                 if (result.success) {
                     _this.userProfileModal.hide();
-                    _this.toastr.success(result.message);
-                    _this.toastr.info("Please re-login to continue.");
+                    _this.toast.success(result.message);
+                    _this.toast.info("Please re-login to continue.");
                     _this.redirectToLogin();
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.updatingUserProfile = false;
                 _this.userProfileDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.updatingUserProfile = false;
             this.userProfileDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     MainComponent.prototype.updatePassword = function () {
@@ -162,24 +162,24 @@ var MainComponent = (function () {
                 if (result.success) {
                     _this.userPasswordModal.hide();
                     _this.userProfileModal.hide();
-                    _this.toastr.success(result.message);
-                    _this.toastr.info("Please re-login to continue.");
+                    _this.toast.success(result.message);
+                    _this.toast.info("Please re-login to continue.");
                     _this.redirectToLogin();
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.updatingUserPassword = false;
                 _this.userProfileDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.updatingUserPassword = false;
             this.userProfileDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     MainComponent.prototype.viewProfile = function () {
@@ -215,11 +215,11 @@ var MainComponent = (function () {
     MainComponent.prototype.confirmUpdatePassword = function () {
         var _this = this;
         if (!this.currentUser.password.trim()) {
-            this.toastr.info("A password is required.");
+            this.toast.info("A password is required.");
             return;
         }
         if (this.currentUser.password.length < 6) {
-            this.toastr.info("Password length should be greater than 6 characters.");
+            this.toast.info("Password length should be greater than 6 characters.");
             return;
         }
         this.swal.confirm({
@@ -244,18 +244,19 @@ MainComponent = __decorate([
         selector: 'main-component',
         templateUrl: './app/components/main/main-page.html',
         providers: [
-            services_1.SweetAlertService,
-            services_1.ToastrService,
-            services_2.LocalStorageService,
-            services_2.PositionService,
-            services_2.UserService
+            helpers_1.SwalHelper,
+            helpers_1.ToastHelper,
+            services_1.LocalStorageService,
+            services_1.PositionService,
+            services_1.UserService
         ]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof services_1.SweetAlertService !== "undefined" && services_1.SweetAlertService) === "function" && _a || Object, typeof (_b = typeof services_1.ToastrService !== "undefined" && services_1.ToastrService) === "function" && _b || Object, services_2.LocalStorageService,
-        services_2.PositionService,
-        services_2.UserService,
+    __metadata("design:paramtypes", [helpers_1.SwalHelper,
+        helpers_1.ToastHelper,
+        services_1.LocalStorageService,
+        services_1.PositionService,
+        services_1.UserService,
         router_1.Router])
 ], MainComponent);
 exports.MainComponent = MainComponent;
-var _a, _b;
 //# sourceMappingURL=main.component.js.map

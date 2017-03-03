@@ -1,1 +1,1 @@
-{"version":3,"file":"email-address.js","sourceRoot":"","sources":["../../app/models/email-address.ts"],"names":[],"mappings":";;AACA;IAII;QAEI,IAAI,CAAC,YAAY,GAAG,EAAE,CAAC;IAE3B,CAAC;IAEL,mBAAC;AAAD,CAAC,AAVD,IAUC;AAVY,oCAAY"}
+{"version":3,"file":"email-address.js","sourceRoot":"","sources":["../../app/models/email-address.ts"],"names":[],"mappings":";;AACA;IAEI;QACI,IAAI,CAAC,YAAY,GAAG,EAAE,CAAC;IAC3B,CAAC;IAGL,mBAAC;AAAD,CAAC,AAPD,IAOC;AAPY,oCAAY"}

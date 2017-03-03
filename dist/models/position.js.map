@@ -1,1 +1,1 @@
-{"version":3,"file":"position.js","sourceRoot":"","sources":["../../app/models/position.ts"],"names":[],"mappings":";;AACA,iCAAiC;AAEjC;IAMI;QAEI,IAAI,CAAC,YAAY,GAAG,EAAE,CAAC;QACvB,IAAI,CAAC,OAAO,GAAG,CAAC,IAAI,cAAM,EAAE,CAAC,CAAC;IAElC,CAAC;IAGL,eAAC;AAAD,CAAC,AAdD,IAcC;AAdY,4BAAQ"}
+{"version":3,"file":"position.js","sourceRoot":"","sources":["../../app/models/position.ts"],"names":[],"mappings":";;AAAA,mCAAkC;AAElC;IAEI;QACI,IAAI,CAAC,YAAY,GAAG,EAAE,CAAC;QACvB,IAAI,CAAC,OAAO,GAAG,CAAC,IAAI,eAAM,EAAE,CAAC,CAAC;IAClC,CAAC;IAKL,eAAC;AAAD,CAAC,AAVD,IAUC;AAVY,4BAAQ"}

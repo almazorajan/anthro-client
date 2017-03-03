@@ -22,7 +22,7 @@ var page_not_found_component_1 = require("./components/page-not-found/page-not-f
 var position_component_1 = require("./components/position/position.component");
 var user_component_1 = require("./components/user/user.component");
 var services_1 = require("./services/services");
-var pipe_1 = require("./pipes/pipe");
+var pipes_1 = require("./pipes/pipes");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -47,8 +47,8 @@ AppModule = __decorate([
             page_not_found_component_1.PageNotFoundComponent,
             position_component_1.PositionComponent,
             user_component_1.UserComponent,
-            pipe_1.UserFilter,
-            pipe_1.EmployeeFilter
+            pipes_1.UserFilter,
+            pipes_1.EmployeeFilter
         ],
         providers: [services_1.ProviderService, services_1.LocalStorageService],
         bootstrap: [app_component_1.AppComponent]

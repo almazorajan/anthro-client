@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SwalHelper, ToastHelper  } from '../../helpers/helpers';
 import { PositionService, LocalStorageService, UserService } from '../../services/services';
 import { User, Position, Modal, Search, Session } from '../../models/models';
-import { UserFilter } from '../../pipes/pipe';
+import { UserFilter } from '../../pipes/pipes';
 
 @Component({
     selector: 'user-component',

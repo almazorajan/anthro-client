@@ -10,13 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var services_1 = require("../../shared-services/services");
-var services_2 = require("../../services/services");
+var helpers_1 = require("../../helpers/helpers");
+var services_1 = require("../../services/services");
 var models_1 = require("../../models/models");
 var EmployeeListComponent = (function () {
-    function EmployeeListComponent(swal, toastr, employeeService, companyService, employmentStatusService, positionService) {
+    function EmployeeListComponent(swal, toast, employeeService, companyService, employmentStatusService, positionService) {
         this.swal = swal;
-        this.toastr = toastr;
+        this.toast = toast;
         this.employeeService = employeeService;
         this.companyService = companyService;
         this.employmentStatusService = employmentStatusService;
@@ -88,19 +88,19 @@ var EmployeeListComponent = (function () {
                     _this.companies = result.data;
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.loadingCompanies = false;
                 _this.isFormDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.loadingCompanies = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     EmployeeListComponent.prototype.getEmploymentStatuses = function () {
@@ -116,19 +116,19 @@ var EmployeeListComponent = (function () {
                     _this.employmentStatuses = result.data;
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.loadingEmploymentStatuses = false;
                 _this.isFormDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.loadingEmploymentStatuses = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     EmployeeListComponent.prototype.getPositions = function () {
@@ -144,19 +144,19 @@ var EmployeeListComponent = (function () {
                     _this.positions = result.data;
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.loadingPositions = false;
                 _this.isFormDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.loadingPositions = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     EmployeeListComponent.prototype.getRelationships = function () {
@@ -164,7 +164,7 @@ var EmployeeListComponent = (function () {
             this.relationships = this.employeeService.getRelationships();
         }
         catch (e) {
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     EmployeeListComponent.prototype.parseDate = function (dateString) {
@@ -209,20 +209,20 @@ var EmployeeListComponent = (function () {
                     _this.originalEmployeeInfo = null;
                     _this.modal.hide();
                     _this.getAllEmployees();
-                    _this.toastr.success(result.message);
+                    _this.toast.success(result.message);
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.updatingEmployee = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.updatingEmployee = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     EmployeeListComponent.prototype.view = function (employee) {
@@ -288,20 +288,20 @@ var EmployeeListComponent = (function () {
                     _this.originalEmployeeInfo = null;
                     _this.modal.hide();
                     _this.getAllEmployees();
-                    _this.toastr.success(result.message);
+                    _this.toast.success(result.message);
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.updatingEmployee = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.updatingEmployee = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     EmployeeListComponent.prototype.deleteEmployee = function () {
@@ -315,22 +315,22 @@ var EmployeeListComponent = (function () {
                 if (result.success) {
                     _this.getAllEmployees();
                     _this.modal.hide();
-                    _this.toastr.success(result.message);
+                    _this.toast.success(result.message);
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.isFormDisabled = false;
                 _this.deletingEmployee = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.isFormDisabled = false;
             this.deletingEmployee = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     EmployeeListComponent.prototype.cancelEdit = function () {
@@ -400,7 +400,7 @@ var EmployeeListComponent = (function () {
             this.currentEmployee.age = Math.abs(new Date(diff).getUTCFullYear() - 1970);
         }
         catch (e) {
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     EmployeeListComponent.prototype.togglePermanentAddress = function () {
@@ -418,19 +418,20 @@ EmployeeListComponent = __decorate([
         selector: 'employee-list-component',
         templateUrl: './app/components/employee-list/employee-list.page.html',
         providers: [
-            services_1.SweetAlertService,
-            services_1.ToastrService,
-            services_2.EmployeeService,
-            services_2.CompanyService,
-            services_2.EmploymentStatusService,
-            services_2.PositionService,
+            helpers_1.SwalHelper,
+            helpers_1.ToastHelper,
+            services_1.EmployeeService,
+            services_1.CompanyService,
+            services_1.EmploymentStatusService,
+            services_1.PositionService,
         ]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof services_1.SweetAlertService !== "undefined" && services_1.SweetAlertService) === "function" && _a || Object, typeof (_b = typeof services_1.ToastrService !== "undefined" && services_1.ToastrService) === "function" && _b || Object, services_2.EmployeeService,
-        services_2.CompanyService,
-        services_2.EmploymentStatusService,
-        services_2.PositionService])
+    __metadata("design:paramtypes", [helpers_1.SwalHelper,
+        helpers_1.ToastHelper,
+        services_1.EmployeeService,
+        services_1.CompanyService,
+        services_1.EmploymentStatusService,
+        services_1.PositionService])
 ], EmployeeListComponent);
 exports.EmployeeListComponent = EmployeeListComponent;
-var _a, _b;
 //# sourceMappingURL=employee-list.component.js.map

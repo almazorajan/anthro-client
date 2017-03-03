@@ -10,8 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var services_1 = require("../../shared-services/services");
-var services_2 = require("../../services/services");
+var helpers_1 = require("../../helpers/helpers");
+var services_1 = require("../../services/services");
 var models_1 = require("../../models/models");
 var EmployeeInfoComponent = (function () {
     function EmployeeInfoComponent() {
@@ -39,12 +39,12 @@ EmployeeInfoComponent = __decorate([
         selector: 'employee-info-component',
         templateUrl: './app/components/employee-list/employee-info.page.html',
         providers: [
-            services_1.SweetAlertService,
-            services_1.ToastrService,
-            services_2.EmployeeService,
-            services_2.CompanyService,
-            services_2.EmploymentStatusService,
-            services_2.PositionService,
+            helpers_1.SwalHelper,
+            helpers_1.ToastHelper,
+            services_1.EmployeeService,
+            services_1.CompanyService,
+            services_1.EmploymentStatusService,
+            services_1.PositionService,
         ]
     })
 ], EmployeeInfoComponent);

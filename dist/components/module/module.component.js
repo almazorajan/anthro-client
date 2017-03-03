@@ -12,12 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var models_1 = require("../../models/models");
 var services_1 = require("../../services/services");
-var services_2 = require("../../shared-services/services");
+var helpers_1 = require("../../helpers/helpers");
 var ModuleComponent = (function () {
-    function ModuleComponent(moduleService, swal, toastr) {
+    function ModuleComponent(moduleService, swal, toast) {
         this.moduleService = moduleService;
         this.swal = swal;
-        this.toastr = toastr;
+        this.toast = toast;
         this.loading = false;
         this.updatingModule = false;
         this.addingModule = false;
@@ -41,12 +41,12 @@ var ModuleComponent = (function () {
                 _this.modules = result.data;
             }
             else {
-                _this.toastr.error(result.message);
+                _this.toast.error(result.message);
             }
         })
             .catch(function (error) {
             _this.loading = false;
-            _this.toastr.error(error);
+            _this.toast.error(error);
         });
     };
     ModuleComponent.prototype.getGroups = function () {
@@ -76,7 +76,7 @@ var ModuleComponent = (function () {
     ModuleComponent.prototype.confirmAdd = function () {
         var _this = this;
         if (!this.selectedModule.moduleName.trim() && !this.selectedModule.link.trim()) {
-            this.toastr.warn("Please provide all the required fields.");
+            this.toast.warn("Please provide all the required fields.");
             return;
         }
         this.swal.confirm({
@@ -98,12 +98,12 @@ var ModuleComponent = (function () {
             _this.addingModule = false;
             _this.isFormDisabled = false;
             if (result.success) {
-                _this.toastr.success(result.message);
+                _this.toast.success(result.message);
                 _this.mdlModalInfo.hide();
                 _this.getAllModules();
             }
             else {
-                _this.toastr.error(result.message);
+                _this.toast.error(result.message);
             }
         })
             .catch(function (error) {
@@ -114,7 +114,7 @@ var ModuleComponent = (function () {
     ModuleComponent.prototype.confirmUpdate = function () {
         var _this = this;
         if (!this.selectedModule.moduleName.trim() && !this.selectedModule.link.trim()) {
-            this.toastr.warn("Please provide all the required fields.");
+            this.toast.warn("Please provide all the required fields.");
             return;
         }
         this.swal.confirm({
@@ -137,11 +137,11 @@ var ModuleComponent = (function () {
             _this.updatingModule = false;
             _this.mdlModalInfo.hide();
             if (result.success) {
-                _this.toastr.success(result.message);
+                _this.toast.success(result.message);
                 _this.getAllModules();
                 return;
             }
-            _this.toastr.error(result.message);
+            _this.toast.error(result.message);
         })
             .catch(function (error) {
             _this.isFormDisabled = false;
@@ -169,17 +169,17 @@ var ModuleComponent = (function () {
             _this.isFormDisabled = false;
             _this.deletingModule = false;
             if (result.success) {
-                _this.toastr.success(result.message);
+                _this.toast.success(result.message);
                 _this.getAllModules();
                 return;
             }
             console.log(result);
-            _this.toastr.error(result.message);
+            _this.toast.error(result.message);
         })
             .catch(function (error) {
             _this.isFormDisabled = false;
             _this.deletingModule = false;
-            _this.toastr.error(error);
+            _this.toast.error(error);
         });
     };
     return ModuleComponent;
@@ -190,12 +190,13 @@ ModuleComponent = __decorate([
         templateUrl: './app/components/module/module-page.html',
         providers: [
             services_1.ModuleService,
-            services_2.SweetAlertService,
-            services_2.ToastrService
+            helpers_1.SwalHelper,
+            helpers_1.ToastHelper
         ]
     }),
-    __metadata("design:paramtypes", [services_1.ModuleService, typeof (_a = typeof services_2.SweetAlertService !== "undefined" && services_2.SweetAlertService) === "function" && _a || Object, typeof (_b = typeof services_2.ToastrService !== "undefined" && services_2.ToastrService) === "function" && _b || Object])
+    __metadata("design:paramtypes", [services_1.ModuleService,
+        helpers_1.SwalHelper,
+        helpers_1.ToastHelper])
 ], ModuleComponent);
 exports.ModuleComponent = ModuleComponent;
-var _a, _b;
 //# sourceMappingURL=module.component.js.map

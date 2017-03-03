@@ -12,11 +12,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var models_1 = require("../../models/models");
 var services_1 = require("../../services/services");
-var services_2 = require("../../shared-services/services");
+var helpers_1 = require("../../helpers/helpers");
 var CompanyComponent = (function () {
-    function CompanyComponent(swal, toastr, companyService) {
+    function CompanyComponent(swal, toast, companyService) {
         this.swal = swal;
-        this.toastr = toastr;
+        this.toast = toast;
         this.companyService = companyService;
         this.operation = 0;
         this.companies = [];
@@ -38,19 +38,19 @@ var CompanyComponent = (function () {
                     _this.companies = result.data;
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.loadingCompanies = true;
                 _this.isFormDisabled = true;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.loadingCompanies = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     CompanyComponent.prototype.view = function (company) {
@@ -94,24 +94,24 @@ var CompanyComponent = (function () {
                 _this.addingCompany = false;
                 _this.isFormDisabled = false;
                 if (result.success) {
-                    _this.toastr.success(result.message);
+                    _this.toast.success(result.message);
                     _this.getAll();
                     _this.modal.hide();
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.addingCompany = false;
                 _this.isFormDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.addingCompany = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     CompanyComponent.prototype.confirmUpdate = function () {
@@ -136,24 +136,24 @@ var CompanyComponent = (function () {
                 _this.deletingCompany = false;
                 _this.isFormDisabled = false;
                 if (result.success) {
-                    _this.toastr.success(result.message);
+                    _this.toast.success(result.message);
                     _this.modal.hide();
                     _this.getAll();
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.deletingCompany = false;
                 _this.isFormDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.deletingCompany = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     CompanyComponent.prototype.confirmDelete = function (company) {
@@ -177,23 +177,23 @@ var CompanyComponent = (function () {
                 _this.deletingCompany = false;
                 _this.isFormDisabled = false;
                 if (result.success) {
-                    _this.toastr.success(result.message);
+                    _this.toast.success(result.message);
                     _this.getAll();
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.deletingCompany = false;
                 _this.isFormDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.deletingCompany = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     return CompanyComponent;
@@ -203,13 +203,14 @@ CompanyComponent = __decorate([
         selector: 'company-component',
         templateUrl: './app/components/company/company-page.html',
         providers: [
-            services_2.SweetAlertService,
-            services_2.ToastrService,
+            helpers_1.SwalHelper,
+            helpers_1.ToastHelper,
             services_1.CompanyService
         ]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof services_2.SweetAlertService !== "undefined" && services_2.SweetAlertService) === "function" && _a || Object, typeof (_b = typeof services_2.ToastrService !== "undefined" && services_2.ToastrService) === "function" && _b || Object, services_1.CompanyService])
+    __metadata("design:paramtypes", [helpers_1.SwalHelper,
+        helpers_1.ToastHelper,
+        services_1.CompanyService])
 ], CompanyComponent);
 exports.CompanyComponent = CompanyComponent;
-var _a, _b;
 //# sourceMappingURL=company.component.js.map

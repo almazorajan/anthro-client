@@ -7,10 +7,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var SweetAlertService = (function () {
-    function SweetAlertService() {
+var SwalHelper = (function () {
+    function SwalHelper() {
     }
-    SweetAlertService.prototype.confirm = function (sweet) {
+    SwalHelper.prototype.confirm = function (sweet) {
         swal({
             title: sweet.title,
             text: sweet.message,
@@ -22,10 +22,10 @@ var SweetAlertService = (function () {
             sweet.callBack(isConfirm);
         });
     };
-    return SweetAlertService;
+    return SwalHelper;
 }());
-SweetAlertService = __decorate([
+SwalHelper = __decorate([
     core_1.Injectable()
-], SweetAlertService);
-exports.SweetAlertService = SweetAlertService;
+], SwalHelper);
+exports.SwalHelper = SwalHelper;
 //# sourceMappingURL=swal.helper.js.map

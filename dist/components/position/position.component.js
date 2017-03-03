@@ -11,14 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var services_1 = require("../../services/services");
-var services_2 = require("../../shared-services/services");
+var helpers_1 = require("../../helpers/helpers");
 var models_1 = require("../../models/models");
 var PositionComponent = (function () {
-    function PositionComponent(positionService, moduleService, swal, toastr) {
+    function PositionComponent(positionService, moduleService, swal, toast) {
         this.positionService = positionService;
         this.moduleService = moduleService;
         this.swal = swal;
-        this.toastr = toastr;
+        this.toast = toast;
         this.operation = 0;
         this.moduleSelector = false;
         this.addingPosition = false;
@@ -43,19 +43,19 @@ var PositionComponent = (function () {
                     _this.modules = result.data;
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.loadingModules = false;
                 _this.isFormDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.loadingModules = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     PositionComponent.prototype.getAllPositions = function () {
@@ -71,19 +71,19 @@ var PositionComponent = (function () {
                     _this.positions = result.data;
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.loadingPositions = false;
                 _this.isFormDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.loadingPositions = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     PositionComponent.prototype.checkModules = function () {
@@ -121,7 +121,7 @@ var PositionComponent = (function () {
     };
     PositionComponent.prototype.validPosition = function (position) {
         if (!this.selectedPosition.positionName.trim()) {
-            this.toastr.warn("Please provide a position name.");
+            this.toast.warn("Please provide a position name.");
             return false;
         }
         this.selectedPosition.modules = [];
@@ -130,7 +130,7 @@ var PositionComponent = (function () {
                 this.selectedPosition.modules.push(this.modules[i]);
         }
         if (this.selectedPosition.modules.length <= 0) {
-            this.toastr.warn("Please select atleast one(1) module.");
+            this.toast.warn("Please select atleast one(1) module.");
             return false;
         }
         return true;
@@ -160,25 +160,25 @@ var PositionComponent = (function () {
                 _this.updatingPosition = false;
                 _this.isFormDisabled = false;
                 if (result.success) {
-                    _this.toastr.success(result.message);
+                    _this.toast.success(result.message);
                     _this.getAllPositions();
                     _this.getAllModules();
                     _this.modal.hide();
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.updatingPosition = false;
                 _this.isFormDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.updatingPosition = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     PositionComponent.prototype.confirmAdd = function () {
@@ -207,25 +207,25 @@ var PositionComponent = (function () {
                 _this.isFormDisabled = false;
                 if (result.success) {
                     _this.modal.hide();
-                    _this.toastr.success(result.message);
+                    _this.toast.success(result.message);
                     _this.getAllPositions();
                     _this.getAllModules();
                     _this.toggleModuleSelection(false);
                     _this.selectedPosition = new models_1.Position();
                     return;
                 }
-                _this.toastr.error(result.message);
+                _this.toast.error(result.message);
             })
                 .catch(function (error) {
                 _this.addingPosition = false;
                 _this.isFormDisabled = false;
-                _this.toastr.error(error.toString());
+                _this.toast.error(error.toString());
             });
         }
         catch (e) {
             this.addingPosition = false;
             this.isFormDisabled = false;
-            this.toastr.error((e || e.message).toString());
+            this.toast.error((e || e.message).toString());
         }
     };
     PositionComponent.prototype.confirmDelete = function (position) {
@@ -250,18 +250,18 @@ var PositionComponent = (function () {
                 _this.deletingPosition = false;
                 _this.isFormDisabled = false;
                 if (result.success) {
-                    _this.toastr.success(result.message);
+                    _this.toast.success(result.message);
                     _this.getAllPositions();
                     _this.getAllModules();
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.deletingPosition = false;
                 _this.isFormDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
@@ -283,13 +283,14 @@ PositionComponent = __decorate([
         providers: [
             services_1.PositionService,
             services_1.ModuleService,
-            services_2.SweetAlertService,
-            services_2.ToastrService
+            helpers_1.SwalHelper,
+            helpers_1.ToastHelper
         ]
     }),
     __metadata("design:paramtypes", [services_1.PositionService,
-        services_1.ModuleService, typeof (_a = typeof services_2.SweetAlertService !== "undefined" && services_2.SweetAlertService) === "function" && _a || Object, typeof (_b = typeof services_2.ToastrService !== "undefined" && services_2.ToastrService) === "function" && _b || Object])
+        services_1.ModuleService,
+        helpers_1.SwalHelper,
+        helpers_1.ToastHelper])
 ], PositionComponent);
 exports.PositionComponent = PositionComponent;
-var _a, _b;
 //# sourceMappingURL=position.component.js.map

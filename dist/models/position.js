@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var model_1 = require("./model");
+var models_1 = require("./models");
 var Position = (function () {
     function Position() {
         this.positionName = "";
-        this.modules = [new model_1.Module()];
+        this.modules = [new models_1.Module()];
     }
     return Position;
 }());

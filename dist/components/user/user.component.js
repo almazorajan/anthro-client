@@ -10,15 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var services_1 = require("../../shared-services/services");
-var services_2 = require("../../services/services");
+var helpers_1 = require("../../helpers/helpers");
+var services_1 = require("../../services/services");
 var models_1 = require("../../models/models");
 var UserComponent = (function () {
-    function UserComponent(userService, positionService, swal, toastr, localStorage) {
+    function UserComponent(userService, positionService, swal, toast, localStorage) {
         this.userService = userService;
         this.positionService = positionService;
         this.swal = swal;
-        this.toastr = toastr;
+        this.toast = toast;
         this.localStorage = localStorage;
         this.positions = [];
         this.users = [];
@@ -45,19 +45,19 @@ var UserComponent = (function () {
                     _this.users = result.data.filter(function (user) { return user._id !== currentUserId; });
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.loadingUsers = false;
                 _this.isFormDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.loadingUsers = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     UserComponent.prototype.getAllPositions = function () {
@@ -73,19 +73,19 @@ var UserComponent = (function () {
                     _this.positions = result.data;
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.loadingPositions = false;
                 _this.isFormDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.loadingPositions = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     UserComponent.prototype.add = function () {
@@ -126,25 +126,25 @@ var UserComponent = (function () {
                 _this.addingUser = false;
                 _this.isFormDisabled = false;
                 if (result.success) {
-                    _this.toastr.success(result.message);
+                    _this.toast.success(result.message);
                     _this.getAllUsers();
                     _this.getAllPositions();
                     _this.userProfileModal.hide();
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.addingUser = false;
                 _this.isFormDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.addingUser = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     UserComponent.prototype.view = function (user) {
@@ -193,11 +193,11 @@ var UserComponent = (function () {
     UserComponent.prototype.confirmUpdatePassword = function () {
         var _this = this;
         if (!this.selectedUser.password.trim()) {
-            this.toastr.info("A password is required.");
+            this.toast.info("A password is required.");
             return;
         }
         if (this.selectedUser.password.length < 6) {
-            this.toastr.info("Password length should be greater than 6 characters.");
+            this.toast.info("Password length should be greater than 6 characters.");
             return;
         }
         this.swal.confirm({
@@ -220,25 +220,25 @@ var UserComponent = (function () {
                 _this.updatingUser = false;
                 _this.isFormDisabled = false;
                 if (result.success) {
-                    _this.toastr.success(result.message);
+                    _this.toast.success(result.message);
                     _this.getAllUsers();
                     _this.getAllPositions();
                     _this.userProfileModal.hide();
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.updatingUser = false;
                 _this.isFormDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.updatingUser = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     UserComponent.prototype.updatePassword = function () {
@@ -252,23 +252,23 @@ var UserComponent = (function () {
                 if (result.success) {
                     _this.userPasswordModal.hide();
                     _this.userProfileModal.hide();
-                    _this.toastr.success(result.message);
+                    _this.toast.success(result.message);
                     _this.getAllUsers();
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.updatingUserPassword = false;
                 _this.isFormDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.updatingUserPassword = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     UserComponent.prototype.confirmDelete = function (user) {
@@ -293,24 +293,24 @@ var UserComponent = (function () {
                 _this.deletingUser = false;
                 _this.isFormDisabled = false;
                 if (result.success) {
-                    _this.toastr.success(result.message);
+                    _this.toast.success(result.message);
                     _this.getAllUsers();
                     _this.getAllPositions();
                 }
                 else {
-                    _this.toastr.error(result.message);
+                    _this.toast.error(result.message);
                 }
             })
                 .catch(function (error) {
                 _this.deletingUser = false;
                 _this.isFormDisabled = false;
-                _this.toastr.error(error);
+                _this.toast.error(error);
             });
         }
         catch (e) {
             this.deletingUser = false;
             this.isFormDisabled = false;
-            this.toastr.error(e);
+            this.toast.error(e);
         }
     };
     return UserComponent;
@@ -320,16 +320,18 @@ UserComponent = __decorate([
         selector: 'user-component',
         templateUrl: './app/components/user/user-page.html',
         providers: [
-            services_2.UserService,
-            services_2.PositionService,
-            services_1.SweetAlertService,
-            services_1.ToastrService,
-            services_2.LocalStorageService
+            services_1.UserService,
+            services_1.PositionService,
+            helpers_1.SwalHelper,
+            helpers_1.ToastHelper,
+            services_1.LocalStorageService
         ]
     }),
-    __metadata("design:paramtypes", [services_2.UserService,
-        services_2.PositionService, typeof (_a = typeof services_1.SweetAlertService !== "undefined" && services_1.SweetAlertService) === "function" && _a || Object, typeof (_b = typeof services_1.ToastrService !== "undefined" && services_1.ToastrService) === "function" && _b || Object, services_2.LocalStorageService])
+    __metadata("design:paramtypes", [services_1.UserService,
+        services_1.PositionService,
+        helpers_1.SwalHelper,
+        helpers_1.ToastHelper,
+        services_1.LocalStorageService])
 ], UserComponent);
 exports.UserComponent = UserComponent;
-var _a, _b;
 //# sourceMappingURL=user.component.js.map
