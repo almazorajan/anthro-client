@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 // components
 import { CompanyComponent } from './components/company/company.component';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
-import { EmployeeSheetComponent } from './components/employee-sheet/employee-sheet.component';
 import { EmploymentStatusComponent } from './components/employment-status/employment-status.component';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
@@ -31,10 +30,6 @@ const routes: Routes = [
         path: 'main',
         component: MainComponent,
         children: [
-            {
-                path: 'employeesheet',
-                component: EmployeeSheetComponent
-            },
             {
                 path: 'employeelist',
                 component: EmployeeListComponent

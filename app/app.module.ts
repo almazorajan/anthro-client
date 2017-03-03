@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CompanyComponent } from './components/company/company.component';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
-import { EmployeeSheetComponent } from './components/employee-sheet/employee-sheet.component';
 import { EmploymentStatusComponent } from './components/employment-status/employment-status.component';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
@@ -23,9 +22,6 @@ import { LocalStorageService } from './shared-services/local-storage.service';
 // pipes
 import { UserFilter, EmployeeFilter } from './pipes/pipe';
 
-// shared-components
-import { TableLoaderComponent } from './shared-components/components';
-
 @NgModule({
     imports: [
         BrowserModule, 
@@ -37,7 +33,6 @@ import { TableLoaderComponent } from './shared-components/components';
         AppComponent,
         CompanyComponent,
         EmployeeListComponent,
-        EmployeeSheetComponent,
         EmploymentStatusComponent,
         LoginComponent,
         MainComponent,

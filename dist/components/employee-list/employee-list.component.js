@@ -14,18 +14,16 @@ var services_1 = require("../../shared-services/services");
 var employee_list_service_1 = require("./employee-list.service");
 var company_service_1 = require("../company/company.service");
 var employment_status_service_1 = require("../employment-status/employment-status.service");
-var employee_sheet_service_1 = require("../employee-sheet/employee-sheet.service");
 var position_service_1 = require("../position/position.service");
 var model_1 = require("../../models/model");
 var EmployeeListComponent = (function () {
-    function EmployeeListComponent(swal, toastr, employeeListService, companyService, employmentStatusService, positionService, employeeSheetService) {
+    function EmployeeListComponent(swal, toastr, employeeListService, companyService, employmentStatusService, positionService) {
         this.swal = swal;
         this.toastr = toastr;
         this.employeeListService = employeeListService;
         this.companyService = companyService;
         this.employmentStatusService = employmentStatusService;
         this.positionService = positionService;
-        this.employeeSheetService = employeeSheetService;
         this.operation = 0;
         this.searchFilter = "";
         this.updatingEmployee = false;
@@ -166,7 +164,7 @@ var EmployeeListComponent = (function () {
     };
     EmployeeListComponent.prototype.getRelationships = function () {
         try {
-            this.relationships = this.employeeSheetService.getRelationships();
+            this.relationships = this.employeeListService.getRelationships();
         }
         catch (e) {
             this.toastr.error(e);
@@ -177,6 +175,58 @@ var EmployeeListComponent = (function () {
             return new Date(dateString);
         }
         return null;
+    };
+    EmployeeListComponent.prototype.add = function () {
+        this.modal.show();
+        this.operation = 2;
+        this.isFormDisabled = false;
+        this.currentEmployee = new model_1.Employee();
+        this.currentEmployee.company = this.companies[0];
+        this.currentEmployee.position = this.positions[0];
+        this.currentEmployee.employmentStatus = this.employmentStatuses[0];
+    };
+    EmployeeListComponent.prototype.confirmAdd = function () {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be adding this employee information",
+            confirmButtonText: "Yes, Update It!",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    _this.saveNewEmployee();
+                }
+            }
+        });
+    };
+    EmployeeListComponent.prototype.saveNewEmployee = function () {
+        var _this = this;
+        try {
+            this.isFormDisabled = true;
+            this.updatingEmployee = true;
+            this.employeeListService.addEmployee(this.currentEmployee).then(function (result) {
+                _this.updatingEmployee = false;
+                if (result.success) {
+                    _this.operation = 0;
+                    _this.isFormDisabled = false;
+                    _this.currentEmployee = null;
+                    _this.originalEmployeeInfo = null;
+                    _this.modal.hide();
+                    _this.getAllEmployees();
+                    _this.toastr.success(result.message);
+                }
+                else {
+                    _this.toastr.error(result.message);
+                }
+            })
+                .catch(function (error) {
+                _this.updatingEmployee = false;
+                _this.toastr.error(error);
+            });
+        }
+        catch (e) {
+            this.updatingEmployee = false;
+            this.toastr.error(e);
+        }
     };
     EmployeeListComponent.prototype.view = function (employee) {
         this.operation = 0;
@@ -356,6 +406,14 @@ var EmployeeListComponent = (function () {
             this.toastr.error(e);
         }
     };
+    EmployeeListComponent.prototype.togglePermanentAddress = function () {
+        if (this.currentEmployee.cityAddress.isPermanent) {
+            this.currentEmployee.provincialAddress.isPermanent = false;
+        }
+        if (this.currentEmployee.provincialAddress.isPermanent) {
+            this.currentEmployee.cityAddress.isPermanent = false;
+        }
+    };
     return EmployeeListComponent;
 }());
 EmployeeListComponent = __decorate([
@@ -369,7 +427,6 @@ EmployeeListComponent = __decorate([
             company_service_1.CompanyService,
             employment_status_service_1.EmploymentStatusService,
             position_service_1.PositionService,
-            employee_sheet_service_1.EmployeeSheetService
         ]
     }),
     __metadata("design:paramtypes", [services_1.SweetAlertService,
@@ -377,8 +434,7 @@ EmployeeListComponent = __decorate([
         employee_list_service_1.EmployeeListService,
         company_service_1.CompanyService,
         employment_status_service_1.EmploymentStatusService,
-        position_service_1.PositionService,
-        employee_sheet_service_1.EmployeeSheetService])
+        position_service_1.PositionService])
 ], EmployeeListComponent);
 exports.EmployeeListComponent = EmployeeListComponent;
 //# sourceMappingURL=employee-list.component.js.map

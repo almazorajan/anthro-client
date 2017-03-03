@@ -23,6 +23,29 @@ var EmployeeListService = (function (_super) {
     function EmployeeListService() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
+    EmployeeListService.prototype.getRelationships = function () {
+        return [
+            "Father",
+            "Mother",
+            "Spouse",
+            "Child",
+            "Sibling"
+        ];
+    };
+    EmployeeListService.prototype.getEducationalLevels = function () {
+        return [
+            "Primary",
+            "Secondary",
+            "Tertiary"
+        ];
+    };
+    EmployeeListService.prototype.addEmployee = function (employee) {
+        return this.apiCall({
+            verb: "post",
+            uri: "employee/add",
+            body: employee
+        });
+    };
     EmployeeListService.prototype.getAllEmployees = function () {
         return this.apiCall({
             verb: "post",

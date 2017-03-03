@@ -1,6 +1,6 @@
 
 .module-header {
-    padding-top: 50px; 
+    padding-top: 30px; 
     margin-bottom: 30px;
 }
 
@@ -16,4 +16,18 @@
     top: 40%;
     margin-left: -32px;
     margin-top: -32px;
-};
+}
+
+.tab-gap {
+    margin-top: 40px;
+}
+.tab-gap-2 {
+    margin-top: 60px;
+}
+
+.section-title {
+    text-align: center;
+    background-color: #403c3c;
+    font-size: 14pt;
+    color: #FFF;
+}

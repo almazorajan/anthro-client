@@ -3,7 +3,6 @@ import { SweetAlertService, ToastrService } from '../../shared-services/services
 import { EmployeeListService } from './employee-list.service';
 import { CompanyService } from '../company/company.service';
 import { EmploymentStatusService } from '../employment-status/employment-status.service';
-import { EmployeeSheetService } from '../employee-sheet/employee-sheet.service';
 import { PositionService } from '../position/position.service';
 import { EmploymentStatus, Employee, Position, Company, Family, Education, Accreditation, WorkHistory, Modal, Address } from '../../models/model';
 
@@ -17,7 +16,6 @@ import { EmploymentStatus, Employee, Position, Company, Family, Education, Accre
         CompanyService,
         EmploymentStatusService,
         PositionService,
-        EmployeeSheetService
     ]
 })
 
@@ -29,8 +27,7 @@ export class EmployeeListComponent implements OnInit {
         private employeeListService : EmployeeListService,
         private companyService : CompanyService,
         private employmentStatusService : EmploymentStatusService,
-        private positionService : PositionService,
-        private employeeSheetService : EmployeeSheetService
+        private positionService : PositionService
     ) { }
 
     operation : number = 0;
@@ -178,7 +175,7 @@ export class EmployeeListComponent implements OnInit {
 
     private getRelationships() : void {
         try {
-            this.relationships = this.employeeSheetService.getRelationships();
+            this.relationships = this.employeeListService.getRelationships();
         } catch (e) {
             this.toastr.error(e);
         }
@@ -189,6 +186,59 @@ export class EmployeeListComponent implements OnInit {
             return new Date(dateString);
         }
         return null;
+    }
+
+    add(): void {
+        this.modal.show();
+        this.operation = 2;
+        this.isFormDisabled = false;
+        this.currentEmployee = new Employee();
+        this.currentEmployee.company = this.companies[0];
+        this.currentEmployee.position = this.positions[0];
+        this.currentEmployee.employmentStatus = this.employmentStatuses[0];
+    }
+
+    confirmAdd() : void {
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be adding this employee information",
+            confirmButtonText: "Yes, Update It!",
+            callBack: (isConfirm) => {
+                if(isConfirm) {
+                    this.saveNewEmployee();
+                }
+            }
+        });
+    }
+
+    saveNewEmployee() : void {
+        try {
+            this.isFormDisabled = true;
+            this.updatingEmployee = true;
+
+            this.employeeListService.addEmployee(this.currentEmployee).then((result) => {
+                this.updatingEmployee = false;
+                
+                if(result.success) {
+                    this.operation = 0;
+                    this.isFormDisabled = false;
+                    this.currentEmployee = null;
+                    this.originalEmployeeInfo = null;
+                    this.modal.hide();
+                    this.getAllEmployees();
+                    this.toastr.success(result.message);
+                } else {
+                    this.toastr.error(result.message);
+                }
+            })
+            .catch((error) => {
+                this.updatingEmployee = false;
+                this.toastr.error(error);
+            });
+        } catch(e) {
+            this.updatingEmployee = false;
+            this.toastr.error(e);
+        }
     }
 
     view(employee : Employee) : void {
@@ -375,6 +425,16 @@ export class EmployeeListComponent implements OnInit {
             this.currentEmployee.age = Math.abs(new Date(diff).getUTCFullYear() - 1970);    
         } catch(e) {
             this.toastr.error(e);
+        }
+    }
+
+    togglePermanentAddress(): void {
+        if (this.currentEmployee.cityAddress.isPermanent) {
+            this.currentEmployee.provincialAddress.isPermanent = false;
+        }
+
+        if (this.currentEmployee.provincialAddress.isPermanent) {
+            this.currentEmployee.cityAddress.isPermanent = false;
         }
     }
 }

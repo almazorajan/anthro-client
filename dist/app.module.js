@@ -14,7 +14,6 @@ var app_routing_module_1 = require("./app-routing.module");
 var app_component_1 = require("./app.component");
 var company_component_1 = require("./components/company/company.component");
 var employee_list_component_1 = require("./components/employee-list/employee-list.component");
-var employee_sheet_component_1 = require("./components/employee-sheet/employee-sheet.component");
 var employment_status_component_1 = require("./components/employment-status/employment-status.component");
 var login_component_1 = require("./components/login/login.component");
 var main_component_1 = require("./components/main/main.component");
@@ -44,7 +43,6 @@ AppModule = __decorate([
             app_component_1.AppComponent,
             company_component_1.CompanyComponent,
             employee_list_component_1.EmployeeListComponent,
-            employee_sheet_component_1.EmployeeSheetComponent,
             employment_status_component_1.EmploymentStatusComponent,
             login_component_1.LoginComponent,
             main_component_1.MainComponent,
