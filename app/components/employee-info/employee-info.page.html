@@ -1,7 +1,10 @@
 <div class="modal fade" id="mdlModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <form autocomplete="off" *ngIf="currentEmployee">
+            <div class="modal-body" *ngIf="loadingCompanies || loadingPositions || loadingEmploymentStatuses">
+                Loading resources... Please wait
+            </div>
+            <form autocomplete="off" *ngIf="employee && !loadingCompanies && !loadingPositions && !loadingEmploymentStatuses">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">
@@ -51,7 +54,7 @@
                                             id="txtFirstName" 
                                             name="txtFirstName" 
                                             placeholder="First Name" 
-                                            [(ngModel)]="currentEmployee.firstName"
+                                            [(ngModel)]="employee.firstName"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -64,7 +67,7 @@
                                             id="txtMiddleName" 
                                             name="txtMiddleName" 
                                             placeholder="Middle Name"
-                                            [(ngModel)]="currentEmployee.middleName"
+                                            [(ngModel)]="employee.middleName"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -77,7 +80,7 @@
                                             id="txtLastName" 
                                             name="txtLastName" 
                                             placeholder="Last Name"
-                                            [(ngModel)]="currentEmployee.lastName"
+                                            [(ngModel)]="employee.lastName"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -88,7 +91,7 @@
                                             class="form-control" 
                                             id="slcGender"
                                             name="slcGender" 
-                                            [(ngModel)]="currentEmployee.gender"
+                                            [(ngModel)]="employee.gender"
                                             [disabled]="isFormDisabled">
                                             <option>Male</option>
                                             <option>Female</option>
@@ -106,7 +109,7 @@
                                             id="txtCitizenship"
                                             name="txtCitizenship"
                                             placeholder="Citizenship"
-                                            [(ngModel)]="currentEmployee.citizenship"
+                                            [(ngModel)]="employee.citizenship"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -118,9 +121,9 @@
                                             class="form-control" 
                                             id="dtBirthDate"
                                             name="dtBirthDate"
-                                            (input)="currentEmployee.birthDate = parseDate($event.target.value)"
-                                            (change)="computeAge(currentEmployee)"
-                                            [value]="currentEmployee.birthDate | date : 'yyyy-MM-dd'"
+                                            (input)="employee.birthDate = parseDate($event.target.value)"
+                                            (change)="computeAge(employee)"
+                                            [value]="employee.birthDate | date : 'yyyy-MM-dd'"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -132,7 +135,7 @@
                                             class="form-control" 
                                             id="nbAge" 
                                             name="ngAge"
-                                            [value]="currentEmployee.age"
+                                            [value]="employee.age"
                                             disabled>
                                     </div>
                                 </div>
@@ -145,7 +148,7 @@
                                             id="txtBirthPlace"
                                             name="txtBirthPlace"
                                             placeholder="Birth Place"
-                                            [(ngModel)]="currentEmployee.birthPlace"
+                                            [(ngModel)]="employee.birthPlace"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -158,7 +161,7 @@
                                                 class="form-control"
                                                 id="slcMaritalStatus"
                                                 name="slcMaritalStatus" 
-                                                [(ngModel)]="currentEmployee.maritalStatus"
+                                                [(ngModel)]="employee.maritalStatus"
                                                 [disabled]="isFormDisabled">
                                                 <option>Single</option>
                                                 <option>Married</option>
@@ -178,7 +181,7 @@
                                             id="txtEmployeeNumber"
                                             name="txtEmployeeNumber"
                                             placeholder="Employee Number"
-                                            [(ngModel)]="currentEmployee.employeeNumber"
+                                            [(ngModel)]="employee.employeeNumber"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -189,7 +192,7 @@
                                             class="form-control" 
                                             id="slcPosition"
                                             name="slcPosition"
-                                            [(ngModel)]="currentEmployee.position._id"
+                                            [(ngModel)]="employee.position._id"
                                             [disabled]="isFormDisabled">
                                             <option *ngFor="let position of positions" [value]="position._id">
                                                 {{ position.positionName }}
@@ -205,8 +208,8 @@
                                             class="form-control" 
                                             id="dtStartingDate" 
                                             name="dtStartingDate"
-                                            [value]="currentEmployee.startingDate | date:'yyyy-mm-dd'"
-                                            (input)="currentEmployee.startingDate = $event.target.value"
+                                            [value]="employee.startingDate | date:'yyyy-mm-dd'"
+                                            (input)="employee.startingDate = $event.target.value"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -217,7 +220,7 @@
                                             class="form-control" 
                                             id="slcCompany" 
                                             name="slcCompany"
-                                            [(ngModel)]="currentEmployee.company._id"
+                                            [(ngModel)]="employee.company._id"
                                             [disabled]="isFormDisabled">
                                             <option
                                                 *ngFor="let company of companies" 
@@ -237,7 +240,7 @@
                                             class="form-control" 
                                             id="nbSalary"
                                             name="dbSalary"
-                                            [(ngModel)]="currentEmployee.salary"
+                                            [(ngModel)]="employee.salary"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -248,7 +251,7 @@
                                             class="form-control" 
                                             id="slcEmploymentStatus" 
                                             name="slcEmploymentStatus" 
-                                            [(ngModel)]="currentEmployee.employmentStatus._id"
+                                            [(ngModel)]="employee.employmentStatus._id"
                                             [disabled]="isFormDisabled">
                                             <option
                                                 *ngFor="let employmentStatus of employmentStatuses" 
@@ -275,7 +278,7 @@
                                                 <i class="glyphicon glyphicon-plus"></i>
                                             </button>
                                         </label>
-                                        <span *ngFor="let phoneNumber of currentEmployee.phoneNumbers">
+                                        <span *ngFor="let phoneNumber of employee.phoneNumbers">
                                             <input 
                                                 type="text" 
                                                 class="form-control" 
@@ -301,7 +304,7 @@
                                                 <i class="glyphicon glyphicon-plus"></i>
                                             </button>
                                         </label>
-                                        <span *ngFor="let landline of currentEmployee.landlines">
+                                        <span *ngFor="let landline of employee.landlines">
                                             <input 
                                                 type="text" 
                                                 class="form-control" 
@@ -326,7 +329,7 @@
                                                 type="checkbox" 
                                                 id="chkCityAddressIsPermanent"
                                                 name="chkCityAddressIsPermanent"
-                                                [(ngModel)]="currentEmployee.cityAddress.isPermanent"
+                                                [(ngModel)]="employee.cityAddress.isPermanent"
                                                 [disabled]="isFormDisabled"
                                                 (ngModelChange)="togglePermanentAddress()"> Is Permanent
                                         </label>
@@ -341,7 +344,7 @@
                                             id="txtCityAddressUnitFloor" 
                                             name="txtCityAddressUnitFloor" 
                                             placeholder="Unit Floor"
-                                            [(ngModel)]="currentEmployee.cityAddress.unitFloor"
+                                            [(ngModel)]="employee.cityAddress.unitFloor"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -354,7 +357,7 @@
                                             id="txtCityAddressBuilding"
                                             name="txtCityAddressBuilding"
                                             placeholder="Building"
-                                            [(ngModel)]="currentEmployee.cityAddress.building"
+                                            [(ngModel)]="employee.cityAddress.building"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -367,7 +370,7 @@
                                             id="txtCityAddressStreetName"
                                             name="txtCityAddressStreetName"
                                             placeholder="Street Name"
-                                            [(ngModel)]="currentEmployee.cityAddress.streetName"
+                                            [(ngModel)]="employee.cityAddress.streetName"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -380,7 +383,7 @@
                                             id="txtCityAddressBarangay"
                                             name="txtCityAddressBarangay" 
                                             placeholder="Barangay"
-                                            [(ngModel)]="currentEmployee.cityAddress.barangay"
+                                            [(ngModel)]="employee.cityAddress.barangay"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -393,7 +396,7 @@
                                             id="txtCityAddressCity"
                                             name="txtCityAddressCity" 
                                             placeholder="City"
-                                            [(ngModel)]="currentEmployee.cityAddress.city"
+                                            [(ngModel)]="employee.cityAddress.city"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -406,7 +409,7 @@
                                             id="txtCityAddressZipCode"
                                             name="txtCityAddressZipCode" 
                                             placeholder="Zip Code"
-                                            [(ngModel)]="currentEmployee.cityAddress.zipCode"
+                                            [(ngModel)]="employee.cityAddress.zipCode"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -420,7 +423,7 @@
                                                 type="checkbox" 
                                                 id="chkProvincialAddressIsPermanent"
                                                 name="chkProvincialAddressIsPermanent"
-                                                [(ngModel)]="currentEmployee.provincialAddress.isPermanent"
+                                                [(ngModel)]="employee.provincialAddress.isPermanent"
                                                 [disabled]="isFormDisabled"
                                                 (ngModelChange)="togglePermanentAddress()"> Is Permanent
                                         </label>
@@ -435,7 +438,7 @@
                                             id="txtProvincialAddressUnitFloor"
                                             name="txtProvincialAddressUnitFloor" 
                                             placeholder="Unit/Floor"
-                                            [(ngModel)]="currentEmployee.provincialAddress.unitFloor"
+                                            [(ngModel)]="employee.provincialAddress.unitFloor"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -448,7 +451,7 @@
                                             id="txtProvincialAddressBuilding"
                                             name="txtProvincialAddressBuilding" 
                                             placeholder="Building"
-                                            [(ngModel)]="currentEmployee.provincialAddress.building"
+                                            [(ngModel)]="employee.provincialAddress.building"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -461,7 +464,7 @@
                                             id="txtProvincialAddressStreetName"
                                             name="txtProvincialAddressStreetName"
                                             placeholder="Street Name"
-                                            [(ngModel)]="currentEmployee.provincialAddress.streetName"
+                                            [(ngModel)]="employee.provincialAddress.streetName"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -474,7 +477,7 @@
                                             id="txtProvincialAddressBarangay"
                                             name="txtProvincialAddressBarangay" 
                                             placeholder="Barangay"
-                                            [(ngModel)]="currentEmployee.provincialAddress.barangay"
+                                            [(ngModel)]="employee.provincialAddress.barangay"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -487,7 +490,7 @@
                                             id="txtProvincialAddressCity"
                                             name="txtProvincialAddressCity"
                                             placeholder="City"
-                                            [(ngModel)]="currentEmployee.provincialAddress.city"
+                                            [(ngModel)]="employee.provincialAddress.city"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -500,7 +503,7 @@
                                             id="txtProvincialAddressZipCode"
                                             name="txtProvincialAddressZipCode" 
                                             placeholder="Zip Code"
-                                            [(ngModel)]="currentEmployee.provincialAddress.zipCode"
+                                            [(ngModel)]="employee.provincialAddress.zipCode"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -516,7 +519,7 @@
                                             id="txtPermanentAddressUnitFloor"
                                             name="txtPermanentAddressUnitFloor" 
                                             placeholder="Unit Floor"
-                                            [(ngModel)]="currentEmployee.permanentAddress.unitFloor"
+                                            [(ngModel)]="employee.permanentAddress.unitFloor"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -529,7 +532,7 @@
                                             id="txtPermanentAddressBuilding"
                                             name="txtPermanentAddressBuilding" 
                                             placeholder="Building"
-                                            [(ngModel)]="currentEmployee.permanentAddress.building"
+                                            [(ngModel)]="employee.permanentAddress.building"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -542,7 +545,7 @@
                                             id="txtPermanentAddressStreetName"
                                             name="txtPermanentAddressStreetName" 
                                             placeholder="Password"
-                                            [(ngModel)]="currentEmployee.permanentAddress.streetName"
+                                            [(ngModel)]="employee.permanentAddress.streetName"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -555,7 +558,7 @@
                                             id="txtPermanentAddressBarangay"
                                             name="txtPermanentAddressBarangay" 
                                             placeholder="Barangay"
-                                            [(ngModel)]="currentEmployee.permanentAddress.barangay"
+                                            [(ngModel)]="employee.permanentAddress.barangay"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -568,7 +571,7 @@
                                             id="txtPermanentAddressCity"
                                             name="txtPermanentAddressCity" 
                                             placeholder="City"
-                                            [(ngModel)]="currentEmployee.permanentAddress.city"
+                                            [(ngModel)]="employee.permanentAddress.city"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -581,7 +584,7 @@
                                             id="txtPermanentAddressZipCode"
                                             name="txtPermanentAddressZipCode" 
                                             placeholder="Zip Code"
-                                            [(ngModel)]="currentEmployee.permanentAddress.zipCode"
+                                            [(ngModel)]="employee.permanentAddress.zipCode"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -598,7 +601,7 @@
                                             id="txtssNumber"
                                             name="txtssNumber" 
                                             placeholder="SS Number"
-                                            [(ngModel)]="currentEmployee.ssNumber"
+                                            [(ngModel)]="employee.ssNumber"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -611,7 +614,7 @@
                                             id="txtTinNumber"
                                             name="txtTinNumber"
                                             placeholder="TIN Number"
-                                            [(ngModel)]="currentEmployee.tinNumber"
+                                            [(ngModel)]="employee.tinNumber"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -624,7 +627,7 @@
                                             id="txtPhilHealthNumber"
                                             name="txtPhilHealthNumber" 
                                             placeholder="PhilHealth Number"
-                                            [(ngModel)]="currentEmployee.philHealthNumber"
+                                            [(ngModel)]="employee.philHealthNumber"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -637,7 +640,7 @@
                                             id="txtPagIbigNumber"
                                             name="txtPagIbigNumber" 
                                             placeholder="PAGIBIG Number"
-                                            [(ngModel)]="currentEmployee.pagibigNumber"
+                                            [(ngModel)]="employee.pagibigNumber"
                                             [disabled]="isFormDisabled">
                                     </div>
                                 </div>
@@ -661,7 +664,7 @@
                                             <th>Occupation</th>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let family of currentEmployee.family; let index = index; trackBy: family">
+                                            <tr *ngFor="let family of employee.family; let index = index; trackBy: family">
                                                 <td class="text-center">
                                                     <button 
                                                         (click)="deleteFamily(family)" 
@@ -698,7 +701,7 @@
                                             <th>Date Graduated</th>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let education of currentEmployee.educationHistory; let index = index; trackBy: education;">
+                                            <tr *ngFor="let education of employee.educationHistory; let index = index; trackBy: education;">
                                                 <td class="text-center">
                                                     <button 
                                                         (click)="deleteEducation(education)" 
@@ -737,7 +740,7 @@
                                             <th class="text-center">Reason for Leaving</th>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let workHistory of currentEmployee.workHistory; let index = index; trackBy: workHistory">
+                                            <tr *ngFor="let workHistory of employee.workHistory; let index = index; trackBy: workHistory">
                                                 <td class="text-center">
                                                     <button 
                                                         (click)="deleteWorkHistory(workHistory)"
@@ -780,7 +783,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let certification of currentEmployee.certifications; let index = index; trackBy: certification;">
+                                            <tr *ngFor="let certification of employee.certifications; let index = index; trackBy: certification;">
                                                 <td class="text-center">
                                                     <button 
                                                         type="button" 
@@ -809,7 +812,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let licensure of currentEmployee.licensures; let index = index; trackBy: licensure">
+                                            <tr *ngFor="let licensure of employee.licensures; let index = index; trackBy: licensure">
                                                 <td class="text-center">
                                                     <button 
                                                         type="button" 

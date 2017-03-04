@@ -13,6 +13,7 @@ var http_1 = require("@angular/http");
 var app_routing_module_1 = require("./app-routing.module");
 var app_component_1 = require("./app.component");
 var company_component_1 = require("./components/company/company.component");
+var employee_info_component_1 = require("./components/employee-info/employee-info.component");
 var employee_list_component_1 = require("./components/employee-list/employee-list.component");
 var employment_status_component_1 = require("./components/employment-status/employment-status.component");
 var login_component_1 = require("./components/login/login.component");
@@ -38,6 +39,7 @@ AppModule = __decorate([
         ],
         declarations: [
             app_component_1.AppComponent,
+            employee_info_component_1.EmployeeInfoComponent,
             company_component_1.CompanyComponent,
             employee_list_component_1.EmployeeListComponent,
             employment_status_component_1.EmploymentStatusComponent,

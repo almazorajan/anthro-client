@@ -4,7 +4,6 @@
         <hr>
     </div>
 </div>
-<!-- search filter -->
 <div class="row" style="margin-bottom: 50px;">  
     <div class="col-lg-2">
         <button (click)="add()" class="btn btn-primary btn-sm">Add</button>
@@ -18,7 +17,7 @@
             [(ngModel)]="searchFilter">
     </div>
 </div>
-<!-- employee list -->
+<employee-info-component [operation]="operation" [employee]="currentEmployee"></employee-info-component>
 <div class="row">
     <table class="table table-bordered table-striped table-hover table-condensed">
         <thead>
@@ -43,7 +42,7 @@
             </tr>
             <tr *ngFor="let employee of (employees | employeeFilter: searchFilter)">
                 <td>
-                    <button (click)="view(employee)" class="btn btn-primary btn-xs" title="View information" data-toggle="modal" data-target="#mdlModalInfo">
+                    <button (click)="view(employee)" class="btn btn-primary btn-xs" title="View information">
                         <i class="glyphicon glyphicon-info-sign"></i>
                     </button>
                 </td>
@@ -69,7 +68,7 @@
     </table>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="mdlModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!--<div class="modal fade" id="mdlModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form autocomplete="off" *ngIf="currentEmployee">
@@ -917,4 +916,4 @@
             </form>
         </div>
     </div>
-</div>
+</div>-->
