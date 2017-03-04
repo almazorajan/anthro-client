@@ -41,7 +41,6 @@ var EmployeeListComponent = (function () {
     EmployeeListComponent.prototype.ngOnInit = function () {
         this.getAllEmployees();
         this.modal = new models_1.Modal("#mdlModalInfo");
-        window.alert(this.modal.id);
     };
     EmployeeListComponent.prototype.getAllEmployees = function () {
         var _this = this;
