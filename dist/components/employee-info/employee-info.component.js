@@ -119,6 +119,7 @@ var EmployeeInfoComponent = (function () {
     EmployeeInfoComponent.prototype.edit = function () {
         this.operation = 1;
         this.isFormDisabled = false;
+        this.employee = JSON.parse(JSON.stringify(this.employee));
         this.originalEmployeeInfo = JSON.parse(JSON.stringify(this.employee));
     };
     EmployeeInfoComponent.prototype.confirmAdd = function () {

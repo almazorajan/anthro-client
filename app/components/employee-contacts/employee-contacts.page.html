@@ -12,17 +12,29 @@
                     <i class="glyphicon glyphicon-plus"></i>
                 </button>
             </label>
-            <span *ngFor="let phoneNumber of employee.phoneNumbers">
-                <input 
-                    type="text" 
-                    class="form-control" 
-                    id="txtPhoneNumber"
-                    name="txtPhoneNumber" 
-                    placeholder="Phone Number"
-                    style="width:270px;"
-                    [(ngModel)]="phoneNumber.number"
-                    [disabled]="isFormDisabled">
-            </span>
+            <div class="row" *ngFor="let phoneNumber of employee.phoneNumbers">
+                <div class="col-lg-1 text-center">
+                    <button 
+                        (click)="deletePhoneNumber(phoneNumber)"
+                        [disabled]="isFormDisabled"
+                        type="button" 
+                        title="Add Phone Number" 
+                        class="btn btn-danger btn-xs">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </div>
+                <div class="col-lg-11">
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="txtPhoneNumber"
+                        name="txtPhoneNumber" 
+                        placeholder="Phone Number"
+                        style="width:270px;"
+                        [(ngModel)]="phoneNumber.number"
+                        [disabled]="isFormDisabled">
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-lg-6">
@@ -38,17 +50,29 @@
                     <i class="glyphicon glyphicon-plus"></i>
                 </button>
             </label>
-            <span *ngFor="let landline of employee.landlines">
-                <input 
-                    type="text" 
-                    class="form-control" 
-                    id="txtLandline" 
-                    name="txtLandline"
-                    placeholder="Landline"
-                    style="width:270px;"
-                    [(ngModel)]="landline.number"
-                    [disabled]="isFormDisabled">
-            </span>
+            <div class="row" *ngFor="let landline of employee.landlines">
+                <div class="col-lg-1">
+                   <button 
+                        (click)="deleteLandline(landline)"
+                        [disabled]="isFormDisabled"
+                        type="button" 
+                        title="Add Phone Number" 
+                        class="btn btn-danger btn-xs">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button> 
+                </div>
+                <div class="col-lg-11">
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="txtLandline" 
+                        name="txtLandline"
+                        placeholder="Landline"
+                        style="width:270px;"
+                        [(ngModel)]="landline.number"
+                        [disabled]="isFormDisabled">
+                </div>
+            </div>
         </div>
     </div>
 </div>

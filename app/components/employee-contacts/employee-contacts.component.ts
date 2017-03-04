@@ -21,4 +21,22 @@ export class EmployeeContactsComponent {
     @Input() employee: Employee;
     @Input() operation: number;
     @Input() isFormDisabled: boolean;
+
+    addPhoneNumber(): void {
+        this.employee.phoneNumbers.unshift(new ContactNumber());
+    }
+
+    addLandline(): void {
+        this.employee.landlines.unshift(new ContactNumber());
+    }
+
+    deletePhoneNumber(phoneNumber: ContactNumber): void {
+        let index = this.employee.phoneNumbers.indexOf(phoneNumber);
+        this.employee.phoneNumbers.splice(index, 1);
+    }
+
+    deleteLandline(landline: ContactNumber): void {
+        let index = this.employee.landlines.indexOf(landline);
+        this.employee.landlines.splice(index, 1);
+    }
 }

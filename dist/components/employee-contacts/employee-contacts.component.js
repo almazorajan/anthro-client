@@ -17,6 +17,20 @@ var EmployeeContactsComponent = (function () {
         this.swal = swal;
         this.toast = toast;
     }
+    EmployeeContactsComponent.prototype.addPhoneNumber = function () {
+        this.employee.phoneNumbers.unshift(new models_1.ContactNumber());
+    };
+    EmployeeContactsComponent.prototype.addLandline = function () {
+        this.employee.landlines.unshift(new models_1.ContactNumber());
+    };
+    EmployeeContactsComponent.prototype.deletePhoneNumber = function (phoneNumber) {
+        var index = this.employee.phoneNumbers.indexOf(phoneNumber);
+        this.employee.phoneNumbers.splice(index, 1);
+    };
+    EmployeeContactsComponent.prototype.deleteLandline = function (landline) {
+        var index = this.employee.landlines.indexOf(landline);
+        this.employee.landlines.splice(index, 1);
+    };
     return EmployeeContactsComponent;
 }());
 __decorate([

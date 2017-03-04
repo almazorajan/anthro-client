@@ -131,6 +131,7 @@ export class EmployeeInfoComponent {
     edit(): void {
         this.operation = 1;
         this.isFormDisabled = false;
+        this.employee = JSON.parse(JSON.stringify(this.employee)) as Employee;
         this.originalEmployeeInfo = JSON.parse(JSON.stringify(this.employee)) as Employee;
     } 
     
