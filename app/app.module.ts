@@ -9,10 +9,12 @@ import { EmployeeAccreditationComponent } from './components/employee-accreditat
 import { EmployeeAddressComponent } from './components/employee-address/employee-address.component';
 import { EmployeeContactsComponent } from './components/employee-contacts/employee-contacts.component';
 import { EmployeeEducationComponent } from './components/employee-education/employee-education.component';
+import { EmployeeEmploymentComponent } from './components/employee-employment/employee-employment.component';
 import { EmployeeFamilyComponent } from './components/employee-family/employee-family.component';
 import { EmployeeGovernmentComponent } from './components/employee-government/employee-government.component';
 import { EmployeeInfoComponent } from './components/employee-info/employee-info.component';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
+import { EmployeePersonalComponent } from './components/employee-personal/employee-personal.component';
 import { EmployeeWorkHistoryComponent } from './components/employee-work-history/employee-work-history.component';
 import { EmploymentStatusComponent } from './components/employment-status/employment-status.component';
 import { LoginComponent } from './components/login/login.component';
@@ -38,10 +40,12 @@ import { UserFilter, EmployeeFilter } from './pipes/pipes';
         EmployeeAddressComponent,
         EmployeeContactsComponent,
         EmployeeEducationComponent,
+        EmployeeEmploymentComponent,
         EmployeeFamilyComponent,
         EmployeeGovernmentComponent,
         EmployeeInfoComponent,
         EmployeeListComponent,
+        EmployeePersonalComponent,
         EmployeeWorkHistoryComponent,
         EmploymentStatusComponent,
         LoginComponent,

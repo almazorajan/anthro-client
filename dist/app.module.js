@@ -17,10 +17,12 @@ var employee_accreditation_component_1 = require("./components/employee-accredit
 var employee_address_component_1 = require("./components/employee-address/employee-address.component");
 var employee_contacts_component_1 = require("./components/employee-contacts/employee-contacts.component");
 var employee_education_component_1 = require("./components/employee-education/employee-education.component");
+var employee_employment_component_1 = require("./components/employee-employment/employee-employment.component");
 var employee_family_component_1 = require("./components/employee-family/employee-family.component");
 var employee_government_component_1 = require("./components/employee-government/employee-government.component");
 var employee_info_component_1 = require("./components/employee-info/employee-info.component");
 var employee_list_component_1 = require("./components/employee-list/employee-list.component");
+var employee_personal_component_1 = require("./components/employee-personal/employee-personal.component");
 var employee_work_history_component_1 = require("./components/employee-work-history/employee-work-history.component");
 var employment_status_component_1 = require("./components/employment-status/employment-status.component");
 var login_component_1 = require("./components/login/login.component");
@@ -51,10 +53,12 @@ AppModule = __decorate([
             employee_address_component_1.EmployeeAddressComponent,
             employee_contacts_component_1.EmployeeContactsComponent,
             employee_education_component_1.EmployeeEducationComponent,
+            employee_employment_component_1.EmployeeEmploymentComponent,
             employee_family_component_1.EmployeeFamilyComponent,
             employee_government_component_1.EmployeeGovernmentComponent,
             employee_info_component_1.EmployeeInfoComponent,
             employee_list_component_1.EmployeeListComponent,
+            employee_personal_component_1.EmployeePersonalComponent,
             employee_work_history_component_1.EmployeeWorkHistoryComponent,
             employment_status_component_1.EmploymentStatusComponent,
             login_component_1.LoginComponent,
