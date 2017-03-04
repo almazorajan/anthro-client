@@ -5,6 +5,7 @@ import { HttpModule }    from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CompanyComponent } from './components/company/company.component';
+import { EmployeeFamilyComponent } from './components/employee-family/employee-family.component';
 import { EmployeeInfoComponent } from './components/employee-info/employee-info.component';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { EmploymentStatusComponent } from './components/employment-status/employment-status.component';
@@ -26,8 +27,9 @@ import { UserFilter, EmployeeFilter } from './pipes/pipes';
 
     declarations: [
         AppComponent,
-        EmployeeInfoComponent,
         CompanyComponent,
+        EmployeeFamilyComponent,
+        EmployeeInfoComponent,
         EmployeeListComponent,
         EmploymentStatusComponent,
         LoginComponent,
