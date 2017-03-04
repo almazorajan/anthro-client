@@ -17,6 +17,23 @@ var EmployeePersonalComponent = (function () {
         this.swal = swal;
         this.toast = toast;
     }
+    EmployeePersonalComponent.prototype.parseDate = function (dateString) {
+        if (dateString) {
+            return new Date(dateString);
+        }
+        return null;
+    };
+    EmployeePersonalComponent.prototype.computeAge = function (employee) {
+        try {
+            var birthDate = new Date(employee.birthDate);
+            var birthDay = new Date(birthDate.getFullYear(), birthDate.getMonth(), birthDate.getDay());
+            var diff = Date.now() - birthDay.getTime();
+            this.employee.age = Math.abs(new Date(diff).getUTCFullYear() - 1970);
+        }
+        catch (e) {
+            this.toast.error(e);
+        }
+    };
     return EmployeePersonalComponent;
 }());
 __decorate([

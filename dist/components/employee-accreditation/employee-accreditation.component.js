@@ -17,6 +17,28 @@ var EmployeeAccreditationComponent = (function () {
         this.swal = swal;
         this.toast = toast;
     }
+    EmployeeAccreditationComponent.prototype.addCertification = function () {
+        if (this.isFormDisabled)
+            return;
+        this.employee.certifications.push(new models_1.Accreditation());
+    };
+    EmployeeAccreditationComponent.prototype.addLicensure = function () {
+        if (this.isFormDisabled)
+            return;
+        this.employee.licensures.push(new models_1.Accreditation());
+    };
+    EmployeeAccreditationComponent.prototype.deleteCertification = function (certification) {
+        if (this.isFormDisabled)
+            return;
+        var index = this.employee.certifications.indexOf(certification);
+        this.employee.certifications.splice(index, 1);
+    };
+    EmployeeAccreditationComponent.prototype.deleteLicense = function (license) {
+        if (this.isFormDisabled)
+            return;
+        var index = this.employee.licensures.indexOf(license);
+        this.employee.licensures.splice(index, 1);
+    };
     return EmployeeAccreditationComponent;
 }());
 __decorate([

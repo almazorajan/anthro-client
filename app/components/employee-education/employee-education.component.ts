@@ -21,4 +21,10 @@ export class EmployeeEducationComponent {
     @Input() employee: Employee;
     @Input() operation: number;
     @Input() isFormDisabled: boolean;
+
+    deleteEducation(education: Education): void {
+        if(this.isFormDisabled) return;
+        let index = this.employee.educationHistory.indexOf(education);
+        this.employee.educationHistory.splice(index, 1);
+    }
 }

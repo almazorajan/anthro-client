@@ -17,6 +17,17 @@ var EmployeeWorkHistoryComponent = (function () {
         this.swal = swal;
         this.toast = toast;
     }
+    EmployeeWorkHistoryComponent.prototype.addWorkHistory = function () {
+        if (this.isFormDisabled)
+            return;
+        this.employee.workHistory.push(new models_1.WorkHistory());
+    };
+    EmployeeWorkHistoryComponent.prototype.deleteWorkHistory = function (workHistory) {
+        if (this.isFormDisabled)
+            return;
+        var index = this.employee.workHistory.indexOf(workHistory);
+        this.employee.workHistory.splice(index, 1);
+    };
     return EmployeeWorkHistoryComponent;
 }());
 __decorate([

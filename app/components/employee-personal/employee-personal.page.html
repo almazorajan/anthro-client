@@ -2,21 +2,39 @@
     <div class="col-lg-3">
         <div class="form-group">
             <label for="txtFirstName">First Name</label>
-            <input type="text" class="form-control" id="txtFirstName" name="txtFirstName" placeholder="First Name" [(ngModel)]="employee.firstName"
+            <input 
+                type="text" 
+                class="form-control" 
+                id="txtFirstName" 
+                name="txtFirstName" 
+                placeholder="First Name" 
+                [(ngModel)]="employee.firstName"
                 [disabled]="isFormDisabled">
         </div>
     </div>
     <div class="col-lg-3">
         <div class="form-group">
             <label for="txtMiddleName">Middle Name</label>
-            <input type="text" class="form-control" id="txtMiddleName" name="txtMiddleName" placeholder="Middle Name" [(ngModel)]="employee.middleName"
+            <input 
+                type="text" 
+                class="form-control" 
+                id="txtMiddleName" 
+                name="txtMiddleName" 
+                placeholder="Middle Name" 
+                [(ngModel)]="employee.middleName"
                 [disabled]="isFormDisabled">
         </div>
     </div>
     <div class="col-lg-3">
         <div class="form-group">
             <label for="txtLastName">Last Name</label>
-            <input type="text" class="form-control" id="txtLastName" name="txtLastName" placeholder="Last Name" [(ngModel)]="employee.lastName"
+            <input 
+                type="text" 
+                class="form-control" 
+                id="txtLastName" 
+                name="txtLastName" 
+                placeholder="Last Name" 
+                [(ngModel)]="employee.lastName"
                 [disabled]="isFormDisabled">
         </div>
     </div>
@@ -24,9 +42,9 @@
         <div class="form-group">
             <label for="slcGender">Gender</label>
             <select class="form-control" id="slcGender" name="slcGender" [(ngModel)]="employee.gender" [disabled]="isFormDisabled">
-                                            <option>Male</option>
-                                            <option>Female</option>
-                                        </select>
+                <option>Male</option>
+                <option>Female</option>
+            </select>
         </div>
     </div>
 </div>
@@ -34,27 +52,52 @@
     <div class="col-lg-3">
         <div class="form-group">
             <label for="txtCitizenship">Citizenship</label>
-            <input type="text" class="form-control" id="txtCitizenship" name="txtCitizenship" placeholder="Citizenship" [(ngModel)]="employee.citizenship"
+            <input 
+                type="text" 
+                class="form-control" 
+                id="txtCitizenship" 
+                name="txtCitizenship"
+                 placeholder="Citizenship" 
+                 [(ngModel)]="employee.citizenship"
                 [disabled]="isFormDisabled">
         </div>
     </div>
     <div class="col-lg-3">
         <div class="form-group">
             <label for="dtBirthDate">Birth Date</label>
-            <input type="date" class="form-control" id="dtBirthDate" name="dtBirthDate" (input)="employee.birthDate = parseDate($event.target.value)"
-                (change)="computeAge(employee)" [value]="employee.birthDate | date : 'yyyy-MM-dd'" [disabled]="isFormDisabled">
+            <input 
+                type="date" 
+                class="form-control" 
+                id="dtBirthDate" 
+                name="dtBirthDate" 
+                (input)="employee.birthDate = parseDate($event.target.value)"
+                (change)="computeAge(employee)" 
+                [value]="employee.birthDate | date : 'yyyy-MM-dd'" 
+                [disabled]="isFormDisabled">
         </div>
     </div>
     <div class="col-lg-3">
         <div class="form-group">
             <label for="nbAge">Age</label>
-            <input type="number" class="form-control" id="nbAge" name="ngAge" [value]="employee.age" disabled>
+            <input 
+                type="number" 
+                class="form-control" 
+                id="nbAge" 
+                name="ngAge" 
+                [value]="employee.age" 
+                disabled>
         </div>
     </div>
     <div class="col-lg-3">
         <div class="form-group">
             <label for="txtBirthPlace">Birth Place</label>
-            <input type="text" class="form-control" id="txtBirthPlace" name="txtBirthPlace" placeholder="Birth Place" [(ngModel)]="employee.birthPlace"
+            <input 
+                type="text" 
+                class="form-control" 
+                id="txtBirthPlace" 
+                name="txtBirthPlace" 
+                placeholder="Birth Place" 
+                [(ngModel)]="employee.birthPlace"
                 [disabled]="isFormDisabled">
         </div>
     </div>
@@ -64,9 +107,9 @@
         <div class="form-group">
             <label for="slcMaritalStatus">Marital Status</label>
             <select class="form-control" id="slcMaritalStatus" name="slcMaritalStatus" [(ngModel)]="employee.maritalStatus" [disabled]="isFormDisabled">
-                                                <option>Single</option>
-                                                <option>Married</option>
-                                            </select>
+                <option>Single</option>
+                <option>Married</option>
+            </select>
         </div>
     </div>
 </div>

@@ -24,6 +24,7 @@ export class EmployeeFamilyComponent implements OnInit {
     @Input() id: string;
     @Input() operation: number;
     @Input() employee: Employee;
+    @Input() isFormDisabled: boolean;
     
     relationships: string[];
     currentFamily: Family;

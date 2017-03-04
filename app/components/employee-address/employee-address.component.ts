@@ -21,4 +21,14 @@ export class EmployeeAddressComponent {
     @Input() employee: Employee;
     @Input() operation: number;
     @Input() isFormDisabled: boolean;
+
+    togglePermanentAddress(): void {
+        if (this.employee.cityAddress.isPermanent) {
+            this.employee.provincialAddress.isPermanent = false;
+        }
+
+        if (this.employee.provincialAddress.isPermanent) {
+            this.employee.cityAddress.isPermanent = false;
+        }
+    }
 }

@@ -34,22 +34,13 @@ export class EmployeeListComponent implements OnInit {
     updatingEmployee: boolean = false;
     deletingEmployee: boolean = false;
     loadingEmployees: boolean = false;
-    loadingCompanies: boolean = false;
-    loadingEmploymentStatuses: boolean = false;
-    loadingPositions: boolean = false;
     isFormDisabled: boolean = true;
-    readyToSave: boolean = false;
     addingEmployee: boolean = false;
     employees: Employee[] = [];
-    companies: Company[] = [];
-    employmentStatuses: EmploymentStatus[] = [];
-    positions: Position[] = [];
-    relationships: string[] = [];
-    modal: Modal;
+    modal: Modal = new Modal("#mdlModalInfo");;
 
     ngOnInit() {
         this.getAllEmployees();
-        this.modal = new Modal("#mdlModalInfo");
     }
 
     private getAllEmployees(): void {
@@ -61,8 +52,6 @@ export class EmployeeListComponent implements OnInit {
             this.employeeService.getAllEmployees().then((result) => {
                 this.loadingEmployees = false;
                 this.isFormDisabled = false;
-                
-                console.log(result);
 
                 if(result.success) {
                     this.employees = result.data as Employee[];
@@ -82,15 +71,17 @@ export class EmployeeListComponent implements OnInit {
         }
     }
 
-    add(): void {
-        this.currentEmployee = new Employee();
-        this.modal.show();
-        this.operation = 2;
-    }
-
     view(employee: Employee): void {
         this.currentEmployee = employee;
-        this.modal.show();
+        this.isFormDisabled = true;
         this.operation = 0;
+        this.modal.show();
+    }
+   
+    add(): void {
+        this.currentEmployee = new Employee();
+        this.isFormDisabled = false;
+        this.operation = 2;
+        this.modal.show();
     }
 }

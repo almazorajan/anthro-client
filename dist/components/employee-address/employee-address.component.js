@@ -17,6 +17,14 @@ var EmployeeAddressComponent = (function () {
         this.swal = swal;
         this.toast = toast;
     }
+    EmployeeAddressComponent.prototype.togglePermanentAddress = function () {
+        if (this.employee.cityAddress.isPermanent) {
+            this.employee.provincialAddress.isPermanent = false;
+        }
+        if (this.employee.provincialAddress.isPermanent) {
+            this.employee.cityAddress.isPermanent = false;
+        }
+    };
     return EmployeeAddressComponent;
 }());
 __decorate([

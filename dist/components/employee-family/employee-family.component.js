@@ -68,6 +68,10 @@ __decorate([
     core_1.Input(),
     __metadata("design:type", models_1.Employee)
 ], EmployeeFamilyComponent.prototype, "employee", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], EmployeeFamilyComponent.prototype, "isFormDisabled", void 0);
 EmployeeFamilyComponent = __decorate([
     core_1.Component({
         selector: 'employee-family-component',

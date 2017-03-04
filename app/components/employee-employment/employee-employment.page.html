@@ -1,4 +1,7 @@
-<div class="row">
+<div *ngIf="loadingCompanies || loadingPositions || loadingEmploymentStatuses">
+    <p class="text-center">Loading resources... Please wait</p>
+</div>
+<div class="row" *ngIf="!loadingCompanies && !loadingPositions && !loadingEmploymentStatuses">
     <div class="col-lg-3">
         <div class="form-group">
             <label for="txtEmployeeNumber">Employee Number</label>

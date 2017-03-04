@@ -11,12 +11,75 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var helpers_1 = require("../../helpers/helpers");
+var services_1 = require("../../services/services");
 var models_1 = require("../../models/models");
 var EmployeeEmploymentComponent = (function () {
-    function EmployeeEmploymentComponent(swal, toast) {
+    function EmployeeEmploymentComponent(swal, toast, positionService, companyService, employmentStatusService) {
         this.swal = swal;
         this.toast = toast;
+        this.positionService = positionService;
+        this.companyService = companyService;
+        this.employmentStatusService = employmentStatusService;
+        this.loadingPositions = false;
+        this.loadingCompanies = false;
+        this.loadingEmploymentStatuses = false;
     }
+    EmployeeEmploymentComponent.prototype.ngOnInit = function () {
+        this.getPositions();
+        this.getCompanies();
+        this.getEmploymentStatuses();
+    };
+    EmployeeEmploymentComponent.prototype.getPositions = function () {
+        var _this = this;
+        this.positions = [];
+        this.loadingPositions = true;
+        this.positionService.getAll().then(function (result) {
+            _this.loadingPositions = false;
+            if (result.success) {
+                _this.positions = result.data;
+            }
+            else {
+                _this.toast.error(result.message);
+            }
+        }).catch(function (e) {
+            _this.loadingPositions = false;
+            _this.toast.error(e || e.message);
+        });
+    };
+    EmployeeEmploymentComponent.prototype.getCompanies = function () {
+        var _this = this;
+        this.companies = [];
+        this.loadingCompanies = true;
+        this.companyService.getAll().then(function (result) {
+            _this.loadingCompanies = false;
+            if (result.success) {
+                _this.companies = result.data;
+            }
+            else {
+                _this.toast.error(result.message);
+            }
+        }).catch(function (e) {
+            _this.loadingCompanies = false;
+            _this.toast.error(e || e.message);
+        });
+    };
+    EmployeeEmploymentComponent.prototype.getEmploymentStatuses = function () {
+        var _this = this;
+        this.employmentStatuses = [];
+        this.loadingEmploymentStatuses = true;
+        this.employmentStatusService.getAll().then(function (result) {
+            _this.loadingEmploymentStatuses = false;
+            if (result.success) {
+                _this.employmentStatuses = result.data;
+            }
+            else {
+                _this.toast.error(result.message);
+            }
+        }).catch(function (e) {
+            _this.loadingEmploymentStatuses = false;
+            _this.toast.error(e || e.message);
+        });
+    };
     return EmployeeEmploymentComponent;
 }());
 __decorate([
@@ -41,7 +104,10 @@ EmployeeEmploymentComponent = __decorate([
         ]
     }),
     __metadata("design:paramtypes", [helpers_1.SwalHelper,
-        helpers_1.ToastHelper])
+        helpers_1.ToastHelper,
+        services_1.PositionService,
+        services_1.CompanyService,
+        services_1.EmploymentStatusService])
 ], EmployeeEmploymentComponent);
 exports.EmployeeEmploymentComponent = EmployeeEmploymentComponent;
 //# sourceMappingURL=employee-employment.component.js.map

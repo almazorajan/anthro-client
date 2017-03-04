@@ -1,10 +1,7 @@
 <div class="modal fade" [id]="id" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-body" *ngIf="loadingCompanies || loadingPositions || loadingEmploymentStatuses">
-                Loading resources... Please wait
-            </div>
-            <form autocomplete="off" *ngIf="employee && !loadingCompanies && !loadingPositions && !loadingEmploymentStatuses">
+            <form autocomplete="off" *ngIf="employee">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">
@@ -44,31 +41,67 @@
                     </ul>
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane tab-gap active" id="personal">
-                            <employee-personal-component [operation]="operation" [employee]="employee" [isFormDisabled]="isFormDisabled"></employee-personal-component>                      
+                            <employee-personal-component 
+                                [operation]="operation" 
+                                [isFormDisabled]="isFormDisabled"
+                                [employee]="employee">
+                            </employee-personal-component>                      
                         </div>
                         <div role="tabpanel" class="tab-pane tab-gap" id="employment">
-                             <employee-employment-component [operation]="operation" [employee]="employee" [isFormDisabled]="isFormDisabled"></employee-employment-component>                      
+                             <employee-employment-component 
+                                [operation]="operation" 
+                                [isFormDisabled]="isFormDisabled"
+                                [employee]="employee">
+                            </employee-employment-component>                      
                         </div>
                         <div role="tabpanel" class="tab-pane tab-gap" id="contacts">
-                             <employee-contacts-component [operation]="operation" [employee]="employee" [isFormDisabled]="isFormDisabled"></employee-contacts-component>          
+                             <employee-contacts-component 
+                                [operation]="operation" 
+                                [isFormDisabled]="isFormDisabled" 
+                                [employee]="employee">
+                            </employee-contacts-component>          
                         </div>
                         <div role="tabpanel" class="tab-pane tab-gap" id="address">
-                            <employee-address-component [operation]="operation" [employee]="employee" [isFormDisabled]="isFormDisabled"></employee-address-component>        
+                            <employee-address-component 
+                                [operation]="operation" 
+                                [isFormDisabled]="isFormDisabled" 
+                                [employee]="employee">
+                            </employee-address-component>        
                         </div>
                         <div role="tabpanel" class="tab-pane tab-gap" id="government">
-                            <employee-government-component [operation]="operation" [employee]="employee" [isFormDisabled]="isFormDisabled"></employee-government-component>
+                            <employee-government-component 
+                                [operation]="operation" 
+                                [isFormDisabled]="isFormDisabled" 
+                                [employee]="employee">
+                            </employee-government-component>
                         </div>
                         <div role="tabpanel" class="tab-pane tab-gap" id="family">
-                            <employee-family-component [operation]="operation" [employee]="employee"></employee-family-component>
+                            <employee-family-component 
+                                [operation]="operation"
+                                [isFormDisabled]="isFormDisabled" 
+                                [employee]="employee">
+                            </employee-family-component>
                         </div>
                         <div role="tabpanel" class="tab-pane tab-gap" id="education">
-                            <employee-education-component [operation]="operation" [employee]="employee" [isFormDisabled]="isFormDisabled"></employee-education-component>
+                            <employee-education-component 
+                                [operation]="operation" 
+                                [isFormDisabled]="isFormDisabled" 
+                                [employee]="employee">
+                            </employee-education-component>
                         </div>
                         <div role="tabpanel" class="tab-pane tab-gap" id="work">
-                            <employee-work-history-component [operation]="operation" [employee]="employee" [isFormDisabled]="isFormDisabled"></employee-work-history-component>
+                            <employee-work-history-component 
+                                [operation]="operation" 
+                                [isFormDisabled]="isFormDisabled" 
+                                [employee]="employee">
+                            </employee-work-history-component>
                         </div>
                         <div role="tabpanel" class="tab-pane tab-gap" id="accreditations">
-                            <employee-accreditation-component [operation]="operation" [employee]="employee" [isFormDisabled]="isFormDisabled"></employee-accreditation-component>
+                            <employee-accreditation-component 
+                                [operation]="operation"
+                                [isFormDisabled]="isFormDisabled" 
+                                [employee]="employee" >
+                            </employee-accreditation-component>
                         </div>
                     </div>
                 </div>
@@ -79,12 +112,12 @@
                     </button>
                 </div>
                 <div class="modal-footer" *ngIf="operation === 1">
-                    <button (click)="cancelEdit()" type="button" class="btn btn-default" [disabled]="isFormDisabled">Cancel</button>
-                    <button (click)="confirmSave()" type="button" class="btn btn-primary" [disabled]="isFormDisabled">Save</button>
+                    <button (click)="confirmCancelUpdate()" [disabled]="isFormDisabled" type="button" class="btn btn-default">Cancel</button>
+                    <button (click)="confirmUpdate()" [disabled]="isFormDisabled" type="button" class="btn btn-primary">Save</button>
                 </div>
                 <div class="modal-footer" *ngIf="operation === 2">
-                    <button (click)="cancelAdd()" type="button" class="btn btn-default" [disabled]="isFormDisabled">Cancel</button>
-                    <button (click)="confirmAdd()" type="button" class="btn btn-primary" [disabled]="isFormDisabled">Add</button>
+                    <button (click)="cancelAdd()" [disabled]="isFormDisabled" type="button" class="btn btn-default">Cancel</button>
+                    <button (click)="confirmAdd()" [disabled]="isFormDisabled" type="button" class="btn btn-primary">Add</button>
                 </div>
             </form>
         </div>

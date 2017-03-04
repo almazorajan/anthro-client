@@ -21,4 +21,15 @@ export class EmployeeWorkHistoryComponent {
     @Input() employee: Employee;
     @Input() operation: number;
     @Input() isFormDisabled: boolean;
+
+    addWorkHistory(): void {
+        if(this.isFormDisabled) return;
+        this.employee.workHistory.push(new WorkHistory());
+    }    
+
+    deleteWorkHistory(workHistory: WorkHistory): void {
+        if(this.isFormDisabled) return;
+        let index = this.employee.workHistory.indexOf(workHistory);
+        this.employee.workHistory.splice(index, 1);
+    }
 }

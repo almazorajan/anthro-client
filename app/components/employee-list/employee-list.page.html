@@ -12,7 +12,6 @@
         <button (click)="add()" class="btn btn-primary btn-block btn-sm">Add</button>
     </div>
 </div>
-<employee-info-component [id]="modal.id" [operation]="operation" [employee]="currentEmployee"></employee-info-component>
 <div class="row">
     <table class="table table-bordered table-striped table-hover table-condensed">
         <thead>
@@ -62,3 +61,9 @@
         </tbody>
     </table>
 </div>
+<employee-info-component 
+    [id]="modal.id" 
+    [operation]="operation" 
+    [isFormDisabled]="isFormDisabled"
+    [employee]="currentEmployee">
+</employee-info-component>

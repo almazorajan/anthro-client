@@ -17,6 +17,12 @@ var EmployeeEducationComponent = (function () {
         this.swal = swal;
         this.toast = toast;
     }
+    EmployeeEducationComponent.prototype.deleteEducation = function (education) {
+        if (this.isFormDisabled)
+            return;
+        var index = this.employee.educationHistory.indexOf(education);
+        this.employee.educationHistory.splice(index, 1);
+    };
     return EmployeeEducationComponent;
 }());
 __decorate([

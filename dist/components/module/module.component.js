@@ -173,7 +173,6 @@ var ModuleComponent = (function () {
                 _this.getAllModules();
                 return;
             }
-            console.log(result);
             _this.toast.error(result.message);
         })
             .catch(function (error) {

@@ -26,21 +26,14 @@ var EmployeeListComponent = (function () {
         this.updatingEmployee = false;
         this.deletingEmployee = false;
         this.loadingEmployees = false;
-        this.loadingCompanies = false;
-        this.loadingEmploymentStatuses = false;
-        this.loadingPositions = false;
         this.isFormDisabled = true;
-        this.readyToSave = false;
         this.addingEmployee = false;
         this.employees = [];
-        this.companies = [];
-        this.employmentStatuses = [];
-        this.positions = [];
-        this.relationships = [];
+        this.modal = new models_1.Modal("#mdlModalInfo");
     }
+    ;
     EmployeeListComponent.prototype.ngOnInit = function () {
         this.getAllEmployees();
-        this.modal = new models_1.Modal("#mdlModalInfo");
     };
     EmployeeListComponent.prototype.getAllEmployees = function () {
         var _this = this;
@@ -51,7 +44,6 @@ var EmployeeListComponent = (function () {
             this.employeeService.getAllEmployees().then(function (result) {
                 _this.loadingEmployees = false;
                 _this.isFormDisabled = false;
-                console.log(result);
                 if (result.success) {
                     _this.employees = result.data;
                 }
@@ -71,15 +63,17 @@ var EmployeeListComponent = (function () {
             toastr.error(e);
         }
     };
-    EmployeeListComponent.prototype.add = function () {
-        this.currentEmployee = new models_1.Employee();
-        this.modal.show();
-        this.operation = 2;
-    };
     EmployeeListComponent.prototype.view = function (employee) {
         this.currentEmployee = employee;
-        this.modal.show();
+        this.isFormDisabled = true;
         this.operation = 0;
+        this.modal.show();
+    };
+    EmployeeListComponent.prototype.add = function () {
+        this.currentEmployee = new models_1.Employee();
+        this.isFormDisabled = false;
+        this.operation = 2;
+        this.modal.show();
     };
     return EmployeeListComponent;
 }());
