@@ -17,7 +17,7 @@
             [(ngModel)]="searchFilter">
     </div>
 </div>
-<employee-info-component [operation]="operation" [employee]="currentEmployee"></employee-info-component>
+<employee-info-component [id]="modal.id" [operation]="operation" [employee]="currentEmployee"></employee-info-component>
 <div class="row">
     <table class="table table-bordered table-striped table-hover table-condensed">
         <thead>

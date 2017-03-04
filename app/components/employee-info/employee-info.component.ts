@@ -27,6 +27,7 @@ export class EmployeeInfoComponent implements OnInit {
         private employmentStatusService: EmploymentStatusService
     ) { }    
 
+    @Input() id: string;
     @Input() employee: Employee;
     @Input() operation: number;
     @Input() onAdd: Function;

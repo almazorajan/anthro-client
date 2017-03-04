@@ -4,11 +4,21 @@ var Modal = (function () {
     function Modal(id) {
         this.id = id;
     }
+    Object.defineProperty(Modal.prototype, "id", {
+        get: function () {
+            return this._id.replace("#", "");
+        },
+        set: function (value) {
+            this._id = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Modal.prototype.show = function () {
-        $(this.id).modal("show");
+        $(this._id).modal("show");
     };
     Modal.prototype.hide = function () {
-        $(this.id).modal("hide");
+        $(this._id).modal("hide");
     };
     return Modal;
 }());

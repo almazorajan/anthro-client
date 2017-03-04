@@ -375,6 +375,10 @@ var EmployeeInfoComponent = (function () {
 }());
 __decorate([
     core_1.Input(),
+    __metadata("design:type", String)
+], EmployeeInfoComponent.prototype, "id", void 0);
+__decorate([
+    core_1.Input(),
     __metadata("design:type", models_1.Employee)
 ], EmployeeInfoComponent.prototype, "employee", void 0);
 __decorate([

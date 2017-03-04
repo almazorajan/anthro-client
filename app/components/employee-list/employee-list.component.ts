@@ -50,6 +50,7 @@ export class EmployeeListComponent implements OnInit {
     ngOnInit() {
         this.getAllEmployees();
         this.modal = new Modal("#mdlModalInfo");
+        window.alert(this.modal.id);
     }
 
     private getAllEmployees(): void {

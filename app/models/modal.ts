@@ -4,13 +4,21 @@ export class Modal {
         this.id = id;
     }    
 
-    id: string;
+    private _id: string;
+
+    set id(value) {
+        this._id = value;
+    }
+
+    get id() {
+        return this._id.replace("#", "");
+    }
 
     show(): void {
-        $(this.id).modal("show");
+        $(this._id).modal("show");
     }
 
     hide(): void {
-        $(this.id).modal("hide");     
+        $(this._id).modal("hide");     
     }
 }
