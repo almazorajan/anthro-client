@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label for="txtssNumber">SSS Number</label>
+            <input type="text" class="form-control" id="txtssNumber" name="txtssNumber" placeholder="SS Number" [(ngModel)]="employee.ssNumber"
+                [disabled]="isFormDisabled">
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label for="txtTinNumber">TIN Number</label>
+            <input type="text" class="form-control" id="txtTinNumber" name="txtTinNumber" placeholder="TIN Number" [(ngModel)]="employee.tinNumber"
+                [disabled]="isFormDisabled">
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label for="txtPhilHealthNumber">PhilHealth Number</label>
+            <input type="text" class="form-control" id="txtPhilHealthNumber" name="txtPhilHealthNumber" placeholder="PhilHealth Number"
+                [(ngModel)]="employee.philHealthNumber" [disabled]="isFormDisabled">
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label for="txtPagIbigNumber">PAGIBIG Number</label>
+            <input type="text" class="form-control" id="txtPagIbigNumber" name="txtPagIbigNumber" placeholder="PAGIBIG Number" [(ngModel)]="employee.pagibigNumber"
+                [disabled]="isFormDisabled">
+        </div>
+    </div>
+</div>

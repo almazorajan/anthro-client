@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label for="txtPhoneNumber">
+                Phone Numbers
+                <button 
+                    (click)="addPhoneNumber()"
+                    [disabled]="isFormDisabled"
+                    type="button" 
+                    title="Add Phone Number" 
+                    class="btn btn-primary btn-xs">
+                    <i class="glyphicon glyphicon-plus"></i>
+                </button>
+            </label>
+            <span *ngFor="let phoneNumber of employee.phoneNumbers">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="txtPhoneNumber"
+                    name="txtPhoneNumber" 
+                    placeholder="Phone Number"
+                    style="width:270px;"
+                    [(ngModel)]="phoneNumber.number"
+                    [disabled]="isFormDisabled">
+            </span>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label for="txtLandline">
+                Landlines
+                <button 
+                    (click)="addLandline()"
+                    [disabled]="isFormDisabled"
+                    type="button" 
+                    title="Add Phone Number" 
+                    class="btn btn-primary btn-xs">
+                    <i class="glyphicon glyphicon-plus"></i>
+                </button>
+            </label>
+            <span *ngFor="let landline of employee.landlines">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="txtLandline" 
+                    name="txtLandline"
+                    placeholder="Landline"
+                    style="width:270px;"
+                    [(ngModel)]="landline.number"
+                    [disabled]="isFormDisabled">
+            </span>
+        </div>
+    </div>
+</div>

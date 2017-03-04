@@ -5,10 +5,15 @@ import { HttpModule }    from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CompanyComponent } from './components/company/company.component';
+import { EmployeeAccreditationComponent } from './components/employee-accreditation/employee-accreditation.component';
+import { EmployeeAddressComponent } from './components/employee-address/employee-address.component';
+import { EmployeeContactsComponent } from './components/employee-contacts/employee-contacts.component';
 import { EmployeeEducationComponent } from './components/employee-education/employee-education.component';
 import { EmployeeFamilyComponent } from './components/employee-family/employee-family.component';
+import { EmployeeGovernmentComponent } from './components/employee-government/employee-government.component';
 import { EmployeeInfoComponent } from './components/employee-info/employee-info.component';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
+import { EmployeeWorkHistoryComponent } from './components/employee-work-history/employee-work-history.component';
 import { EmploymentStatusComponent } from './components/employment-status/employment-status.component';
 import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
@@ -29,10 +34,15 @@ import { UserFilter, EmployeeFilter } from './pipes/pipes';
     declarations: [
         AppComponent,
         CompanyComponent,
+        EmployeeAccreditationComponent,
+        EmployeeAddressComponent,
+        EmployeeContactsComponent,
         EmployeeEducationComponent,
         EmployeeFamilyComponent,
+        EmployeeGovernmentComponent,
         EmployeeInfoComponent,
         EmployeeListComponent,
+        EmployeeWorkHistoryComponent,
         EmploymentStatusComponent,
         LoginComponent,
         MainComponent,

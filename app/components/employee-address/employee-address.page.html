@@ -1,0 +1,161 @@
+<div class="row">
+    <h3 class="text-center">City Address</h3>
+    <div class="col-lg-12 text-center">
+        <div class="checkbox">
+            <label for="chkCityAddressIsPermanent">
+                <input 
+                    type="checkbox" 
+                    id="chkCityAddressIsPermanent"
+                    name="chkCityAddressIsPermanent"
+                    [(ngModel)]="employee.cityAddress.isPermanent"
+                    [disabled]="isFormDisabled"
+                    (ngModelChange)="togglePermanentAddress()"> Is Permanent
+            </label>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="form-group">
+            <label for="txtCityAddressUnitFloor">Unit/Floor</label>
+            <input type="text" class="form-control" id="txtCityAddressUnitFloor" name="txtCityAddressUnitFloor" placeholder="Unit Floor"
+                [(ngModel)]="employee.cityAddress.unitFloor" [disabled]="isFormDisabled">
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="form-group">
+            <label for="txtCityAddressBuilding">Building</label>
+            <input type="text" class="form-control" id="txtCityAddressBuilding" name="txtCityAddressBuilding" placeholder="Building"
+                [(ngModel)]="employee.cityAddress.building" [disabled]="isFormDisabled">
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label for="txtCityAddressStreetName">Street Name</label>
+            <input type="text" class="form-control" id="txtCityAddressStreetName" name="txtCityAddressStreetName" placeholder="Street Name"
+                [(ngModel)]="employee.cityAddress.streetName" [disabled]="isFormDisabled">
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="form-group">
+            <label for="txtCityAddressBarangay">Barangay</label>
+            <input type="text" class="form-control" id="txtCityAddressBarangay" name="txtCityAddressBarangay" placeholder="Barangay"
+                [(ngModel)]="employee.cityAddress.barangay" [disabled]="isFormDisabled">
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label for="txtCityAddressCity">City</label>
+            <input type="text" class="form-control" id="txtCityAddressCity" name="txtCityAddressCity" placeholder="City" [(ngModel)]="employee.cityAddress.city"
+                [disabled]="isFormDisabled">
+        </div>
+    </div>
+    <div class="col-lg-2">
+        <div class="form-group">
+            <label for="txtCityAddressZipCode">Zip Code</label>
+            <input type="text" class="form-control" id="txtCityAddressZipCode" name="txtCityAddressZipCode" placeholder="Zip Code" [(ngModel)]="employee.cityAddress.zipCode"
+                [disabled]="isFormDisabled">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <h3 class="text-center">Provincial Address</h3>
+    <div class="col-lg-12 text-center">
+        <div class="checkbox">
+            <label for="chkProvincialAddressIsPermanent">
+                <input 
+                    type="checkbox" 
+                    id="chkProvincialAddressIsPermanent"
+                    name="chkProvincialAddressIsPermanent"
+                    [(ngModel)]="employee.provincialAddress.isPermanent"
+                    [disabled]="isFormDisabled"
+                    (ngModelChange)="togglePermanentAddress()"> Is Permanent
+            </label>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="form-group">
+            <label for="txtProvincialAddressUnitFloor">Unit/Floor</label>
+            <input type="text" class="form-control" id="txtProvincialAddressUnitFloor" name="txtProvincialAddressUnitFloor" placeholder="Unit/Floor"
+                [(ngModel)]="employee.provincialAddress.unitFloor" [disabled]="isFormDisabled">
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="form-group">
+            <label for="txtProvincialAddressBuilding">Building</label>
+            <input type="text" class="form-control" id="txtProvincialAddressBuilding" name="txtProvincialAddressBuilding" placeholder="Building"
+                [(ngModel)]="employee.provincialAddress.building" [disabled]="isFormDisabled">
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label for="txtProvincialAddressStreetName">Street Name</label>
+            <input type="text" class="form-control" id="txtProvincialAddressStreetName" name="txtProvincialAddressStreetName" placeholder="Street Name"
+                [(ngModel)]="employee.provincialAddress.streetName" [disabled]="isFormDisabled">
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="form-group">
+            <label for="txtProvincialAddressBarangay">Barangay</label>
+            <input type="text" class="form-control" id="txtProvincialAddressBarangay" name="txtProvincialAddressBarangay" placeholder="Barangay"
+                [(ngModel)]="employee.provincialAddress.barangay" [disabled]="isFormDisabled">
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label for="txtProvincialAddressCity">City</label>
+            <input type="text" class="form-control" id="txtProvincialAddressCity" name="txtProvincialAddressCity" placeholder="City"
+                [(ngModel)]="employee.provincialAddress.city" [disabled]="isFormDisabled">
+        </div>
+    </div>
+    <div class="col-lg-2">
+        <div class="form-group">
+            <label for="txtProvincialAddressZipCode">Zip Code</label>
+            <input type="text" class="form-control" id="txtProvincialAddressZipCode" name="txtProvincialAddressZipCode" placeholder="Zip Code"
+                [(ngModel)]="employee.provincialAddress.zipCode" [disabled]="isFormDisabled">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <h3 class="text-center">Permanent Address</h3>
+    <div class="col-lg-3">
+        <div class="form-group">
+            <label for="txtPermanentAddressUnitFloor">Unit/Floor</label>
+            <input type="text" class="form-control" id="txtPermanentAddressUnitFloor" name="txtPermanentAddressUnitFloor" placeholder="Unit Floor"
+                [(ngModel)]="employee.permanentAddress.unitFloor" [disabled]="isFormDisabled">
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="form-group">
+            <label for="txtPermanentAddressBuilding">Building</label>
+            <input type="text" class="form-control" id="txtPermanentAddressBuilding" name="txtPermanentAddressBuilding" placeholder="Building"
+                [(ngModel)]="employee.permanentAddress.building" [disabled]="isFormDisabled">
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label for="txtPermanentAddressStreetName">Street Name</label>
+            <input type="text" class="form-control" id="txtPermanentAddressStreetName" name="txtPermanentAddressStreetName" placeholder="Password"
+                [(ngModel)]="employee.permanentAddress.streetName" [disabled]="isFormDisabled">
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="form-group">
+            <label for="txtPermanentAddressBarangay">Barangay</label>
+            <input type="text" class="form-control" id="txtPermanentAddressBarangay" name="txtPermanentAddressBarangay" placeholder="Barangay"
+                [(ngModel)]="employee.permanentAddress.barangay" [disabled]="isFormDisabled">
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label for="txtPermanentAddressCity">City</label>
+            <input type="text" class="form-control" id="txtPermanentAddressCity" name="txtPermanentAddressCity" placeholder="City" [(ngModel)]="employee.permanentAddress.city"
+                [disabled]="isFormDisabled">
+        </div>
+    </div>
+    <div class="col-lg-2">
+        <div class="form-group">
+            <label for="txtPermanentAddressZipCode">Zip Code</label>
+            <input type="text" class="form-control" id="txtPermanentAddressZipCode" name="txtPermanentAddressZipCode" placeholder="Zip Code"
+                [(ngModel)]="employee.permanentAddress.zipCode" [disabled]="isFormDisabled">
+        </div>
+    </div>
+</div>

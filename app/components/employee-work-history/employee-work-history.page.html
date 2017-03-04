@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-lg-offset-10 col-lg-2 pull-right">
+        <button (click)="addWorkHistory()" class="btn btn-primary  btn-block btn-sm">Add Work History</button>
+    </div>
+</div>
+<div class="row tab-gap">
+    <div class="col-lg-12">
+        <table class="table table-condensed table-responsive">
+            <thead>
+                <th></th>
+                <th class="text-center">Position</th>
+                <th class="text-center">Company Name</th>
+                <th class="text-center">From</th>
+                <th class="text-center">To</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Salary</th>
+                <th class="text-center">Reason for Leaving</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let workHistory of employee.workHistory; let index = index; trackBy: workHistory">
+                    <td class="text-center">
+                        <button (click)="deleteWorkHistory(workHistory)" [disabled]="isFormDisabled" type="button" class="btn btn-default btn-xs">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </td>
+                    <td>{{ workHistory.position }}</td>
+                    <td>{{ workHistory.companyName }}</td>
+                    <td>{{ workHistory.dateFrom }}</td>
+                    <td>{{ workHistory.dateTo }}</td>
+                    <td>{{ workHistory.employmentStatus.employmentStatus }}</td>
+                    <td>{{ workHistory.salary }}</td>
+                    <td>{{ workHistory.reasonForLeaving }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -13,10 +13,15 @@ var http_1 = require("@angular/http");
 var app_routing_module_1 = require("./app-routing.module");
 var app_component_1 = require("./app.component");
 var company_component_1 = require("./components/company/company.component");
+var employee_accreditation_component_1 = require("./components/employee-accreditation/employee-accreditation.component");
+var employee_address_component_1 = require("./components/employee-address/employee-address.component");
+var employee_contacts_component_1 = require("./components/employee-contacts/employee-contacts.component");
 var employee_education_component_1 = require("./components/employee-education/employee-education.component");
 var employee_family_component_1 = require("./components/employee-family/employee-family.component");
+var employee_government_component_1 = require("./components/employee-government/employee-government.component");
 var employee_info_component_1 = require("./components/employee-info/employee-info.component");
 var employee_list_component_1 = require("./components/employee-list/employee-list.component");
+var employee_work_history_component_1 = require("./components/employee-work-history/employee-work-history.component");
 var employment_status_component_1 = require("./components/employment-status/employment-status.component");
 var login_component_1 = require("./components/login/login.component");
 var main_component_1 = require("./components/main/main.component");
@@ -42,10 +47,15 @@ AppModule = __decorate([
         declarations: [
             app_component_1.AppComponent,
             company_component_1.CompanyComponent,
+            employee_accreditation_component_1.EmployeeAccreditationComponent,
+            employee_address_component_1.EmployeeAddressComponent,
+            employee_contacts_component_1.EmployeeContactsComponent,
             employee_education_component_1.EmployeeEducationComponent,
             employee_family_component_1.EmployeeFamilyComponent,
+            employee_government_component_1.EmployeeGovernmentComponent,
             employee_info_component_1.EmployeeInfoComponent,
             employee_list_component_1.EmployeeListComponent,
+            employee_work_history_component_1.EmployeeWorkHistoryComponent,
             employment_status_component_1.EmploymentStatusComponent,
             login_component_1.LoginComponent,
             main_component_1.MainComponent,

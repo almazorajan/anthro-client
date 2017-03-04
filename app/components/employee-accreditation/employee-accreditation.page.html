@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-lg-offset-10 col-lg-2 pull-right">
+        <button (click)="addAccreditation()" class="btn btn-primary  btn-block btn-sm">Add Accreditation</button>
+    </div>
+</div>
+<div class="row tab-gap">
+    <div class="col-lg-12">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th colspan="3" class="section-title">Certificates</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Date Accredited</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let certification of employee.certifications; let index = index; trackBy: certification;">
+                    <td class="text-center">
+                        <button type="button" class="btn btn-default btn-xs" (click)="deleteCertification(certification)" [disabled]="isFormDisabled">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </td>
+                    <td>{{ certification.title }}</td>
+                    <td>{{ certification.dateAccredited }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-12">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th colspan="3" class="section-title">Licensures</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Date Accredited</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let licensure of employee.licensures; let index = index; trackBy: licensure">
+                    <td class="text-center">
+                        <button type="button" class="btn btn-default btn-xs" (click)="deleteLicense(licensure)" [disabled]="isFormDisabled">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </td>
+                    <td>{{ licensure.title }}</td>
+                    <td>{{ licensure.dateAccredited }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
