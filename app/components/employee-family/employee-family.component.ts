@@ -38,6 +38,11 @@ export class EmployeeFamilyComponent implements OnInit {
         this.relationships = this.employeeService.getRelationships();
     }
 
+    private deleteFamily(family: Family): void {
+        let index = this.employee.family.indexOf(family);
+        this.employee.family.splice(index, 1);
+    }
+
     viewFamilyInfo(family: Family) {
         this.currentFamily = family;
     }
@@ -65,9 +70,4 @@ export class EmployeeFamilyComponent implements OnInit {
             }
         });
     }    
-    
-    private deleteFamily(family: Family): void {
-        let index = this.employee.family.indexOf(family);
-        this.employee.family.splice(index, 1);
-    }
 }

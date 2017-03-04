@@ -25,6 +25,10 @@ var EmployeeFamilyComponent = (function () {
     EmployeeFamilyComponent.prototype.getRelationships = function () {
         this.relationships = this.employeeService.getRelationships();
     };
+    EmployeeFamilyComponent.prototype.deleteFamily = function (family) {
+        var index = this.employee.family.indexOf(family);
+        this.employee.family.splice(index, 1);
+    };
     EmployeeFamilyComponent.prototype.viewFamilyInfo = function (family) {
         this.currentFamily = family;
     };
@@ -49,10 +53,6 @@ var EmployeeFamilyComponent = (function () {
                 }
             }
         });
-    };
-    EmployeeFamilyComponent.prototype.deleteFamily = function (family) {
-        var index = this.employee.family.indexOf(family);
-        this.employee.family.splice(index, 1);
     };
     return EmployeeFamilyComponent;
 }());
