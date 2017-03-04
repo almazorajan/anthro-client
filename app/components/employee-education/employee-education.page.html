@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-lg-offset-10 col-lg-2 pull-right">
+        <button (click)="addFamily()" class="btn btn-primary  btn-block btn-sm">Add Family</button>
+    </div>
+</div>
+<div class="row  tab-gap">
+    <div class="col-lg-12">
+        <table class="table table-condensed table-responsive">
+            <thead>
+                <th></th>
+                <th>Education Level</th>
+                <th>Degree</th>
+                <th>Date Graduated</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let education of employee.educationHistory; let index = index; trackBy: education;">
+                    <td class="text-center">
+                        <button (click)="deleteEducation(education)" [disabled]="isFormDisabled" type="button" class="btn btn-default btn-xs">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </td>
+                    <td>{{ education.educationLevel }}</td>
+                    <td>{{ education.degree }}</td>
+                    <td>{{ education.dateGraduated }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
