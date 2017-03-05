@@ -20,6 +20,8 @@ var EmployeeFamilyComponent = (function () {
         this.employeeService = employeeService;
     }
     EmployeeFamilyComponent.prototype.ngOnInit = function () {
+        this.mainModal = new models_1.Modal("#" + this.mainModalId);
+        this.familyModal = new models_1.Modal("#mdlFamilyInfo");
         this.getRelationships();
     };
     EmployeeFamilyComponent.prototype.getRelationships = function () {
@@ -29,17 +31,92 @@ var EmployeeFamilyComponent = (function () {
         var index = this.employee.family.indexOf(family);
         this.employee.family.splice(index, 1);
     };
-    EmployeeFamilyComponent.prototype.viewFamilyInfo = function (family) {
-        this.currentFamily = family;
+    EmployeeFamilyComponent.prototype.copyFamily = function (family) {
+        return JSON.parse(JSON.stringify(family));
     };
-    EmployeeFamilyComponent.prototype.editFamilyInfo = function () {
-        this.originalFamilyInfo = JSON.parse(JSON.stringify(this.currentFamily));
+    EmployeeFamilyComponent.prototype.editFamily = function (family, index) {
+        this.familyOperation = 1;
+        this.isFamilyFormDisabled = false;
+        this.currentIndex = index;
+        this.family = this.copyFamily(family);
+        this.originalFamilyInfo = this.copyFamily(this.family);
+        this.familyModal.show();
     };
     EmployeeFamilyComponent.prototype.addFamily = function () {
-        if (!this.employee.family) {
-            this.employee.family = [];
-        }
-        this.employee.family.unshift(new models_1.Family());
+        this.familyOperation = 2;
+        this.isFamilyFormDisabled = false;
+        this.family = new models_1.Family();
+        this.family.relationship = this.relationships[0];
+        this.familyModal.show();
+    };
+    EmployeeFamilyComponent.prototype.appendFamily = function () {
+        this.employee.family.unshift(this.family);
+        this.familyModal.hide();
+    };
+    EmployeeFamilyComponent.prototype.saveUpdate = function () {
+        this.employee.family[this.currentIndex] = this.copyFamily(this.family);
+        this.familyModal.hide();
+    };
+    EmployeeFamilyComponent.prototype.cancelAppendFamily = function () {
+        this.family = new models_1.Family();
+        this.familyModal.hide();
+    };
+    EmployeeFamilyComponent.prototype.cancelSaveFamily = function () {
+        this.family = this.copyFamily(this.originalFamilyInfo);
+        this.originalFamilyInfo = null;
+        this.familyModal.hide();
+    };
+    EmployeeFamilyComponent.prototype.confirmAdd = function () {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be adding this family information",
+            confirmButtonText: "Yes, Add It!",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    _this.appendFamily();
+                }
+            }
+        });
+    };
+    EmployeeFamilyComponent.prototype.confirmSave = function () {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be updating this family information",
+            confirmButtonText: "Yes, Update It!",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    _this.saveUpdate();
+                }
+            }
+        });
+    };
+    EmployeeFamilyComponent.prototype.confirmCancelSave = function () {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be cancelling this family information",
+            confirmButtonText: "Yes, Cancel It!",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    _this.cancelSaveFamily();
+                }
+            }
+        });
+    };
+    EmployeeFamilyComponent.prototype.confirmCancelAdd = function () {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be cancelling this family information",
+            confirmButtonText: "Yes, Cancel It!",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    _this.cancelAppendFamily();
+                }
+            }
+        });
     };
     EmployeeFamilyComponent.prototype.confirmDelete = function (family) {
         var _this = this;
@@ -59,7 +136,7 @@ var EmployeeFamilyComponent = (function () {
 __decorate([
     core_1.Input(),
     __metadata("design:type", String)
-], EmployeeFamilyComponent.prototype, "id", void 0);
+], EmployeeFamilyComponent.prototype, "mainModalId", void 0);
 __decorate([
     core_1.Input(),
     __metadata("design:type", Number)

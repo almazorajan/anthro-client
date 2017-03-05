@@ -1,6 +1,7 @@
 import { ContactNumber, EmailAddress } from './models';
 
 export class Family {
+    
     constructor() {
         this.firstName = "";
         this.middleName = "";
