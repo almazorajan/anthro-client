@@ -17,6 +17,9 @@
                 <th>Email</th>
             </thead>
             <tbody>
+                <tr *ngIf="employee.family.length <= 0">
+                    <td colspan="8" class="text-center">No family records yet</td>
+                </tr>
                 <tr *ngFor="let family of employee.family; let index = index; trackBy: family">
                     <td class="text-center">
                         <button (click)="confirmDelete(family)" [disabled]="isFormDisabled" type="button" class="btn btn-default btn-xs">
@@ -38,14 +41,13 @@
         </table>
     </div>
 </div>
-
-<div class="modal fade" id="mdlFamilyInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="mdlFamilyInfo" tabindex="-1" role="dialog" aria-labelledby="lblFamilyInfo">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <form autocomplete="off">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">
+                    <h4 class="modal-title" id="lblFamilyInfo">
                         Family Information
                         <span *ngIf="isFamilyFormDisabled"><strong>(Read-only mode)</strong></span>
                     </h4>

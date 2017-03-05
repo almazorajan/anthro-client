@@ -17,11 +17,119 @@ var EmployeeEducationComponent = (function () {
         this.swal = swal;
         this.toast = toast;
     }
+    EmployeeEducationComponent.prototype.ngOnInit = function () {
+        this.educationModal = new models_1.Modal("#mdlEducationInfo");
+    };
+    EmployeeEducationComponent.prototype.copyEducation = function (education) {
+        return JSON.parse(JSON.stringify(education));
+    };
+    EmployeeEducationComponent.prototype.appendEducation = function () {
+        this.employee.educationHistory.push(this.copyEducation(this.education));
+        this.educationModal.hide();
+    };
+    EmployeeEducationComponent.prototype.cancelAppendEducation = function () {
+        this.education = null;
+        this.educationModal.hide();
+    };
+    EmployeeEducationComponent.prototype.updateEducation = function () {
+        this.employee.educationHistory[this.currentIndex] = this.copyEducation(this.education);
+        this.originalEducationInfo = null;
+        this.educationModal.hide();
+    };
+    EmployeeEducationComponent.prototype.cancelUpdateEducation = function () {
+        this.education = this.copyEducation(this.originalEducationInfo);
+        this.originalEducationInfo = null;
+        this.educationModal.hide();
+    };
     EmployeeEducationComponent.prototype.deleteEducation = function (education) {
-        if (this.isFormDisabled)
-            return;
         var index = this.employee.educationHistory.indexOf(education);
         this.employee.educationHistory.splice(index, 1);
+        this.educationModal.hide();
+    };
+    EmployeeEducationComponent.prototype.parseDate = function (dateString) {
+        if (dateString) {
+            return new Date(dateString);
+        }
+        return null;
+    };
+    EmployeeEducationComponent.prototype.addEducation = function () {
+        this.educationOperation = 2;
+        this.isEducationFormDisabled = false;
+        this.education = new models_1.Education();
+        this.educationModal.show();
+    };
+    EmployeeEducationComponent.prototype.editEducation = function (education, index) {
+        this.educationOperation = 1;
+        this.isEducationFormDisabled = false;
+        this.currentIndex = index;
+        this.education = this.copyEducation(education);
+        this.originalEducationInfo = this.copyEducation(this.education);
+        this.educationModal.show();
+    };
+    EmployeeEducationComponent.prototype.confirmAdd = function () {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be adding this education information",
+            confirmButtonText: "Yes, Add It!",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    _this.appendEducation();
+                }
+            }
+        });
+    };
+    EmployeeEducationComponent.prototype.confirmUpdate = function () {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be updating this education information",
+            confirmButtonText: "Yes, Update It!",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    _this.updateEducation();
+                }
+            }
+        });
+    };
+    EmployeeEducationComponent.prototype.confirmCancelAdd = function () {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be cancelling this education information",
+            confirmButtonText: "Yes, Cancel It!",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    _this.cancelAppendEducation();
+                }
+            }
+        });
+    };
+    EmployeeEducationComponent.prototype.confirmCancelUpdate = function () {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be cancelling this education information",
+            confirmButtonText: "Yes, Cancel It!",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    _this.cancelUpdateEducation();
+                }
+            }
+        });
+    };
+    EmployeeEducationComponent.prototype.confirmDeleteEducation = function (education) {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be deleting this education information",
+            confirmButtonText: "Yes, Delete It!",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    _this.deleteEducation(education);
+                }
+            }
+        });
     };
     return EmployeeEducationComponent;
 }());

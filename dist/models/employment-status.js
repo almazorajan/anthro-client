@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var EmploymentStatus = (function () {
     function EmploymentStatus() {
+        this._id = "";
+        this.employmentStatus = "";
     }
     return EmploymentStatus;
 }());
