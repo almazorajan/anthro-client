@@ -17,19 +17,33 @@
                 </tr>
             </thead>
             <tbody>
+                <tr *ngIf="employee.certifications.length <= 0">
+                    <td colspan="3" class="text-center">No certifications yet</td>
+                </tr>
                 <tr *ngFor="let certification of employee.certifications; let index = index; trackBy: certification;">
                     <td class="text-center">
-                        <button type="button" class="btn btn-default btn-xs" (click)="deleteCertification(certification)" [disabled]="isFormDisabled">
+                        <button 
+                            type="button" 
+                            class="btn btn-default btn-xs" 
+                            (click)="confirmDeleteAccreditation(employee.certifications, certification)" 
+                            [disabled]="isFormDisabled">
                             <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                        <button 
+                            type="button" 
+                            class="btn btn-default btn-xs" 
+                            (click)="editAccreditation(certification, index, 'Certificate')" 
+                            [disabled]="isFormDisabled">
+                            Edit
                         </button>
                     </td>
                     <td>{{ certification.title }}</td>
-                    <td>{{ certification.dateAccredited }}</td>
+                    <td>{{ certification.dateAccredited | date : 'yyyy-MM-dd' }}</td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <div class="col-lg-12">
+    <div class="col-lg-12 tab-gap">
         <table class="table table-condensed">
             <thead>
                 <tr>
@@ -42,16 +56,88 @@
                 </tr>
             </thead>
             <tbody>
+                <tr *ngIf="employee.licensures.length <= 0">
+                    <td colspan="3" class="text-center">No licensures yet</td>
+                </tr>
                 <tr *ngFor="let licensure of employee.licensures; let index = index; trackBy: licensure">
                     <td class="text-center">
-                        <button type="button" class="btn btn-default btn-xs" (click)="deleteLicense(licensure)" [disabled]="isFormDisabled">
+                        <button 
+                            type="button" 
+                            class="btn btn-default btn-xs" 
+                            (click)="confirmDeleteAccreditation(employee.licensures, index, licensure)" 
+                            [disabled]="isFormDisabled">
                             <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                        <button 
+                            type="button" 
+                            class="btn btn-default btn-xs" 
+                            (click)="editAccreditation(licensure, index, 'Licensure')" 
+                            [disabled]="isFormDisabled">
+                            Edit
                         </button>
                     </td>
                     <td>{{ licensure.title }}</td>
-                    <td>{{ licensure.dateAccredited }}</td>
+                    <td>{{ licensure.dateAccredited | date : 'yyyy-MM-dd' }}</td>
                 </tr>
             </tbody>
         </table>
+    </div>
+</div>
+<div class="modal fade" id="mdlAccreditationInfo" tabindex="-1" role="dialog" aria-labelledby="lblFamilyInfo">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <form autocomplete="off">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="lblFamilyInfo">
+                        Accreditation Information
+                        <span *ngIf="isAccreditationFormDisabled"><strong>(Read-only mode)</strong></span>
+                    </h4>
+                </div>
+                <div class="modal-body" *ngIf="accreditation && accreditationTypes">
+                    <div class="form-group">
+                        <label for="slcAccreditationType">Accreditation Type</label>
+                        <select 
+                            type="text" 
+                            id="txtAccreditationType" 
+                            name="txtAccreditationType"
+                            class="form-control"
+                            [(ngModel)]="accreditationType"
+                            [disabled]="isAccreditationFormDisabled">
+                            <option *ngFor="let type of accreditationTypes" [value]="type">{{ type }}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtAccreditationTitle">Title</label>
+                        <input 
+                            type="text" 
+                            id="txtAccreditationTitle" 
+                            name="txtAccreditationTitle"
+                            class="form-control"
+                            [(ngModel)]="accreditation.title"
+                            [disabled]="isAccreditationFormDisabled">
+                    </div>
+                    <div class="form-group">
+                        <label for="dtAccreditationDateAccredited">Title</label>
+                        <input 
+                            type="date" 
+                            class="form-control" 
+                            id="dtAccreditationDateAccredited" 
+                            name="dtAccreditationDateAccredited" 
+                            (input)="accreditation.dateAccredited = parseDate($event.target.value)"
+                            [value]="accreditation.dateAccredited | date : 'yyyy-MM-dd'" 
+                            [disabled]="isAccreditationFormDisabled">
+                    </div>
+                </div>
+                <div class="modal-footer" *ngIf="accreditationOperation === 1">
+                    <button (click)="confirmCancelSave()" type="button" class="btn btn-default btn-sm">Cancel</button>
+                    <button (click)="confirmUpdateAccreditation()" type="button" class="btn btn-primary btn-sm">Save</button>
+                </div>
+                <div class="modal-footer" *ngIf="accreditationOperation === 2">
+                    <button (click)="confirmCancelAdd()" type="button" class="btn btn-default btn-sm">Cancel</button>
+                    <button (click)="confirmAddAccreditation()" type="button" class="btn btn-primary btn-sm">Add</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

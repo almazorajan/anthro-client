@@ -39,6 +39,12 @@ var EmployeeService = (function (_super) {
             "Tertiary"
         ];
     };
+    EmployeeService.prototype.getAccreditationTypes = function () {
+        return [
+            "Licensure",
+            "Certificate"
+        ];
+    };
     EmployeeService.prototype.addEmployee = function (employee) {
         return this.apiCall({
             verb: "post",
