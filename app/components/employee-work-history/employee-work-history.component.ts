@@ -61,7 +61,24 @@ export class EmployeeWorkHistoryComponent implements OnInit {
         return JSON.parse(JSON.stringify(workHistory)) as WorkHistory;
     }
 
+    private resolveEmploymentStatus(workHistory: WorkHistory): void {
+        if (workHistory) {
+            if (workHistory.employmentStatus) {
+                for (let key in this.employmentStatuses) {               
+                    let employmentStatus = this.employmentStatuses[key];
+
+                    if (workHistory.employmentStatus._id === employmentStatus._id) {
+                        workHistory.employmentStatus.employmentStatus = employmentStatus.employmentStatus
+                        return;
+                    }
+                }
+            }   
+        }
+        workHistory.employmentStatus.employmentStatus = "";
+    }
+
     private appendWorkHistory(): void {
+        this.resolveEmploymentStatus(this.workHistory);
         this.employee.workHistory.unshift(this.copyWorkHistory(this.workHistory));
         this.workHistoryModal.hide();
     }
@@ -73,6 +90,7 @@ export class EmployeeWorkHistoryComponent implements OnInit {
     }
     
     private updateWorkHistory(): void {
+        this.resolveEmploymentStatus(this.workHistory);
         this.employee.workHistory[this.currentIndex] = this.copyWorkHistory(this.workHistory);
         this.originalWorkHistory = null;
         this.workHistoryModal.hide();
@@ -84,25 +102,16 @@ export class EmployeeWorkHistoryComponent implements OnInit {
         this.workHistoryModal.hide();
     }
 
+    private deleteWorkHistory(workHistory: WorkHistory): void {
+        let index = this.employee.workHistory.indexOf(workHistory);
+        this.employee.workHistory.splice(index, 1);
+    }
+
     parseDate(dateString: string): Date {
         if(dateString) {
             return new Date(dateString);
         }
         return null;
-    }
-
-    resolveEmploymentStatus(workHistory: WorkHistory): string {
-        if (workHistory) {
-            if (workHistory.employmentStatus) {
-                for (let key in this.employmentStatuses) {
-                    let employmentStatus = this.employmentStatuses[key];
-                    if (workHistory.employmentStatus._id === employmentStatus._id) {
-                        return workHistory.employmentStatus.employmentStatus;
-                    }
-                }
-            }   
-        }
-        return "Employment Status unidentified";
     }
 
     addWorkHistory(): void {
@@ -181,6 +190,19 @@ export class EmployeeWorkHistoryComponent implements OnInit {
             callBack: (isConfirm) => {
                 if(isConfirm) {
                     this.cancelEditWorkHistory();
+                }
+            }
+        });
+    }
+
+    confirmDeleteWorkHistory(workHistory: WorkHistory): void {
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be deleting this work history information",
+            confirmButtonText: "Yes, Delete It!",
+            callBack: (isConfirm) => {
+                if(isConfirm) {
+                    this.deleteWorkHistory(workHistory);
                 }
             }
         });

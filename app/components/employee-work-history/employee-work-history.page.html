@@ -33,7 +33,7 @@
                     <td>{{ workHistory.companyName }}</td>
                     <td>{{ workHistory.dateFrom | date : 'yyyy-MM-dd' }}</td>
                     <td>{{ workHistory.dateTo | date : 'yyyy-MM-dd' }}</td>
-                    <td>{{ resolveEmploymentStatus(workHistory) }}</td>
+                    <td>{{ workHistory.employmentStatus.employmentStatus }}</td>
                     <td>{{ workHistory.salary | currency : 'PHP' : true : '1.2-2' }}</td>
                     <td>{{ workHistory.reasonForLeaving }}</td>
                 </tr>

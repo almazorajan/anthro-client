@@ -44,7 +44,22 @@ var EmployeeWorkHistoryComponent = (function () {
     EmployeeWorkHistoryComponent.prototype.copyWorkHistory = function (workHistory) {
         return JSON.parse(JSON.stringify(workHistory));
     };
+    EmployeeWorkHistoryComponent.prototype.resolveEmploymentStatus = function (workHistory) {
+        if (workHistory) {
+            if (workHistory.employmentStatus) {
+                for (var key in this.employmentStatuses) {
+                    var employmentStatus = this.employmentStatuses[key];
+                    if (workHistory.employmentStatus._id === employmentStatus._id) {
+                        workHistory.employmentStatus.employmentStatus = employmentStatus.employmentStatus;
+                        return;
+                    }
+                }
+            }
+        }
+        workHistory.employmentStatus.employmentStatus = "";
+    };
     EmployeeWorkHistoryComponent.prototype.appendWorkHistory = function () {
+        this.resolveEmploymentStatus(this.workHistory);
         this.employee.workHistory.unshift(this.copyWorkHistory(this.workHistory));
         this.workHistoryModal.hide();
     };
@@ -54,6 +69,7 @@ var EmployeeWorkHistoryComponent = (function () {
         this.workHistoryModal.hide();
     };
     EmployeeWorkHistoryComponent.prototype.updateWorkHistory = function () {
+        this.resolveEmploymentStatus(this.workHistory);
         this.employee.workHistory[this.currentIndex] = this.copyWorkHistory(this.workHistory);
         this.originalWorkHistory = null;
         this.workHistoryModal.hide();
@@ -63,24 +79,15 @@ var EmployeeWorkHistoryComponent = (function () {
         this.originalWorkHistory = null;
         this.workHistoryModal.hide();
     };
+    EmployeeWorkHistoryComponent.prototype.deleteWorkHistory = function (workHistory) {
+        var index = this.employee.workHistory.indexOf(workHistory);
+        this.employee.workHistory.splice(index, 1);
+    };
     EmployeeWorkHistoryComponent.prototype.parseDate = function (dateString) {
         if (dateString) {
             return new Date(dateString);
         }
         return null;
-    };
-    EmployeeWorkHistoryComponent.prototype.resolveEmploymentStatus = function (workHistory) {
-        if (workHistory) {
-            if (workHistory.employmentStatus) {
-                for (var key in this.employmentStatuses) {
-                    var employmentStatus = this.employmentStatuses[key];
-                    if (workHistory.employmentStatus._id === employmentStatus._id) {
-                        return workHistory.employmentStatus.employmentStatus;
-                    }
-                }
-            }
-        }
-        return "Employment Status unidentified";
     };
     EmployeeWorkHistoryComponent.prototype.addWorkHistory = function () {
         this.workHistoryOperation = 2;
@@ -157,6 +164,19 @@ var EmployeeWorkHistoryComponent = (function () {
             callBack: function (isConfirm) {
                 if (isConfirm) {
                     _this.cancelEditWorkHistory();
+                }
+            }
+        });
+    };
+    EmployeeWorkHistoryComponent.prototype.confirmDeleteWorkHistory = function (workHistory) {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be deleting this work history information",
+            confirmButtonText: "Yes, Delete It!",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    _this.deleteWorkHistory(workHistory);
                 }
             }
         });
