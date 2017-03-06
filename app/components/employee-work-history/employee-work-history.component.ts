@@ -78,6 +78,33 @@ export class EmployeeWorkHistoryComponent implements OnInit {
         this.workHistoryModal.hide();
     }
 
+    private cancelUpdateWorkHistory(): void {
+        this.workHistory = this.copyWorkHistory(this.originalWorkHistory);
+        this.originalWorkHistory = null;
+        this.workHistoryModal.hide();
+    }
+
+    parseDate(dateString: string): Date {
+        if(dateString) {
+            return new Date(dateString);
+        }
+        return null;
+    }
+
+    resolveEmploymentStatus(workHistory: WorkHistory): string {
+        if (workHistory) {
+            if (workHistory.employmentStatus) {
+                for (let key in this.employmentStatuses) {
+                    let employmentStatus = this.employmentStatuses[key];
+                    if (workHistory.employmentStatus._id === employmentStatus._id) {
+                        return workHistory.employmentStatus.employmentStatus;
+                    }
+                }
+            }   
+        }
+        return "Employment Status unidentified";
+    }
+
     addWorkHistory(): void {
         this.workHistoryOperation = 2;
         this.isWorkHistoryFormDisabled = false;
@@ -88,6 +115,7 @@ export class EmployeeWorkHistoryComponent implements OnInit {
     editWorkHistory(workHistory: WorkHistory, index: number): void {
         this.workHistoryOperation = 1;
         this.isWorkHistoryFormDisabled = false;
+        this.currentIndex = index;
         this.workHistory = this.copyWorkHistory(this.workHistory);
         this.originalWorkHistory = this.copyWorkHistory(this.workHistory);
         this.workHistoryModal.show();
@@ -118,6 +146,19 @@ export class EmployeeWorkHistoryComponent implements OnInit {
             }
         });
     }
+
+    confirmCancelUpdate(): void {
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be cancelling this work history information",
+            confirmButtonText: "Yes, Cancel It!",
+            callBack: (isConfirm) => {
+                if(isConfirm) {
+                    this.cancelUpdateWorkHistory();
+                }
+            }
+        });
+    }    
 
     confirmCancelAdd(): void {
         this.swal.confirm({

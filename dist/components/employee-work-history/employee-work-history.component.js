@@ -58,6 +58,30 @@ var EmployeeWorkHistoryComponent = (function () {
         this.originalWorkHistory = null;
         this.workHistoryModal.hide();
     };
+    EmployeeWorkHistoryComponent.prototype.cancelUpdateWorkHistory = function () {
+        this.workHistory = this.copyWorkHistory(this.originalWorkHistory);
+        this.originalWorkHistory = null;
+        this.workHistoryModal.hide();
+    };
+    EmployeeWorkHistoryComponent.prototype.parseDate = function (dateString) {
+        if (dateString) {
+            return new Date(dateString);
+        }
+        return null;
+    };
+    EmployeeWorkHistoryComponent.prototype.resolveEmploymentStatus = function (workHistory) {
+        if (workHistory) {
+            if (workHistory.employmentStatus) {
+                for (var key in this.employmentStatuses) {
+                    var employmentStatus = this.employmentStatuses[key];
+                    if (workHistory.employmentStatus._id === employmentStatus._id) {
+                        return workHistory.employmentStatus.employmentStatus;
+                    }
+                }
+            }
+        }
+        return "Employment Status unidentified";
+    };
     EmployeeWorkHistoryComponent.prototype.addWorkHistory = function () {
         this.workHistoryOperation = 2;
         this.isWorkHistoryFormDisabled = false;
@@ -67,6 +91,7 @@ var EmployeeWorkHistoryComponent = (function () {
     EmployeeWorkHistoryComponent.prototype.editWorkHistory = function (workHistory, index) {
         this.workHistoryOperation = 1;
         this.isWorkHistoryFormDisabled = false;
+        this.currentIndex = index;
         this.workHistory = this.copyWorkHistory(this.workHistory);
         this.originalWorkHistory = this.copyWorkHistory(this.workHistory);
         this.workHistoryModal.show();
@@ -93,6 +118,19 @@ var EmployeeWorkHistoryComponent = (function () {
             callBack: function (isConfirm) {
                 if (isConfirm) {
                     _this.updateWorkHistory();
+                }
+            }
+        });
+    };
+    EmployeeWorkHistoryComponent.prototype.confirmCancelUpdate = function () {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be cancelling this work history information",
+            confirmButtonText: "Yes, Cancel It!",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    _this.cancelUpdateWorkHistory();
                 }
             }
         });

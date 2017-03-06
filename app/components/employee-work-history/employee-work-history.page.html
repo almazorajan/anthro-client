@@ -25,13 +25,16 @@
                         <button (click)="confirmDeleteWorkHistory(workHistory)" [disabled]="isFormDisabled" type="button" class="btn btn-default btn-xs">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
+                        <button (click)="editWorkHistory(workHistory, index)" [disabled]="isFormDisabled" type="button" class="btn btn-default btn-xs">
+                            Edit
+                        </button>
                     </td>
                     <td>{{ workHistory.position }}</td>
                     <td>{{ workHistory.companyName }}</td>
                     <td>{{ workHistory.dateFrom | date : 'yyyy-MM-dd' }}</td>
                     <td>{{ workHistory.dateTo | date : 'yyyy-MM-dd' }}</td>
-                    <td>{{ workHistory.employmentStatus.employmentStatus }}</td>
-                    <td>{{ workHistory.salary }}</td>
+                    <td>{{ resolveEmploymentStatus(workHistory) }}</td>
+                    <td>{{ workHistory.salary | currency : 'PHP' : true : '1.2-2' }}</td>
                     <td>{{ workHistory.reasonForLeaving }}</td>
                 </tr>
             </tbody>
@@ -99,26 +102,28 @@
                     <div class="row">
                         <div class="col-lg-4">
                             <label for="dtDateFrom">Date From</label>
-                            <input
-                                type="text"
-                                id="txtWorkHistoryDateFrom"
-                                name="txtWorkHistoryDateFrom"
-                                class="form-control"
-                                [(ngModel)]="workHistory.dateFrom"
+                            <input 
+                                type="date" 
+                                class="form-control" 
+                                id="dtDateFrom" 
+                                name="dtDateFrom" 
+                                (input)="workHistory.dateFrom = parseDate($event.target.value)"
+                                [value]="workHistory.dateFrom | date : 'yyyy-MM-dd'" 
                                 [disabled]="isWorkHistoryFormDisabled">
                         </div>
                         <div class="col-lg-4">
-                            <label for="dtDateFrom">Date To</label>
-                            <input
-                                type="text"
-                                id="txtWorkHistoryDateTo"
-                                name="txtWorkHistoryDateTo"
-                                class="form-control"
-                                [(ngModel)]="workHistory.dateTo"
+                            <label for="dtDateTo">Date To</label>
+                            <input 
+                                type="date" 
+                                class="form-control" 
+                                id="dtDateTo" 
+                                name="dtDateTo" 
+                                (input)="workHistory.dateTo = parseDate($event.target.value)"
+                                [value]="workHistory.dateTo | date : 'yyyy-MM-dd'" 
                                 [disabled]="isWorkHistoryFormDisabled">
                         </div>
                         <div class="col-lg-4">
-                            <label for="dtDateFrom">Reason For Leaving</label>
+                            <label for="txtWorkHistoryReasonForLeaving">Reason For Leaving</label>
                             <input
                                 type="text"
                                 id="txtWorkHistoryReasonForLeaving"
@@ -146,7 +151,7 @@
                 </div>
                 <div class="modal-footer" *ngIf="workHistoryOperation === 1">
                     <button (click)="confirmCancelUpdate()" type="button" class="btn btn-default btn-sm">Cancel</button>
-                    <button (click)="confirmUpdate()" type="button" class="btn btn-primary btn-sm">Save</button>
+                    <button (click)="confirmUpdateWorkHistory()" type="button" class="btn btn-primary btn-sm">Save</button>
                 </div>
                 <div class="modal-footer" *ngIf="workHistoryOperation === 2">
                     <button (click)="confirmCancelAdd()" type="button" class="btn btn-default btn-sm">Cancel</button>
