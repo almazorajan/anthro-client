@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SwalHelper, ToastHelper } from '../../helpers/helpers';
 import { EmployeeService } from '../../services/services';
-import { Employee, Modal } from '../../models/models';
+import { Employee, Modal, EmployeeInfoTab, Tab } from '../../models/models';
 
 @Component({
     selector: 'employee-info-component',
@@ -12,7 +12,7 @@ import { Employee, Modal } from '../../models/models';
     ]
 })
 
-export class EmployeeInfoComponent {
+export class EmployeeInfoComponent implements OnInit {
 
     constructor(
         private swal: SwalHelper,
@@ -28,13 +28,86 @@ export class EmployeeInfoComponent {
     @Input() onUpdate: Function;
     @Input() onDelete: Function;
     
+    tabKeys: any[];
     originalEmployeeInfo: Employee;
     updatingEmployee: boolean = false;
     deletingEmployee: boolean = false;
     loadingCompanies: boolean = false;
     addingEmployee: boolean = false;
     modal: Modal = new Modal(`#${this.id}`);
+    tabs: EmployeeInfoTab = {
+        personal: new Tab({
+            name: "Per",
+            href: "#personal",
+            active: true,
+            badge: 0
+        }),
+        employment: new Tab({
+            name: "Emp",
+            href: "#employment",
+            active: false,
+            badge: 0
+        }),
+        contacts: new Tab({
+            name: "Con",
+            href: "#contacts",
+            active: false,
+            badge: 0
+        }),
+        address: new Tab({
+            name: "Addr",
+            href: "#address",
+            active: false,
+            badge: 0
+        }),
+        government: new Tab({
+            name: "Gov",
+            href: "#government",
+            active: false,
+            badge: 0
+        }),
+        family: new Tab({
+            name: "Fam",
+            href: "#family",
+            active: false,
+            badge: 0
+        }),
+        education: new Tab({
+            name: "Edu",
+            href: "#education",
+            active: false,
+            badge: 0
+        }),
+        work: new Tab({
+            name: "Work",
+            href: "#work",
+            active: false,
+            badge: 0
+        }),
+        accreditation: new Tab({
+            name: "Accr",
+            href: "#accreditations",
+            active: false,
+            badge: 0
+        })
+    }
     
+    ngOnInit() {
+        this.tabKeys = Object.keys(this.tabs);
+    }
+
+    private resetTabBadges(): void {
+        this.tabs.personal.badge = 0;
+        this.tabs.employment.badge = 0;
+        this.tabs.contacts.badge = 0;
+        this.tabs.address.badge = 0;
+        this.tabs.government.badge = 0;
+        this.tabs.family.badge = 0;
+        this.tabs.education.badge = 0;
+        this.tabs.work.badge = 0;
+        this.tabs.accreditation.badge = 0;
+    }    
+
     private addEmployee(): void {
         try {
             this.isFormDisabled = true;
@@ -136,6 +209,12 @@ export class EmployeeInfoComponent {
     } 
     
     confirmAdd(): void {
+        let valid = this.validate();
+
+        if (!valid) {
+            return;
+        }        
+
         this.swal.confirm({
             title: "Are You Sure?",
             message: "You will be adding this employee information",
@@ -186,4 +265,62 @@ export class EmployeeInfoComponent {
             }
         });
     }   
+
+    private superTrim(str: string): string {
+        try {
+            return str.replace(/\s+/g, "").trim();
+        } catch (e) {
+            console.log(e);
+        }
+        return "";
+    }    
+
+    validate(): boolean {
+        this.resetTabBadges();
+        let isValid = true;
+
+        if (!this.superTrim(this.employee.firstName)) {
+            this.toast.info("Please provide a first name to proceed");
+            this.tabs.personal.badge += 1;
+            isValid = false;
+        }
+
+        if (!this.superTrim(this.employee.lastName)) {
+            this.toast.info("Please provide a last name to proceed");
+            this.tabs.personal.badge += 1;
+            isValid = false;
+        }
+
+        if (!this.superTrim(this.employee.employeeNumber)) {
+            this.toast.info("Please provide an employee number");
+            this.tabs.employment.badge += 1;
+            isValid = false;
+        }
+
+        if (!this.employee.position || !this.superTrim(this.employee.position._id)) {
+            this.toast.info("Please select a position");
+            this.tabs.employment.badge += 1;
+            isValid = false;
+        }
+
+        if (!this.employee.company || !this.superTrim(this.employee.company._id)) {
+            this.toast.info("Please select a company");
+            this.tabs.employment.badge += 1;
+            isValid = false;
+        }        
+        
+        if (!this.employee.employmentStatus || !this.superTrim(this.employee.employmentStatus._id)) {
+            this.toast.info("Please select an employment status");
+            this.tabs.employment.badge += 1;
+            isValid = false;
+        }
+
+        if (this.employee.phoneNumbers.length <= 0 && this.employee.landlines.length <= 0) {
+            this.toast.info("Please provide at least one contact information");
+            this.tabs.contacts.badge += 1;
+            isValid = false;
+        }
+
+        return isValid;
+    }
 }

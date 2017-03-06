@@ -17,6 +17,8 @@ var EmployeePersonalComponent = (function () {
         this.swal = swal;
         this.toast = toast;
     }
+    EmployeePersonalComponent.prototype.ngOnInit = function () {
+    };
     EmployeePersonalComponent.prototype.parseDate = function (dateString) {
         if (dateString) {
             return new Date(dateString);

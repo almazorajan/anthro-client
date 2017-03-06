@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
 import { SwalHelper, ToastHelper } from '../../helpers/helpers';
 import { Employee, Modal } from '../../models/models';
 
@@ -11,16 +11,19 @@ import { Employee, Modal } from '../../models/models';
     ]
 })
 
-export class EmployeePersonalComponent {
+export class EmployeePersonalComponent implements OnInit {
 
     constructor(
         private swal: SwalHelper,
-        private toast: ToastHelper
-    ) { }    
+        private toast: ToastHelper) {   
+    }    
 
     @Input() employee: Employee;
     @Input() operation: number;
     @Input() isFormDisabled: boolean;
+
+    ngOnInit() {
+    }    
 
     parseDate(dateString: string): Date {
         if(dateString) {

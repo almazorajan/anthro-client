@@ -11,71 +11,50 @@
                 </div>
                 <div class="modal-body">
                     <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active">
-                            <a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Personal</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#employment" aria-controls="employment" role="tab" data-toggle="tab">Employment</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#contacts" aria-controls="contacts" role="tab" data-toggle="tab">Contacts</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#address" aria-controls="address" role="tab" data-toggle="tab">Address</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#government" aria-controls="government" role="tab" data-toggle="tab">Government</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#family" aria-controls="family" role="tab" data-toggle="tab">Family</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#education" aria-controls="education" role="tab" data-toggle="tab">Education</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#work" aria-controls="work" role="tab" data-toggle="tab">Work</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#accreditations" aria-controls="accreditations" role="tab" data-toggle="tab">Accreditations</a>
+                        <li *ngFor="let key of tabKeys" role="presentation" [class.active]="tabs[key].active">
+                            <a [href]="tabs[key].href" role="tab" data-toggle="tab">
+                                {{ tabs[key].name }}
+                                <span class="badge" *ngIf="tabs[key].badge > 0">{{ tabs[key].badge }}</span>
+                            </a>
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane tab-gap active" id="personal">
+                        <div role="tabpanel" class="tab-pane tab-gap fade in active" id="personal">
                             <employee-personal-component 
                                 [operation]="operation" 
                                 [isFormDisabled]="isFormDisabled"
                                 [employee]="employee">
                             </employee-personal-component>                      
                         </div>
-                        <div role="tabpanel" class="tab-pane tab-gap" id="employment">
+                        <div role="tabpanel" class="tab-pane tab-gap fade" id="employment">
                              <employee-employment-component 
                                 [operation]="operation" 
                                 [isFormDisabled]="isFormDisabled"
                                 [employee]="employee">
                             </employee-employment-component>                      
                         </div>
-                        <div role="tabpanel" class="tab-pane tab-gap" id="contacts">
+                        <div role="tabpanel" class="tab-pane tab-gap fade" id="contacts">
                              <employee-contacts-component 
                                 [operation]="operation" 
                                 [isFormDisabled]="isFormDisabled" 
                                 [employee]="employee">
                             </employee-contacts-component>          
                         </div>
-                        <div role="tabpanel" class="tab-pane tab-gap" id="address">
+                        <div role="tabpanel" class="tab-pane tab-gap fade" id="address">
                             <employee-address-component 
                                 [operation]="operation" 
                                 [isFormDisabled]="isFormDisabled" 
                                 [employee]="employee">
                             </employee-address-component>        
                         </div>
-                        <div role="tabpanel" class="tab-pane tab-gap" id="government">
+                        <div role="tabpanel" class="tab-pane tab-gap fade" id="government">
                             <employee-government-component 
                                 [operation]="operation" 
                                 [isFormDisabled]="isFormDisabled" 
                                 [employee]="employee">
                             </employee-government-component>
                         </div>
-                        <div role="tabpanel" class="tab-pane tab-gap" id="family">
+                        <div role="tabpanel" class="tab-pane tab-gap fade" id="family">
                             <employee-family-component 
                                 [mainModalId]="id"
                                 [operation]="operation"
@@ -83,25 +62,25 @@
                                 [employee]="employee">
                             </employee-family-component>
                         </div>
-                        <div role="tabpanel" class="tab-pane tab-gap" id="education">
+                        <div role="tabpanel" class="tab-pane tab-gap fade" id="education">
                             <employee-education-component 
                                 [operation]="operation" 
                                 [isFormDisabled]="isFormDisabled" 
                                 [employee]="employee">
                             </employee-education-component>
                         </div>
-                        <div role="tabpanel" class="tab-pane tab-gap" id="work">
+                        <div role="tabpanel" class="tab-pane tab-gap fade" id="work">
                             <employee-work-history-component 
                                 [operation]="operation" 
                                 [isFormDisabled]="isFormDisabled" 
-                                [employee]="employee">
+                                [(employee)]="employee">
                             </employee-work-history-component>
                         </div>
-                        <div role="tabpanel" class="tab-pane tab-gap" id="accreditations">
+                        <div role="tabpanel" class="tab-pane tab-gap fade" id="accreditations">
                             <employee-accreditation-component 
                                 [operation]="operation"
                                 [isFormDisabled]="isFormDisabled" 
-                                [employee]="employee" >
+                                [employee]="employee">
                             </employee-accreditation-component>
                         </div>
                     </div>

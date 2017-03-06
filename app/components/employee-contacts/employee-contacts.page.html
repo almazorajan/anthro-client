@@ -2,7 +2,10 @@
     <div class="col-lg-6">
         <div class="form-group">
             <label for="txtPhoneNumber">
-                Phone Numbers
+                Phone Numbers 
+                <span *ngIf="employee.phoneNumbers.length <= 0">
+                    <small>(<strong>No phone numbers yet</strong>)</small>
+                </span>
                 <button 
                     (click)="addPhoneNumber()"
                     [disabled]="isFormDisabled"
@@ -41,6 +44,9 @@
         <div class="form-group">
             <label for="txtLandline">
                 Landlines
+                <span *ngIf="employee.landlines.length <= 0">
+                    <small>(<strong>No landlines yet</strong>)</small>
+                </span>
                 <button 
                     (click)="addLandline()"
                     [disabled]="isFormDisabled"
