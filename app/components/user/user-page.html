@@ -1,66 +1,64 @@
 <div class="row">
-    <form>
-        <div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-            <h2 class="text-center">User Maintenance</h2>
-            <hr/>
-        </div>
-        <div *ngIf="!loadingUsers && !loadingPositions" class="col-lg-6">
-            <button (click)="add()" class="btn btn-success btn-md" title="Add" data-toggle="modal" data-target="#mdlModalInfo">
-				<i class="glyphicon glyphicon-plus"></i> Add
-			</button>
-        </div>
-        <div *ngIf="!loadingUsers && !loadingPositions" class="col-lg-6">
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <label for="txtSearchKeyword" class="col-lg-5 control-label">Search:</label>
-                    <div class="col-lg-7">
-                        <input [(ngModel)]="search.keyword" type="text" name="txtSearchKeyword" class="form-control pull-right" placeholder="Keyword...">
-                    </div>
+    <div class="col-lg-12" class="custom-page-header">
+        <h2 class="text-center">Users</h2>
+        <hr/>
+    </div>
+    <div *ngIf="!loadingUsers && !loadingPositions" class="col-lg-6">
+        <button (click)="add()" class="btn btn-primary btn-sm" title="Add" data-toggle="modal" data-target="#mdlModalInfo">
+            <i class="glyphicon glyphicon-plus"></i> Add
+        </button>
+    </div>
+    <div *ngIf="!loadingUsers && !loadingPositions" class="col-lg-6">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="txtSearchKeyword" class="col-lg-5 control-label">Search:</label>
+                <div class="col-lg-7">
+                    <input [(ngModel)]="search.keyword" type="text" name="txtSearchKeyword" class="form-control" placeholder="Keyword...">
                 </div>
-            </form>
-        </div>
-        <div class="col-lg-12">
-            <div *ngIf="loadingUsers || loadingPositions" class="text-center">
-                <img src="assets/img/spin.svg">
-                <br>
-                Loading... Please wait
             </div>
-            <table *ngIf="!loadingUsers && !loadingPositions" class="table table-condensed" style="margin-top: 40px;">
-                <thead>
-                    <th></th>
-                    <th>Username</th>
-                    <th>First Name</th>
-                    <th>Middle Name</th>
-                    <th>Last Name</th>
-                    <th>Position</th>
-                </thead>
-                <tbody>
-                    <tr *ngIf="!loadingUsers && !loadingPositions && users.length <= 0">
-                        <td colspan="6" class="text-center">No data yet.</td>
-                    </tr>
-                    <tr *ngFor="let user of (users | userFilter: search.keyword)">
-                        <td>
-                            <button (click)="view(user)" class="btn btn-primary btn-xs" title="View information" data-toggle="modal" data-target="#mdlModalInfo">
-                                <i class="glyphicon glyphicon-info-sign"></i>
-                            </button>
-                            <button (click)="confirmDelete(user)" class="btn btn-danger btn-xs" title="Delete">
-                                <i class="glyphicon glyphicon-trash"></i>
-                            </button>
-                        </td>
-                        <td>{{ user.userName }}</td>
-                        <td>{{ user.firstName }}</td>
-                        <td>{{ user.middleName }}</td>
-                        <td>{{ user.lastName }}</td>
-                        <td>
-                            <span *ngIf="user.position">
-                                {{ user.position.positionName }}
-                            </span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        </form>
+    </div>
+    <div class="col-lg-12">
+        <div *ngIf="loadingUsers || loadingPositions" class="text-center">
+            <img src="assets/img/spin.svg">
+            <br>
+            Loading... Please wait
         </div>
-    </form>
+        <table *ngIf="!loadingUsers && !loadingPositions" class="table table-condensed" style="margin-top: 40px;">
+            <thead>
+                <th></th>
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Last Name</th>
+                <th>Position</th>
+            </thead>
+            <tbody>
+                <tr *ngIf="!loadingUsers && !loadingPositions && users.length <= 0">
+                    <td colspan="6" class="text-center">No data yet.</td>
+                </tr>
+                <tr *ngFor="let user of (users | userFilter: search.keyword)">
+                    <td>
+                        <button (click)="view(user)" class="btn btn-primary btn-xs" title="View information" data-toggle="modal" data-target="#mdlModalInfo">
+                            <i class="glyphicon glyphicon-info-sign"></i>
+                        </button>
+                        <button (click)="confirmDelete(user)" class="btn btn-danger btn-xs" title="Delete">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </button>
+                    </td>
+                    <td>{{ user.userName }}</td>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.middleName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>
+                        <span *ngIf="user.position">
+                            {{ user.position.positionName }}
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <!-- Modal -->
