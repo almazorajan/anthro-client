@@ -232,7 +232,7 @@ export class PositionComponent implements OnInit {
         try {
             this.addingPosition = true;
             this.isFormDisabled = true;
-
+            console.log(this.selectedPosition);
             this.positionService.addPosition(this.selectedPosition).then((result) => {
                 this.addingPosition = false;
                 this.isFormDisabled = false;
