@@ -15,7 +15,7 @@ export class ProviderService implements iService {
     
     constructor(private http : Http, private localStorage : LocalStorageService) {
         this.forDevelopment = false;
-        this.developmentApi = "http://localhost:8090/";
+        this.developmentApi = "https://anthro-api-dev.herokuapp.com/";
         this.productionApi = "https://anthro-api.herokuapp.com/";
 
         if(this.forDevelopment)
