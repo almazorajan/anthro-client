@@ -84,4 +84,19 @@ export class EmployeeListComponent implements OnInit {
         this.operation = 2;
         this.modal.show();
     }
+
+    onAdd(): void {
+        this.getAllEmployees();
+        this.modal.hide();
+    }
+
+    onUpdate(): void {
+        this.getAllEmployees();
+        this.modal.hide();
+    }
+
+    onDelete(): void {
+        this.getAllEmployees();
+        this.modal.hide();
+    }
 }

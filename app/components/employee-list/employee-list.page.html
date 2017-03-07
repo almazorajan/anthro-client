@@ -75,5 +75,8 @@
     [id]="modal.id" 
     [operation]="operation" 
     [isFormDisabled]="isFormDisabled"
-    [employee]="currentEmployee">
+    [employee]="currentEmployee"
+    (onAdd)="onAdd()"
+    (onUpdate)="onUpdate()"
+    (onDelete)="onDelete()">
 </employee-info-component>
