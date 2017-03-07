@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-offset-10 col-lg-2 pull-right">
-        <button (click)="addFamily()" class="btn btn-primary  btn-block btn-sm">Add Family</button>
+        <button (click)="addFamily()" [disabled]="isFormDisabled" class="btn btn-primary  btn-block btn-sm">Add Family</button>
     </div>
 </div>
 <div class="row tab-gap">
@@ -13,12 +13,20 @@
                 <th>Middle Name</th>
                 <th>Last Name</th>
                 <th>Occupation</th>
+                <th>Contact</th>
+                <th>Email</th>
             </thead>
             <tbody>
+                <tr *ngIf="employee.family.length <= 0">
+                    <td colspan="8" class="text-center">No family records yet</td>
+                </tr>
                 <tr *ngFor="let family of employee.family; let index = index; trackBy: family">
                     <td class="text-center">
-                        <button (click)="deleteFamily(family)" [disabled]="isFormDisabled" type="button" class="btn btn-default btn-xs">
+                        <button (click)="confirmDelete(family)" [disabled]="isFormDisabled" type="button" class="btn btn-default btn-xs">
                             <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                        <button (click)="editFamily(family, index)" [disabled]="isFormDisabled" type="button" class="btn btn-default btn-xs">
+                            Edit
                         </button>
                     </td>
                     <td>{{ family.relationship }}</td>
@@ -26,8 +34,120 @@
                     <td>{{ family.middleName }}</td>
                     <td>{{ family.lastName }}</td>
                     <td>{{ family.occupation }}</td>
+                    <td>{{ family.contactNumbers[0].number }}</td>
+                    <td>{{ family.emailAddresses[0].emailAddress }}</td>
                 </tr>
             </tbody>
         </table>
+    </div>
+</div>
+<div class="modal fade" id="mdlFamilyInfo" tabindex="-1" role="dialog" aria-labelledby="lblFamilyInfo">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <form autocomplete="off">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="lblFamilyInfo">
+                        Family Information
+                        <span *ngIf="isFamilyFormDisabled"><strong>(Read-only mode)</strong></span>
+                    </h4>
+                </div>
+                <div class="modal-body" *ngIf="family">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="txtFamilyFirstName">First Name</label>
+                                <input 
+                                    type="text" 
+                                    id="txtFamilyFirstName" 
+                                    name="txtFamilyFirstName"
+                                    class="form-control"
+                                    [(ngModel)]="family.firstName"
+                                    [disabled]="isFamilyFormDisabled">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="txtFamilyMiddleName">Middle Name</label>
+                                <input 
+                                    type="text" 
+                                    id="txtFamilyMiddleName" 
+                                    name="txtFamilyMiddleName"
+                                    class="form-control"
+                                    [(ngModel)]="family.middleName"
+                                    [disabled]="isFamilyFormDisabled">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="txtFamilyLastName">Last Name</label>
+                                <input 
+                                    type="text" 
+                                    id="txtFamilyLastName" 
+                                    name="txtFamilyLastName"
+                                    class="form-control"
+                                    [(ngModel)]="family.lastName"
+                                    [disabled]="isFamilyFormDisabled">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="txtFamilyOccupation">Occupation</label>
+                                <input 
+                                    type="text" 
+                                    id="txtFamilyOccupation" 
+                                    name="txtFamilyOccupation"
+                                    class="form-control"
+                                    [(ngModel)]="family.occupation"
+                                    [disabled]="isFamilyFormDisabled">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Contact Number</label>
+                                <input
+                                    type="text"
+                                    id="txtFamilyContactNumber"
+                                    name="txtFamilyContactNumber"
+                                    class="form-control"
+                                    [(ngModel)]="family.contactNumbers[0].number"
+                                    [disabled]="isFamilyFormDisabled">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input
+                                    type="text"
+                                    id="txtFamilyEmailAddress"
+                                    name="txtFamilyEmailAddress"
+                                    class="form-control"
+                                    [(ngModel)]="family.emailAddresses[0].emailAddress"
+                                    [disabled]="isFamilyFormDisabled">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label>Relationship</label>
+                            <select id="slcFamilyRelationship" name="slcFamilyRelationship" class="form-control" [(ngModel)]="family.relationship" [disabled]="isFamilyFormDisabled">
+                                <option *ngFor="let relationship of relationships" [value]="relationship">{{ relationship }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" *ngIf="familyOperation === 1">
+                    <button (click)="confirmCancelSave()" type="button" class="btn btn-default btn-sm">Cancel</button>
+                    <button (click)="confirmSave()" type="button" class="btn btn-primary btn-sm">Save</button>
+                </div>
+                <div class="modal-footer" *ngIf="familyOperation === 2">
+                    <button (click)="confirmCancelAdd()" type="button" class="btn btn-default btn-sm">Cancel</button>
+                    <button (click)="confirmAdd()" type="button" class="btn btn-primary btn-sm">Add</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

@@ -3,29 +3,21 @@ import { EmploymentStatus, Address, Education, Accreditation, WorkHistory, Famil
 export class Employee {
 
     constructor() {
+        this._id = "";
         this.employeeNumber = "";
         this.startingDate = new Date();
         this.salary = 0;
         this.position = new Position();
-        this.position._id = "";
-        this.position.positionName = "";
         this.company = new Company();
-        this.company._id = "";
-        this.company.companyName = "";
-        this.company.companyAddress = "";
-        this.company.contactNumber = "";
-        this.company.emailAddress = "";
         this.employmentStatus = new EmploymentStatus();
-        this.employmentStatus._id = "";
-        this.employmentStatus.employmentStatus = "";
         this.firstName = "";
         this.middleName = "";
         this.lastName = "";
         this.birthDate = new Date();
         this.age = 0;
         this.birthPlace = "";
-        this.phoneNumbers = [new ContactNumber()];
-        this.landlines = [new ContactNumber()];
+        this.phoneNumbers = [];
+        this.landlines = [];
         this.maritalStatus = "Single";
         this.gender = "Male";
         this.citizenship = "Filipino";
@@ -36,11 +28,11 @@ export class Employee {
         this.tinNumber = "";
         this.philHealthNumber = "";
         this.pagibigNumber = "";
-        this.educationHistory = [new Education()];
-        this.certifications = [new Accreditation()];
-        this.licensures = [new Accreditation()];
-        this.workHistory = [new WorkHistory()];
-        this.family = [new Family()];
+        this.educationHistory = [];
+        this.certifications = [];
+        this.licensures = [];
+        this.workHistory = [];
+        this.family = [];
     }
 
     _id: string;

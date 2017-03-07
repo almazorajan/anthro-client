@@ -12,48 +12,29 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var helpers_1 = require("../../helpers/helpers");
 var models_1 = require("../../models/models");
-var EmployeePersonalComponent = (function () {
-    function EmployeePersonalComponent(swal, toast) {
+var EmployeeAddressComponent = (function () {
+    function EmployeeAddressComponent(swal, toast) {
         this.swal = swal;
         this.toast = toast;
     }
-    EmployeePersonalComponent.prototype.ngOnInit = function () {
-    };
-    EmployeePersonalComponent.prototype.parseDate = function (dateString) {
-        if (dateString) {
-            return new Date(dateString);
-        }
-        return null;
-    };
-    EmployeePersonalComponent.prototype.computeAge = function (employee) {
-        try {
-            var birthDate = new Date(employee.birthDate);
-            var birthDay = new Date(birthDate.getFullYear(), birthDate.getMonth(), birthDate.getDay());
-            var diff = Date.now() - birthDay.getTime();
-            this.employee.age = Math.abs(new Date(diff).getUTCFullYear() - 1970);
-        }
-        catch (e) {
-            this.toast.error(e);
-        }
-    };
-    return EmployeePersonalComponent;
+    return EmployeeAddressComponent;
 }());
 __decorate([
     core_1.Input(),
     __metadata("design:type", models_1.Employee)
-], EmployeePersonalComponent.prototype, "employee", void 0);
+], EmployeeAddressComponent.prototype, "employee", void 0);
 __decorate([
     core_1.Input(),
     __metadata("design:type", Number)
-], EmployeePersonalComponent.prototype, "operation", void 0);
+], EmployeeAddressComponent.prototype, "operation", void 0);
 __decorate([
     core_1.Input(),
     __metadata("design:type", Boolean)
-], EmployeePersonalComponent.prototype, "isFormDisabled", void 0);
-EmployeePersonalComponent = __decorate([
+], EmployeeAddressComponent.prototype, "isFormDisabled", void 0);
+EmployeeAddressComponent = __decorate([
     core_1.Component({
-        selector: 'employee-personal-component',
-        templateUrl: './app/components/employee-personal/employee-personal.page.html',
+        selector: 'employee-address-component',
+        templateUrl: './app/components/employee-address/employee-address.page.html',
         providers: [
             helpers_1.SwalHelper,
             helpers_1.ToastHelper
@@ -61,6 +42,6 @@ EmployeePersonalComponent = __decorate([
     }),
     __metadata("design:paramtypes", [helpers_1.SwalHelper,
         helpers_1.ToastHelper])
-], EmployeePersonalComponent);
-exports.EmployeePersonalComponent = EmployeePersonalComponent;
-//# sourceMappingURL=employee-personal.component.js.map
+], EmployeeAddressComponent);
+exports.EmployeeAddressComponent = EmployeeAddressComponent;
+//# sourceMappingURL=family-info.component.js.map

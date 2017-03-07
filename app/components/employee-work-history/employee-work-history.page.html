@@ -17,21 +17,147 @@
                 <th class="text-center">Reason for Leaving</th>
             </thead>
             <tbody>
+                <tr *ngIf="employee.workHistory.length <= 0">
+                    <td colspan="8" class="text-center">No work history yet</td>
+                </tr>
                 <tr *ngFor="let workHistory of employee.workHistory; let index = index; trackBy: workHistory">
                     <td class="text-center">
-                        <button (click)="deleteWorkHistory(workHistory)" [disabled]="isFormDisabled" type="button" class="btn btn-default btn-xs">
+                        <button (click)="confirmDeleteWorkHistory(workHistory)" [disabled]="isFormDisabled" type="button" class="btn btn-default btn-xs">
                             <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                        <button (click)="editWorkHistory(workHistory, index)" [disabled]="isFormDisabled" type="button" class="btn btn-default btn-xs">
+                            Edit
                         </button>
                     </td>
                     <td>{{ workHistory.position }}</td>
                     <td>{{ workHistory.companyName }}</td>
-                    <td>{{ workHistory.dateFrom }}</td>
-                    <td>{{ workHistory.dateTo }}</td>
+                    <td>{{ workHistory.dateFrom | date : 'yyyy-MM-dd' }}</td>
+                    <td>{{ workHistory.dateTo | date : 'yyyy-MM-dd' }}</td>
                     <td>{{ workHistory.employmentStatus.employmentStatus }}</td>
-                    <td>{{ workHistory.salary }}</td>
+                    <td>{{ workHistory.salary | currency : 'PHP' : true : '1.2-2' }}</td>
                     <td>{{ workHistory.reasonForLeaving }}</td>
                 </tr>
             </tbody>
         </table>
+    </div>
+</div>
+<div class="modal fade" id="mdlWorkHistory" tabindex="-1" role="dialog" aria-labelledby="lblWorkHistoryInfo">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <form autocomplete="off">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="lblWorkHistoryInfo">
+                        Work History Information
+                        <span *ngIf="isWorkHistoryFormDisabled"><strong>(Read-only mode)</strong></span>
+                    </h4>
+                </div>
+                <div class="modal-body" *ngIf="loadingEmploymentStatuses">
+                    <p class="text-center">Please wait... Loading resources...</p>
+                </div>
+                <div class="modal-body" *ngIf="workHistory && !loadingEmploymentStatuses">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="txtWorkHistoryPosition">Position</label>
+                                <input
+                                    type="text"
+                                    id="txtWorkHistoryPosition"
+                                    name="txtWorkHistoryPosition"
+                                    class="form-control"
+                                    [(ngModel)]="workHistory.position"
+                                    [disabled]="isWorkHistoryFormDisabled">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="txtWorkHistoryCompanyName">Company Name</label>
+                                <input
+                                    type="text"
+                                    id="txtWorkHistoryCompanyName"
+                                    name="txtWorkHistoryCompanyName"
+                                    class="form-control"
+                                    [(ngModel)]="workHistory.companyName"
+                                    [disabled]="isWorkHistoryFormDisabled">
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="slcWorkHistoryEmploymentStatus">Employment History</label>
+                                <select 
+                                    id="slcWorkHistoryEmploymentStatus" 
+                                    name="slcWorkHistoryEmploymentStatus"
+                                    class="form-control" 
+                                    [(ngModel)]="workHistory.employmentStatus._id" 
+                                    [disabled]="isWorkHistoryFormDisabled">
+                                    <option 
+                                        *ngFor="let employmentStatus of employmentStatuses" 
+                                        [value]="employmentStatus._id">
+                                        {{ employmentStatus.employmentStatus }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label for="dtDateFrom">Date From</label>
+                            <input 
+                                type="date" 
+                                class="form-control" 
+                                id="dtDateFrom" 
+                                name="dtDateFrom" 
+                                (input)="workHistory.dateFrom = parseDate($event.target.value)"
+                                [value]="workHistory.dateFrom | date : 'yyyy-MM-dd'" 
+                                [disabled]="isWorkHistoryFormDisabled">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="dtDateTo">Date To</label>
+                            <input 
+                                type="date" 
+                                class="form-control" 
+                                id="dtDateTo" 
+                                name="dtDateTo" 
+                                (input)="workHistory.dateTo = parseDate($event.target.value)"
+                                [value]="workHistory.dateTo | date : 'yyyy-MM-dd'" 
+                                [disabled]="isWorkHistoryFormDisabled">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="txtWorkHistoryReasonForLeaving">Reason For Leaving</label>
+                            <input
+                                type="text"
+                                id="txtWorkHistoryReasonForLeaving"
+                                name="txtWorkHistoryReasonForLeaving"
+                                class="form-control"
+                                [(ngModel)]="workHistory.reasonForLeaving"
+                                [disabled]="isWorkHistoryFormDisabled">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="nbWorkHistorySalary">Salary</label>
+                                <input
+                                    type="number"
+                                    step="any"
+                                    id="nbWorkHistorySalary"
+                                    name="nbWorkHistorySalary"
+                                    class="form-control"
+                                    [(ngModel)]="workHistory.salary"
+                                    [disabled]="isWorkHistoryFormDisabled">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" *ngIf="workHistoryOperation === 1">
+                    <button (click)="confirmCancelUpdate()" type="button" class="btn btn-default btn-sm">Cancel</button>
+                    <button (click)="confirmUpdateWorkHistory()" type="button" class="btn btn-primary btn-sm">Save</button>
+                </div>
+                <div class="modal-footer" *ngIf="workHistoryOperation === 2">
+                    <button (click)="confirmCancelAdd()" type="button" class="btn btn-default btn-sm">Cancel</button>
+                    <button (click)="confirmAdd()" type="button" class="btn btn-primary btn-sm">Add</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

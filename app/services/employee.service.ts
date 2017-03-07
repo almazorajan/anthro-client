@@ -22,6 +22,13 @@ import { ProviderService } from './provider.service';
         ];
     }
 
+    getAccreditationTypes(): string[] {
+        return [
+            "Licensure",
+            "Certificate"
+        ];
+    }
+
     addEmployee(employee: Employee): Promise<Result> {
         return this.apiCall({
             verb: "post",

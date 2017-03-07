@@ -23,7 +23,77 @@ var EmployeeInfoComponent = (function () {
         this.loadingCompanies = false;
         this.addingEmployee = false;
         this.modal = new models_1.Modal("#" + this.id);
+        this.tabs = {
+            personal: new models_1.Tab({
+                name: "Per",
+                href: "#personal",
+                active: true,
+                badge: 0
+            }),
+            employment: new models_1.Tab({
+                name: "Emp",
+                href: "#employment",
+                active: false,
+                badge: 0
+            }),
+            contacts: new models_1.Tab({
+                name: "Con",
+                href: "#contacts",
+                active: false,
+                badge: 0
+            }),
+            address: new models_1.Tab({
+                name: "Addr",
+                href: "#address",
+                active: false,
+                badge: 0
+            }),
+            government: new models_1.Tab({
+                name: "Gov",
+                href: "#government",
+                active: false,
+                badge: 0
+            }),
+            family: new models_1.Tab({
+                name: "Fam",
+                href: "#family",
+                active: false,
+                badge: 0
+            }),
+            education: new models_1.Tab({
+                name: "Edu",
+                href: "#education",
+                active: false,
+                badge: 0
+            }),
+            work: new models_1.Tab({
+                name: "Work",
+                href: "#work",
+                active: false,
+                badge: 0
+            }),
+            accreditation: new models_1.Tab({
+                name: "Accr",
+                href: "#accreditations",
+                active: false,
+                badge: 0
+            })
+        };
     }
+    EmployeeInfoComponent.prototype.ngOnInit = function () {
+        this.tabKeys = Object.keys(this.tabs);
+    };
+    EmployeeInfoComponent.prototype.resetTabBadges = function () {
+        this.tabs.personal.badge = 0;
+        this.tabs.employment.badge = 0;
+        this.tabs.contacts.badge = 0;
+        this.tabs.address.badge = 0;
+        this.tabs.government.badge = 0;
+        this.tabs.family.badge = 0;
+        this.tabs.education.badge = 0;
+        this.tabs.work.badge = 0;
+        this.tabs.accreditation.badge = 0;
+    };
     EmployeeInfoComponent.prototype.addEmployee = function () {
         var _this = this;
         try {
@@ -124,6 +194,10 @@ var EmployeeInfoComponent = (function () {
     };
     EmployeeInfoComponent.prototype.confirmAdd = function () {
         var _this = this;
+        var valid = this.validate();
+        if (!valid) {
+            return;
+        }
         this.swal.confirm({
             title: "Are You Sure?",
             message: "You will be adding this employee information",
@@ -173,6 +247,55 @@ var EmployeeInfoComponent = (function () {
                 }
             }
         });
+    };
+    EmployeeInfoComponent.prototype.superTrim = function (str) {
+        try {
+            return str.replace(/\s+/g, "").trim();
+        }
+        catch (e) {
+            console.log(e);
+        }
+        return "";
+    };
+    EmployeeInfoComponent.prototype.validate = function () {
+        this.resetTabBadges();
+        var isValid = true;
+        if (!this.superTrim(this.employee.firstName)) {
+            this.toast.info("Please provide a first name to proceed");
+            this.tabs.personal.badge += 1;
+            isValid = false;
+        }
+        if (!this.superTrim(this.employee.lastName)) {
+            this.toast.info("Please provide a last name to proceed");
+            this.tabs.personal.badge += 1;
+            isValid = false;
+        }
+        if (!this.superTrim(this.employee.employeeNumber)) {
+            this.toast.info("Please provide an employee number");
+            this.tabs.employment.badge += 1;
+            isValid = false;
+        }
+        if (!this.employee.position || !this.superTrim(this.employee.position._id)) {
+            this.toast.info("Please select a position");
+            this.tabs.employment.badge += 1;
+            isValid = false;
+        }
+        if (!this.employee.company || !this.superTrim(this.employee.company._id)) {
+            this.toast.info("Please select a company");
+            this.tabs.employment.badge += 1;
+            isValid = false;
+        }
+        if (!this.employee.employmentStatus || !this.superTrim(this.employee.employmentStatus._id)) {
+            this.toast.info("Please select an employment status");
+            this.tabs.employment.badge += 1;
+            isValid = false;
+        }
+        if (this.employee.phoneNumbers.length <= 0 && this.employee.landlines.length <= 0) {
+            this.toast.info("Please provide at least one contact information");
+            this.tabs.contacts.badge += 1;
+            isValid = false;
+        }
+        return isValid;
     };
     return EmployeeInfoComponent;
 }());

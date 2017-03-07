@@ -41,7 +41,12 @@
     <div class="col-lg-3">
         <div class="form-group">
             <label for="slcGender">Gender</label>
-            <select class="form-control" id="slcGender" name="slcGender" [(ngModel)]="employee.gender" [disabled]="isFormDisabled">
+            <select 
+                class="form-control" 
+                id="slcGender" 
+                name="slcGender" 
+                [(ngModel)]="employee.gender"
+                [disabled]="isFormDisabled">
                 <option>Male</option>
                 <option>Female</option>
             </select>
@@ -70,8 +75,8 @@
                 class="form-control" 
                 id="dtBirthDate" 
                 name="dtBirthDate" 
-                (input)="employee.birthDate = parseDate($event.target.value)"
-                (change)="computeAge(employee)" 
+                (input)="employee.birthDate = parseDate(employee.target.value)"
+                (ngModelChange)="computeAge(employee);" 
                 [value]="employee.birthDate | date : 'yyyy-MM-dd'" 
                 [disabled]="isFormDisabled">
         </div>
@@ -84,7 +89,7 @@
                 class="form-control" 
                 id="nbAge" 
                 name="ngAge" 
-                [value]="employee.age" 
+                [value]="employee.age"
                 disabled>
         </div>
     </div>
@@ -106,7 +111,12 @@
     <div class="col-lg-3">
         <div class="form-group">
             <label for="slcMaritalStatus">Marital Status</label>
-            <select class="form-control" id="slcMaritalStatus" name="slcMaritalStatus" [(ngModel)]="employee.maritalStatus" [disabled]="isFormDisabled">
+            <select 
+                class="form-control" 
+                id="slcMaritalStatus" 
+                name="slcMaritalStatus" 
+                [(ngModel)]="employee.maritalStatus"
+                [disabled]="isFormDisabled">
                 <option>Single</option>
                 <option>Married</option>
             </select>
