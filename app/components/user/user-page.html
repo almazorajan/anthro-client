@@ -4,14 +4,12 @@
             <h2 class="text-center">User Maintenance</h2>
             <hr/>
         </div>
-
-        <div class="col-lg-6">
+        <div *ngIf="!loadingUsers && !loadingPositions" class="col-lg-6">
             <button (click)="add()" class="btn btn-success btn-md" title="Add" data-toggle="modal" data-target="#mdlModalInfo">
 				<i class="glyphicon glyphicon-plus"></i> Add
 			</button>
         </div>
-
-        <div class="col-lg-6">
+        <div *ngIf="!loadingUsers && !loadingPositions" class="col-lg-6">
             <form class="form-horizontal">
                 <div class="form-group">
                     <label for="txtSearchKeyword" class="col-lg-5 control-label">Search:</label>
@@ -21,9 +19,13 @@
                 </div>
             </form>
         </div>
-
         <div class="col-lg-12">
-            <table class="table table-condensed" style="margin-top: 40px;">
+            <div *ngIf="loadingUsers || loadingPositions" class="text-center">
+                <img src="assets/img/spin.svg">
+                <br>
+                Loading... Please wait
+            </div>
+            <table *ngIf="!loadingUsers && !loadingPositions" class="table table-condensed" style="margin-top: 40px;">
                 <thead>
                     <th></th>
                     <th>Username</th>
@@ -33,15 +35,9 @@
                     <th>Position</th>
                 </thead>
                 <tbody>
-
-                    <tr *ngIf="loadingUsers && loadingCompanies">
-                        <td colspan="6" class="text-center">Loading...</td>
-                    </tr>
-
-                    <tr *ngIf="!loadingUsers && !loadingCompanies && users.length <= 0">
+                    <tr *ngIf="!loadingUsers && !loadingPositions && users.length <= 0">
                         <td colspan="6" class="text-center">No data yet.</td>
                     </tr>
-
                     <tr *ngFor="let user of (users | userFilter: search.keyword)">
                         <td>
                             <button (click)="view(user)" class="btn btn-primary btn-xs" title="View information" data-toggle="modal" data-target="#mdlModalInfo">
@@ -51,7 +47,6 @@
                                 <i class="glyphicon glyphicon-trash"></i>
                             </button>
                         </td>
-
                         <td>{{ user.userName }}</td>
                         <td>{{ user.firstName }}</td>
                         <td>{{ user.middleName }}</td>
@@ -156,13 +151,19 @@
                     <button (click)="edit()" type="button" class="btn btn-primary">Edit</button>
                 </div>
                 <div *ngIf="operation === 1" class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button (click)="confirmAdd()" type="button" class="btn btn-primary">Add</button>
+                    <button [disabled]="isFormDisabled" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button (click)="confirmAdd()" [disabled]="isFormDisabled" type="button" class="btn btn-primary">
+                        <span *ngIf="!addingUser">Add</span>
+                        <span *ngIf="addingUser">Adding user...</span>
+                    </button>
                 </div>
                 <div *ngIf="operation === 2" class="modal-footer">
-                    <button (click)="cancelEdit()" class="btn btn-default">Cancel</button>
-                    <button (click)="confirmUpdate()" type="button" class="btn btn-primary">Save</button>
-                    <button (click)="displayChangePassword()" type="button" class="btn btn-primary pull-left">Change Password</button>
+                    <button (click)="cancelEdit()" [disabled]="isFormDisabled" class="btn btn-default">Cancel</button>
+                    <button (click)="confirmUpdate()" [disabled]="isFormDisabled" type="button" class="btn btn-primary">
+                        <span *ngIf="!updatingUser">Save</span>
+                        <span *ngIf="updatingUser">(Saving user...)</span>
+                    </button>
+                    <button (click)="displayChangePassword()" [disabled]="isFormDisabled" type="button" class="btn btn-primary pull-left">Change Password</button>
                 </div>
             </form>
         </div>

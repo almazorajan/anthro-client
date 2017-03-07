@@ -1,4 +1,4 @@
-<div class="row" style="margin-bottom: 50px;">  
+<div class="row" *ngIf="!loadingEmployees" style="margin-bottom: 50px;">  
     <div class="col-lg-3">
         <input 
             name="txtSearchKeyword" 
@@ -13,7 +13,12 @@
     </div>
 </div>
 <div class="row">
-    <table class="table table-bordered table-striped table-hover table-condensed">
+    <div *ngIf="loadingEmployees" class="text-center">
+        <img src="assets/img/spin.svg">
+        <br>
+        Loading... Please wait
+    </div>
+    <table *ngIf="!loadingEmployees" class="table table-bordered table-striped table-hover table-condensed">
         <thead>
             <th></th>
             <th class="text-center">Company</th>

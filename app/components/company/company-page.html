@@ -1,24 +1,21 @@
 <div class="row">
 	<form>
-
 		<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-
 			<h2 class="text-center">Company Maintenance</h2>
 			<hr/>
-
 		</div>
-
 		<div class="col-lg-12">
-
-			<button (click)="add()" class="btn btn-success btn-md" title="Add" data-toggle="modal" data-target="#mdlModalInfo">
+			<button *ngIf="!loadingCompanies" (click)="add()" class="btn btn-success btn-md" title="Add" data-toggle="modal" data-target="#mdlModalInfo">
 				<i class="glyphicon glyphicon-plus"></i> Add
 			</button>
-
 		</div>
-
 		<div class="col-lg-12">
-
-			<table class="table table-condensed" style="margin-top: 40px;">
+			<div *ngIf="loadingCompanies" class="text-center" style="margin-top: 40px;">
+				<img src="assets/img/spin.svg">
+				<br>
+				Loading... Please wait
+			</div>
+			<table *ngIf="!loadingCompanies" class="table table-condensed" style="margin-top: 40px;">
 				<thead>
 					<th></th>
 					<th>Company Name</th>
@@ -27,15 +24,9 @@
 					<th>Email Address</th>
 				</thead>
 				<tbody>
-
-					<tr *ngIf="loadingCompanies">
-						<td colspan="5" class="text-center">Loading...</td>
-					</tr>
-
 					<tr *ngIf="!loadingCompanies && companies.length <= 0">
 						<td colspan="5" class="text-center">No data yet.</td>
 					</tr>
-
 					<tr *ngFor="let company of companies">
 						<td>
 							<button (click)="view(company)" class="btn btn-primary btn-xs" title="View information" data-toggle="modal" data-target="#mdlModalInfo">
@@ -50,12 +41,9 @@
 						<td>{{ company.contactNumber }}</td>
 						<td>{{ company.emailAddress }}</td>
 					</tr>
-
 				</tbody>
 			</table>
-
 		</div>
-
 	</form>
 </div>
 
