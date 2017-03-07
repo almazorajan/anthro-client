@@ -18,7 +18,7 @@ var ProviderService = (function () {
         this.http = http;
         this.localStorage = localStorage;
         this.forDevelopment = true;
-        this.developmentApi = "http://localhost:8090/";
+        this.developmentApi = "https://anthro-api.herokuapp.com/";
         this.productionApi = "https://127.0.0.1/";
         if (this.forDevelopment)
             this.server = this.developmentApi;
