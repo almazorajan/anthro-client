@@ -75,6 +75,18 @@ var EmployeeListComponent = (function () {
         this.operation = 2;
         this.modal.show();
     };
+    EmployeeListComponent.prototype.onAdd = function () {
+        this.getAllEmployees();
+        this.modal.hide();
+    };
+    EmployeeListComponent.prototype.onUpdate = function () {
+        this.getAllEmployees();
+        this.modal.hide();
+    };
+    EmployeeListComponent.prototype.onDelete = function () {
+        this.getAllEmployees();
+        this.modal.hide();
+    };
     return EmployeeListComponent;
 }());
 EmployeeListComponent = __decorate([

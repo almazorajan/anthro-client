@@ -18,6 +18,9 @@ var EmployeeInfoComponent = (function () {
         this.swal = swal;
         this.toast = toast;
         this.employeeService = employeeService;
+        this.onAdd = new core_1.EventEmitter();
+        this.onUpdate = new core_1.EventEmitter();
+        this.onDelete = new core_1.EventEmitter();
         this.updatingEmployee = false;
         this.deletingEmployee = false;
         this.loadingCompanies = false;
@@ -101,10 +104,10 @@ var EmployeeInfoComponent = (function () {
             this.updatingEmployee = true;
             this.employeeService.addEmployee(this.employee).then(function (result) {
                 _this.updatingEmployee = false;
+                _this.isFormDisabled = false;
                 if (result.success) {
-                    _this.onAdd(result);
+                    _this.onAdd.emit();
                     _this.operation = 0;
-                    _this.isFormDisabled = false;
                     _this.originalEmployeeInfo = null;
                     _this.modal.hide();
                     _this.toast.success(result.message);
@@ -115,6 +118,7 @@ var EmployeeInfoComponent = (function () {
             })
                 .catch(function (error) {
                 _this.updatingEmployee = false;
+                _this.isFormDisabled = false;
                 _this.toast.error(error);
             });
         }
@@ -130,10 +134,10 @@ var EmployeeInfoComponent = (function () {
             this.updatingEmployee = true;
             this.employeeService.updateEmployee(this.employee).then(function (result) {
                 _this.updatingEmployee = false;
+                _this.isFormDisabled = false;
                 if (result.success) {
-                    _this.onUpdate(result);
+                    _this.onUpdate.emit();
                     _this.operation = 0;
-                    _this.isFormDisabled = false;
                     _this.originalEmployeeInfo = null;
                     _this.modal.hide();
                     _this.toast.success(result.message);
@@ -161,7 +165,7 @@ var EmployeeInfoComponent = (function () {
                 _this.isFormDisabled = false;
                 _this.deletingEmployee = false;
                 if (result.success) {
-                    _this.onDelete(result);
+                    _this.onDelete.emit();
                     _this.modal.hide();
                     _this.toast.success(result.message);
                 }
@@ -316,16 +320,16 @@ __decorate([
     __metadata("design:type", Boolean)
 ], EmployeeInfoComponent.prototype, "isFormDisabled", void 0);
 __decorate([
-    core_1.Input(),
-    __metadata("design:type", Function)
+    core_1.Output(),
+    __metadata("design:type", core_1.EventEmitter)
 ], EmployeeInfoComponent.prototype, "onAdd", void 0);
 __decorate([
-    core_1.Input(),
-    __metadata("design:type", Function)
+    core_1.Output(),
+    __metadata("design:type", core_1.EventEmitter)
 ], EmployeeInfoComponent.prototype, "onUpdate", void 0);
 __decorate([
-    core_1.Input(),
-    __metadata("design:type", Function)
+    core_1.Output(),
+    __metadata("design:type", core_1.EventEmitter)
 ], EmployeeInfoComponent.prototype, "onDelete", void 0);
 EmployeeInfoComponent = __decorate([
     core_1.Component({

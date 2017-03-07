@@ -1,19 +1,29 @@
-<div class="row" style="margin-bottom: 50px;">  
-    <div class="col-lg-3">
-        <input 
-            name="txtSearchKeyword" 
-            type="text" 
-            class="form-control" 
-            placeholder="Type in keyword here..." 
-            [(ngModel)]="searchFilter">
+<div class="row">  
+    <div class="col-lg-12" class="custom-page-header">
+        <h2 class="text-center">Employees</h2>
+        <hr>
     </div>
-    <div class="col-lg-offset-8"></div>
-    <div class="col-lg-1">
-        <button (click)="add()" class="btn btn-primary btn-block btn-sm">Add</button>
+    <div class="col-lg-6">
+        <button (click)="add()" class="btn btn-primary btn-sm">Add</button>
+    </div>
+    <div class="col-lg-6">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="txtSearchKeyword" class="col-lg-5 control-label">Search:</label>
+                <div class="col-lg-7">
+                    <input [(ngModel)]="searchFilter" type="text" name="txtSearchKeyword" class="form-control" placeholder="Keyword...">
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 <div class="row">
-    <table class="table table-bordered table-striped table-hover table-condensed">
+    <div *ngIf="loadingEmployees" class="text-center">
+        <img src="assets/img/spin.svg">
+        <br>
+        Loading... Please wait
+    </div>
+    <table *ngIf="!loadingEmployees" class="table table-bordered table-striped table-hover table-condensed">
         <thead>
             <th></th>
             <th class="text-center">Company</th>
@@ -65,5 +75,8 @@
     [id]="modal.id" 
     [operation]="operation" 
     [isFormDisabled]="isFormDisabled"
-    [employee]="currentEmployee">
+    [employee]="currentEmployee"
+    (onAdd)="onAdd()"
+    (onUpdate)="onUpdate()"
+    (onDelete)="onDelete()">
 </employee-info-component>

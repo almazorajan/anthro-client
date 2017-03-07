@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { SwalHelper, ToastHelper } from '../../helpers/helpers';
 import { EmployeeService } from '../../services/services';
 import { Employee, Modal, EmployeeInfoTab, Tab } from '../../models/models';
@@ -24,9 +24,9 @@ export class EmployeeInfoComponent implements OnInit {
     @Input() employee: Employee;
     @Input() operation: number;
     @Input() isFormDisabled: boolean;
-    @Input() onAdd: Function;
-    @Input() onUpdate: Function;
-    @Input() onDelete: Function;
+    @Output() onAdd: EventEmitter<any> = new EventEmitter();
+    @Output() onUpdate: EventEmitter<any> = new EventEmitter();
+    @Output() onDelete: EventEmitter<any> = new EventEmitter();
     
     tabKeys: any[];
     originalEmployeeInfo: Employee;
@@ -94,6 +94,7 @@ export class EmployeeInfoComponent implements OnInit {
     
     ngOnInit() {
         this.tabKeys = Object.keys(this.tabs);
+
     }
 
     private resetTabBadges(): void {
@@ -115,11 +116,11 @@ export class EmployeeInfoComponent implements OnInit {
 
             this.employeeService.addEmployee(this.employee).then((result) => {
                 this.updatingEmployee = false;
-                
+                this.isFormDisabled = false;
+                    
                 if(result.success) {
-                    this.onAdd(result);
+                    this.onAdd.emit();
                     this.operation = 0;
-                    this.isFormDisabled = false;
                     this.originalEmployeeInfo = null;
                     this.modal.hide();
                     this.toast.success(result.message);
@@ -129,6 +130,7 @@ export class EmployeeInfoComponent implements OnInit {
             })
             .catch((error) => {
                 this.updatingEmployee = false;
+                this.isFormDisabled = false;
                 this.toast.error(error);
             });
         } catch(e) {
@@ -144,11 +146,11 @@ export class EmployeeInfoComponent implements OnInit {
 
             this.employeeService.updateEmployee(this.employee).then((result) => {
                 this.updatingEmployee = false;
-                
+                this.isFormDisabled = false;                 
+                    
                 if(result.success) {
-                    this.onUpdate(result);
+                    this.onUpdate.emit();
                     this.operation = 0;
-                    this.isFormDisabled = false;                 
                     this.originalEmployeeInfo = null;
                     this.modal.hide();
                     this.toast.success(result.message);
@@ -176,7 +178,7 @@ export class EmployeeInfoComponent implements OnInit {
                 this.deletingEmployee = false;
 
                 if(result.success) {
-                    this.onDelete(result);
+                    this.onDelete.emit();
                     this.modal.hide();
                     this.toast.success(result.message);
                 } else {

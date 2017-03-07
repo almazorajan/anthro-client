@@ -202,6 +202,7 @@ var PositionComponent = (function () {
         try {
             this.addingPosition = true;
             this.isFormDisabled = true;
+            console.log(this.selectedPosition);
             this.positionService.addPosition(this.selectedPosition).then(function (result) {
                 _this.addingPosition = false;
                 _this.isFormDisabled = false;

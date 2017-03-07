@@ -1,26 +1,28 @@
 <div class="row">
     <form>
-        <div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-            <h2 class="text-center">Position Maintenance</h2>
+        <div class="col-lg-12" class="custom-page-header">
+            <h2 class="text-center">Positions</h2>
             <hr>
         </div>
-        <div class="col-lg-12">
-            <button (click)="add()" class="btn btn-success btn-md" title="Add" data-toggle="modal" data-target="#mdlModalInfo">
+        <div *ngIf="!loadingPositions" class="col-lg-12">
+            <button (click)="add()" class="btn btn-primary btn-sm pull-left" title="Add" data-toggle="modal" data-target="#mdlModalInfo">
 				<i class="glyphicon glyphicon-plus"></i> Add
 			</button>
         </div>
         <div class="col-lg-12">
-            <table class="table table-condensed" style="margin-top: 40px;">
+            <div *ngIf="loadingPositions" class="text-center">
+                <img src="assets/img/spin.svg">
+                <br>
+                Loading... Please wait
+            </div>
+            <table *ngIf="!loadingPositions" class="table table-condensed" style="margin-top: 40px;">
                 <thead>
                     <th></th>
                     <th>Position Name</th>
                     <th>Modules</th>
                 </thead>
                 <tbody>
-                    <tr *ngIf="loading">
-                        <td colspan="5" class="text-center">Loading...</td>
-                    </tr>
-                    <tr *ngIf="!loading && positions.length <= 0">
+                    <tr *ngIf="!loadingPositions && positions.length <= 0">
                         <td colspan="5" class="text-center">No data yet.</td>
                     </tr>
                     <tr *ngFor="let position of positions">
@@ -100,12 +102,18 @@
                     <button (click)="edit()" type="button" class="btn btn-primary">Edit</button>
                 </div>
                 <div *ngIf="operation === 1" class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button (click)="confirmAdd()" type="button" class="btn btn-primary">Add</button>
+                    <button type="button" [disabled]="addingPosition" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button (click)="confirmAdd()" [disabled]="addingPosition" type="button" class="btn btn-primary">
+                        <span *ngIf="addingPosition">Adding position...</span>
+                        <span *ngIf="!addingPosition">Add</span>
+                    </button>
                 </div>
                 <div *ngIf="operation === 2" class="modal-footer">
-                    <button (click)="cancelEdit()" class="btn btn-default">Cancel</button>
-                    <button (click)="confirmUpdate()" type="button" class="btn btn-primary">Save</button>
+                    <button (click)="cancelEdit()"[disabled]="updatingPosition" class="btn btn-default">Cancel</button>
+                    <button (click)="confirmUpdate()" [disabled]="updatingPosition" type="button" class="btn btn-primary">
+                        <span *ngIf="updatingPosition">Saving position...</span>
+                        <span *ngIf="!updatingPosition">Save</span>
+                    </button>
                 </div>
             </form>
         </div>

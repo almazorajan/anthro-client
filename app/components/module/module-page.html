@@ -1,18 +1,21 @@
 <div class="row">
 	<form>
-		<div class="col-lg-12" style="padding-top: 50px; margin-bottom: 30px;">
-			<h2 class="text-center">Module Maintenance</h2>
+		<div class="col-lg-12" class="custom-page-header">
+			<h2 class="text-center">Modules</h2>
 			<hr/>
 		</div>
-
-		<div class="col-lg-12">
-			<button (click)="add()" class="btn btn-success btn-md" title="Add" data-toggle="modal" data-target="#mdlModalInfo">
+		<div *ngIf="!loading" class="col-lg-12">
+			<button (click)="add()" class="btn btn-primary btn-sm pull-left" title="Add" data-toggle="modal" data-target="#mdlModalInfo">
 				<i class="glyphicon glyphicon-plus"></i> Add
 			</button>
 		</div>
-
 		<div class="col-lg-12">
-			<table class="table table-condensed" style="margin-top: 40px;">
+			<div *ngIf="loading" class="text-center" style="margin-top: 40px;">
+                <img src="assets/img/spin.svg">
+                <br>
+                Loading... Please wait
+            </div>
+			<table *ngIf="!loading" class="table table-condensed" style="margin-top: 40px;">
 				<thead>
 					<th></th>
 					<th>Group</th>
@@ -21,9 +24,6 @@
 					<th>Link</th>
 				</thead>
 				<tbody>
-					<tr *ngIf="loading">
-						<td colspan="5" class="text-center">Loading...</td>
-					</tr>
 					<tr *ngIf="!loading && modules.length <= 0">
 						<td colspan="5" class="text-center">No modules found</td>
 					</tr>
