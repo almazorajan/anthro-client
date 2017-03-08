@@ -14,7 +14,7 @@ export class ProviderService implements iService {
     readonly productionApi : string;
     
     constructor(private http : Http, private localStorage : LocalStorageService) {
-        this.forDevelopment = false;
+        this.forDevelopment = true;
         this.developmentApi = "https://anthro-api-dev.herokuapp.com/";
         this.productionApi = "https://anthro-api.herokuapp.com/";
 
