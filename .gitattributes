@@ -1,0 +1,3 @@
+app/services/provider.service.ts merge=ours
+dist/services/provider.service.js merge=ours
+dist/services/provider.service.js.map merge=ours
