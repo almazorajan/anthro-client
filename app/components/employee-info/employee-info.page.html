@@ -96,7 +96,7 @@
                     <button (click)="confirmUpdate()" [disabled]="isFormDisabled" type="button" class="btn btn-primary">Save</button>
                 </div>
                 <div class="modal-footer" *ngIf="operation === 2">
-                    <button (click)="cancelAdd()" [disabled]="isFormDisabled" type="button" class="btn btn-default">Cancel</button>
+                    <button (click)="confirmCancelAdd()" [disabled]="isFormDisabled" type="button" class="btn btn-default">Cancel</button>
                     <button (click)="confirmAdd()" [disabled]="isFormDisabled" type="button" class="btn btn-primary">Add</button>
                 </div>
             </form>

@@ -25,7 +25,6 @@ var EmployeeInfoComponent = (function () {
         this.deletingEmployee = false;
         this.loadingCompanies = false;
         this.addingEmployee = false;
-        this.modal = new models_1.Modal("#" + this.id);
         this.tabs = {
             personal: new models_1.Tab({
                 name: "Per",
@@ -85,6 +84,7 @@ var EmployeeInfoComponent = (function () {
     }
     EmployeeInfoComponent.prototype.ngOnInit = function () {
         this.tabKeys = Object.keys(this.tabs);
+        this.modal = new models_1.Modal("#" + this.id);
     };
     EmployeeInfoComponent.prototype.resetTabBadges = function () {
         this.tabs.personal.badge = 0;
@@ -186,9 +186,14 @@ var EmployeeInfoComponent = (function () {
         }
     };
     EmployeeInfoComponent.prototype.cancelUpdate = function () {
+        this.modal.hide();
         this.operation = 0;
         this.isFormDisabled = true;
         this.employee = JSON.parse(JSON.stringify(this.originalEmployeeInfo));
+    };
+    EmployeeInfoComponent.prototype.cancelAdd = function () {
+        this.modal.hide();
+        this.operation = 0;
     };
     EmployeeInfoComponent.prototype.edit = function () {
         this.operation = 1;
@@ -222,6 +227,19 @@ var EmployeeInfoComponent = (function () {
             callBack: function (isConfirm) {
                 if (isConfirm) {
                     _this.updateEmployee();
+                }
+            }
+        });
+    };
+    EmployeeInfoComponent.prototype.confirmCancelAdd = function () {
+        var _this = this;
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be cancelling this employee information",
+            confirmButtonText: "Yes, Cancel It!",
+            callBack: function (isConfirm) {
+                if (isConfirm) {
+                    _this.cancelAdd();
                 }
             }
         });

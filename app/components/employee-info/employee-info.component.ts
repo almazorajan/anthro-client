@@ -34,7 +34,7 @@ export class EmployeeInfoComponent implements OnInit {
     deletingEmployee: boolean = false;
     loadingCompanies: boolean = false;
     addingEmployee: boolean = false;
-    modal: Modal = new Modal(`#${this.id}`);
+    modal: Modal;
     tabs: EmployeeInfoTab = {
         personal: new Tab({
             name: "Per",
@@ -94,7 +94,7 @@ export class EmployeeInfoComponent implements OnInit {
     
     ngOnInit() {
         this.tabKeys = Object.keys(this.tabs);
-
+        this.modal = new Modal(`#${this.id}`);
     }
 
     private resetTabBadges(): void {
@@ -198,10 +198,16 @@ export class EmployeeInfoComponent implements OnInit {
     }
 
     private cancelUpdate(): void {
+        this.modal.hide();
         this.operation = 0;
         this.isFormDisabled = true;
         this.employee = JSON.parse(JSON.stringify(this.originalEmployeeInfo)) as Employee;
     }    
+
+    private cancelAdd(): void {
+        this.modal.hide();
+        this.operation = 0;
+    }
    
     edit(): void {
         this.operation = 1;
@@ -241,6 +247,19 @@ export class EmployeeInfoComponent implements OnInit {
             }
         });
     }
+
+    confirmCancelAdd(): void {
+        this.swal.confirm({
+            title: "Are You Sure?",
+            message: "You will be cancelling this employee information",
+            confirmButtonText: "Yes, Cancel It!",
+            callBack: (isConfirm) => {
+                if(isConfirm) {
+                    this.cancelAdd();
+                }
+            }
+        });
+    }    
 
     confirmCancelUpdate(): void {
         this.swal.confirm({
