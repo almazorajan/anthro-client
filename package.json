@@ -9,7 +9,8 @@
     "tsc:w": "tsc -w"
   },
   "engines": {
-    "node": "6.9.1"
+    "node": "6.9.1",
+    "npm": "3.10.9"
   },
   "licenses": [
     {
@@ -30,6 +31,7 @@
     "@types/bootstrap": "^3.3.32",
     "@types/sweetalert": "^1.1.27",
     "@types/toastr": "^2.1.30",
+    "angular-cli": "^1.0.0-beta.28.3",
     "angular-in-memory-web-api": "~0.1.13",
     "angular2-moment": "^1.2.0",
     "bootstrap": "^3.3.7",
@@ -40,7 +42,6 @@
     "rxjs": "5.0.0-beta.12",
     "sweetalert2": "^6.0.0",
     "systemjs": "0.19.39",
-    "typescript": "^2.2.1",
     "zone.js": "^0.6.25"
   },
   "devDependencies": {
