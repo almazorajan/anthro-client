@@ -1,1 +1,0 @@
-{"version":3,"file":"search.js","sourceRoot":"","sources":["../../../app/models/search.ts"],"names":[],"mappings":";;AAAA;IAEI;QACI,IAAI,CAAC,KAAK,GAAG,EAAE,CAAC;QAChB,IAAI,CAAC,OAAO,GAAG,EAAE,CAAC;QAClB,IAAI,CAAC,QAAQ,GAAG,IAAI,IAAI,EAAE,CAAC;QAC3B,IAAI,CAAC,MAAM,GAAG,IAAI,IAAI,EAAE,CAAC;IAC7B,CAAC;IAML,aAAC;AAAD,CAAC,AAbD,IAaC;AAbY,wBAAM"}
