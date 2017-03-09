@@ -13,50 +13,59 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var local_storage_service_1 = require("./local-storage.service");
 require("rxjs/add/operator/toPromise");
+var AppConfig = (function () {
+    function AppConfig() {
+    }
+    return AppConfig;
+}());
 var ProviderService = (function () {
     function ProviderService(http, localStorage) {
         this.http = http;
         this.localStorage = localStorage;
-        this.forDevelopment = false;
-        this.developmentApi = "https://anthro-api-dev.herokuapp.com/";
-        this.productionApi = "https://anthro-api.herokuapp.com/";
-        if (this.forDevelopment)
-            this.server = this.developmentApi;
-        else
-            this.server = this.productionApi;
     }
-    ProviderService.prototype.endpoint = function (uri) {
-        return "" + this.server + uri;
+    ProviderService.prototype.getApiEndPoint = function () {
+        return this.http["post"]("/config", {}, new http_1.RequestOptions())
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    ProviderService.prototype.endpoint = function (apiEndPoint, uri) {
+        var endpoint = "" + apiEndPoint + uri;
+        return endpoint;
     };
     ProviderService.prototype.handleError = function (error) {
         return Promise.reject(error.message || error);
     };
     ProviderService.prototype.apiCall = function (request) {
+        var _this = this;
         var session = this.localStorage.get("anthro.user-session");
         var payload = {
             data: request.body,
             auth: {}
         };
-        if (session) {
-            var headers = new http_1.Headers();
-            headers.append("x-access-token", session.token);
-            return this.http[request.verb](this.endpoint(request.uri), payload, new http_1.RequestOptions({ headers: headers }))
-                .toPromise()
-                .then(function (response) { return response.json(); })
-                .catch(this.handleError);
-        }
-        else {
-            return this.http[request.verb](this.endpoint(request.uri), payload)
-                .toPromise()
-                .then(function (response) { return response.json(); })
-                .catch(this.handleError);
-        }
+        return this.getApiEndPoint().then(function (config) {
+            if (session) {
+                var headers = new http_1.Headers();
+                headers.append("x-access-token", session.token);
+                return _this.http[request.verb](_this.endpoint(config.api, request.uri), payload, new http_1.RequestOptions({ headers: headers }))
+                    .toPromise()
+                    .then(function (response) { return response.json(); })
+                    .catch(_this.handleError);
+            }
+            else {
+                return _this.http[request.verb](_this.endpoint(config.api, request.uri), payload)
+                    .toPromise()
+                    .then(function (response) { return response.json(); })
+                    .catch(_this.handleError);
+            }
+        });
     };
     return ProviderService;
 }());
 ProviderService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http, local_storage_service_1.LocalStorageService])
+    __metadata("design:paramtypes", [http_1.Http,
+        local_storage_service_1.LocalStorageService])
 ], ProviderService);
 exports.ProviderService = ProviderService;
 //# sourceMappingURL=provider.service.js.map

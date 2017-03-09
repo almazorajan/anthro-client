@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
             this.attempingLogin = true;
             this.isFormDisabled = true;
             this.toast.info("Attempting login.");
-
+            
             this.loginService.attemptLogin(this.user).then((result) => {
                 this.attempingLogin = false;
                 this.isFormDisabled = false;

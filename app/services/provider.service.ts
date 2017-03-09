@@ -5,53 +5,56 @@ import { LocalStorageService } from './local-storage.service';
 import { Result, Session } from '../models/models';
 import 'rxjs/add/operator/toPromise';
 
+class AppConfig {
+    api: string;
+}
+
 @Injectable()
 export class ProviderService implements iService {
 
-    readonly forDevelopment : boolean;
-    readonly server : string;
-    readonly developmentApi : string;
-    readonly productionApi : string;
-    
-    constructor(private http : Http, private localStorage : LocalStorageService) {
-        this.forDevelopment = false;
-        this.developmentApi = "https://anthro-api-dev.herokuapp.com/";
-        this.productionApi = "https://anthro-api.herokuapp.com/";
+    constructor(
+        private http: Http,
+        private localStorage: LocalStorageService
+    ) { }
 
-        if(this.forDevelopment)
-            this.server = this.developmentApi;
-        else
-            this.server = this.productionApi;        
+    private getApiEndPoint(): Promise<AppConfig> {
+        return this.http["post"]("/config", {}, new RequestOptions())
+            .toPromise()
+            .then(response => response.json() as AppConfig)
+            .catch(this.handleError);
     }
 
-    endpoint(uri : string) : string {
-        return `${this.server}${uri}`;
+    endpoint(apiEndPoint: string, uri: string): string {
+        let endpoint = `${apiEndPoint}${uri}`;
+        return endpoint;
     }
 
-    handleError(error : any) : Promise<any> {
+    handleError(error: any): Promise<any> {
         return Promise.reject(error.message || error);
     }
 
-    apiCall(request : iApiCall) : Promise<Result> {
+    apiCall(request: iApiCall): Promise<Result> {
         let session = this.localStorage.get<Session>("anthro.user-session");
         let payload = {
             data: request.body,
             auth: {}
         };
 
-        if(session) {
-            let headers = new Headers();
-            headers.append("x-access-token", session.token);
-            
-            return this.http[request.verb](this.endpoint(request.uri), payload, new RequestOptions({ headers: headers }))
-                .toPromise()
-                .then(response => response.json() as Result)
-                .catch(this.handleError);
-        } else {
-            return this.http[request.verb](this.endpoint(request.uri), payload)
-                .toPromise()
-                .then(response => response.json() as Result)
-                .catch(this.handleError);
-        }
+        return this.getApiEndPoint().then((config) => {
+            if (session) {
+                let headers = new Headers();
+                headers.append("x-access-token", session.token);
+
+                return this.http[request.verb](this.endpoint(config.api, request.uri), payload, new RequestOptions({ headers: headers }))
+                    .toPromise()
+                    .then(response => response.json() as Result)
+                    .catch(this.handleError);
+            } else {
+                return this.http[request.verb](this.endpoint(config.api, request.uri), payload)
+                    .toPromise()
+                    .then(response => response.json() as Result)
+                    .catch(this.handleError);
+            }
+        });
     }
 }
