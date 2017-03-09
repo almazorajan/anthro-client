@@ -8,10 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var helpers_1 = require("../../helpers/helpers");
-var models_1 = require("../../models/models");
+var core_1 = require('@angular/core');
+var helpers_1 = require('../../helpers/helpers');
+var models_1 = require('../../models/models');
 var EmployeeContactsComponent = (function () {
     function EmployeeContactsComponent(swal, toast) {
         this.swal = swal;
@@ -31,31 +30,30 @@ var EmployeeContactsComponent = (function () {
         var index = this.employee.landlines.indexOf(landline);
         this.employee.landlines.splice(index, 1);
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', models_1.Employee)
+    ], EmployeeContactsComponent.prototype, "employee", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], EmployeeContactsComponent.prototype, "operation", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], EmployeeContactsComponent.prototype, "isFormDisabled", void 0);
+    EmployeeContactsComponent = __decorate([
+        core_1.Component({
+            selector: 'employee-contacts-component',
+            templateUrl: './app/components/employee-contacts/employee-contacts.page.html',
+            providers: [
+                helpers_1.SwalHelper,
+                helpers_1.ToastHelper
+            ]
+        }), 
+        __metadata('design:paramtypes', [helpers_1.SwalHelper, helpers_1.ToastHelper])
+    ], EmployeeContactsComponent);
     return EmployeeContactsComponent;
 }());
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", models_1.Employee)
-], EmployeeContactsComponent.prototype, "employee", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Number)
-], EmployeeContactsComponent.prototype, "operation", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean)
-], EmployeeContactsComponent.prototype, "isFormDisabled", void 0);
-EmployeeContactsComponent = __decorate([
-    core_1.Component({
-        selector: 'employee-contacts-component',
-        templateUrl: './app/components/employee-contacts/employee-contacts.page.html',
-        providers: [
-            helpers_1.SwalHelper,
-            helpers_1.ToastHelper
-        ]
-    }),
-    __metadata("design:paramtypes", [helpers_1.SwalHelper,
-        helpers_1.ToastHelper])
-], EmployeeContactsComponent);
 exports.EmployeeContactsComponent = EmployeeContactsComponent;
 //# sourceMappingURL=employee-contacts.component.js.map

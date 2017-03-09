@@ -8,11 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var helpers_1 = require("../../helpers/helpers");
-var services_1 = require("../../services/services");
-var models_1 = require("../../models/models");
+var core_1 = require('@angular/core');
+var helpers_1 = require('../../helpers/helpers');
+var services_1 = require('../../services/services');
+var models_1 = require('../../models/models');
 var EmployeeListComponent = (function () {
     function EmployeeListComponent(swal, toast, employeeService, companyService, employmentStatusService, positionService) {
         this.swal = swal;
@@ -87,27 +86,22 @@ var EmployeeListComponent = (function () {
         this.getAllEmployees();
         this.modal.hide();
     };
+    EmployeeListComponent = __decorate([
+        core_1.Component({
+            selector: 'employee-list-component',
+            templateUrl: './app/components/employee-list/employee-list.page.html',
+            providers: [
+                helpers_1.SwalHelper,
+                helpers_1.ToastHelper,
+                services_1.EmployeeService,
+                services_1.CompanyService,
+                services_1.EmploymentStatusService,
+                services_1.PositionService,
+            ]
+        }), 
+        __metadata('design:paramtypes', [helpers_1.SwalHelper, helpers_1.ToastHelper, services_1.EmployeeService, services_1.CompanyService, services_1.EmploymentStatusService, services_1.PositionService])
+    ], EmployeeListComponent);
     return EmployeeListComponent;
 }());
-EmployeeListComponent = __decorate([
-    core_1.Component({
-        selector: 'employee-list-component',
-        templateUrl: './app/components/employee-list/employee-list.page.html',
-        providers: [
-            helpers_1.SwalHelper,
-            helpers_1.ToastHelper,
-            services_1.EmployeeService,
-            services_1.CompanyService,
-            services_1.EmploymentStatusService,
-            services_1.PositionService,
-        ]
-    }),
-    __metadata("design:paramtypes", [helpers_1.SwalHelper,
-        helpers_1.ToastHelper,
-        services_1.EmployeeService,
-        services_1.CompanyService,
-        services_1.EmploymentStatusService,
-        services_1.PositionService])
-], EmployeeListComponent);
 exports.EmployeeListComponent = EmployeeListComponent;
 //# sourceMappingURL=employee-list.component.js.map

@@ -8,12 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var router_1 = require("@angular/router");
-var services_1 = require("../../services/services");
-var helpers_1 = require("../../helpers/helpers");
-var models_1 = require("../../models/models");
+var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
+var services_1 = require('../../services/services');
+var helpers_1 = require('../../helpers/helpers');
+var models_1 = require('../../models/models');
 var LoginComponent = (function () {
     function LoginComponent(swal, toast, loginService, localStorage, router) {
         this.swal = swal;
@@ -67,24 +66,20 @@ var LoginComponent = (function () {
             this.toast.error(e);
         }
     };
+    LoginComponent = __decorate([
+        core_1.Component({
+            selector: 'login-component',
+            templateUrl: './app/components/login/login-page.html',
+            providers: [
+                helpers_1.SwalHelper,
+                helpers_1.ToastHelper,
+                services_1.LoginService,
+                services_1.LocalStorageService
+            ]
+        }), 
+        __metadata('design:paramtypes', [helpers_1.SwalHelper, helpers_1.ToastHelper, services_1.LoginService, services_1.LocalStorageService, router_1.Router])
+    ], LoginComponent);
     return LoginComponent;
 }());
-LoginComponent = __decorate([
-    core_1.Component({
-        selector: 'login-component',
-        templateUrl: './app/components/login/login-page.html',
-        providers: [
-            helpers_1.SwalHelper,
-            helpers_1.ToastHelper,
-            services_1.LoginService,
-            services_1.LocalStorageService
-        ]
-    }),
-    __metadata("design:paramtypes", [helpers_1.SwalHelper,
-        helpers_1.ToastHelper,
-        services_1.LoginService,
-        services_1.LocalStorageService,
-        router_1.Router])
-], LoginComponent);
 exports.LoginComponent = LoginComponent;
 //# sourceMappingURL=login.component.js.map

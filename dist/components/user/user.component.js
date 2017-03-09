@@ -8,11 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var helpers_1 = require("../../helpers/helpers");
-var services_1 = require("../../services/services");
-var models_1 = require("../../models/models");
+var core_1 = require('@angular/core');
+var helpers_1 = require('../../helpers/helpers');
+var services_1 = require('../../services/services');
+var models_1 = require('../../models/models');
 var UserComponent = (function () {
     function UserComponent(userService, positionService, swal, toast, localStorage) {
         this.userService = userService;
@@ -313,25 +312,21 @@ var UserComponent = (function () {
             this.toast.error(e);
         }
     };
+    UserComponent = __decorate([
+        core_1.Component({
+            selector: 'user-component',
+            templateUrl: './app/components/user/user-page.html',
+            providers: [
+                services_1.UserService,
+                services_1.PositionService,
+                helpers_1.SwalHelper,
+                helpers_1.ToastHelper,
+                services_1.LocalStorageService
+            ]
+        }), 
+        __metadata('design:paramtypes', [services_1.UserService, services_1.PositionService, helpers_1.SwalHelper, helpers_1.ToastHelper, services_1.LocalStorageService])
+    ], UserComponent);
     return UserComponent;
 }());
-UserComponent = __decorate([
-    core_1.Component({
-        selector: 'user-component',
-        templateUrl: './app/components/user/user-page.html',
-        providers: [
-            services_1.UserService,
-            services_1.PositionService,
-            helpers_1.SwalHelper,
-            helpers_1.ToastHelper,
-            services_1.LocalStorageService
-        ]
-    }),
-    __metadata("design:paramtypes", [services_1.UserService,
-        services_1.PositionService,
-        helpers_1.SwalHelper,
-        helpers_1.ToastHelper,
-        services_1.LocalStorageService])
-], UserComponent);
 exports.UserComponent = UserComponent;
 //# sourceMappingURL=user.component.js.map

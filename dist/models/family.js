@@ -1,6 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var models_1 = require("./models");
+var models_1 = require('./models');
 var Family = (function () {
     function Family() {
         this.firstName = "";

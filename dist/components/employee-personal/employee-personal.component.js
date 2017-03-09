@@ -8,10 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var helpers_1 = require("../../helpers/helpers");
-var models_1 = require("../../models/models");
+var core_1 = require('@angular/core');
+var helpers_1 = require('../../helpers/helpers');
+var models_1 = require('../../models/models');
 var EmployeePersonalComponent = (function () {
     function EmployeePersonalComponent(swal, toast) {
         this.swal = swal;
@@ -36,31 +35,30 @@ var EmployeePersonalComponent = (function () {
             this.toast.error(e);
         }
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', models_1.Employee)
+    ], EmployeePersonalComponent.prototype, "employee", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], EmployeePersonalComponent.prototype, "operation", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], EmployeePersonalComponent.prototype, "isFormDisabled", void 0);
+    EmployeePersonalComponent = __decorate([
+        core_1.Component({
+            selector: 'employee-personal-component',
+            templateUrl: './app/components/employee-personal/employee-personal.page.html',
+            providers: [
+                helpers_1.SwalHelper,
+                helpers_1.ToastHelper
+            ]
+        }), 
+        __metadata('design:paramtypes', [helpers_1.SwalHelper, helpers_1.ToastHelper])
+    ], EmployeePersonalComponent);
     return EmployeePersonalComponent;
 }());
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", models_1.Employee)
-], EmployeePersonalComponent.prototype, "employee", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Number)
-], EmployeePersonalComponent.prototype, "operation", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean)
-], EmployeePersonalComponent.prototype, "isFormDisabled", void 0);
-EmployeePersonalComponent = __decorate([
-    core_1.Component({
-        selector: 'employee-personal-component',
-        templateUrl: './app/components/employee-personal/employee-personal.page.html',
-        providers: [
-            helpers_1.SwalHelper,
-            helpers_1.ToastHelper
-        ]
-    }),
-    __metadata("design:paramtypes", [helpers_1.SwalHelper,
-        helpers_1.ToastHelper])
-], EmployeePersonalComponent);
 exports.EmployeePersonalComponent = EmployeePersonalComponent;
 //# sourceMappingURL=employee-personal.component.js.map

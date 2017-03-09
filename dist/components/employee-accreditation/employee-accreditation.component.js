@@ -8,11 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var helpers_1 = require("../../helpers/helpers");
-var services_1 = require("../../services/services");
-var models_1 = require("../../models/models");
+var core_1 = require('@angular/core');
+var helpers_1 = require('../../helpers/helpers');
+var services_1 = require('../../services/services');
+var models_1 = require('../../models/models');
 var EmployeeAccreditationComponent = (function () {
     function EmployeeAccreditationComponent(swal, toast, employeeService) {
         this.swal = swal;
@@ -150,32 +149,30 @@ var EmployeeAccreditationComponent = (function () {
             }
         });
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', models_1.Employee)
+    ], EmployeeAccreditationComponent.prototype, "employee", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], EmployeeAccreditationComponent.prototype, "operation", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], EmployeeAccreditationComponent.prototype, "isFormDisabled", void 0);
+    EmployeeAccreditationComponent = __decorate([
+        core_1.Component({
+            selector: 'employee-accreditation-component',
+            templateUrl: './app/components/employee-accreditation/employee-accreditation.page.html',
+            providers: [
+                helpers_1.SwalHelper,
+                helpers_1.ToastHelper
+            ]
+        }), 
+        __metadata('design:paramtypes', [helpers_1.SwalHelper, helpers_1.ToastHelper, services_1.EmployeeService])
+    ], EmployeeAccreditationComponent);
     return EmployeeAccreditationComponent;
 }());
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", models_1.Employee)
-], EmployeeAccreditationComponent.prototype, "employee", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Number)
-], EmployeeAccreditationComponent.prototype, "operation", void 0);
-__decorate([
-    core_1.Input(),
-    __metadata("design:type", Boolean)
-], EmployeeAccreditationComponent.prototype, "isFormDisabled", void 0);
-EmployeeAccreditationComponent = __decorate([
-    core_1.Component({
-        selector: 'employee-accreditation-component',
-        templateUrl: './app/components/employee-accreditation/employee-accreditation.page.html',
-        providers: [
-            helpers_1.SwalHelper,
-            helpers_1.ToastHelper
-        ]
-    }),
-    __metadata("design:paramtypes", [helpers_1.SwalHelper,
-        helpers_1.ToastHelper,
-        services_1.EmployeeService])
-], EmployeeAccreditationComponent);
 exports.EmployeeAccreditationComponent = EmployeeAccreditationComponent;
 //# sourceMappingURL=employee-accreditation.component.js.map

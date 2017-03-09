@@ -1,6 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var models_1 = require("./models");
+var models_1 = require('./models');
 var WorkHistory = (function () {
     function WorkHistory() {
         this.position = "";

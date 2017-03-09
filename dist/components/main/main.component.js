@@ -8,12 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var router_1 = require("@angular/router");
-var helpers_1 = require("../../helpers/helpers");
-var services_1 = require("../../services/services");
-var models_1 = require("../../models/models");
+var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
+var helpers_1 = require('../../helpers/helpers');
+var services_1 = require('../../services/services');
+var models_1 = require('../../models/models');
 var MainComponent = (function () {
     function MainComponent(swal, toast, localStorage, positionService, userService, router) {
         this.swal = swal;
@@ -237,26 +236,21 @@ var MainComponent = (function () {
         this.localStorage.remove("anthro.user-session");
         this.redirectToLogin();
     };
+    MainComponent = __decorate([
+        core_1.Component({
+            selector: 'main-component',
+            templateUrl: './app/components/main/main-page.html',
+            providers: [
+                helpers_1.SwalHelper,
+                helpers_1.ToastHelper,
+                services_1.LocalStorageService,
+                services_1.PositionService,
+                services_1.UserService
+            ]
+        }), 
+        __metadata('design:paramtypes', [helpers_1.SwalHelper, helpers_1.ToastHelper, services_1.LocalStorageService, services_1.PositionService, services_1.UserService, router_1.Router])
+    ], MainComponent);
     return MainComponent;
 }());
-MainComponent = __decorate([
-    core_1.Component({
-        selector: 'main-component',
-        templateUrl: './app/components/main/main-page.html',
-        providers: [
-            helpers_1.SwalHelper,
-            helpers_1.ToastHelper,
-            services_1.LocalStorageService,
-            services_1.PositionService,
-            services_1.UserService
-        ]
-    }),
-    __metadata("design:paramtypes", [helpers_1.SwalHelper,
-        helpers_1.ToastHelper,
-        services_1.LocalStorageService,
-        services_1.PositionService,
-        services_1.UserService,
-        router_1.Router])
-], MainComponent);
 exports.MainComponent = MainComponent;
 //# sourceMappingURL=main.component.js.map

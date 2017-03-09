@@ -8,11 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = require("@angular/core");
-var services_1 = require("../../services/services");
-var helpers_1 = require("../../helpers/helpers");
-var models_1 = require("../../models/models");
+var core_1 = require('@angular/core');
+var services_1 = require('../../services/services');
+var helpers_1 = require('../../helpers/helpers');
+var models_1 = require('../../models/models');
 var PositionComponent = (function () {
     function PositionComponent(positionService, moduleService, swal, toast) {
         this.positionService = positionService;
@@ -275,23 +274,20 @@ var PositionComponent = (function () {
             this.modules[i].selected = val;
         }
     };
+    PositionComponent = __decorate([
+        core_1.Component({
+            selector: 'position-component',
+            templateUrl: './app/components/position/position.page.html',
+            providers: [
+                services_1.PositionService,
+                services_1.ModuleService,
+                helpers_1.SwalHelper,
+                helpers_1.ToastHelper
+            ]
+        }), 
+        __metadata('design:paramtypes', [services_1.PositionService, services_1.ModuleService, helpers_1.SwalHelper, helpers_1.ToastHelper])
+    ], PositionComponent);
     return PositionComponent;
 }());
-PositionComponent = __decorate([
-    core_1.Component({
-        selector: 'position-component',
-        templateUrl: './app/components/position/position.page.html',
-        providers: [
-            services_1.PositionService,
-            services_1.ModuleService,
-            helpers_1.SwalHelper,
-            helpers_1.ToastHelper
-        ]
-    }),
-    __metadata("design:paramtypes", [services_1.PositionService,
-        services_1.ModuleService,
-        helpers_1.SwalHelper,
-        helpers_1.ToastHelper])
-], PositionComponent);
 exports.PositionComponent = PositionComponent;
 //# sourceMappingURL=position.component.js.map
