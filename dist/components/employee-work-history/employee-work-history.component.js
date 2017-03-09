@@ -8,10 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var helpers_1 = require('../../helpers/helpers');
-var services_1 = require('../../services/services');
-var models_1 = require('../../models/models');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var helpers_1 = require("../../helpers/helpers");
+var services_1 = require("../../services/services");
+var models_1 = require("../../models/models");
 var EmployeeWorkHistoryComponent = (function () {
     function EmployeeWorkHistoryComponent(swal, toast, employmentStatusService) {
         this.swal = swal;
@@ -180,31 +181,33 @@ var EmployeeWorkHistoryComponent = (function () {
             }
         });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', models_1.Employee)
-    ], EmployeeWorkHistoryComponent.prototype, "employee", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Number)
-    ], EmployeeWorkHistoryComponent.prototype, "operation", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], EmployeeWorkHistoryComponent.prototype, "isFormDisabled", void 0);
-    EmployeeWorkHistoryComponent = __decorate([
-        core_1.Component({
-            selector: 'employee-work-history-component',
-            templateUrl: './app/components/employee-work-history/employee-work-history.page.html',
-            providers: [
-                helpers_1.SwalHelper,
-                helpers_1.ToastHelper,
-                services_1.EmploymentStatusService
-            ]
-        }), 
-        __metadata('design:paramtypes', [helpers_1.SwalHelper, helpers_1.ToastHelper, services_1.EmploymentStatusService])
-    ], EmployeeWorkHistoryComponent);
     return EmployeeWorkHistoryComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", models_1.Employee)
+], EmployeeWorkHistoryComponent.prototype, "employee", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], EmployeeWorkHistoryComponent.prototype, "operation", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], EmployeeWorkHistoryComponent.prototype, "isFormDisabled", void 0);
+EmployeeWorkHistoryComponent = __decorate([
+    core_1.Component({
+        selector: 'employee-work-history-component',
+        templateUrl: './app/components/employee-work-history/employee-work-history.page.html',
+        providers: [
+            helpers_1.SwalHelper,
+            helpers_1.ToastHelper,
+            services_1.EmploymentStatusService
+        ]
+    }),
+    __metadata("design:paramtypes", [helpers_1.SwalHelper,
+        helpers_1.ToastHelper,
+        services_1.EmploymentStatusService])
+], EmployeeWorkHistoryComponent);
 exports.EmployeeWorkHistoryComponent = EmployeeWorkHistoryComponent;
 //# sourceMappingURL=employee-work-history.component.js.map

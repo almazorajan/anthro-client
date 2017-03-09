@@ -8,10 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var helpers_1 = require('../../helpers/helpers');
-var services_1 = require('../../services/services');
-var models_1 = require('../../models/models');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var helpers_1 = require("../../helpers/helpers");
+var services_1 = require("../../services/services");
+var models_1 = require("../../models/models");
 var EmployeeFamilyComponent = (function () {
     function EmployeeFamilyComponent(swal, toast, employeeService) {
         this.swal = swal;
@@ -130,35 +131,37 @@ var EmployeeFamilyComponent = (function () {
             }
         });
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], EmployeeFamilyComponent.prototype, "mainModalId", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Number)
-    ], EmployeeFamilyComponent.prototype, "operation", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', models_1.Employee)
-    ], EmployeeFamilyComponent.prototype, "employee", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], EmployeeFamilyComponent.prototype, "isFormDisabled", void 0);
-    EmployeeFamilyComponent = __decorate([
-        core_1.Component({
-            selector: 'employee-family-component',
-            templateUrl: './app/components/employee-family/employee-family.page.html',
-            providers: [
-                helpers_1.SwalHelper,
-                helpers_1.ToastHelper,
-                services_1.EmployeeService
-            ]
-        }), 
-        __metadata('design:paramtypes', [helpers_1.SwalHelper, helpers_1.ToastHelper, services_1.EmployeeService])
-    ], EmployeeFamilyComponent);
     return EmployeeFamilyComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], EmployeeFamilyComponent.prototype, "mainModalId", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], EmployeeFamilyComponent.prototype, "operation", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", models_1.Employee)
+], EmployeeFamilyComponent.prototype, "employee", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], EmployeeFamilyComponent.prototype, "isFormDisabled", void 0);
+EmployeeFamilyComponent = __decorate([
+    core_1.Component({
+        selector: 'employee-family-component',
+        templateUrl: './app/components/employee-family/employee-family.page.html',
+        providers: [
+            helpers_1.SwalHelper,
+            helpers_1.ToastHelper,
+            services_1.EmployeeService
+        ]
+    }),
+    __metadata("design:paramtypes", [helpers_1.SwalHelper,
+        helpers_1.ToastHelper,
+        services_1.EmployeeService])
+], EmployeeFamilyComponent);
 exports.EmployeeFamilyComponent = EmployeeFamilyComponent;
 //# sourceMappingURL=employee-family.component.js.map

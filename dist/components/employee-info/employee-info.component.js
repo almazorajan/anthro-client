@@ -8,10 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var helpers_1 = require('../../helpers/helpers');
-var services_1 = require('../../services/services');
-var models_1 = require('../../models/models');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var helpers_1 = require("../../helpers/helpers");
+var services_1 = require("../../services/services");
+var models_1 = require("../../models/models");
 var EmployeeInfoComponent = (function () {
     function EmployeeInfoComponent(swal, toast, employeeService) {
         this.swal = swal;
@@ -318,46 +319,48 @@ var EmployeeInfoComponent = (function () {
         }
         return isValid;
     };
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], EmployeeInfoComponent.prototype, "id", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', models_1.Employee)
-    ], EmployeeInfoComponent.prototype, "employee", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Number)
-    ], EmployeeInfoComponent.prototype, "operation", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], EmployeeInfoComponent.prototype, "isFormDisabled", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], EmployeeInfoComponent.prototype, "onAdd", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], EmployeeInfoComponent.prototype, "onUpdate", void 0);
-    __decorate([
-        core_1.Output(), 
-        __metadata('design:type', core_1.EventEmitter)
-    ], EmployeeInfoComponent.prototype, "onDelete", void 0);
-    EmployeeInfoComponent = __decorate([
-        core_1.Component({
-            selector: 'employee-info-component',
-            templateUrl: './app/components/employee-info/employee-info.page.html',
-            providers: [
-                helpers_1.SwalHelper,
-                helpers_1.ToastHelper
-            ]
-        }), 
-        __metadata('design:paramtypes', [helpers_1.SwalHelper, helpers_1.ToastHelper, services_1.EmployeeService])
-    ], EmployeeInfoComponent);
     return EmployeeInfoComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], EmployeeInfoComponent.prototype, "id", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", models_1.Employee)
+], EmployeeInfoComponent.prototype, "employee", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], EmployeeInfoComponent.prototype, "operation", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], EmployeeInfoComponent.prototype, "isFormDisabled", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", core_1.EventEmitter)
+], EmployeeInfoComponent.prototype, "onAdd", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", core_1.EventEmitter)
+], EmployeeInfoComponent.prototype, "onUpdate", void 0);
+__decorate([
+    core_1.Output(),
+    __metadata("design:type", core_1.EventEmitter)
+], EmployeeInfoComponent.prototype, "onDelete", void 0);
+EmployeeInfoComponent = __decorate([
+    core_1.Component({
+        selector: 'employee-info-component',
+        templateUrl: './app/components/employee-info/employee-info.page.html',
+        providers: [
+            helpers_1.SwalHelper,
+            helpers_1.ToastHelper
+        ]
+    }),
+    __metadata("design:paramtypes", [helpers_1.SwalHelper,
+        helpers_1.ToastHelper,
+        services_1.EmployeeService])
+], EmployeeInfoComponent);
 exports.EmployeeInfoComponent = EmployeeInfoComponent;
 //# sourceMappingURL=employee-info.component.js.map

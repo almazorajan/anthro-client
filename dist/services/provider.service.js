@@ -8,10 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
-var local_storage_service_1 = require('./local-storage.service');
-require('rxjs/add/operator/toPromise');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+var local_storage_service_1 = require("./local-storage.service");
+require("rxjs/add/operator/toPromise");
 var AppConfig = (function () {
     function AppConfig() {
     }
@@ -59,11 +60,12 @@ var ProviderService = (function () {
             }
         });
     };
-    ProviderService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http, local_storage_service_1.LocalStorageService])
-    ], ProviderService);
     return ProviderService;
 }());
+ProviderService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http,
+        local_storage_service_1.LocalStorageService])
+], ProviderService);
 exports.ProviderService = ProviderService;
 //# sourceMappingURL=provider.service.js.map

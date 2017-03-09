@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var Tab = (function () {
     function Tab(tab) {
         this.name = tab.name;

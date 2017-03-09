@@ -8,38 +8,40 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var helpers_1 = require('../../helpers/helpers');
-var models_1 = require('../../models/models');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var helpers_1 = require("../../helpers/helpers");
+var models_1 = require("../../models/models");
 var EmployeeGovernmentComponent = (function () {
     function EmployeeGovernmentComponent(swal, toast) {
         this.swal = swal;
         this.toast = toast;
     }
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', models_1.Employee)
-    ], EmployeeGovernmentComponent.prototype, "employee", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Number)
-    ], EmployeeGovernmentComponent.prototype, "operation", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean)
-    ], EmployeeGovernmentComponent.prototype, "isFormDisabled", void 0);
-    EmployeeGovernmentComponent = __decorate([
-        core_1.Component({
-            selector: 'employee-government-component',
-            templateUrl: './app/components/employee-government/employee-government.page.html',
-            providers: [
-                helpers_1.SwalHelper,
-                helpers_1.ToastHelper
-            ]
-        }), 
-        __metadata('design:paramtypes', [helpers_1.SwalHelper, helpers_1.ToastHelper])
-    ], EmployeeGovernmentComponent);
     return EmployeeGovernmentComponent;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", models_1.Employee)
+], EmployeeGovernmentComponent.prototype, "employee", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Number)
+], EmployeeGovernmentComponent.prototype, "operation", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], EmployeeGovernmentComponent.prototype, "isFormDisabled", void 0);
+EmployeeGovernmentComponent = __decorate([
+    core_1.Component({
+        selector: 'employee-government-component',
+        templateUrl: './app/components/employee-government/employee-government.page.html',
+        providers: [
+            helpers_1.SwalHelper,
+            helpers_1.ToastHelper
+        ]
+    }),
+    __metadata("design:paramtypes", [helpers_1.SwalHelper,
+        helpers_1.ToastHelper])
+], EmployeeGovernmentComponent);
 exports.EmployeeGovernmentComponent = EmployeeGovernmentComponent;
 //# sourceMappingURL=employee-government.component.js.map

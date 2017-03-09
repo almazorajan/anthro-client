@@ -8,10 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var models_1 = require('../../models/models');
-var services_1 = require('../../services/services');
-var helpers_1 = require('../../helpers/helpers');
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var models_1 = require("../../models/models");
+var services_1 = require("../../services/services");
+var helpers_1 = require("../../helpers/helpers");
 var ModuleComponent = (function () {
     function ModuleComponent(moduleService, swal, toast) {
         this.moduleService = moduleService;
@@ -180,19 +181,21 @@ var ModuleComponent = (function () {
             _this.toast.error(error);
         });
     };
-    ModuleComponent = __decorate([
-        core_1.Component({
-            selector: 'module-component',
-            templateUrl: './app/components/module/module-page.html',
-            providers: [
-                services_1.ModuleService,
-                helpers_1.SwalHelper,
-                helpers_1.ToastHelper
-            ]
-        }), 
-        __metadata('design:paramtypes', [services_1.ModuleService, helpers_1.SwalHelper, helpers_1.ToastHelper])
-    ], ModuleComponent);
     return ModuleComponent;
 }());
+ModuleComponent = __decorate([
+    core_1.Component({
+        selector: 'module-component',
+        templateUrl: './app/components/module/module-page.html',
+        providers: [
+            services_1.ModuleService,
+            helpers_1.SwalHelper,
+            helpers_1.ToastHelper
+        ]
+    }),
+    __metadata("design:paramtypes", [services_1.ModuleService,
+        helpers_1.SwalHelper,
+        helpers_1.ToastHelper])
+], ModuleComponent);
 exports.ModuleComponent = ModuleComponent;
 //# sourceMappingURL=module.component.js.map
