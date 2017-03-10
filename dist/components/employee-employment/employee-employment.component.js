@@ -86,6 +86,37 @@ var EmployeeEmploymentComponent = (function () {
             _this.toast.error(e || e.message);
         });
     };
+    Object.defineProperty(EmployeeEmploymentComponent.prototype, "employmentStartDate", {
+        get: function () {
+            var def = new Date().toISOString().substring(0, 10);
+            try {
+                if (!this.employee) {
+                    return def;
+                }
+                if (!typeof this.employee.startingDate) {
+                    return def;
+                }
+                this.employee.startingDate = new Date(this.employee.startingDate);
+                return this.employee.startingDate.toISOString().substring(0, 10);
+            }
+            catch (e) {
+                console.log(e);
+            }
+            return def;
+        },
+        set: function (e) {
+            try {
+                var f = e.split('-');
+                var d = new Date(Date.UTC(f[0], f[1] - 1, f[2]));
+                this.employee.startingDate.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1);
+            }
+            catch (e) {
+                console.log(e);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     return EmployeeEmploymentComponent;
 }());
 __decorate([

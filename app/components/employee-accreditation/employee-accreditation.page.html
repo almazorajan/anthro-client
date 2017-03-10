@@ -118,14 +118,13 @@
                             [disabled]="isAccreditationFormDisabled">
                     </div>
                     <div class="form-group">
-                        <label for="dtAccreditationDateAccredited">Title</label>
+                        <label for="dtAccreditationDateAccredited">Date Accredited</label>
                         <input 
                             type="date" 
                             class="form-control" 
                             id="dtAccreditationDateAccredited" 
                             name="dtAccreditationDateAccredited" 
-                            (input)="accreditation.dateAccredited = parseDate($event.target.value)"
-                            [value]="accreditation.dateAccredited | date : 'yyyy-MM-dd'" 
+                            [(ngModel)]="dateAccredited"
                             [disabled]="isAccreditationFormDisabled">
                     </div>
                 </div>

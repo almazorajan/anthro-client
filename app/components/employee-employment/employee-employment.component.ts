@@ -20,7 +20,7 @@ export class EmployeeEmploymentComponent implements OnInit {
         private positionService: PositionService,
         private companyService: CompanyService,
         private employmentStatusService: EmploymentStatusService
-    ) { }    
+    ) { }
 
     @Input() employee: Employee;
     @Input() operation: number;
@@ -40,11 +40,11 @@ export class EmployeeEmploymentComponent implements OnInit {
     }
 
     parseDate(dateString: string): Date {
-        if(dateString) {
+        if (dateString) {
             return new Date(dateString);
         }
         return null;
-    }    
+    }
 
     getPositions(): void {
         this.positions = [];
@@ -62,7 +62,7 @@ export class EmployeeEmploymentComponent implements OnInit {
             this.toast.error(e || e.message);
         });
     }
-    
+
     getCompanies(): void {
         this.companies = [];
         this.loadingCompanies = true;
@@ -88,12 +88,43 @@ export class EmployeeEmploymentComponent implements OnInit {
             this.loadingEmploymentStatuses = false;
             if (result.success) {
                 this.employmentStatuses = result.data as EmploymentStatus[];
-            } else {    
+            } else {
                 this.toast.error(result.message);
             }
         }).catch((e) => {
             this.loadingEmploymentStatuses = false;
             this.toast.error(e || e.message);
         });
+    }
+
+    get employmentStartDate() {
+        let def = new Date().toISOString().substring(0, 10);
+
+        try {
+            if (!this.employee) {
+                return def;
+            }
+
+            if (!typeof this.employee.startingDate) {
+                return def;
+            }
+
+            this.employee.startingDate = new Date(this.employee.startingDate);
+            return this.employee.startingDate.toISOString().substring(0, 10);
+        } catch (e) {
+            console.log(e);
+        }
+
+        return def;
+    }
+
+    set employmentStartDate(e) {
+        try {
+            let f: any = e.split('-');
+            let d = new Date(Date.UTC(f[0], f[1] - 1, f[2]));
+            this.employee.startingDate.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1);
+        } catch (e) {
+            console.log(e);
+        }
     }
 }

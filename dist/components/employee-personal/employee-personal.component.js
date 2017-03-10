@@ -19,6 +19,37 @@ var EmployeePersonalComponent = (function () {
     }
     EmployeePersonalComponent.prototype.ngOnInit = function () {
     };
+    Object.defineProperty(EmployeePersonalComponent.prototype, "birthDate", {
+        get: function () {
+            var def = new Date().toISOString().substring(0, 10);
+            try {
+                if (!this.employee) {
+                    return def;
+                }
+                if (!typeof this.employee.birthDate) {
+                    return def;
+                }
+                this.employee.birthDate = new Date(this.employee.birthDate);
+                return this.employee.birthDate.toISOString().substring(0, 10);
+            }
+            catch (e) {
+                console.log(e);
+            }
+            return def;
+        },
+        set: function (e) {
+            try {
+                var f = e.split('-');
+                var d = new Date(Date.UTC(f[0], f[1] - 1, f[2]));
+                this.employee.birthDate.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1);
+            }
+            catch (e) {
+                console.log(e);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     EmployeePersonalComponent.prototype.parseDate = function (dateString) {
         if (dateString) {
             return new Date(dateString);
