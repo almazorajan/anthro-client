@@ -92,8 +92,7 @@
                                     class="form-control" 
                                     id="dtDateGraduated" 
                                     name="dtDateGraduated" 
-                                    (input)="education.dateGraduated = parseDate($event.target.value)"
-                                    [value]="education.dateGraduated | date : 'yyyy-MM-dd'" 
+                                    [(ngModel)]="dateGraduated"
                                     [disabled]="isEducationFormDisabled">
                             </div>
                         </div>  

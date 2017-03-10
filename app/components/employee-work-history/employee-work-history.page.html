@@ -106,9 +106,8 @@
                                 type="date" 
                                 class="form-control" 
                                 id="dtDateFrom" 
-                                name="dtDateFrom" 
-                                (input)="workHistory.dateFrom = parseDate($event.target.value)"
-                                [value]="workHistory.dateFrom | date : 'yyyy-MM-dd'" 
+                                name="dtDateFrom"
+                                [(ngModel)]="dateFrom"
                                 [disabled]="isWorkHistoryFormDisabled">
                         </div>
                         <div class="col-lg-4">
@@ -118,8 +117,7 @@
                                 class="form-control" 
                                 id="dtDateTo" 
                                 name="dtDateTo" 
-                                (input)="workHistory.dateTo = parseDate($event.target.value)"
-                                [value]="workHistory.dateTo | date : 'yyyy-MM-dd'" 
+                                [(ngModel)]="dateTo"
                                 [disabled]="isWorkHistoryFormDisabled">
                         </div>
                         <div class="col-lg-4">

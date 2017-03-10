@@ -20,6 +20,39 @@ var EmployeeEducationComponent = (function () {
     EmployeeEducationComponent.prototype.ngOnInit = function () {
         this.educationModal = new models_1.Modal("#mdlEducationInfo");
     };
+    Object.defineProperty(EmployeeEducationComponent.prototype, "dateGraduated", {
+        get: function () {
+            var def = new Date().toISOString().substring(0, 10);
+            try {
+                if (!this.employee) {
+                    return def;
+                }
+                if (!this.education) {
+                    return def;
+                }
+                if (typeof this.employee.birthDate.toISOString !== "function") {
+                    this.education.dateGraduated = new Date(this.education.dateGraduated);
+                }
+                return this.employee.birthDate.toISOString().substring(0, 10);
+            }
+            catch (e) {
+                console.log(e);
+            }
+            return def;
+        },
+        set: function (e) {
+            try {
+                var f = e.split('-');
+                var d = new Date(Date.UTC(f[0], f[1] - 1, f[2]));
+                this.education.dateGraduated.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1);
+            }
+            catch (e) {
+                console.log(e);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     EmployeeEducationComponent.prototype.copyEducation = function (education) {
         return JSON.parse(JSON.stringify(education));
     };

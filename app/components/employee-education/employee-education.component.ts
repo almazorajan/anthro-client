@@ -33,6 +33,40 @@ export class EmployeeEducationComponent implements OnInit {
         this.educationModal = new Modal("#mdlEducationInfo");
     }
     
+    set dateGraduated(e) {
+        try {
+            let f: any = e.split('-');
+            let d = new Date(Date.UTC(f[0], f[1] - 1, f[2]));
+            this.education.dateGraduated.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    get dateGraduated() {
+        let def = new Date().toISOString().substring(0, 10);
+
+        try {
+            if (!this.employee) {
+                return def;
+            }
+
+            if (!this.education) {
+                return def;
+            }
+
+            if (typeof this.employee.birthDate.toISOString !== "function") {
+                this.education.dateGraduated = new Date(this.education.dateGraduated);
+            }
+
+            return this.employee.birthDate.toISOString().substring(0, 10);
+        } catch (e) {
+            console.log(e);
+        }
+
+        return def;
+    }
+
     private copyEducation(education: Education): Education {
         return JSON.parse(JSON.stringify(education)) as Education;
     }    

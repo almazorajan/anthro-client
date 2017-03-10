@@ -24,6 +24,72 @@ var EmployeeWorkHistoryComponent = (function () {
         this.workHistoryModal = new models_1.Modal("#mdlWorkHistory");
         this.getAllEmploymentStatus();
     };
+    Object.defineProperty(EmployeeWorkHistoryComponent.prototype, "dateFrom", {
+        get: function () {
+            var def = new Date().toISOString().substring(0, 10);
+            try {
+                if (!this.employee) {
+                    return def;
+                }
+                if (!this.workHistory) {
+                    return def;
+                }
+                if (typeof this.workHistory.dateFrom.toISOString !== "function") {
+                    this.workHistory.dateFrom = new Date(this.workHistory.dateFrom);
+                }
+                return this.workHistory.dateFrom.toISOString().substring(0, 10);
+            }
+            catch (e) {
+                console.log(e);
+            }
+            return def;
+        },
+        set: function (e) {
+            try {
+                var f = e.split('-');
+                var d = new Date(Date.UTC(f[0], f[1] - 1, f[2]));
+                this.workHistory.dateFrom.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1);
+            }
+            catch (e) {
+                console.log(e);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(EmployeeWorkHistoryComponent.prototype, "dateTo", {
+        get: function () {
+            var def = new Date().toISOString().substring(0, 10);
+            try {
+                if (!this.employee) {
+                    return def;
+                }
+                if (!this.workHistory) {
+                    return def;
+                }
+                if (typeof this.workHistory.dateTo.toISOString !== "function") {
+                    this.workHistory.dateTo = new Date(this.workHistory.dateTo);
+                }
+                return this.workHistory.dateTo.toISOString().substring(0, 10);
+            }
+            catch (e) {
+                console.log(e);
+            }
+            return def;
+        },
+        set: function (e) {
+            try {
+                var f = e.split('-');
+                var d = new Date(Date.UTC(f[0], f[1] - 1, f[2]));
+                this.workHistory.dateTo.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1);
+            }
+            catch (e) {
+                console.log(e);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     EmployeeWorkHistoryComponent.prototype.getAllEmploymentStatus = function () {
         var _this = this;
         this.isWorkHistoryFormDisabled = true;

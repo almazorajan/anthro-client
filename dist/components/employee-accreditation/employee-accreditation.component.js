@@ -26,6 +26,39 @@ var EmployeeAccreditationComponent = (function () {
         this.getAccreditationTypes();
         this.setDefaultAccreditationType();
     };
+    Object.defineProperty(EmployeeAccreditationComponent.prototype, "dateAccredited", {
+        get: function () {
+            var def = new Date().toISOString().substring(0, 10);
+            try {
+                if (!this.employee) {
+                    return def;
+                }
+                if (!this.accreditation) {
+                    return def;
+                }
+                if (typeof this.accreditation.dateAccredited.toISOString !== "function") {
+                    this.accreditation.dateAccredited = new Date(this.accreditation.dateAccredited);
+                }
+                return this.accreditation.dateAccredited.toISOString().substring(0, 10);
+            }
+            catch (e) {
+                console.log(e);
+            }
+            return def;
+        },
+        set: function (e) {
+            try {
+                var f = e.split('-');
+                var d = new Date(Date.UTC(f[0], f[1] - 1, f[2]));
+                this.accreditation.dateAccredited.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1);
+            }
+            catch (e) {
+                console.log(e);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
     EmployeeAccreditationComponent.prototype.getAccreditationTypes = function () {
         this.accreditationTypes = this.employeeService.getAccreditationTypes();
     };
