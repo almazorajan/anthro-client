@@ -181,6 +181,13 @@ var EmployeeWorkHistoryComponent = (function () {
             }
         });
     };
+    EmployeeWorkHistoryComponent.prototype.validateEmploymentStatus = function (workHistory) {
+        if (!workHistory)
+            return "";
+        if (!workHistory.employmentStatus)
+            return "";
+        return workHistory.employmentStatus.employmentStatus;
+    };
     return EmployeeWorkHistoryComponent;
 }());
 __decorate([

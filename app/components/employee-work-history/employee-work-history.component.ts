@@ -207,4 +207,14 @@ export class EmployeeWorkHistoryComponent implements OnInit {
             }
         });
     }
+
+    validateEmploymentStatus(workHistory: WorkHistory): string {
+        if (!workHistory)
+            return "";
+        
+        if (!workHistory.employmentStatus)
+            return "";
+        
+        return workHistory.employmentStatus.employmentStatus;
+    }
 }
