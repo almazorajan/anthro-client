@@ -22,8 +22,14 @@
     <div class="col-lg-3">
         <div class="form-group">
             <label for="dtStartingDate">Starting Date</label>
-            <input type="date" class="form-control" id="dtStartingDate" name="dtStartingDate" [value]="employee.startingDate | date:'yyyy-mm-dd'"
-                (input)="employee.startingDate = $event.target.value" [disabled]="isFormDisabled">
+            <input 
+                type="date" 
+                class="form-control" 
+                id="dtStartingDate" 
+                name="dtStartingDate" 
+                (input)="employee.startingDate = parseDate(employee.target.value)"
+                [value]="employee.startingDate | date : 'yyyy-MM-dd'" 
+                [disabled]="isFormDisabled">
         </div>
     </div>
     <div class="col-lg-3">
