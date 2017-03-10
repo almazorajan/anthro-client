@@ -39,6 +39,13 @@ export class EmployeeEmploymentComponent implements OnInit {
         this.getEmploymentStatuses();
     }
 
+    parseDate(dateString: string): Date {
+        if(dateString) {
+            return new Date(dateString);
+        }
+        return null;
+    }    
+
     getPositions(): void {
         this.positions = [];
         this.loadingPositions = true;
