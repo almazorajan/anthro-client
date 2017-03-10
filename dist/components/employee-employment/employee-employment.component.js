@@ -29,6 +29,12 @@ var EmployeeEmploymentComponent = (function () {
         this.getCompanies();
         this.getEmploymentStatuses();
     };
+    EmployeeEmploymentComponent.prototype.parseDate = function (dateString) {
+        if (dateString) {
+            return new Date(dateString);
+        }
+        return null;
+    };
     EmployeeEmploymentComponent.prototype.getPositions = function () {
         var _this = this;
         this.positions = [];

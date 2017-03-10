@@ -75,7 +75,7 @@
                 class="form-control" 
                 id="dtBirthDate" 
                 name="dtBirthDate" 
-                (input)="employee.birthDate = parseDate(employee.target.value)"
+                (input)="employee.birthDate = parseDate($event.target.value)"
                 (ngModelChange)="computeAge(employee);" 
                 [value]="employee.birthDate | date : 'yyyy-MM-dd'" 
                 [disabled]="isFormDisabled">
