@@ -27,7 +27,7 @@
                 class="form-control" 
                 id="dtStartingDate" 
                 name="dtStartingDate" 
-                (input)="employee.startingDate = parseDate(employee.target.value)"
+                (input)="employee.startingDate = parseDate($event.target.value)"
                 [value]="employee.startingDate | date : 'yyyy-MM-dd'" 
                 [disabled]="isFormDisabled">
         </div>
