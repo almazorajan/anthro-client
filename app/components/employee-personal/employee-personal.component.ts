@@ -40,7 +40,7 @@ export class EmployeePersonalComponent implements OnInit {
 
         try {
             if (!this.employee) {
-                return def; 
+                return def;
             }
 
             if (!typeof this.employee.birthDate) {
@@ -51,8 +51,8 @@ export class EmployeePersonalComponent implements OnInit {
             return this.employee.birthDate.toISOString().substring(0, 10);
         } catch (e) {
             console.log(e);
-}
-        
+        }
+
         return def;
     }
 
