@@ -226,7 +226,7 @@ export class EmployeeInfoComponent implements OnInit {
         this.swal.confirm({
             title: "Are You Sure?",
             message: "You will be adding this employee information",
-            confirmButtonText: "Yes, Update It!",
+            confirmButtonText: "Yes, Add It!",
             callBack: (isConfirm) => {
                 if(isConfirm) {
                     this.addEmployee();

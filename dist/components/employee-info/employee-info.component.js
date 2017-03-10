@@ -210,7 +210,7 @@ var EmployeeInfoComponent = (function () {
         this.swal.confirm({
             title: "Are You Sure?",
             message: "You will be adding this employee information",
-            confirmButtonText: "Yes, Update It!",
+            confirmButtonText: "Yes, Add It!",
             callBack: function (isConfirm) {
                 if (isConfirm) {
                     _this.addEmployee();
