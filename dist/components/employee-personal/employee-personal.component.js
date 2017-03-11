@@ -23,11 +23,6 @@ var EmployeePersonalComponent = (function () {
                 day: new Date().getDate()
             }
         };
-        this.myDatePickerOptions = {
-            // other options...
-            dateFormat: 'dd.mm.yyyy',
-            componentDisabled: this.isFormDisabled
-        };
         console.log("sdfsdf");
     }
     EmployeePersonalComponent.prototype.ngOnChanges = function () {
@@ -61,11 +56,6 @@ var EmployeePersonalComponent = (function () {
         catch (e) {
             this.toast.error(e);
         }
-    };
-    EmployeePersonalComponent.prototype.onDateChanged = function (event) {
-        this.birthDate = {
-            date: event.date
-        };
     };
     return EmployeePersonalComponent;
 }());

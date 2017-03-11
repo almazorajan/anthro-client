@@ -67,16 +67,4 @@ export class EmployeePersonalComponent implements OnInit, OnChanges {
             this.toast.error(e);
         }
     }
-
-    private myDatePickerOptions: IMyOptions = {
-        // other options...
-        dateFormat: 'dd.mm.yyyy',
-        componentDisabled: this.isFormDisabled
-    }
-
-    onDateChanged(event: IMyDateModel) {
-        this.birthDate = {
-            date: event.date
-        };
-    }
 }
