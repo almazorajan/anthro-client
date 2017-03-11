@@ -11,6 +11,7 @@ var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var app_routing_module_1 = require("./app-routing.module");
+var mydatepicker_1 = require("mydatepicker");
 var app_component_1 = require("./app.component");
 var company_component_1 = require("./components/company/company.component");
 var employee_accreditation_component_1 = require("./components/employee-accreditation/employee-accreditation.component");
@@ -31,6 +32,7 @@ var module_component_1 = require("./components/module/module.component");
 var page_not_found_component_1 = require("./components/page-not-found/page-not-found.component");
 var position_component_1 = require("./components/position/position.component");
 var user_component_1 = require("./components/user/user.component");
+var date_picker_component_1 = require("./utility-component/date-picker/date-picker.component");
 var services_1 = require("./services/services");
 var pipes_1 = require("./pipes/pipes");
 var AppModule = (function () {
@@ -44,7 +46,8 @@ AppModule = __decorate([
             platform_browser_1.BrowserModule,
             forms_1.FormsModule,
             http_1.HttpModule,
-            app_routing_module_1.AppRoutingModule
+            app_routing_module_1.AppRoutingModule,
+            mydatepicker_1.MyDatePickerModule
         ],
         declarations: [
             app_component_1.AppComponent,
@@ -67,6 +70,7 @@ AppModule = __decorate([
             page_not_found_component_1.PageNotFoundComponent,
             position_component_1.PositionComponent,
             user_component_1.UserComponent,
+            date_picker_component_1.DatePickerComponent,
             pipes_1.UserFilter,
             pipes_1.EmployeeFilter
         ],

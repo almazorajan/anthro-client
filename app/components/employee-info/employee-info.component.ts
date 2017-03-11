@@ -2,6 +2,7 @@ import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { SwalHelper, ToastHelper } from '../../helpers/helpers';
 import { EmployeeService } from '../../services/services';
 import { Employee, Modal, EmployeeInfoTab, Tab } from '../../models/models';
+import { IMyOptions, IMyDateModel } from 'mydatepicker';
 
 @Component({
     selector: 'employee-info-component',
@@ -18,7 +19,7 @@ export class EmployeeInfoComponent implements OnInit {
         private swal: SwalHelper,
         private toast: ToastHelper,
         private employeeService: EmployeeService
-    ) { }    
+    ) { }
 
     @Input() id: string;
     @Input() employee: Employee;
@@ -27,7 +28,7 @@ export class EmployeeInfoComponent implements OnInit {
     @Output() onAdd: EventEmitter<any> = new EventEmitter();
     @Output() onUpdate: EventEmitter<any> = new EventEmitter();
     @Output() onDelete: EventEmitter<any> = new EventEmitter();
-    
+
     tabKeys: any[];
     originalEmployeeInfo: Employee;
     updatingEmployee: boolean = false;
@@ -91,7 +92,7 @@ export class EmployeeInfoComponent implements OnInit {
             badge: 0
         })
     }
-    
+
     ngOnInit() {
         this.tabKeys = Object.keys(this.tabs);
         this.modal = new Modal(`#${this.id}`);
@@ -107,7 +108,7 @@ export class EmployeeInfoComponent implements OnInit {
         this.tabs.education.badge = 0;
         this.tabs.work.badge = 0;
         this.tabs.accreditation.badge = 0;
-    }    
+    }
 
     private addEmployee(): void {
         try {
@@ -117,8 +118,8 @@ export class EmployeeInfoComponent implements OnInit {
             this.employeeService.addEmployee(this.employee).then((result) => {
                 this.updatingEmployee = false;
                 this.isFormDisabled = false;
-                    
-                if(result.success) {
+
+                if (result.success) {
                     this.onAdd.emit();
                     this.operation = 0;
                     this.originalEmployeeInfo = null;
@@ -128,12 +129,12 @@ export class EmployeeInfoComponent implements OnInit {
                     this.toast.error(result.message);
                 }
             })
-            .catch((error) => {
-                this.updatingEmployee = false;
-                this.isFormDisabled = false;
-                this.toast.error(error);
-            });
-        } catch(e) {
+                .catch((error) => {
+                    this.updatingEmployee = false;
+                    this.isFormDisabled = false;
+                    this.toast.error(error);
+                });
+        } catch (e) {
             this.updatingEmployee = false;
             this.toast.error(e);
         }
@@ -146,9 +147,9 @@ export class EmployeeInfoComponent implements OnInit {
 
             this.employeeService.updateEmployee(this.employee).then((result) => {
                 this.updatingEmployee = false;
-                this.isFormDisabled = false;                 
-                    
-                if(result.success) {
+                this.isFormDisabled = false;
+
+                if (result.success) {
                     this.onUpdate.emit();
                     this.operation = 0;
                     this.originalEmployeeInfo = null;
@@ -158,11 +159,11 @@ export class EmployeeInfoComponent implements OnInit {
                     this.toast.error(result.message);
                 }
             })
-            .catch((error) => {
-                this.updatingEmployee = false;
-                this.toast.error(error);
-            });
-        } catch(e) {
+                .catch((error) => {
+                    this.updatingEmployee = false;
+                    this.toast.error(error);
+                });
+        } catch (e) {
             this.updatingEmployee = false;
             this.toast.error(e);
         }
@@ -177,7 +178,7 @@ export class EmployeeInfoComponent implements OnInit {
                 this.isFormDisabled = false;
                 this.deletingEmployee = false;
 
-                if(result.success) {
+                if (result.success) {
                     this.onDelete.emit();
                     this.modal.hide();
                     this.toast.success(result.message);
@@ -185,12 +186,12 @@ export class EmployeeInfoComponent implements OnInit {
                     this.toast.error(result.message);
                 }
             })
-            .catch((error) => {
-                this.isFormDisabled = false;
-                this.deletingEmployee = false;
-                this.toast.error(error);
-            });
-        } catch(e) {
+                .catch((error) => {
+                    this.isFormDisabled = false;
+                    this.deletingEmployee = false;
+                    this.toast.error(error);
+                });
+        } catch (e) {
             this.isFormDisabled = false;
             this.deletingEmployee = false;
             this.toast.error(e);
@@ -202,38 +203,38 @@ export class EmployeeInfoComponent implements OnInit {
         this.operation = 0;
         this.isFormDisabled = true;
         this.employee = JSON.parse(JSON.stringify(this.originalEmployeeInfo)) as Employee;
-    }    
+    }
 
     private cancelAdd(): void {
         this.modal.hide();
         this.operation = 0;
     }
-   
+
     edit(): void {
         this.operation = 1;
         this.isFormDisabled = false;
         this.employee = JSON.parse(JSON.stringify(this.employee)) as Employee;
         this.originalEmployeeInfo = JSON.parse(JSON.stringify(this.employee)) as Employee;
-    } 
-    
+    }
+
     confirmAdd(): void {
         let valid = this.validate();
 
         if (!valid) {
             return;
-        }        
+        }
 
         this.swal.confirm({
             title: "Are You Sure?",
             message: "You will be adding this employee information",
             confirmButtonText: "Yes, Add It!",
             callBack: (isConfirm) => {
-                if(isConfirm) {
+                if (isConfirm) {
                     this.addEmployee();
                 }
             }
         });
-    }    
+    }
 
     confirmUpdate(): void {
         this.swal.confirm({
@@ -241,7 +242,7 @@ export class EmployeeInfoComponent implements OnInit {
             message: "You will be updating this employee information",
             confirmButtonText: "Yes, Update It!",
             callBack: (isConfirm) => {
-                if(isConfirm) {
+                if (isConfirm) {
                     this.updateEmployee();
                 }
             }
@@ -254,12 +255,12 @@ export class EmployeeInfoComponent implements OnInit {
             message: "You will be cancelling this employee information",
             confirmButtonText: "Yes, Cancel It!",
             callBack: (isConfirm) => {
-                if(isConfirm) {
+                if (isConfirm) {
                     this.cancelAdd();
                 }
             }
         });
-    }    
+    }
 
     confirmCancelUpdate(): void {
         this.swal.confirm({
@@ -267,7 +268,7 @@ export class EmployeeInfoComponent implements OnInit {
             message: "You will be reverting your changes",
             confirmButtonText: "Yes, Cancel It!",
             callBack: (isConfirm) => {
-                if(isConfirm) {
+                if (isConfirm) {
                     this.cancelUpdate();
                 }
             }
@@ -280,12 +281,12 @@ export class EmployeeInfoComponent implements OnInit {
             message: "You will be deleting this employee information",
             confirmButtonText: "Delete",
             callBack: (isConfirm) => {
-                if(isConfirm) {
+                if (isConfirm) {
                     this.deleteEmployee();
                 }
             }
         });
-    }   
+    }
 
     private superTrim(str: string): string {
         try {
@@ -294,7 +295,7 @@ export class EmployeeInfoComponent implements OnInit {
             console.log(e);
         }
         return "";
-    }    
+    }
 
     validate(): boolean {
         this.resetTabBadges();
@@ -328,8 +329,8 @@ export class EmployeeInfoComponent implements OnInit {
             this.toast.info("Please select a company");
             this.tabs.employment.badge += 1;
             isValid = false;
-        }        
-        
+        }
+
         if (!this.employee.employmentStatus || !this.superTrim(this.employee.employmentStatus._id)) {
             this.toast.info("Please select an employment status");
             this.tabs.employment.badge += 1;

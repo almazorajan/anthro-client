@@ -43,6 +43,7 @@ export class MainComponent implements OnInit {
     
     ngOnInit() {
         try {
+            document.title = "Ad-haven";
             this.session = new Session();
             this.session = this.localStorage.get<Session>("anthro.user-session");
             this.currentUser = Object.assign({}, this.session.user);

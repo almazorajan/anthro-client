@@ -16,40 +16,90 @@ var EmployeePersonalComponent = (function () {
     function EmployeePersonalComponent(swal, toast) {
         this.swal = swal;
         this.toast = toast;
+        this.birthDate = {
+            date: {
+                year: new Date().getFullYear(),
+                month: new Date().getMonth() + 1,
+                day: new Date().getDate()
+            }
+        };
+        this.myDatePickerOptions = {
+            // other options...
+            dateFormat: 'dd.mm.yyyy',
+            componentDisabled: this.isFormDisabled
+        };
+        console.log("sdfsdf");
     }
-    EmployeePersonalComponent.prototype.ngOnInit = function () {
+    EmployeePersonalComponent.prototype.ngOnChanges = function () {
+        if (this.employee) {
+            if (this.employee.birthDate) {
+                var date = new Date(this.employee.birthDate);
+                this.birthDate = {
+                    date: {
+                        year: date.getFullYear(),
+                        month: date.getMonth() + 1,
+                        day: date.getDate()
+                    }
+                };
+            }
+        }
     };
-    Object.defineProperty(EmployeePersonalComponent.prototype, "birthDate", {
-        get: function () {
-            var def = new Date().toISOString().substring(0, 10);
-            try {
-                if (!this.employee) {
-                    return def;
-                }
-                if (!typeof this.employee.birthDate) {
-                    return def;
-                }
-                this.employee.birthDate = new Date(this.employee.birthDate);
-                return this.employee.birthDate.toISOString().substring(0, 10);
-            }
-            catch (e) {
-                console.log(e);
-            }
-            return def;
-        },
-        set: function (e) {
-            try {
-                var f = e.split('-');
-                var d = new Date(Date.UTC(f[0], f[1] - 1, f[2]));
-                this.employee.birthDate.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1);
-            }
-            catch (e) {
-                console.log(e);
-            }
-        },
-        enumerable: true,
-        configurable: true
-    });
+    EmployeePersonalComponent.prototype.ngOnInit = function () {
+        console.log("dfdfd");
+        // this.onDateChanged({
+        //     date: {
+        //         year: new Date(this.employee.birthDate).getFullYear(),
+        //         month: new Date(this.employee.birthDate).getMonth() + 1,
+        //         day: new Date(this.employee.birthDate).getDate()
+        //     },
+        //     jsdate: new Date(),
+        //     formatted: "",
+        //     epoc: 0
+        // });
+        // if (this.employee.birthDate) {
+        //     this.birthDate = {
+        //         date: {
+        //             year: new Date(this.employee.birthDate).getFullYear(),
+        //             month: new Date(this.employee.birthDate).getMonth() + 1,
+        //             day: new Date(this.employee.birthDate).getDate()
+        //         }
+        //     };
+        // }
+    };
+    // set birthDate(e) {
+    //     try {
+    //         var date = new Date(e.date.year, e.date.month, e.date.day);
+    //         if (this.employee) {
+    //             if (this.employee.birthDate) {
+    //                 this.employee.birthDate = date;
+    //             }
+    //         }
+    //         this.dateOfBirth = {
+    //             date: {
+    //                 year: date.getFullYear(),
+    //                 month: date.getMonth() + 1,
+    //                 day: date.getDate()
+    //             }
+    //         };
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // }
+    // get birthDate() {
+    //     if (this.employee) {
+    //         if (this.employee.birthDate) {
+    //             var date = new Date(this.employee.birthDate);
+    //             this.dateOfBirth = {
+    //                 date: {
+    //                     year: date.getFullYear(),
+    //                     month: date.getMonth() + 1,
+    //                     day: date.getDate()
+    //                 }
+    //             };
+    //         }
+    //     }
+    //     return this.dateOfBirth;
+    // }
     EmployeePersonalComponent.prototype.parseDate = function (dateString) {
         if (dateString) {
             return new Date(dateString);
@@ -66,6 +116,11 @@ var EmployeePersonalComponent = (function () {
         catch (e) {
             this.toast.error(e);
         }
+    };
+    EmployeePersonalComponent.prototype.onDateChanged = function (event) {
+        this.birthDate = {
+            date: event.date
+        };
     };
     return EmployeePersonalComponent;
 }());

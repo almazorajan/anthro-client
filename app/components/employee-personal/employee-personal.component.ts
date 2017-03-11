@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { SwalHelper, ToastHelper } from '../../helpers/helpers';
 import { Employee, Modal } from '../../models/models';
+import { IMyOptions, IMyDateModel } from 'mydatepicker';
 
 @Component({
     selector: 'employee-personal-component',
@@ -11,50 +12,103 @@ import { Employee, Modal } from '../../models/models';
     ]
 })
 
-export class EmployeePersonalComponent implements OnInit {
+export class EmployeePersonalComponent implements OnInit, OnChanges {
 
     constructor(
         private swal: SwalHelper,
         private toast: ToastHelper) {
+        console.log("sdfsdf");
     }
 
     @Input() employee: Employee;
     @Input() operation: number;
     @Input() isFormDisabled: boolean;
 
+    birthDate: any = {
+        date: {
+            year: new Date().getFullYear(),
+            month: new Date().getMonth() + 1,
+            day: new Date().getDate()
+        }
+    };    
+
+    ngOnChanges() {
+        if (this.employee) {
+            if (this.employee.birthDate) {
+                var date = new Date(this.employee.birthDate);
+
+                this.birthDate = {
+                    date: {
+                        year: date.getFullYear(),
+                        month: date.getMonth() + 1,
+                        day: date.getDate()
+                    }
+                };
+            }
+        }
+    }    
+
     ngOnInit() {
+        console.log("dfdfd");
+        // this.onDateChanged({
+        //     date: {
+        //         year: new Date(this.employee.birthDate).getFullYear(),
+        //         month: new Date(this.employee.birthDate).getMonth() + 1,
+        //         day: new Date(this.employee.birthDate).getDate()
+        //     },
+        //     jsdate: new Date(),
+        //     formatted: "",
+        //     epoc: 0
+        // });
+        // if (this.employee.birthDate) {
+        //     this.birthDate = {
+        //         date: {
+        //             year: new Date(this.employee.birthDate).getFullYear(),
+        //             month: new Date(this.employee.birthDate).getMonth() + 1,
+        //             day: new Date(this.employee.birthDate).getDate()
+        //         }
+        //     };
+        // }
     }
 
-    set birthDate(e) {
-        try {
-            let f: any = e.split('-');
-            let d = new Date(Date.UTC(f[0], f[1] - 1, f[2]));
-            this.employee.birthDate.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1);
-        } catch (e) {
-            console.log(e);
-        }
-    }
+    // set birthDate(e) {
+    //     try {
+    //         var date = new Date(e.date.year, e.date.month, e.date.day);
 
-    get birthDate() {
-        let def = new Date().toISOString().substring(0, 10);
+    //         if (this.employee) {
+    //             if (this.employee.birthDate) {
+    //                 this.employee.birthDate = date;
+    //             }
+    //         }
 
-        try {
-            if (!this.employee) {
-                return def;
-            }
+    //         this.dateOfBirth = {
+    //             date: {
+    //                 year: date.getFullYear(),
+    //                 month: date.getMonth() + 1,
+    //                 day: date.getDate()
+    //             }
+    //         };
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // }
 
-            if (!typeof this.employee.birthDate) {
-                return def;
-            }
+    // get birthDate() {
+    //     if (this.employee) {
+    //         if (this.employee.birthDate) {
+    //             var date = new Date(this.employee.birthDate);
+    //             this.dateOfBirth = {
+    //                 date: {
+    //                     year: date.getFullYear(),
+    //                     month: date.getMonth() + 1,
+    //                     day: date.getDate()
+    //                 }
+    //             };
+    //         }
+    //     }
 
-            this.employee.birthDate = new Date(this.employee.birthDate);
-            return this.employee.birthDate.toISOString().substring(0, 10);
-        } catch (e) {
-            console.log(e);
-        }
-
-        return def;
-    }
+    //     return this.dateOfBirth;
+    // }
 
     parseDate(dateString: string): Date {
         if (dateString) {
@@ -72,5 +126,17 @@ export class EmployeePersonalComponent implements OnInit {
         } catch (e) {
             this.toast.error(e);
         }
+    }
+
+    private myDatePickerOptions: IMyOptions = {
+        // other options...
+        dateFormat: 'dd.mm.yyyy',
+        componentDisabled: this.isFormDisabled
+    }
+
+    onDateChanged(event: IMyDateModel) {
+        this.birthDate = {
+            date: event.date
+        };
     }
 }

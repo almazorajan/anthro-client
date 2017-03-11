@@ -25,6 +25,7 @@ var MainComponent = (function () {
     }
     MainComponent.prototype.ngOnInit = function () {
         try {
+            document.title = "Ad-haven";
             this.session = new models_1.Session();
             this.session = this.localStorage.get("anthro.user-session");
             this.currentUser = Object.assign({}, this.session.user);

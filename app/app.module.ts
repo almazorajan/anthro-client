@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule }    from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
+import { MyDatePickerModule } from 'mydatepicker';
 import { AppComponent } from './app.component';
 import { CompanyComponent } from './components/company/company.component';
 import { EmployeeAccreditationComponent } from './components/employee-accreditation/employee-accreditation.component';
@@ -23,6 +24,7 @@ import { ModuleComponent } from './components/module/module.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { PositionComponent } from './components/position/position.component';
 import { UserComponent } from './components/user/user.component';
+import { DatePickerComponent } from './utility-component/date-picker/date-picker.component';
 import { ProviderService, LocalStorageService } from './services/services';
 import { UserFilter, EmployeeFilter } from './pipes/pipes';
 
@@ -31,7 +33,8 @@ import { UserFilter, EmployeeFilter } from './pipes/pipes';
         BrowserModule, 
         FormsModule,
         HttpModule,
-        AppRoutingModule],
+        AppRoutingModule,
+        MyDatePickerModule],
 
     declarations: [
         AppComponent,
@@ -54,6 +57,8 @@ import { UserFilter, EmployeeFilter } from './pipes/pipes';
         PageNotFoundComponent,
         PositionComponent,
         UserComponent,
+
+        DatePickerComponent,
 
         UserFilter,
         EmployeeFilter],

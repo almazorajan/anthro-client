@@ -69,15 +69,10 @@
     </div>
     <div class="col-lg-3">
         <div class="form-group">
-            <label for="dtBirthDate">Birth Date</label>
-            <input 
-                type="date" 
-                class="form-control" 
-                id="dtBirthDate" 
-                name="dtBirthDate" 
-                [(ngModel)]="birthDate"
-                (ngModelChange)="computeAge(employee)"
-                [disabled]="isFormDisabled">
+            <div class="col-lg-12">
+                <label for="dtBirthDate pad-left-0px">Birth Date ({{ employee.birthDate }})</label>
+            </div>
+            <date-picker-component [(date)]="employee.birthDate"></date-picker-component>
         </div>
     </div>
     <div class="col-lg-3">
@@ -94,7 +89,7 @@
     </div>
     <div class="col-lg-3">
         <div class="form-group">
-            <label for="txtBirthPlace">Birth Place</label>
+            <label for="txtBirthPlace">Birth Place</label>   
             <input 
                 type="text" 
                 class="form-control" 
