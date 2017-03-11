@@ -17,6 +17,8 @@ var DateModel = (function () {
 }());
 var DatePickerComponent = (function () {
     function DatePickerComponent() {
+        this.dateChange = new core_1.EventEmitter();
+        this.onUpdate = new core_1.EventEmitter();
         this.years = [];
         this.days = [];
         this.months = [];
@@ -38,8 +40,6 @@ var DatePickerComponent = (function () {
         this.getYears();
         this.getMonths(this.years[0]);
         this.getDays(this.months[0], this.years[0]);
-        this.dateChange = new core_1.EventEmitter();
-        this.onUpdate = new core_1.EventEmitter();
     }
     DatePickerComponent.prototype.ngOnChanges = function () {
         if (this.date) {
@@ -72,6 +72,10 @@ var DatePickerComponent = (function () {
             this.days.push(i);
         }
         this.days.reverse();
+        if (this.days.indexOf(this.dateModel.day) <= -1) {
+            this.dateModel.day = this.days[0];
+            this.onDateChange();
+        }
     };
     DatePickerComponent.prototype.getMonths = function (year) {
         this.months = [];
@@ -83,6 +87,10 @@ var DatePickerComponent = (function () {
             this.months.push(this.availableMonths[i]);
         }
         this.months.reverse();
+        if (this.months.indexOf(this.dateModel.month) <= -1) {
+            this.dateModel.month = this.months[0];
+            this.onDateChange();
+        }
     };
     DatePickerComponent.prototype.getYears = function () {
         this.years = [];
