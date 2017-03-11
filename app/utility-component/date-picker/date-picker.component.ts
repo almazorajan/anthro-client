@@ -16,11 +16,13 @@ export class DatePickerComponent implements OnChanges {
 
     @Input() date: Date;
     @Output() dateChange: EventEmitter<Date>;
+    @Output() onUpdate: EventEmitter<Date>;
 
     years: number[] = [];
     days: number[] = [];
     months: string[] = [];
     dateModel: DateModel = new DateModel();
+
 
     availableMonths = [
         "Jan",
@@ -42,6 +44,7 @@ export class DatePickerComponent implements OnChanges {
         this.getMonths(this.years[0]);
         this.getDays(this.months[0], this.years[0]);
         this.dateChange = new EventEmitter<Date>();
+        this.onUpdate = new EventEmitter<Date>();
     }
 
     ngOnChanges() {
@@ -78,6 +81,8 @@ export class DatePickerComponent implements OnChanges {
         for (let i = 1; i <= limit; i++) {
             this.days.push(i);
         }
+
+        this.days.reverse();
     }
 
     getMonths(year: number): void {
@@ -108,7 +113,8 @@ export class DatePickerComponent implements OnChanges {
     }
 
     onDateChange() {
-        console.log("sfs HELLO f");
-        this.dateChange.emit(new Date(this.dateModel.year, this.availableMonths.indexOf(this.dateModel.month), this.dateModel.day));
+        let newDate = new Date(this.dateModel.year, this.availableMonths.indexOf(this.dateModel.month), this.dateModel.day);
+        this.dateChange.emit(newDate);
+        this.onUpdate.emit(newDate);
     }
 }

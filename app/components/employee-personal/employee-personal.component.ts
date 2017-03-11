@@ -48,67 +48,7 @@ export class EmployeePersonalComponent implements OnInit, OnChanges {
         }
     }    
 
-    ngOnInit() {
-        console.log("dfdfd");
-        // this.onDateChanged({
-        //     date: {
-        //         year: new Date(this.employee.birthDate).getFullYear(),
-        //         month: new Date(this.employee.birthDate).getMonth() + 1,
-        //         day: new Date(this.employee.birthDate).getDate()
-        //     },
-        //     jsdate: new Date(),
-        //     formatted: "",
-        //     epoc: 0
-        // });
-        // if (this.employee.birthDate) {
-        //     this.birthDate = {
-        //         date: {
-        //             year: new Date(this.employee.birthDate).getFullYear(),
-        //             month: new Date(this.employee.birthDate).getMonth() + 1,
-        //             day: new Date(this.employee.birthDate).getDate()
-        //         }
-        //     };
-        // }
-    }
-
-    // set birthDate(e) {
-    //     try {
-    //         var date = new Date(e.date.year, e.date.month, e.date.day);
-
-    //         if (this.employee) {
-    //             if (this.employee.birthDate) {
-    //                 this.employee.birthDate = date;
-    //             }
-    //         }
-
-    //         this.dateOfBirth = {
-    //             date: {
-    //                 year: date.getFullYear(),
-    //                 month: date.getMonth() + 1,
-    //                 day: date.getDate()
-    //             }
-    //         };
-    //     } catch (e) {
-    //         console.log(e);
-    //     }
-    // }
-
-    // get birthDate() {
-    //     if (this.employee) {
-    //         if (this.employee.birthDate) {
-    //             var date = new Date(this.employee.birthDate);
-    //             this.dateOfBirth = {
-    //                 date: {
-    //                     year: date.getFullYear(),
-    //                     month: date.getMonth() + 1,
-    //                     day: date.getDate()
-    //                 }
-    //             };
-    //         }
-    //     }
-
-    //     return this.dateOfBirth;
-    // }
+    ngOnInit() { }
 
     parseDate(dateString: string): Date {
         if (dateString) {
@@ -117,9 +57,9 @@ export class EmployeePersonalComponent implements OnInit, OnChanges {
         return null;
     }
 
-    computeAge(employee: Employee): void {
+    computeAge(): void {
         try {
-            var birthDate = new Date(employee.birthDate);
+            var birthDate = new Date(this.employee.birthDate);
             var birthDay = new Date(birthDate.getFullYear(), birthDate.getMonth(), birthDate.getDay());
             var diff = Date.now() - birthDay.getTime();
             this.employee.age = Math.abs(new Date(diff).getUTCFullYear() - 1970);
