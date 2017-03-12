@@ -5,7 +5,7 @@ import { EmploymentStatus, Modal } from '../../models/models';
 
 @Component({
     selector: 'employment-status-component',
-    templateUrl: './app/components/employment-status/employment-status.page.html',
+    templateUrl: './app/utility-components/employment-status/employment-status.page.html',
     providers: [
         SwalHelper,
         ToastHelper,
