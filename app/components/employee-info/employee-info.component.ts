@@ -1,4 +1,4 @@
-import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter, OnChanges } from '@angular/core';
 import { SwalHelper, ToastHelper } from '../../helpers/helpers';
 import { EmployeeService } from '../../services/services';
 import { Employee, Modal, EmployeeInfoTab, Tab } from '../../models/models';
@@ -13,7 +13,7 @@ import { IMyOptions, IMyDateModel } from 'mydatepicker';
     ]
 })
 
-export class EmployeeInfoComponent implements OnInit {
+export class EmployeeInfoComponent implements OnInit, OnChanges {
 
     constructor(
         private swal: SwalHelper,
@@ -98,6 +98,10 @@ export class EmployeeInfoComponent implements OnInit {
         this.modal = new Modal(`#${this.id}`);
     }
 
+    ngOnChanges() {
+        this.resetTabBadges();
+    }
+
     private resetTabBadges(): void {
         this.tabs.personal.badge = 0;
         this.tabs.employment.badge = 0;
@@ -159,10 +163,10 @@ export class EmployeeInfoComponent implements OnInit {
                     this.toast.error(result.message);
                 }
             })
-                .catch((error) => {
-                    this.updatingEmployee = false;
-                    this.toast.error(error);
-                });
+            .catch((error) => {
+                this.updatingEmployee = false;
+                this.toast.error(error);
+            });
         } catch (e) {
             this.updatingEmployee = false;
             this.toast.error(e);

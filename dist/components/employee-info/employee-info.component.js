@@ -86,6 +86,9 @@ var EmployeeInfoComponent = (function () {
         this.tabKeys = Object.keys(this.tabs);
         this.modal = new models_1.Modal("#" + this.id);
     };
+    EmployeeInfoComponent.prototype.ngOnChanges = function () {
+        this.resetTabBadges();
+    };
     EmployeeInfoComponent.prototype.resetTabBadges = function () {
         this.tabs.personal.badge = 0;
         this.tabs.employment.badge = 0;
