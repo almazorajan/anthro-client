@@ -38,41 +38,7 @@ export class EmployeeAccreditationComponent implements OnInit {
         this.accreditationModal = new Modal("#mdlAccreditationInfo");
         this.getAccreditationTypes();
         this.setDefaultAccreditationType();
-    }    
-
-    set dateAccredited(e) {
-        try {
-            let f: any = e.split('-');
-            let d = new Date(Date.UTC(f[0], f[1] - 1, f[2]));
-            this.accreditation.dateAccredited.setFullYear(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() + 1);
-        } catch (e) {
-            console.log(e);
-        }
     }
-
-    get dateAccredited() {
-        let def = new Date().toISOString().substring(0, 10);
-
-        try {
-            if (!this.employee) {
-                return def;
-            }
-
-            if (!this.accreditation) {
-                return def;
-            }
-
-            if (typeof this.accreditation.dateAccredited.toISOString !== "function") {
-                this.accreditation.dateAccredited = new Date(this.accreditation.dateAccredited);
-            }
-
-            return this.accreditation.dateAccredited.toISOString().substring(0, 10);
-        } catch (e) {
-            console.log(e);
-        }
-
-        return def;
-    }    
 
     private getAccreditationTypes(): void {
         this.accreditationTypes = this.employeeService.getAccreditationTypes();
@@ -129,7 +95,8 @@ export class EmployeeAccreditationComponent implements OnInit {
     }
 
     private cancelAppendAccreditation(): void {
-
+        this.accreditation = null;
+        this.accreditationModal.hide();
     }    
 
     private deleteAccreditation(accreditations: Accreditation[], accreditation: Accreditation): void {
@@ -179,11 +146,11 @@ export class EmployeeAccreditationComponent implements OnInit {
     confirmCancelAdd(): void {
         this.swal.confirm({
             title: "Are You Sure?",
-            message: "You will be cancelling this family information",
+            message: "You will be cancelling this accreditation information",
             confirmButtonText: "Yes, Cancel It!",
             callBack: (isConfirm) => {
                 if(isConfirm) {
-                    this.appendAccreditation();
+                    this.cancelAppendAccreditation();
                 }
             }
         });
@@ -192,7 +159,7 @@ export class EmployeeAccreditationComponent implements OnInit {
     confirmUpdateAccreditation(): void {
         this.swal.confirm({
             title: "Are You Sure?",
-            message: "You will be cancelling this family information",
+            message: "You will be cancelling this accreditation information",
             confirmButtonText: "Yes, Cancel It!",
             callBack: (isConfirm) => {
                 if(isConfirm) {
