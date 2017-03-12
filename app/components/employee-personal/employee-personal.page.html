@@ -69,10 +69,10 @@
     </div>
     <div class="col-lg-3">
         <div class="form-group">
-            <div class="col-lg-12">
-                <label for="dtBirthDate pad-left-0px">Birth Date</label>
+            <div class="col-lg-12 pad-left-0px">
+                <label for="dtBirthDate">Birth Date</label>
             </div>
-            <date-picker-component [(date)]="employee.birthDate" (onUpdate)="computeAge()"></date-picker-component>
+            <date-picker-component [(date)]="employee.birthDate" [disabled]="isFormDisabled" (onUpdate)="computeAge()"></date-picker-component>
         </div>
     </div>
     <div class="col-lg-3">

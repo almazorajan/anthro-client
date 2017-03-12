@@ -15,6 +15,7 @@ class DateModel {
 export class DatePickerComponent implements OnChanges {
 
     @Input() date: Date;
+    @Input() disabled: boolean;
     @Output() dateChange: EventEmitter<Date> = new EventEmitter<Date>();
     @Output() onUpdate: EventEmitter<Date> = new EventEmitter<Date>();
 

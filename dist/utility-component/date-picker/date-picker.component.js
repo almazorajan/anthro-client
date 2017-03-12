@@ -113,6 +113,10 @@ __decorate([
     __metadata("design:type", Date)
 ], DatePickerComponent.prototype, "date", void 0);
 __decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], DatePickerComponent.prototype, "disabled", void 0);
+__decorate([
     core_1.Output(),
     __metadata("design:type", core_1.EventEmitter)
 ], DatePickerComponent.prototype, "dateChange", void 0);
