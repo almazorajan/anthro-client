@@ -45,7 +45,7 @@ var DatePickerComponent = (function () {
         if (this.date) {
             this.date = new Date(this.date);
             this.dateModel.day = Number(this.date.getDate());
-            this.dateModel.month = String(this.months[this.date.getMonth()]);
+            this.dateModel.month = String(this.availableMonths[this.date.getMonth()]);
             this.dateModel.year = this.date.getFullYear();
             this.getMonths(this.dateModel.year);
             this.getDays(this.dateModel.month, this.dateModel.year);

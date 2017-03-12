@@ -47,7 +47,7 @@ export class DatePickerComponent implements OnChanges {
         if (this.date) {
             this.date = new Date(this.date);
             this.dateModel.day = Number(this.date.getDate());
-            this.dateModel.month = String(this.months[this.date.getMonth()]);
+            this.dateModel.month = String(this.availableMonths[this.date.getMonth()]);
             this.dateModel.year = this.date.getFullYear();
             this.getMonths(this.dateModel.year);
             this.getDays(this.dateModel.month, this.dateModel.year);
@@ -97,7 +97,7 @@ export class DatePickerComponent implements OnChanges {
         for (let i = 0; i < limit; i++) {
             this.months.push(this.availableMonths[i]);
         }
-
+        
         this.months.reverse();
 
         if (this.months.indexOf(this.dateModel.month) <= -1) {
