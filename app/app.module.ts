@@ -39,6 +39,15 @@ import { UserFilter, EmployeeFilter } from './pipes/pipes';
     declarations: [
         AppComponent,
         CompanyComponent,
+        EmploymentStatusComponent,
+        LoginComponent,
+        MainComponent,
+        ModuleComponent,
+        PageNotFoundComponent,
+        PositionComponent,
+        UserComponent,
+
+        DatePickerComponent,
         EmployeeAccreditationComponent,
         EmployeeAddressComponent,
         EmployeeContactsComponent,
@@ -50,15 +59,6 @@ import { UserFilter, EmployeeFilter } from './pipes/pipes';
         EmployeeListComponent,
         EmployeePersonalComponent,
         EmployeeWorkHistoryComponent,
-        EmploymentStatusComponent,
-        LoginComponent,
-        MainComponent,
-        ModuleComponent,
-        PageNotFoundComponent,
-        PositionComponent,
-        UserComponent,
-
-        DatePickerComponent,
 
         UserFilter,
         EmployeeFilter],
