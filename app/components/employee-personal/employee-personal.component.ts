@@ -17,7 +17,6 @@ export class EmployeePersonalComponent implements OnInit, OnChanges {
     constructor(
         private swal: SwalHelper,
         private toast: ToastHelper) {
-        console.log("sdfsdf");
     }
 
     @Input() employee: Employee;

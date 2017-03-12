@@ -23,7 +23,6 @@ var EmployeePersonalComponent = (function () {
                 day: new Date().getDate()
             }
         };
-        console.log("sdfsdf");
     }
     EmployeePersonalComponent.prototype.ngOnChanges = function () {
         if (this.employee) {

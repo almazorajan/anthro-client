@@ -100,26 +100,30 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-4">
-                            <label for="dtDateFrom">Date From</label>
-                            <input 
-                                type="date" 
-                                class="form-control" 
-                                id="dtDateFrom" 
-                                name="dtDateFrom"
-                                [(ngModel)]="dateFrom"
-                                [disabled]="isWorkHistoryFormDisabled">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-12 pad-left-0px">
+                                    <label for="dtWorkHistoryDateFrom">Date From</label>
+                                </div>
+                                <date-picker-component 
+                                    [(date)]="workHistory.dateFrom" 
+                                    [disabled]="isWorkHistoryFromDisabled">
+                                </date-picker-component>
+                            </div>
                         </div>
-                        <div class="col-lg-4">
-                            <label for="dtDateTo">Date To</label>
-                            <input 
-                                type="date" 
-                                class="form-control" 
-                                id="dtDateTo" 
-                                name="dtDateTo" 
-                                [(ngModel)]="dateTo"
-                                [disabled]="isWorkHistoryFormDisabled">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-12 pad-left-0px">
+                                    <label for="dtWorkHistoryDateTo">Date To</label>
+                                </div>
+                                <date-picker-component 
+                                    [(date)]="workHistory.dateTo" 
+                                    [disabled]="isWorkHistoryFromDisabled">
+                                </date-picker-component>
+                            </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-lg-4">
                             <label for="txtWorkHistoryReasonForLeaving">Reason For Leaving</label>
                             <input
@@ -130,8 +134,6 @@
                                 [(ngModel)]="workHistory.reasonForLeaving"
                                 [disabled]="isWorkHistoryFormDisabled">
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label for="nbWorkHistorySalary">Salary</label>
