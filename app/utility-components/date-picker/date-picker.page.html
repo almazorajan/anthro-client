@@ -1,0 +1,15 @@
+<div class="col-lg-4 pad-width-0px">
+    <select class="form-control pad-width-3px" name="dtDatePickerMonth" [(ngModel)]="dateModel.month" [disabled]="disabled" (ngModelChange)="onDateChange()">
+        <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+    </select>
+</div>
+<div class="col-lg-3 pad-width-0px">
+    <select class="form-control pad-width-3px" name="dtDatePickerDay" [(ngModel)]="dateModel.day" [disabled]="disabled" (ngModelChange)="onDateChange()">
+        <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+    </select>
+</div>
+<div class="col-lg-5 pad-width-0px">
+    <select class="form-control pad-width-3px" name="dtDatePickerYear" [(ngModel)]="dateModel.year" [disabled]="disabled" (ngModelChange)="onDateChange()">
+        <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+    </select>
+</div>

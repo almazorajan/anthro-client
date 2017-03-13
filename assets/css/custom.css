@@ -31,3 +31,30 @@
     padding-top: 10px; 
     margin-bottom: 30px;
 }
+
+.pad-left-0px {
+    padding-left: 0px;
+}
+
+.pad-width-3px {
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.pad-width-5px {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.pad-width-0px {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.pad-left-5px {
+    padding-left: 5px;
+}
+
+.pad-left-3px {
+    padding-left: 3px;
+}

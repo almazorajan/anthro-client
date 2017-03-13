@@ -23,8 +23,8 @@
             '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
             // other libraries
             'rxjs': 'npm:rxjs',
+            'mydatepicker': 'npm:mydatepicker/bundles/mydatepicker.umd.js',
             'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
-
             'angular-2-local-storage': 'vendor/angular-2-local-storage'
         },
         // packages tells the System loader how to load when no filename and/or no extension
