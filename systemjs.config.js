@@ -25,7 +25,8 @@
             'rxjs': 'npm:rxjs',
             'mydatepicker': 'npm:mydatepicker/bundles/mydatepicker.umd.js',
             'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
-            'angular-2-local-storage': 'vendor/angular-2-local-storage'
+            'angular-2-local-storage': 'vendor/angular-2-local-storage',
+            'jspdf': 'npm:jspdf/dist/jspdf.min.js'
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {

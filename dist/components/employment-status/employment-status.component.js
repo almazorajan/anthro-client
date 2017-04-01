@@ -211,7 +211,7 @@ var EmploymentStatusComponent = (function () {
 EmploymentStatusComponent = __decorate([
     core_1.Component({
         selector: 'employment-status-component',
-        templateUrl: './app/utility-components/employment-status/employment-status.page.html',
+        templateUrl: './app/components/employment-status/employment-status.page.html',
         providers: [
             helpers_1.SwalHelper,
             helpers_1.ToastHelper,

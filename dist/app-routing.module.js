@@ -16,6 +16,7 @@ var login_component_1 = require("./components/login/login.component");
 var main_component_1 = require("./components/main/main.component");
 var module_component_1 = require("./components/module/module.component");
 var page_not_found_component_1 = require("./components/page-not-found/page-not-found.component");
+var uploader_component_1 = require("./components/uploader/uploader.component");
 var position_component_1 = require("./components/position/position.component");
 var user_component_1 = require("./components/user/user.component");
 var routes = [
@@ -59,6 +60,10 @@ var routes = [
             {
                 path: 'company',
                 component: company_component_1.CompanyComponent
+            },
+            {
+                path: 'uploader',
+                component: uploader_component_1.UploaderComponent
             }
         ]
     }

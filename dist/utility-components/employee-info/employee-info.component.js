@@ -13,6 +13,7 @@ var core_1 = require("@angular/core");
 var helpers_1 = require("../../helpers/helpers");
 var services_1 = require("../../services/services");
 var models_1 = require("../../models/models");
+var jsPDF = require("jspdf");
 var EmployeeInfoComponent = (function () {
     function EmployeeInfoComponent(swal, toast, employeeService) {
         this.swal = swal;
@@ -21,6 +22,7 @@ var EmployeeInfoComponent = (function () {
         this.onAdd = new core_1.EventEmitter();
         this.onUpdate = new core_1.EventEmitter();
         this.onDelete = new core_1.EventEmitter();
+        this.pdfTemplateId = "employee-pdf-template";
         this.updatingEmployee = false;
         this.deletingEmployee = false;
         this.loadingCompanies = false;
@@ -321,6 +323,18 @@ var EmployeeInfoComponent = (function () {
             isValid = false;
         }
         return isValid;
+    };
+    EmployeeInfoComponent.prototype.print = function () {
+        var specialElementHandlers = {
+            '#editor': function (element, renderer) {
+                return true;
+            }
+        };
+        var doc = new jsPDF();
+        doc.fromHTML(document.getElementById(this.pdfTemplateId).outerHTML, 15, 15, {
+            'width': 170
+        });
+        doc.save('sample-file.pdf');
     };
     return EmployeeInfoComponent;
 }());

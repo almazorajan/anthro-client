@@ -87,6 +87,9 @@
                 </div>
                 <div class="modal-footer" *ngIf="operation === 0">
                     <button (click)="edit()" type="button" class="btn btn-primary">Edit</button>
+                    <button (click)="print()" type="button" class="btn btn-warning pull-left">
+                        <i class="glyphicon glyphicon-print"></i> Print
+                    </button>
                     <button (click)="confirmDelete()" type="button" class="btn btn-default pull-left">
                         <i class="glyphicon glyphicon-warning-sign"></i> Delete
                     </button>
@@ -103,3 +106,4 @@
         </div>
     </div>
 </div>
+<!--<employee-pdf-component [id]="pdfTemplateId"></employee-pdf-component>-->

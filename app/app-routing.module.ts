@@ -9,6 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import { MainComponent } from './components/main/main.component';
 import { ModuleComponent } from './components/module/module.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { UploaderComponent } from './components/uploader/uploader.component';
 import { PositionComponent } from './components/position/position.component';
 import { UserComponent } from './components/user/user.component';
 
@@ -53,6 +54,10 @@ const routes: Routes = [
             {
                 path: 'company',
                 component: CompanyComponent
+            },
+            {
+                path: 'uploader',
+                component: UploaderComponent
             }
         ]
     }

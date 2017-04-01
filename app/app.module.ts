@@ -13,6 +13,7 @@ import { EmployeeEducationComponent } from './utility-components/employee-educat
 import { EmployeeEmploymentComponent } from './utility-components/employee-employment/employee-employment.component';
 import { EmployeeFamilyComponent } from './utility-components/employee-family/employee-family.component';
 import { EmployeeGovernmentComponent } from './utility-components/employee-government/employee-government.component';
+import { EmployeePdfComponent } from './utility-components/employee-pdf/employee-pdf.component';
 import { EmployeeInfoComponent } from './utility-components/employee-info/employee-info.component';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
 import { EmployeePersonalComponent } from './utility-components/employee-personal/employee-personal.component';
@@ -23,6 +24,7 @@ import { MainComponent } from './components/main/main.component';
 import { ModuleComponent } from './components/module/module.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { PositionComponent } from './components/position/position.component';
+import { UploaderComponent } from './components/uploader/uploader.component';
 import { UserComponent } from './components/user/user.component';
 import { DatePickerComponent } from './utility-components/date-picker/date-picker.component';
 import { ProviderService, LocalStorageService } from './services/services';
@@ -45,6 +47,7 @@ import { UserFilter, EmployeeFilter } from './pipes/pipes';
         ModuleComponent,
         PageNotFoundComponent,
         PositionComponent,
+        UploaderComponent,
         UserComponent,
 
         DatePickerComponent,
@@ -55,6 +58,7 @@ import { UserFilter, EmployeeFilter } from './pipes/pipes';
         EmployeeEmploymentComponent,
         EmployeeFamilyComponent,
         EmployeeGovernmentComponent,
+        EmployeePdfComponent,
         EmployeeInfoComponent,
         EmployeeListComponent,
         EmployeePersonalComponent,

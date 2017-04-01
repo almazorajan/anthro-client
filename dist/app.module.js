@@ -21,6 +21,7 @@ var employee_education_component_1 = require("./utility-components/employee-educ
 var employee_employment_component_1 = require("./utility-components/employee-employment/employee-employment.component");
 var employee_family_component_1 = require("./utility-components/employee-family/employee-family.component");
 var employee_government_component_1 = require("./utility-components/employee-government/employee-government.component");
+var employee_pdf_component_1 = require("./utility-components/employee-pdf/employee-pdf.component");
 var employee_info_component_1 = require("./utility-components/employee-info/employee-info.component");
 var employee_list_component_1 = require("./components/employee-list/employee-list.component");
 var employee_personal_component_1 = require("./utility-components/employee-personal/employee-personal.component");
@@ -31,6 +32,7 @@ var main_component_1 = require("./components/main/main.component");
 var module_component_1 = require("./components/module/module.component");
 var page_not_found_component_1 = require("./components/page-not-found/page-not-found.component");
 var position_component_1 = require("./components/position/position.component");
+var uploader_component_1 = require("./components/uploader/uploader.component");
 var user_component_1 = require("./components/user/user.component");
 var date_picker_component_1 = require("./utility-components/date-picker/date-picker.component");
 var services_1 = require("./services/services");
@@ -58,6 +60,7 @@ AppModule = __decorate([
             module_component_1.ModuleComponent,
             page_not_found_component_1.PageNotFoundComponent,
             position_component_1.PositionComponent,
+            uploader_component_1.UploaderComponent,
             user_component_1.UserComponent,
             date_picker_component_1.DatePickerComponent,
             employee_accreditation_component_1.EmployeeAccreditationComponent,
@@ -67,6 +70,7 @@ AppModule = __decorate([
             employee_employment_component_1.EmployeeEmploymentComponent,
             employee_family_component_1.EmployeeFamilyComponent,
             employee_government_component_1.EmployeeGovernmentComponent,
+            employee_pdf_component_1.EmployeePdfComponent,
             employee_info_component_1.EmployeeInfoComponent,
             employee_list_component_1.EmployeeListComponent,
             employee_personal_component_1.EmployeePersonalComponent,

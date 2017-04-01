@@ -16,9 +16,9 @@ import { SwalHelper, ToastHelper } from '../../helpers/helpers';
 export class CompanyComponent implements OnInit {
 
     constructor(
-        private swal : SwalHelper,
-        private toast : ToastHelper,
-        private companyService : CompanyService
+        private swal: SwalHelper,
+        private toast: ToastHelper,
+        private companyService: CompanyService
     ) { }
 
     ngOnInit() {
@@ -26,18 +26,18 @@ export class CompanyComponent implements OnInit {
         this.getAll();
     }
 
-    operation : number = 0;
-    companies : Company[] = [];
-    selectedCompany : Company;
-    originalCompanyInfo : Company;
-    loadingCompanies : boolean;
-    addingCompany : boolean;
-    updatingCompany : boolean;
-    deletingCompany : boolean;
-    isFormDisabled : boolean;
-    modal : Modal;
+    operation: number = 0;
+    companies: Company[] = [];
+    selectedCompany: Company;
+    originalCompanyInfo: Company;
+    loadingCompanies: boolean;
+    addingCompany: boolean;
+    updatingCompany: boolean;
+    deletingCompany: boolean;
+    isFormDisabled: boolean;
+    modal: Modal;
 
-    getAll() : void {
+    getAll(): void {
         try {
             this.companies = [];
             this.loadingCompanies = true;
@@ -65,30 +65,30 @@ export class CompanyComponent implements OnInit {
         }
     }
 
-    view(company : Company) : void {
+    view(company: Company): void {
         this.operation = 0;
         this.isFormDisabled = true;        
         this.selectedCompany = company;
     }
 
-    edit() : void {
+    edit(): void {
         this.operation = 2;
         this.isFormDisabled = false;
         this.originalCompanyInfo = Object.assign({}, this.selectedCompany);
     }
 
-    cancelEdit() : void {
+    cancelEdit(): void {
         this.selectedCompany = Object.assign({}, this.originalCompanyInfo);
         this.view(this.selectedCompany);
     }
 
-    add() : void {
+    add(): void {
         this.operation = 1;
         this.isFormDisabled = false;
         this.selectedCompany = new Company();
     }
 
-    confirmAdd() : void {
+    confirmAdd(): void {
         this.swal.confirm({
             title: "Are you sure?",
             message: "You will be adding this module.",
@@ -101,7 +101,7 @@ export class CompanyComponent implements OnInit {
         });
     }
 
-    private addCompany() : void {
+    private addCompany(): void {
         try {
             this.addingCompany = true;
             this.isFormDisabled = true;
@@ -130,7 +130,7 @@ export class CompanyComponent implements OnInit {
         }
     }
 
-    confirmUpdate() : void {
+    confirmUpdate(): void {
         this.swal.confirm({
             title: "Are you sure?",
             message: "You will be updating this company.",
@@ -143,7 +143,7 @@ export class CompanyComponent implements OnInit {
         });
     }
 
-    private updateCompany() : void {
+    private updateCompany(): void {
         try {
             this.deletingCompany = true;
             this.isFormDisabled = true;
@@ -172,7 +172,7 @@ export class CompanyComponent implements OnInit {
         }
     }
 
-    confirmDelete(company : Company) : void {
+    confirmDelete(company: Company): void {
         this.swal.confirm({
             title: "Are you sure?",
             message: "You will be deleting this module.",
@@ -183,7 +183,7 @@ export class CompanyComponent implements OnInit {
         });
     }
 
-    private deleteCompany(company : Company) : void {
+    private deleteCompany(company: Company): void {
         try {
             this.deletingCompany = true;
             this.isFormDisabled = true;

@@ -3,6 +3,7 @@ import { SwalHelper, ToastHelper } from '../../helpers/helpers';
 import { EmployeeService } from '../../services/services';
 import { Employee, Modal, EmployeeInfoTab, Tab } from '../../models/models';
 import { IMyOptions, IMyDateModel } from 'mydatepicker';
+import * as jsPDF from 'jspdf'
 
 @Component({
     selector: 'employee-info-component',
@@ -29,6 +30,7 @@ export class EmployeeInfoComponent implements OnInit, OnChanges {
     @Output() onUpdate: EventEmitter<any> = new EventEmitter();
     @Output() onDelete: EventEmitter<any> = new EventEmitter();
 
+    pdfTemplateId: string = "employee-pdf-template";
     tabKeys: any[];
     originalEmployeeInfo: Employee;
     updatingEmployee: boolean = false;
@@ -163,10 +165,10 @@ export class EmployeeInfoComponent implements OnInit, OnChanges {
                     this.toast.error(result.message);
                 }
             })
-            .catch((error) => {
-                this.updatingEmployee = false;
-                this.toast.error(error);
-            });
+                .catch((error) => {
+                    this.updatingEmployee = false;
+                    this.toast.error(error);
+                });
         } catch (e) {
             this.updatingEmployee = false;
             this.toast.error(e);
@@ -348,5 +350,24 @@ export class EmployeeInfoComponent implements OnInit, OnChanges {
         }
 
         return isValid;
+    }
+
+    print(): void {
+        let specialElementHandlers = {
+            '#editor': function (element, renderer) {
+                return true;
+            }
+        };
+
+        var doc = new jsPDF();
+        doc.fromHTML(
+            document.getElementById(this.pdfTemplateId).outerHTML,
+            15,
+            15,
+            {
+                'width': 170
+            }
+        );
+        doc.save('sample-file.pdf');
     }
 }
