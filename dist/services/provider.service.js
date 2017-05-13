@@ -43,16 +43,19 @@ var ProviderService = (function () {
             data: request.body,
             auth: {}
         };
+        console.log("session", session);
         return this.getApiEndPoint().then(function (config) {
             if (session) {
                 var headers = new http_1.Headers();
                 headers.append("x-access-token", session.token);
+                console.log(true, request);
                 return _this.http[request.verb](_this.endpoint(config.api, request.uri), payload, new http_1.RequestOptions({ headers: headers }))
                     .toPromise()
                     .then(function (response) { return response.json(); })
                     .catch(_this.handleError);
             }
             else {
+                console.log(false);
                 return _this.http[request.verb](_this.endpoint(config.api, request.uri), payload)
                     .toPromise()
                     .then(function (response) { return response.json(); })

@@ -47,6 +47,7 @@ var LoginComponent = (function () {
                     if (_this.rememberMe) {
                         _this.localStorage.set("athro.user-credential", _this.user);
                     }
+                    console.log(result.data);
                     _this.localStorage.set("anthro.user-session", result.data);
                     _this.router.navigate(["/main/user"]);
                 }

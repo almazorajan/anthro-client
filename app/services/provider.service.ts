@@ -40,16 +40,19 @@ export class ProviderService implements iService {
             auth: {}
         };
 
+        console.log("session", session);        
+
         return this.getApiEndPoint().then((config) => {
             if (session) {
                 let headers = new Headers();
                 headers.append("x-access-token", session.token);
-
+                console.log(true, request);
                 return this.http[request.verb](this.endpoint(config.api, request.uri), payload, new RequestOptions({ headers: headers }))
                     .toPromise()
                     .then(response => response.json() as Result)
                     .catch(this.handleError);
             } else {
+                console.log(false);
                 return this.http[request.verb](this.endpoint(config.api, request.uri), payload)
                     .toPromise()
                     .then(response => response.json() as Result)

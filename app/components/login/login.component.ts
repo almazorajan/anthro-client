@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService, LocalStorageService } from '../../services/services';
 import { SwalHelper, ToastHelper } from '../../helpers/helpers';
-import { User, Modal } from '../../models/models';
+import { User, Session, Modal } from '../../models/models';
 
 @Component({
     selector: 'login-component',
@@ -59,8 +59,8 @@ export class LoginComponent implements OnInit {
                     if(this.rememberMe) {
                         this.localStorage.set("athro.user-credential", this.user);
                     }
-
-                    this.localStorage.set<User>("anthro.user-session", result.data as User);
+                    console.log(result.data);
+                    this.localStorage.set<Session>("anthro.user-session", result.data as Session);
                     this.router.navigate(["/main/user"]);
                 } else {
                     this.toast.error(result.message);

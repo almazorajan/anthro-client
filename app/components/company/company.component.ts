@@ -21,11 +21,6 @@ export class CompanyComponent implements OnInit {
         private companyService: CompanyService
     ) { }
 
-    ngOnInit() {
-        this.modal = new Modal("#mdlModalInfo");
-        this.getAll();
-    }
-
     operation: number = 0;
     companies: Company[] = [];
     selectedCompany: Company;
@@ -37,29 +32,31 @@ export class CompanyComponent implements OnInit {
     isFormDisabled: boolean;
     modal: Modal;
 
+    ngOnInit() {
+        this.modal = new Modal("#mdlModalInfo");
+        this.getAll();
+    }
+
     getAll(): void {
         try {
             this.companies = [];
-            this.loadingCompanies = true;
             this.isFormDisabled = true;
+            this.companyService
+                .getAll()
+                .then((result) => {
+                    this.isFormDisabled = false;
 
-            this.companyService.getAll().then((result) => {
-                this.loadingCompanies = false;
-                this.isFormDisabled = false;
-
-                if(result.success) {
-                    this.companies = result.data as Company[];
-                } else {
-                    this.toast.error(result.message);
-                }
-            })
-            .catch((error) => {
-                this.loadingCompanies = true;
-                this.isFormDisabled = true;
-                this.toast.error(error);
-            });
-        } catch(e) {
-            this.loadingCompanies = false;
+                    if (result.success) {
+                        this.companies = result.data as Company[];
+                    } else {
+                        this.toast.error(result.message);
+                    }
+                })
+                .catch((error) => {
+                    this.isFormDisabled = false;
+                    this.toast.error(error);
+                });
+        } catch (e) {
             this.isFormDisabled = false;
             this.toast.error(e);
         }
@@ -67,7 +64,7 @@ export class CompanyComponent implements OnInit {
 
     view(company: Company): void {
         this.operation = 0;
-        this.isFormDisabled = true;        
+        this.isFormDisabled = true;
         this.selectedCompany = company;
     }
 
@@ -94,7 +91,7 @@ export class CompanyComponent implements OnInit {
             message: "You will be adding this module.",
             confirmButtonText: "Yes, add it!",
             callBack: (isConfirm) => {
-                if(isConfirm) {
+                if (isConfirm) {
                     this.addCompany();
                 }
             }
@@ -103,29 +100,25 @@ export class CompanyComponent implements OnInit {
 
     private addCompany(): void {
         try {
-            this.addingCompany = true;
-            this.isFormDisabled = true;
-
-            this.companyService.addCompany(this.selectedCompany).then((result) => {
-                this.addingCompany = false;
-                this.isFormDisabled = false;
-
-                if(result.success) {
-                    this.toast.success(result.message);
-                    this.getAll();
-                    this.modal.hide();
-                } else {
-                    this.toast.error(result.message);
-                }
-            })
-            .catch((error) => {
-                this.addingCompany = false;
-                this.isFormDisabled = false;
-                this.toast.error(error);
-            });
-        } catch(e) {
-            this.addingCompany = false;
-            this.isFormDisabled = false;
+            this.toggleAddCompany(true);
+            this.companyService
+                .addCompany(this.selectedCompany)
+                .then((result) => {
+                    this.toggleAddCompany(false);
+                    if (result.success) {
+                        this.toast.success(result.message);
+                        this.getAll();
+                        this.modal.hide();
+                    } else {
+                        this.toast.error(result.message);
+                    }
+                })
+                .catch((error) => {
+                    this.toggleAddCompany(false);
+                    this.toast.error(error);
+                });
+        } catch (e) {
+            this.toggleAddCompany(false);
             this.toast.error(e);
         }
     }
@@ -136,7 +129,7 @@ export class CompanyComponent implements OnInit {
             message: "You will be updating this company.",
             confirmButtonText: "Yes, Update It!",
             callBack: (isConfirm) => {
-                if(isConfirm) {
+                if (isConfirm) {
                     this.updateCompany();
                 }
             }
@@ -145,29 +138,25 @@ export class CompanyComponent implements OnInit {
 
     private updateCompany(): void {
         try {
-            this.deletingCompany = true;
-            this.isFormDisabled = true;
-
-            this.companyService.updateCompany(this.selectedCompany).then((result) => {
-                this.deletingCompany = false;
-                this.isFormDisabled = false;
-
-                if(result.success) {
-                    this.toast.success(result.message);
-                    this.modal.hide();
-                    this.getAll();
-                } else {
-                    this.toast.error(result.message);
-                }
-            })
-            .catch((error) => {
-                this.deletingCompany = false;
-                this.isFormDisabled = false;
-                this.toast.error(error);
-            });
-        } catch(e) {
-            this.deletingCompany = false;
-            this.isFormDisabled = false;
+            this.toggleUpdateControls(true);
+            this.companyService
+                .updateCompany(this.selectedCompany)
+                .then((result) => {
+                    this.toggleUpdateControls(false);
+                    if (result.success) {
+                        this.toast.success(result.message);
+                        this.modal.hide();
+                        this.getAll();
+                    } else {
+                        this.toast.error(result.message);
+                    }
+                })
+                .catch((error) => {
+                    this.toggleUpdateControls(false);
+                    this.toast.error(error);
+                });
+        } catch (e) {
+            this.toggleUpdateControls(false);
             this.toast.error(e);
         }
     }
@@ -178,36 +167,47 @@ export class CompanyComponent implements OnInit {
             message: "You will be deleting this module.",
             confirmButtonText: "Yes, Delete It!",
             callBack: (isConfirm) => {
-                if(isConfirm) this.deleteCompany(company);
+                if (isConfirm) this.deleteCompany(company);
             }
         });
     }
 
     private deleteCompany(company: Company): void {
         try {
-            this.deletingCompany = true;
-            this.isFormDisabled = true;
-
-            this.companyService.deleteCompany(company).then((result) => {
-                this.deletingCompany = false;
-                this.isFormDisabled = false;
-
-                if(result.success) {
-                    this.toast.success(result.message);
-                    this.getAll();
-                } else {
-                    this.toast.error(result.message);
-                }
-            })
-            .catch((error) => {
-                this.deletingCompany = false;
-                this.isFormDisabled = false;
-                this.toast.error(error);
-            });
-        } catch(e) {
-            this.deletingCompany = false;
-            this.isFormDisabled = false;
+            this.toggleDeleteControls(true);
+            this.companyService
+                .deleteCompany(company)
+                .then((result) => {
+                    this.toggleDeleteControls(false);
+                    if (result.success) {
+                        this.toast.success(result.message);
+                        this.getAll();
+                    } else {
+                        this.toast.error(result.message);
+                    }
+                })
+                .catch((error) => {
+                    this.toggleDeleteControls(false);
+                    this.toast.error(error);
+                });
+        } catch (e) {
+            this.toggleDeleteControls(false);
             this.toast.error(e);
         }
+    }
+
+    private toggleUpdateControls(bool: boolean) {
+        this.updatingCompany = bool;
+        this.isFormDisabled = bool;
+    }
+
+    private toggleDeleteControls(bool: boolean) {
+        this.deletingCompany = bool;
+        this.isFormDisabled = bool;
+    }
+
+    private toggleAddCompany(bool: boolean) {
+        this.addingCompany = bool;
+        this.isFormDisabled = bool;
     }
 }
